@@ -85,10 +85,6 @@
 
 \RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
-%\RequirePackage{hyperref}
-%\RequirePackage[plainpages=false,pdfpagelabels,pagebackref]{hyperref}
-%\RequirePackage[plainpages=false,pdfpagelabels]{hyperref}
-%\usepackage[plainpages=false,pdfpagelabels,ps2pdf,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true]{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
@@ -107,8 +103,6 @@
 \fi %nottoc
 \fi %numbib
 
-%\usepackage{appendix}
-
 \renewcommand\appendix{\par
   \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
   \setcounter{chapter}{0}%
@@ -123,12 +117,16 @@
 \pdfcompresslevel=9
 \fi
 
-%\usepackage{graphicx}
-%\usepackage{epstopdf}
-
-%\usepackage[ps2pdf,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true]{hyperref}
-\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true,pagebackref]{hyperref}
-%\usepackage[pdftex,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,hypertexnames=false,breaklinks=true]{hyperref}
+\usepackage[
+	plainpages=false,
+	pdfpagelabels,
+	pdftitle={Gradu},
+	urlcolor=blue,
+	linktocpage,
+	a4paper,
+	colorlinks=true,
+	breaklinks=true,
+	pagebackref]{hyperref}
 
 
 \iffi
@@ -156,7 +154,7 @@
 
 \AtBeginDocument{%
 \selectdefaultlanguage
-% use unique page numbers as names for non-numbered title pages
+% use unique page numbers as names of non-numbered title pages
 \pagenumbering{Roman}
 \maketitle
 % restart numbering
@@ -589,5 +587,3 @@
   \fi%
   \gradu@thebibliography{#1}%
 }
-
-%\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true]{hyperref}
