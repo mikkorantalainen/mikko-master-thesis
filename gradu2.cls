@@ -2,8 +2,10 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2002/12/03}
-\def\fileversion{1.3}
+\def\CvsRevision$#1: #2 ${#2}
+\def\CvsDate$#1: #2 #3 ${#2}
+\def\filedate{\CvsDate$Date: 2004/05/03 09:59:35 $}
+\def\fileversion{\CvsRevision$Revision: 1.48 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -17,6 +19,9 @@
 
 \newif\ifnumbib
 \numbibtrue
+
+\newif\ifnottoc
+\nottoctrue
 
 \newif\ifoldtitle
 \oldtitletrue
@@ -55,6 +60,9 @@
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
 
+\DeclareOption{toc}{\nottocfalse}
+\DeclareOption{nottoc}{\nottoctrue}
+
 \DeclareOption{oldtitle}{\oldtitletrue}
 \DeclareOption{newtitle}{\oldtitlefalse}
 
@@ -74,17 +82,26 @@
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
+\RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage[plainpages=false,pdfpagelabels,pagebackref]{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
+\RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
 \ifnumbib
+\ifnottoc
+\RequirePackage[numbib,nottoc]{tocbibind}
+\else %nottoc
 \RequirePackage[numbib]{tocbibind}
-\else
+\fi %nottoc
+\else %numbib
+\ifnottoc
+\RequirePackage[nottoc]{tocbibind}
+\else  %nottoc
 \RequirePackage{tocbibind}
-\fi
+\fi %nottoc
+\fi %numbib
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
@@ -98,7 +115,7 @@
 \def\appendicesname{Appendices}
 \fi
 
-\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\baselinestretch}{1.2}
 %\linespread{1.3}
 
 \newcounter{pages}
@@ -279,7 +296,7 @@
       \gradu@aine\ \gradu@linja\par%
       \gradu@tyyppi%
 \else%
-     \parindent6truecm\parskip0pt%
+     \parindent9truecm\parskip0pt%
       \gradu@type\par%
       \gradu@aine\ \gradu@linja%
 \fi%
@@ -377,7 +394,7 @@
   \end{titlepage}%
 \fi%
   \iffi%
-    \def\gradu@finishtitle{\gradu@title}%
+    \def\gradu@finnishtitle{\gradu@title}%
     \def\gradu@englishtitle{\gradu@titletrans}%
   \else%
     \def\gradu@finnishtitle{\gradu@titletrans}%
@@ -518,4 +535,16 @@
   \\\mbox{}\hfill---~\gradu@quoteattr
   \end{quote}
   \@endparenv
+}
+
+\let\gradu@thebibliography\thebibliography
+\def\thebibliography#1{%
+  \iffi%
+  \def\refname{Viitteet}%
+  \def\bibname{Viitteet}%
+  \else%
+  \def\refname{References}%
+  \def\bibname{References}%
+  \fi%
+  \gradu@thebibliography{#1}%
 }
