@@ -14,6 +14,8 @@ NOHYPHEN	= "No hyphenation patterns were loaded for"
 RERUNBIB	= "No file.*\.bbl|Citation.*undefined"
 RERUN		= "(There were undefined references|Rerun to get (cross-references|the bars) right)"
 # output only lines that match following 'egrep' regexp. LaTeX tools dump all debug data to stdout so some filtering is needed
+FLAGS		= "-A1"
+#FLAGS		=
 ERR		= "warn|error|^\\!|^\\?|^l\.|^[*][*]"
 LATEXARGS	= -interaction=nonstopmode
 
@@ -46,15 +48,15 @@ clean:
 %.dvi:	%.tex
 	@echo === Creating: $@
 	latex $(LATEXARGS) $< > /dev/null ; true
-	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(ERR) && latex $(LATEXARGS) $< | egrep -i $(ERR) ; true
-	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(ERR)) ; true
-	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(ERR) ) ; true
-	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(ERR) ) || true
+	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(FLAGS) $(ERR) && latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ; true
+	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(FLAGS) $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR)) ; true
+	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) ; true
+	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
 	@echo ======= Done: $@
 
 %.ps:	%.dvi
 	@echo === Creating: $@
-	dvips $< -o $@ 2>&1 | egrep -i $(ERR) || true
+	dvips $< -o $@ 2>&1 | egrep -i $(FLAGS) $(ERR) || true
 	@echo ======= Done: $@
 
 %-alt.pdf: %.dvi
@@ -64,9 +66,9 @@ clean:
 
 %.pdf:	%.tex %.dvi
 	@echo === Creating: $@
-	pdflatex $(LATEXARGS) $* | egrep -i $(ERR)
-	egrep -q $(NOHYPHEN) $*.log && pdfinitex pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(ERR); true
-	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(ERR) ) || true
+	pdflatex $(LATEXARGS) $* | egrep -i $(FLAGS) $(ERR)
+	egrep -q $(NOHYPHEN) $*.log && pdfinitex pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR); true
+	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
 	@echo ======= Done: $@
 	
 
