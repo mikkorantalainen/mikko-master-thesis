@@ -129,7 +129,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Vihko#</dia:string>
+        <dia:string>#Oppimappi#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="Flowchart - Box" version="0" id="O3">
