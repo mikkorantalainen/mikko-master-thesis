@@ -16,7 +16,7 @@ oli väärä, voi hän tämän toiminnon avulla välittömästi palata takaisin
 sisällysluetteloon miettimättä olisiko valinnan seurauksena annetulla
 sivulla ollut jokin keino siirtyä sisällysluetteloon.
 
-Välittömästi linkkien seuraamisen jälkeen, www-sivuja käyttävä henkilö
+Välittömästi linkkien seuraamisen jälkeen www-sivuja käyttävä henkilö
 oppiikin takaisin-toiminnon käytön. Jos verkossa linkkien
 seuraamistaito vastaa lukemaan oppimista, niin takaisin-toiminnon
 käyttö vastaa kirjoittamista. Tästä huolimatta selainkäyttöisessä
@@ -28,16 +28,77 @@ ikkunassa ja kirjanmerkin luominen.} Selainkäyttöisten ohjelmien
 kehittäjien yleinen kysymys onkin, \emph{kuinka takaisin-toiminnon
 käyttö voitaisiin estää}, kun oikea kysymys olisi, \strong{miksi} se
 pitäisi estää. Jos käyttäjä selvästi haluaa suorittaa kyseisen
-toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, että käyttäjä
-voisi tuon toiminnon tehdä?
+toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, että hän voisi
+tuon toiminnon tehdä?
 
 Kuvailen ensin selainkäyttöisten sovellusten toteuttamisessa usein
 huomiotta jätettyjä, mutta käytettävyyden kannalta varsinkin
 tulevaisuudessa, tärkeitä ongelmia. Esitän sitten näihin ongelmiin
 ratkaisumalleja, joista osaa olen työtehtävissäni päässyt kokeilemaan
-ja osa on jäänyt toistaiseksi liian työlääksi toteuttaa. Lisäksi
+ja osa on jäänyt toistaiseksi liian työlääksi toteuttaa. Lopuksi
 esittelen Peda.net -hankkeessa tekemiäni ohjelmistoja ja kerron niiden
-teknisistä ratkaisuista ja havaituista ongelmista.
+teknisistä ratkaisuista ja havaituista ongelmista sekä ehdotan
+suuntaviivoja tulevaisuuden tutkimusta varten.
+
+\chapter{Peruskäsitteitä}
+
+%Käsittelen tässä luvussa selainkäyttöisten sovellusten käytettävyyden
+%peruskäsitteitä. Lähestyn asiaa tavallisten www"-sivujen suunnalta,
+%koska selainkäyttöisiä sovelluksia käytetään www"-selaimella.
+%Selaimella puolestaan yleensä käytetään juuri tavallisia www"-sivuja,
+%joten käytettävyyden kannalta olennaista olisi, että selainkäyttöinen
+%sovellus toimisi tavallisten www"-sivujen tavoin.
+%
+%\section{Käytettävyys -- mitä se tarkoittaa?}
+
+Sana \emph{käytettävyys} voidaan usein tulkita monella tavalla. Omasta
+mielestäni käytettävyys tarkoittaa ennen kaikkea sitä, että tuote
+soveltuu siihen tehtävään, johon se on suunniteltu. Luonnollisesti
+tähän vaatimukseen sisältyy se, että tuote \emph{toimii}.
+Tietokoneohjelmien tapauksessa käytettävyys käsittelee nimenomaan
+ihmisen ja koneen välistä rajapintaa. Käyttävyys jakautuu useisiin
+osa-alueisiin. Näitä osa-alueita ovat eri lähteiden mukaan ainakin:
+
+% http://www2.uiah.fi/projects/metodi/058.htm
+% http://www.usabilityfirst.com/
+% http://www.adage.fi/artikkelit/kaytettavyys_mita_se_on.html
+
+\begin{description}
+
+\item[Johdonmukaisuus] tarkoittaa, että eri tapaukset tai tilanteet
+noudattavat yhdenmukaisia periaatteita. Se helpottaa asioiden
+oppimista.
+
+\item[Opittavuus] tarkoittaa sitä, että tuotteen käyttö on helppo
+oppia. Käytännössä toiminnot pitää esittää itsensä kuvaavalla tavalla
+ja tuotteen tulee toimiva arvattavasti.
+
+\item[Esitystapa] tarkoittaa sitä, että käyttäjä saa selkeän kuvauksen
+kulloinkin suoritettavasta toiminnosta ja toimintojen lopputulokset
+ovat ymmärrettäviä.
+
+\item[Virheiden sieto ja välttäminen] tarkoittaa sitä, että
+käyttöliittymän tulee sietää virheellisiä syötteitä ja estää virheiden
+tekeminen mahdollisuuksien rajoissa. Esimerkiksi käyttöliittymän
+painike, joka ei tee mitään pitää olla selkeästi ei-aktiivinen tai se
+pitää poistaa kokonaan näkyvistä.
+
+\item[Muistettavien asioiden määrä] tulee minimoida. Käytännössä
+tuotteen tulee esimerkiksi tarjota käyttäjälle vaihtoehtoja, joista
+käyttäjä valitsee yhden tai useamman sen sijaan, että käyttäjän tulisi
+syöttää valintansa tyhjään kenttään.
+
+\item[Tehtävään sopivuus] tarkoittaa sitä, että käyttäjälle esitetään
+vain ne asiat, joita kulloisenkiin tehtävään tarvitaan. Tehtävään
+tarvittavat asiat tulee esittää myös oikeassa järjestyksessä.
+
+\end{description}
+Monet käytettävyyden osa"-alueet ovat hyvin tulkinnallisia ja niiden
+mittaaminen on vaikeaa.
+
+% http://www.usabilityfirst.com/intro/index.txl
+% http://www.dokumentoijat.net/linkit/kaytettavyys.php
+
 
 \section{Selainkäyttöisten ohjelmien käytettävyydestä}
 
@@ -50,7 +111,9 @@ kuitenkin käytetään www-selaimella, tulisi ohjelman toimia
 mahdollisimman tarkasti samalla tavalla kuin muutkin selaimella
 käsiteltävät asiat. Erityisesti selainkäyttöisen ohjelman
 käyttöliittymän pitäisi poiketa tavallisesta www-sivusta niin vähän
-kuin mahdollista.
+kuin mahdollista. En ole löytänyt tutkimustuloksia suoraan tukemaan tai
+kumoamaan tätä väitettä, mutta perustelen näkemystäni seuraavissa
+luvuissa.
 
 \section{Käytettäviä www-sivuja}
 
@@ -67,7 +130,7 @@ Tero Linjaman kirjoittama
 Web-suunnittelu\cite{korpela:web-suunnittelu}.
 
 Molempien kirjojen mukaan www-sivun käytettävyyden kannalta on tärkeää
-painottua nimenomaan sisällön esittämiseen; navigointiin ja sivun
+painottua nimenomaan \emph{sisällön} esittämiseen; navigointiin ja sivun
 koristeluun ei tule tuhlata aikaa -- tai sivun pinta-alaa. Nielsen jopa
 arvioi karkeasti www-sivun käytettävyyttä laskemalla kuinka suuri
 prosenttiosuus koko sivun pinta-alasta on varattu itse sisällölle.
@@ -92,14 +155,18 @@ kaikille kävijöille välittömästi selväksi käyvä ominaisuus: molemmat
 näyttävät ``tylsiltä''. Niissä ei ole hienoja kuvia, animoitua
 navigointia tai muuta turhanpäiväistä. Sivun alussa saattaa olla rivi
 tai pari tietoa nykyisestä sijainnista, seuraavaksi tulee otsikko ja
-sitä välittömästi seuraa sisältö.
+sitä välittömästi seuraa sisältö. Pelkistetyistäkin sivuista olisi
+mahdollista tehdä tyylikkäämpiä, mutta edellä mainituilla sivustoilla
+tekijät ovat selvästikin ajatelleet, että ulkonäköön keskitytään siinä
+vaiheessa kun ei keksi enää mitään tärkeää sanottavaa ja voi keskittyä
+myös epäolennaiseen.
 
 Useilla sivuilla suuri osa sivun pinta-alasta on varattu navigoinnille.
 Sivujen tekijät kokevat usein -- jostain syystä -- että käyttäjä voi
 ``eksyä'', jos jokaiselta sivulta ei helposti pääse mille tahansa
-muulle sivulle. Eksyykö tavallisen kirjan lukija, jos ja kun joka
-sivulla ei lue jokaisen muun kappaleen sivunumeroita? Ei, hän sen
-sijaan palaa sisällysluetteloon ja tarkistaa asian sieltä. Aivan
+muulle sivulle. Eksyykö tavallisen kirjan lukija, kun joka sivulla ei
+lue jokaisen muun kappaleen sivunumeroita? Ei, hän sen sijaan palaa
+sisällysluetteloon ja halutessaan tarkistaa asian sieltä. Aivan
 vastaavasti www-sivuston ensimmäinen sivu voisi olla sisällysluettelo.
 Tällä sivulla navigoinnille on varattu 100\% sivun pinta-alasta, joten
 navigointi voidaan suunnitella mahdollisimman tehokkaasti
@@ -107,20 +174,20 @@ käytettäväksi. Muilla sivuilla riittää \emph{suhteellinen sijainti},
 joka vastaa kirjan yläreunassa usein toistettavaa nykyisen luvun nimeä.
 Sivun navigoinnista vastaa tällöin yksi linkki: ``Sisällysluettelo''.
 Edelleen, jos sivusto on mielekäs lukea tietyssä järjestyksessä kuten
-tavallinen kirja, voidaan navigointiin liittää linkit ''Seuraava'' ja
-''Edellinen''.
+tavallinen kirja, voidaan navigointiin liittää myös linkit ''Seuraava''
+ja ''Edellinen''.
 
 Joskus näkee sivuilla myös linkkejä, joista ei tiedä, pitäisikö itkeä
 vai nauraa. Kamalimmat esimerkit ovat varmastikin ``Takaisin'', joka
 \emph{yrittää} tehdä saman kuin selaimen takaisin-toiminto, ja ``Sivun
-alkuun'', joka \emph{yrittää} virittää näkymän takaisin sivun alkuun.
+alkuun'', joka \emph{yrittää} vierittää näkymän takaisin sivun alkuun.
 Jos selaimessa on jo takaisin-painike ja käyttäjä tietää \emph{missä}
 se on ja \emph{mitä} se tekee, miksi enää tarjota samaa toimintoa
 epävarmasti toimivana versiona itse sivulla? Ja jos selaimen käyttäjä
 pääsee \emph{aina} sivun alkuun painamalla näppäimistössä olevaa
-\alt{home}-näppäintä, niin miksi tarjota samaa toimintoa pienenä
-linkkinä sivun lopussa, jolloin siihen täytyy yrittää osua hiirellä ja
-sen toiminta on vielä silloinkin epävarmaa\footnote{''Sivun alkuun'' ja
+\alt{home}-näppäintä, miksi tarjota samaa toimintoa pienenä linkkinä
+sivun lopussa, jolloin siihen täytyy yrittää osua hiirellä ja sen
+toiminta on vielä silloinkin epävarmaa\footnote{''Sivun alkuun'' ja
 ''Takaisin'' -toimintoja yritetään matkia käyttämällä
 JavaScript-skriptikieltä. Kaikki selaimet eivät kuitenkaan tue
 JavaScript-kieltä. Edellä mainitut toiminnot on \emph{mahdollista}
@@ -134,18 +201,18 @@ sisällysluettelo) tai sisältösivu (jolla on siis korkeintaan kolme
 navigointiin liittyvää linkkiä: sisällysluettelo, edellinen, seuraava)
 niin kuinka tätä voisi vielä parantaa? Varmastikin sijoittamalla nuo
 kolme sisältösivulla olevaa linkkiä aina samaan paikkaan, joilloin
-käyttäjän ei tarvitse etsiä noita toimintoja joka paikasta.
+käyttäjän ei tarvitse etsiä noita toimintoja sisällön seasta.
 HTML"-määritys antaakin tähän mahdollisuuden \tag{link}-elementtiä
 käyttäen. Tällöin nuo linkit tulisivat aina \emph{täsmälleen} samaan
 paikkaan käyttöliittymässä. Tätä toimintoa on esitelty kuvassa
 \ref{fig:mozilla-linkbar}. Huomaa painikkeet taaksepäin, eteenpäin ja
-sisällysluetteloon. Ikävä kyllä, useimmat selaimet eivät tue
-tätä osaa standardista, joten käytännössä linkit täytyy sijoittaa myös
-sivun sisälle.
+sisällysluetteloon. Ikävä kyllä, useimmat selaimet eivät tue tätäkään
+osaa jo vuonna 1997 julkaistusta standardista\cite{w3c:html32}, joten
+käytännössä linkit täytyy sijoittaa \emph{myös} sivun sisälle toimivuuden varmistamiseksi.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/mozilla-linkbar}
-\caption{HTML"-kieltä täysin tukeva selain tukee integroitua navigointia}
+\caption{HTML"-määritystä täysin tukeva selain tukee integroitua navigointia}
 \label{fig:mozilla-linkbar}
 \end{kuva}
 
@@ -161,21 +228,26 @@ siirtymiseen vaikka erillisen pikanäppäimen tai painikkeen.}.
 Sisällysluettelosta pääsee mihin tahansa sivuun suoraan painamalla
 halumaansa linkkiä. Kun vertaa tätä sivuun, jossa navigointi ja sisältö
 on samalla sivulla, havaitaan, että sisällysluettelon käyttö ja
-esittäminen helpottuu, koska sille voidaan varata enemmän tilaa. Myös
-varsinaisen sisällön käyttö helpottuu, koska koko selaimen ikkuna
-voidaan varata sen käyttöön. Yhdistelmäsivullakin joudutaan siirtymään
-sivun alkuun (tai loppuun) navigoinnin käyttämistä varten, joten ainoa
-etu yhdistelmäsivulla on, että ei tarvitse painaa
-''Sisällysluettelo''-linkkiä. Kun vastapuolella vaakakupissa on
-helppokäyttöisempi sisällysluettelo \emph{ja} parempi sisällön
-käytettävyys pitäisi valinnan olla helppo!
+esittäminen helpottuu, koska sille voidaan varata enemmän tilaa.
+Lisäksi sisällysluettelon siirtämiseen ei tarvitse tuhlata
+tiedonsiirtokaistaa, jos käyttäjä ei sitä tarvitse. Toisaalta
+sisällysluettelo tarvitsee siirtää vain kerran, joten sille palaaminen
+myöhemmin ei vaadi sivun odottamista uudelleen joka kerralla, kun sivu
+on edelleen välimuistissa. Myös varsinaisen sisällön käyttö helpottuu,
+koska koko selaimen ikkuna voidaan varata sen käyttöön.
+Yhdistelmäsivullakin joudutaan siirtymään sivun alkuun (tai loppuun)
+navigoinnin käyttämistä varten, joten ainoa etu yhdistelmäsivulla on,
+että ei tarvitse painaa ''Sisällysluettelo''-linkkiä. Kun vastapuolella
+vaakakupissa on helppokäyttöisempi sisällysluettelo \emph{ja} parempi
+sisällön käytettävyys pitäisi valinnan olla helppo!
 
 Toinen linkityksessä usein tehty virhe on käyttää linkityksessä sanoja
 ''klikkaa tästä''. Joskus webin alkuaikoina, kun käyttäjät eivät vielä
 tienneet, mitä linkittäminen on ja kuinka linkkejä käytetään, on
-tuollainen sanamuoto saattanut tuntua hetken hyvältä. Mutta entä jos
-samaa mallia käytettäisiin selainkäyttöisessä sähköpostissakin? Viestin
-perässä voisi pahimmillaan olla toimintavaihtoehtoja:
+tuollainen sanamuoto saattanut tuntua hetken hyvältä. Mutta kuinka
+käytettävä selainkäyttöinen sähköpostisovellus olisi, jos samaa mallia
+käytettäisiin myös siinä? Viestin perässä voisi pahimmillaan olla
+toimintavaihtoehtoja:
 
 \begin{quote}
 Poistaaksesi tämän viestin \emph{klikkaa tästä}.\\
@@ -192,12 +264,15 @@ Parempia muotoja edellisille toiminnoille olisivat esimerkiksi
 \emph{Vastaa tähän viestiin}.\\
 \emph{Lähetä tämä viesti eteenpäin}.
 \end{quote}
-Joissakin tilanteissa parempi vaihtoehto on käyttää ainoastaan verbejä
-toimintoihin liittyvissä linkeissä. Esimerkiksi pelkkä \emph{vastaa} ja
-\emph{poista} riittäisi hyvin linkin tekstiksi, jos toiminnon kohde on
-muusta yhteydestä selvä. Tällainen linkki ei edes vie merkittävästi
-enemmän tilaa kuin tarkoitukseen erikseen suunniteltu ikoni ja on
-varmasti yksiselitteinen, toisin kuin ikoni.
+
+Huomaa, että näissä linkeissä ensimmäinen sana on aina toimintoa
+kuvaava verbi. Joissakin tilanteissa vieläkin parempi vaihtoehto on
+käyttää ainoastaan verbejä toimintoihin liittyvissä linkeissä.
+Esimerkiksi pelkkä \emph{vastaa} ja \emph{poista} riittäisi hyvin
+linkin tekstiksi, jos toiminnon kohde on muusta yhteydestä selvä.
+Tällainen linkki ei edes vie merkittävästi enemmän tilaa kuin
+tarkoitukseen erikseen suunniteltu ikoni ja on varmasti
+yksiselitteinen, toisin kuin ikoni.
 
 Myös Edward Tufte kirjoittaa kirjassaan
 \cite{tufte:explanations} seuraavia huomioita:
@@ -228,14 +303,14 @@ käyttökelpoisia myös useimpien www-sivujen suhteen.
 \section{Käytännön kompromisseja}
 
 Vaikka www-sivustolla kannattaisikin jakaa sisältö ja sisällysluettelo
-(l. navigointi) omiksi sivuikseen, on suuri osa \emph{olemassa
-olevista} sivustoista tehty toisin. Tähän on useita syitä, joista
-vähäpätöisimpiä eivät ole historialliset syyt (esimerkiksi
-\element{link}-elementin tuki on ollut vanhoissa selaimissa huono) ja
-sisällöllisiä (jos todellisuudessa on ollut vain hyvin vähän
-sanottavaa, on sivuston näyttänyt hienommalta, kun joka sivulla
-\emph{näyttää} olevan paljon sisältöä. Todellisuudessa suuri osa tuosta
-''sisällöstä'' onkin vain navigointia).
+(navigointi) omiksi sivuikseen, on suuri osa \emph{olemassa olevista}
+sivustoista tehty toisin. Tähän on useita syitä, joista vähäpätöisimpiä
+eivät ole historialliset syyt (esimerkiksi \element{link}-elementin
+tuki on ollut vanhoissa selaimissa huono) ja sisällöllisiä (jos
+todellisuudessa on ollut vain hyvin vähän sanottavaa, on sivuston
+näyttänyt hienommalta, kun joka sivulla \emph{näyttää} olevan paljon
+sisältöä. Todellisuudessa suurin osa tuosta ''sisällöstä'' onkin ollut
+vain navigointia).
 
 Koska useimmat verkon käyttäjät ovat siis tottuneet sivuihin, joissa on
 sisällön lisäksi myös paljon navigointielementtejä, täytyy ilmeisesti
@@ -261,17 +336,20 @@ eivät ole niin merkittävässä osassa käytettävyyden kannalta kuin
 varsinainen toiminnallisuus. Aidosti selainkäyttöisen sovelluksen
 tekijä ei voi myöskään tietää, missä käyttöjärjestelmässä sovellusta
 käytetään, joten ulkonäöstä ei ole järkevää tehdä mitään tiettyä
-käyttöjärjestelmää matkivaa. Tätä ongelmaa kuvaavat seuraavat
+käyttöjärjestelmää matkivaa. Tätä ongelmaa havainnollistavat seuraavat
 kuvakaappaukset. Näistä ensimmäisessä (kuva \ref{fig:mixedos}) on
 kuvattu, millaiselta täydellisesti Windows"-käyttöjärjestelmää matkiva
 selainkäyttöinen sovellus näyttäisi MacOS"-käyttöjärjestelmässä.
-Erityisesti tulee huomata, että MacOS"-järjestelmässä kunkin ohjelman
-valikko on kiinnitetty näytön yläreunaan kun taas
-Windows"-sovelluksissa se on kiinni ikkunan yläreunassa. Myös
-värimaailma ja ikonien tyyli poikkeaa käyttäjän odottamasta. Toisessa
-(\ref{fig:oppimappi-palm}) on esitetty Oppimappi"-työkalu PalmOS V
-"=kämmentietokoneen www"-selaimessa. Luonnollisesti jotain tavallista
-käyttöjärjestelmää matkiva sovellus toimisi huonosti tälläisessä
+Ensimmäisenä havaittava ero on, että MacOS"-järjestelmässä kunkin
+ohjelman valikko on kiinnitetty näytön yläreunaan kun taas
+Windows"-sovelluksissa se on kiinni ikkunan yläreunassa. Käyttäjä voi
+odottaa valikon otsikkoa painaessaan näpäyttävänsä tavallista linkkiä
+(luonnollinen oletus, kun kyse on selaimessa näytettävästä sivusta!),
+mutta yllättyy kun sivun vaihtumisen sijaan näkyviin tuleekin valikko.
+Myös värimaailma ja ikonien tyyli poikkeaa käyttäjän odottamasta.
+Toisessa (kuva \ref{fig:oppimappi-palm}) on esitetty Oppimappi"-työkalu
+PalmOS V "=kämmentietokoneen www"-selaimessa. Luonnollisesti jokin
+muuta käyttöjärjestelmää matkiva sovellus toimisi huonosti tälläisessä
 ympäristössä.
 
 \begin{kuva}
@@ -287,8 +365,8 @@ ympäristössä.
 \end{kuva}
 
 Yhdenmukaisuuden kannalta tärkeintä olisi siis saada sovellus
-\emph{toimimaan} muiden www-sivujen tapaan. Mielestäni tavallisten
-www-sivujen yhteydessä \emph{selaimen} tärkeimpiä ominaisuuksia ovat:
+\emph{toimimaan} muiden www-sivujen tapaan. Tavallisten www-sivujen
+yhteydessä \emph{selaimen} tärkeimpiä ominaisuuksia ovat:
 
 \begin{enumerate}
 \item Linkkien seuraaminen
@@ -327,22 +405,23 @@ Sovelluksen käytettävyydessä huomioidaan herkästi pelkkä
 käyttöliittymä, vaikka käytettävyydessä merkitsee myös koko sovelluksen
 rakenne. Rakenne heijastuu usein sovelluksen toimintamalleihin;
 esimerkiksi verkko-oppimisympäristössä perusrakenteena voisi olla
-kurssin materiaali tai ryhmä ja tämä valinta vaikuttaisi ympäristön
-tehokkaisiin toimintamalleihin.
+\emph{kurssin materiaali} tai vaihtoehtoisesti \emph{ryhmä} ja tämä
+valinta vaikuttaisi myöhemmin ympäristön tehokkaisiin
+toimintamalleihin.
 
 Verkkosovelluksen käytettävyyteen vaikuttavat erityisesti seuraavat
 asiat Beckerin ja Berkemeyerin mukaan \cite{becker:web_usability}:
 
 \begin{description}
 
-\item[ulkonäön taitto] sisältäen värit, kuvat ja kirjainten ulkoasun.
+\item[ulkonäön taitto] sisältäen värit, kuvat ja tekstin ulkoasun.
 
-\item[yhdenmukaisuus], joka käsittelee ulkonäön ja toiminnallisuuden
+\item[yhdenmukaisuus,] joka käsittelee ulkonäön ja toiminnallisuuden
 yhdenmukaisuutta yksittäisen sivun sisällä ja eri sivujen välillä.
-Vastaavat toiminnot pitäisi aina esittää ja niiden pitäisi toimia
+Vastaavat toiminnot pitäisi aina esittää, ja niiden pitäisi toimia,
 samalla tavalla.
 
-\item[saavutettavuus], joka käsittelee sovelluksen käyttäjien näkö- ja
+\item[saavutettavuus,] joka käsittelee sovelluksen käyttäjien näkö- ja
 ymmärryskykyä sekä motorisia rajoitteita. Sovelluksen pitää olla joko
 sellaisenaan käytettävissä erikoisryhmille tai siihen pitää tarjota
 mahdollisuus apuvälineiden kautta. Esimerkiksi kirjasinkoon  tai
