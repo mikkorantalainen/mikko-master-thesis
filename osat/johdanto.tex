@@ -1,5 +1,9 @@
 \chapter{Johdanto}
 
+\begin{chapterquote}{Jakob Nielsen's Alertbox, 2001-08-05}
+To design an easy-to-use interface, pay attention to what users do, not what they say. Self-reported claims are unreliable, as are user speculations about future behavior.
+\end{chapterquote}
+
 Voidaan perustellusti väittää, että jokainen www-sivuja tehokkaasti lukeva ja verkossa olevaa materiaalia hyväkseenkäyttävä henkilö on tietoinen www-selainten perusominaisuuksista. Tärkein, erityisesti www-selaimelle tyypillinen toiminto, on ns. \emph{takaisin}-toiminto (\alt{back} tai \alt{backward}), jolla voidaan sivuhistoriassa palata edelliselle sivulle. Jos www-selainta käyttävä henkilö huomaa esimerkiksi sisällysluettolosta jonkin kohdan valittuaan, että valinta oli väärä, voi hän tämän toiminnon avulla välittömästi palata takaisin sisällysluetteloon miettimättä olisiko valinnan seurauksena annetulla sivulla ollut jokin keino siirtyä sisällysluetteloon.
 
 Välittömästi linkkien seuraamisen jälkeen, www-sivuja käyttävä henkilö oppiikin takaisin-toiminnon käytön. Jos verkossa linkkien seuraamistaito vastaa lukemaan oppimista, niin takaisin-toiminnon käyttö vastaa kirjoittamista. Tästä huolimatta selainkäyttöisessä sovelluksessa takaisin-toiminnon\footnote{Muita usein tavallisten sivujen yhteydessä käytettyjä toimintoja, jotka eivät toimi monessa selainkäyttöisessä sovelluksessa, ovat mm. linkin avaaminen toisessa ikkunassa ja kirjanmerkin luominen.} käyttäminen aiheuttaa liian usein ohjelman rikkoutumisen. Selainkäyttöisten ohjelmien kehittäjien yleinen kysymys onkin, \emph{kuinka takaisin-toiminnon käyttö voitaisiin estää}, kun oikea kysymys olisi, \strong{miksi} se pitäisi estää. Jos käyttäjä selvästi haluaa suorittaa kyseisen toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, että käyttäjä voisi tuon toiminnon tehdä?
@@ -10,7 +14,7 @@ Kuvailen ensin selainkäyttöisten sovellusten toteuttamisessa usein huomiotta jät
 
 Selaimella toimivat ohjelmat yritetään usein naamioida tavallisten ohjelmien näköisiksi ja niitä jopa suunnitellaan tavallisten ohjelmien kehittämisessä hyviksi havaittujen mallien mukaisesti. Tarkoitan tässä yhteydessä tavallisella ohjelmalla käyttöjärjestelmän oman käyttöliittymän mukaista ohjelmaa. Koska selainkäyttöistä ohjelmaa kuitenkin käytetään www-selaimella tulisi ohjelman toimia mahdollisimman tarkasti samalla tavalla kuin muutkin selaimella käsiteltävät asiat. Erityisesti selainkäyttöisen ohjelman käyttöliittymän pitäisi poiketa tavallisesta www-sivusta niin vähän kuin mahdollista.
 
-\subsection{Käytettäviä www-sivuja}
+\section{Käytettäviä www-sivuja}
 
 Tavallisten www-sivujen käytettävyydestä on kirjoitettu useita kirjoja. Ehkä arvostetuimpia on Jakob Nielsenin WWW-suunnittelu. Nielsen käsittelee kirjassaan useita olemassa olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen -- painottuen erityisesti käytettävyyden esteisiin. Kotimaisesta tuotannosta mainitsemisen arvoinen on Jukka Korpelan ja Tero Linjaman kirjoittama Web-suunnittelu. Molempien kirjojen mukaan www-sivun käytettävyyden kannalta on tärkeää erityisesti varsinaisen sisällön maksimointi; navigointiin ja sivun koristeluun ei tule tuhlata pinta-alaa. Nielsen jopa laskee sivun pinta-alasta sivun varsinaisen sisällön ja koko sivun suhteen. Turhan monessa www-sivussa ja selainkäyttöisessä sovelluksessa sisällölle varattu pinta-ala on alle puolet!
 
@@ -36,11 +40,11 @@ Jos käytettävässä www-sivu on aina joko navigointi-sivu (siis jonkin tason sisäl
 
 Tälläisilla sivuilla navigointi tapahtuu aina sisällysluettelon kautta tai lukemalla koko sivusto kirjoittajan suunnittelemassa järjestyksessä. Navigointiin pääsee \emph{aina} painamalla näppäimistön \alt{home}-näppäintä ja valitsemalla sivun alusta linkki ''Sisällysluettelo''\footnote{Jos selain tukee \element{link}-elementtiä, ei sivulla tarvitse edes navigoida, sillä \element{link}-elementillä voidaan kertoa selaimelle, mistä sivuston sisällysluettelo löytyy. Selain voi sitten tarjota sisällysluetteloon siirtymiseen vaikka erillisen pikanäppäimen tai painikkeen!}. Sisällysluettelosta pääsee mihin tahansa sivuun suoraan painamalla haluamaanssa linkkiä. Kun vertaa tätä sivuun, jossa navigointi ja sisältö on samalla sivulla, havaitaan, että sisällysluettelon käyttö ja esittäminen helpottuu, koska sille voidaan varata enemmän tilaa. Myös varsinaisen sisällön käyttö helpottuu, koska koko selaimen ikkuna voidaan varata sen käyttöön. Yhdistelmäsivulla joudutaan myös siirtymään sivun alkuun (tai loppuun) navigoinnin käyttämistä varten, joten ainoa etu yhdistelmäsivulla on, että ei tarvitse painaa ''Sisällysluettelo''-linkkiä. Kun vastapuolella vaakakupissa on helppokäyttöisempi sisällysluettelo \emph{ja} parempi sisällön käytettävyys pitäisi valinnan olla helppo!
 
-\subsection{Käytännön kompromisseja}
+\section{Käytännön kompromisseja}
 
 Vaikka www-sivustolla kannattaisikin jakaa sisältö ja sisällysluettelo (l. navigointi) omiksi sivuikseen, on suuri osa \emph{olemassaolevista} sivustoista tehty toisin. Tähän on useita syitä, joista vähäpätöisimpiä eivät ole historialliset syyt (esimerkiksi \element{link}-elementtin tuki on ollut vanhoissa selaimissa huono) ja sisällöllisiä (kun on ollut todellisuudessa vain hyvin vähän sanottavaa on sivuston näyttänyt hienommalta, kun joka sivulla \emph{näyttää} olevan paljon sisältöä, vaikka suuri osa tuosta ''sisällöstä'' onkin vain navigointia).
 
-\subsection{Käytettävät selainkäyttöiset sovellukset}
+\section{Käytettävät selainkäyttöiset sovellukset}
 
 Koska selainkäyttösiä sovelluksia käytetään samalla käyttöliittymällä (www-selaimella) kuin tavallisia www-sivujakin pitäisi tälläisen sovelluksen käytön muistuttaa mahdollisimman paljon tavallisen www-sivun käyttämistä. Ulkonäöllisesti eri www-sivustot poikkeavat toisistaan merkittävästi muutenkin, joten tietyt fonttien värit ja muut ulkonäön yksityiskohdat eivät ole niin merkittävässä osassa käytettävyyden kannalta kuin varsinainen toiminnallisuus. Pitäisi itseäni keskivertoa huomattavasti kokeneempana verkon käyttäjänä (käytän verkon palveluita paljon, teen niitä itse ja ymmärrän myös taustalla toimivaa tekniikkaa) pidän tavallisten www-sivujen yhteydessä tärkeimpänä seuraavia ominaisuuksia:
 

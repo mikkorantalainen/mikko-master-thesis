@@ -59,7 +59,7 @@ clean:
 
 %-alt.pdf: %.dvi
 	@echo === Creating: $@
-	dvipdf $< $@
+	dvipdf -sPAPERSIZE=a4 $< $@
 	@echo ======= Done: $@
 
 %.pdf:	%.tex %.dvi
