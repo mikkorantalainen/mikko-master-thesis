@@ -154,10 +154,14 @@ henkilöiden tekemät muutokset eivät ole ristiriidassa keskenään.
 
 Toinen merkittävä puute on rinnakkaisissa muutoksissa tilanne, jossa
 henkilö $A$ aloittaa dokumentin $X$ muokkaamisen ja tämän jälkeen
-henkilö $B$ poistaa dokumentin $X$. Virhetilannetta, jossa dokumentin
+henkilö $B$ poistaa dokumentin $X$. Jos $A$ nyt yrittää tallentaa
+tekemänsä muutokset, niin haluttu tulos ei ole itsestään selvä.
+Oppimappi ei toistaiseksi osaa käsitellä tilannetta, jossa dokumentin
 $X$ muutokset yritetään tallentaa, mutta dokumenttia $X$ ei ole enää
-olemassa, ei ainakaan toistaiseksi käsitellä Oppimappi"-sovelluksessa.
-Ongelmana on, pitäisikö järjestelmän palauttaa dokumentti $X$
-järjestelmään (miten? Eikö dokumenttia $X$ voikaan oikeasti koskaan
-poistaa?) ja tallentaa muutos. Vai pitäisikö muutokset tallentaa uutena
-dokumenttina? Jos, niin minne -- myös hakemisto, jossa tiedosto oli on voitu poistaa -- ja millä nimellä?
+olemassa. Näin tapahtuessa käyttäjälle annetaan vain virheilmoitus,
+jossa toistetaan käyttäjän syöttämä tieto, jotta hän voi kopioida sen
+talteen toiseen ohjelmaan. Ongelmana on, pitäisikö järjestelmän
+palauttaa dokumentti $X$ järjestelmään (miten? Eikö dokumenttia $X$
+voikaan oikeasti koskaan poistaa?) ja tallentaa muutos. Vai pitäisikö
+muutokset tallentaa uutena dokumenttina? Jos, niin minne ja millä
+nimellä? Myös hakemisto, jossa tiedosto oli, on voitu poistaa.
