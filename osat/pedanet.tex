@@ -1,0 +1,67 @@
+\chapter{Peda.net -projekti ja -hanke}
+
+Peda.net on vuonna 1995(?) perustetun projektin loppumisen jälkeen hankkeeksi siirtynyt jäsenyhteisö. Peda.net kouluverkko muodostuu jäsenverkostosta, jossa jokainen jäsen (koulu tai kunta) maksaa kiinteän vuosimaksun ja saa vastineeksi rajoittamattoman käyttöoikeuden Peda.net-hankkeen tuottamiin sovelluksiin.
+
+
+\section{Taustaa}
+
+Internet, ja erityisesti World Wide Web (WWW), on kehittynyt viimeisen kymmenen vuoden aikana olemattomasta ehkä tärkeimmäksi tietolähteeksi ja tiedonjakelukanavaksi. WWW-ympäristössä käytetty HTTP-tiedonsiirtoprokotolla ei ole merkittävästi muuttunut tänä aikana - samoin myös sivujen esityskieli, HyperText Markup Language (HTML), on pääpiirteiltään säilynyt samana. Erityisesti WWW-ympäristössä käytettävissä olevat vuorovaikutuksen mahdollistavat tekniikat ovat käytännössä edelleen samat kuin jo aikoinaan Netscape Navigator 2.0:n julkistuksessa. Tämä historian taakka käytettävien tekniikoiden suhteen vaatii huomioonottamista heti selainkäyttöisen ohjelman suunnittelun aloittamisesta saakka. Liian usein näin ei kuitenkaan ole.
+
+
+
+\section{Peda.net-kouluverkko}
+
+Peda.net on Jyväskylän yliopiston Koulutuksen tutkimuslaitoksen koordinoima tutkimus- ja kehittämishanke, joka alkoi projektina vuonna 1996(??). Projektivaihe loppui 2002(??), jonka jälkeen Peda.net on toiminut omarahoitteisena jäseniltä kerättyjen vuosimaksujen turvin. Jäsenet saavat jäsenmaksun vastineena vapaan käyttöoikeuden kaikkiin Peda.net:n sovelluksiin ja pääsevät halutessaan osallistumaan uusien sovellusten kehittämiseen.
+
+Peda.net-kouluverkko toimii Koulutuksen tutkimuslaitoksessa Tietoverkot oppimis- ja työympäristöissä tutkimusryhmän yhteydessä. Tutkimusryhmän tavoitteena on tarkastella teknologian ja virtuaalisten oppimisympäristöjen mahdollisuuksia oppimisen ja opetuksen tukena. Tutkimusryhmän tekemä tutkimus on yhtäältä monitieteistä, teoreettisesti painottunutta perustutkimusta sekä toisaalta käytännöllistä lähtökohdista nousevaa kehittämistutkimusta.
+
+Peda.net kouluverkkoon liittyvä tutkimus on kehittämistutkimusta, joka tapahtuu läheisessä yhteistyössä koulujen ja opettajien kanssa. Eri oppilaitosten ja organisaatioiden henkilöstön lisäksi tutkimusyhteistyössä on mukana myös muita alan kansallisia ja kansainvälisiä asiantutkijoita.
+
+\section{Peda.net:ssä kirjoittajan kehittämiä sovelluksia ja prototyyppejä}
+
+\subsection{Kurssitarjotin (1998?-2000?)}
+
+Kurssitarjotin kehitettiin MiniSQL-tietokantasovelluksen päälle Perl-ohjelmointikielellä. Kurssitarjotin suunniteltiin samannimisen paperilla julkaistun toisen asteen oppilaitosten yhteistyössä järjestämien kurssien sähköiseksi vastineeksi. Sovelluksella pystyi selaamaan tarjolla olevia kursseja ja lähettämään hakemuksia kurssille. Ylläpito-osalla voitiin lisätä, muokata ja poistaa kurssien vastuuhenkilöitä (käytännössä opettajia tai opinto-ohjaajia); lisätä, muokata ja poistaa tarjolla olevia kursseja ja hallita kursseille hakeneita ja liitettyjä opiskelijoita.
+
+Kurssitarjotin kehitettiin siihen aikaa yleiseen tyyliin, jossa ohjelman toiminta ja käyttöliittymän toimintaan liittyvä koodi oli sidottu tiukasti toisiinsa. Lisäksi normaali luku-käyttöliittymä ja ylläpitokäyttöliittymä toimivat omina sovelluksinaan käyttäen yhteistä tietokantaa. Ohjelman ylläpito todettiin hankalaksi ohjelman heikon rakenteen, MiniSQL-tietokannan rajoittuneisuuden ja kokonaisuuden sirpaleisuuden (luku ja ylläpito käyttivät osittain poikkeavia käyttöliittymiä, mikä puolestaan koettiin huonona käytettävyytenä - tämän korjaaminen oli taas työlästä) vuoksi.
+
+
+\subsection{OPSpro2-prototyyppi (1999?-2000?)}
+
+OPSpro, eli opetussuunnitelmaprosessori, on hajautettu, rakenteisen dokumentin tuottamissovellus. Koska jokaisella koululla tulee olla oma, yksilöllinen opetussuunnitelma, ja toisaalta opetussuunnitelman jokainen osa on parhaimmillaan täysin erilainen osuus (esimerkiksi kuvaus englanninkielen opetuksesta yläasteella) voi dokumentin eri osia kirjoittaa samanaikaisesti usea eri henkilö. OPSpro:n avulla esimerkiksi äidinkielen opettaja voi kirjoittaa ja ylläpitää opetussuunnitelman äidinkielen osuutta samaan aikaan kun matematiikan opettaja vastaavasti ylläpitää omaa osuuttaan. OPSpro huolehtii automaattisesti rakenteen ylläpitämisestä (eli äidinkieli ja englanti ovat koko opintosuunnitelman alilukuja) ja koko dokumentin kokoamisesta (eli dokumentin eri paloja ei tarvitse lähettää esimerkiksi sähköpostilla kokoamisesta vastaavalle henkilölle, joka koostaisi koko dokumentin esimerkiksi MS Word -tekstinkäsittelyohjelmalla. Ohjelman nykyisin (2004) käytössä olevalla versiolla on kirjoitettu ongelmitta yli 500 sivun dokumentteja.
+
+OPSpro ei sinänsä pakota juuri opetussuunnitelman tekemiseen, vaikka osa käyttöliittymässä käytetyistä termeistä siihen suuntaan viittaakin.
+
+Ensimmäinen OPSpro kehitettiin aikoinaan (1997?) Jyväskylän yliopiston tietotekniikan laitoksen Cum Laude -työprojektina(???). Tämän sovelluksen tekninen toteutus todettiin kuitenkin myöhemmin riittämättömäksi. Kirjoittajan tehtäväksi jäi kehittää ideasta parempi versio. Tämä versio jäi loppujen lopuksi prototyypiksi, erityisesti käytetyn ohjelmointikielen ja tietokannan vuoksi: ohjelma toteutettiin Perl-ohjelmointikielellä MiniSQL-tietokannan päälle. Toiminnallisella puolella sovellus pystyi tekemään suuren osan siitä, mitä nykyinenkin versio ja tarjosi enemmän käyttäjän suorittamaa räätälöinnin mahdollisuutta koulukohtaisesti erityisesti käyttöliittymän osalta. Käytännössä käyttöliittymän räätälöinti osoittautui liian vaikeaksi tavalliselle opettajalle tai koulun atk-ylläpitäjälle (joka yleensä on todellisuudessa matemaatiikan tai tietotekniikan opettaja).
+
+
+\subsection{Verkkoveräjä (Portal) (2000?-)}
+
+Portaalissa eli verkkoveräjässä alkuperäisenä ideana oli tarjota koulun opettajalle mahdollisuus ylläpitää opiskelua tukevaa www-sivua tai sivustoa ilman ohjelmointitaitoa. Yleisempänä käyttötarkoituksena oli tukea myös yleisemmin www-sivujen tuotantoa - esimerkiksi koulun kotisivujen muodossa. Verkkoveräjän yhteydessä www-sivulla tarkoitetaan pelkän tekstin ja kuvien julkaisemisen lisäksi esimerkiksi verkkokeskustelua ja vastaavaa toimintaa. Sivu kootaan ns. moduuleista joita ladotaan käyttöliittymään palstoina. Ideana on, että yksi moduuli tarjoaa yhden toiminon: esimerkiksi kuva-mooduulilla voi sivulle liittää kuvan ja kuvatekstin.
+
+Verkkoveräjä oli viimeinen Peda.net:sssä Perl-ohjelmointikielellä toteutettu ja julkaistu sovellus. Verkkoveräjä toimi MySQL-tietokannan päällä ja nykyisin käytössä oleva, Juha Lahden PHP-ohjelmointikielellä vuonna 2004 kirjoittama versio, käyttää edelleen pääpiirteiltään samaa tietokantaa. Keväällä 2004 verkkoveräjiä oli käytössä n. 13000.
+
+
+\subsection{Portal2-prototyyppi (2001?-2003?)}
+
+Portaalista eli verkkoveräjästä alettiin tekemään toista versiota, joka eteni täysin toimivan prototyypin toteutukseen asti. Uusi versio tarjosi mahdollisuuden vaikuttaa portaalin ulkonäköön huomattavasti enemmän ja merkittävänä toiminnallisena uutuutena moduuleita voitiin tarjota julkisesti tarjolle, jolloin esimerkiksi yksittäisen opettajan tuottamaa matemaatikan aineistoa voitaisiin käyttää toisen koulun matematiikan kurssilla integroituna muuhun koulun käyttämään materiaaliin. Ohjelmaa tehtiin uuden tietokantarakenteen päälle, mutta myöhemmin päädyttiin tulokseen, että uuden version tarjoamat uudet toiminnot eivät olleet riittävän merkittäviä ja helppokäyttöisiä, että vanhan version käyttäjien olisi kannattanut siirtyä käyttämään uutta versiota. Portal2 tehtiin vielä Perl-ohjelmointikielellä MySQL-tietokannan päälle.
+
+Juha Lahti kirjoitti keväällä 2004 julkaistun kolmannen version. 
+
+
+\subsection{Yale2-prototyyppi (2002?)}
+
+Yale2 eli Yet Another Learning Environment 2 on kokonaan PHP-ohjelmointikielellä kirjoitettu versio Juha Lahden tekemästä YALE-prototyypistä. Yale2 on selainkäyttöinen oppimisympäristö yksittäisen koulun käyttöön. Yale2 tarjosi suljettujen, oppilaiden käyttöön luotujen kurssien luomisen ja ylläpidon lisäksi julkaisumahdollisuuden "kirjasto"-nimisen ominaisuuden muodossa. Yale2 on tätä kirjoittaessa (keväällä 2004) edelleen pienimuotoisessa testikäytössä, mutta sitä ei tulla virallisesti ottamaan käyttöön missään vaiheessa. Sovellus poistetaan käytöstä todennäköisesti tämän vuoden loppuun mennessä. Yale2 oli loogisesti Peda.net Vihkon esiaste, jossa ei ollut versionhallintaa ja oikeuksien hallinta oli huomattavasti rajoittuneempaa. Lisäksi käyttöliittymän rakenteessa oli joitakin käytettävyysongelmia, mutta pelkästään niiden vuoksi ei olisi kannattanut aloittaa täysin alusta, kuten Vihkon tapauksessa tehtiin.
+
+\subsection{Muu Peda.netissä tapahtunut sovelluskehitys}
+
+Lisäkseni Peda.net-projektissa ja hankkeessa on tehnyt ohjelmistokehitystä Juha Lahti, joka on kehittänyt mm. seuraavat sovellukset:
+
+\begin{itemize}
+\item Verkkolehti (vain prototyyppi, 1998?)
+\item Verkkolehti (Juhan opinnäytetyö?, 2001?)
+\item OPSpro (versio 3+) (2002?)
+\item Verkkoveräjä2 (Portal3, 2004)
+\item Verkkolehti (uusi versio, otetaan käyttöön kesällä 2004)
+\end{itemize}
+

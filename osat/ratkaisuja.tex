@@ -1,0 +1,60 @@
+\chapter{Eräs ratkaisumalli selainkäyttöliittymän toteutukseen}
+
+\emph{[ Tämä kappale on vuosi sitten kirjoittamaani tekstiä. Osa tekstistä ei vastaa tämänhetkistä sovellusta, koska PHP-ohjelmointikieli osoittautui tehottomaksi ja toteutus tarpeettoman työlääksi näin täytellisellä jakamisella eri kerroksiin. ]}
+
+Suunnittelemani ratkaisumalli mm. ylläolevien ongelmien ratkaisemiseksi on kehittää sovelluskehys selainkäyttöliittymien ohjelmoimisen helpottamiseksi. Poiketen perinteisestä mallista, rakenteesta tulee näillä näkymin nelikerroksinen; erona kolmikerroksiseen malliin käyttöliittymälogiikka jakautuu kahteen osaan: käyttöliittymän toiminnallisuuden kuvaamiseen ja käyttöliittymäajuriin (kuva \ref{fig:4tier}).
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=10cm]{kuvat/fig4tier}
+\caption{Kaavio nelikerroksista arkkitehtuurista usean sovelluksen tapauksessa}
+\label{fig:4tier}
+\end{center}
+\end{figure}
+
+Jaon etuna eri sovellusten käyttöliittymät saadaan toimimaan vastaavalla ulkonäöllä ja mahdollisimman pitkälti vastaavilla toiminnoilla. Tämä onnistuu jakamalla käyttöliittymäajuri eri sovellusten kesken. Uskon, että suunnittelemalla käyttöliittymän toiminnallisuuden ja käyttöliittymäajurin rajapinta sopivasti, helpottuu käyttöliittymän kirjoittaminen verrattuna entiseen malliin, jossa käyttöliittymää kirjoitettaessa jouduttiin kirjoittamaan koodi myös käyttöliittymän eri osien, kuten erilaisten painikkeiden, hallintaan.
+
+Käyttöliittymäajuri keskustelee www-selaimen kanssa, mutta vaihtoehtoisesti sen voisi toteuttaa natiivilla sovelluksella. Koska toiminnallisuuden täytyy kuitenkin olla lomakepohjainen toimiakseen hyvin selaimen kautta, ei tälläinen natiivikäyttöliittymä olisi merkittävästi parempi kuin selainpohjainen käyttöliittymäkään.
+
+\section{Tiedon käsittelyn logiikka}
+
+Tämä kerros toteutetaan käyttämällä jotain olemassaolevaa tietokantaa, kuten MySQL tai PostgreSQL.
+
+\section{Sovelluslogiikka}
+
+Sovelluslogiikka vastaa sovelluksen ``älystä''. Käytännössä tämä kerros on todennäköisesti tehokkainta sulauttaa osittain käyttöliittymän toiminnallisuuden kanssa. Näin sen vuoksi, että sovelluslogiikkaan ei yleensä ohjelmoida ominaisuuksia, joita käyttöliittymän toiminnallisuus ei tarvitse ja toisaalta sulauttamisen haittojen voi olettaa olevan kohtuullisen pieniä käyttöliittymän toiminnallisuuden abstraktiuden vuoksi. Oletan, että erillisyydestä saatavat edut ovat pienemmät kuin siitä aiheutuvat haitat toteutusvaiheessa -- tätä pitäisi kuitenkin tutkia tarkemmin.
+
+\section{Käyttöliittymän toiminnallisuus}
+
+Käyttöliittymän toiminnallisuudesta vastaava kerros kuvaisi käyttöliittymän toiminnan abstraktilla tavalla: ``tästä taulukosta täytyy valita 2-5 riviä'' tai ``käyttäjän tulee syöttää lomakkeelle kaksi merkkijonoa. Näiden merkkijonojen nimet ja tyypit ovat 'käyttäjätunnus':merkkijono ja 'salasana':salattu merkkijono.'' Tämä kerros ei ota kantaa siihen missä järjestyksessä taulukon sarakkeet ja rivit näytetään tai siihen, syötetäänkö käyttäjätunnus tekstikenttään vai napauttelemalla hiirellä jonkin kuvan eri kohtia.
+
+Teoriassa tämä kerros voisi generoida yksinkertaisen XML-sivun, joka muunnettaisiin XHTML tai HTML -sivuksi selaimen toimintoja varten. Tällöin käyttöliittymäajuri pitäisi käytännössä kirjoittaa XSLT-kielellä. Käytännössä tälläisen ajurin kirjoittaminen muodostuu olettavasti niin hankalaksi, että paremmalta vaihtoehdolta tuntuu kirjoittaa käyttöliittymäajuri kirjastoksi, joka linkitetään ohjelmaan sitä tehtäessä. Linkitys pitää tehdä uudelleen kirjaston päivityksen yhteydessä, mutta itse käyttöliittymän toiminnallisuuteen ei tarvitse puuttua. Tässäkin mallissa eri sovellusten käyttöliittymät saadaan säilymään yhdenmukaisina pelkästään linkittämällä kaikki sovellukset uudelleen aina käyttöliittymäajurin päivityksen jälkeen.
+\cite{w3:xml_v1_0,w3:xhtml,w3:xslt}
+
+\section{Käyttöliittymäajuri}
+
+Tämä kerros vastaa siitä kuinka käyttäjä pystyy tekemään eri valinnat ja toiminnot. Toiminnallisuudessa kuvataan esimerkiksi, että lomakkeella on 10 vaihtoehtoa, joista pitää valita täsmälleen yksi. Tällöin käyttöliittymäajuri voi näyttää sivulla 10 linkkiä, joista käyttäjä painaa yhtä. Vaihtoehtoisesti ajuri voisi näyttää lomakkeen jossa on 10 \alt{radio button} -tyyppistä elementtiä ja OK-painike. Kolmas vaihtoehto olisi näyttää \alt{combobox}-alasvetovalikko yhdistettynä JavaScript-käsittelijään, joka lähettäisi lomakkeen välittömästi käyttäjän näpäytettyä jotain kohtaa. Optimaalisessa tapauksessa käyttöliittymäajuri osaisi käyttää kaikkia näitä vaihtoehtoja ja käyttäjä voisi omissa asetuksissaan valita millä tyylillä hän haluaa käyttää erityyppisiä lomakkeita.
+
+Koska käyttäjä voi haarauttaa istunnon ja siitä ei tule tietoa palvelimelle, täytyy kaikki tieto kuljettaa lomakkeen muun tiedon yhteydessä. Tällöin tieto kahdentuu automaattisesti kun käyttäjä kahdentaa istunnon (avaa uuden ikkunan, jossa on sama sovellus toiminnassa) ja \emph{takaisin}-toiminnon yhteydessä selain käyttää automaattisesti entisen lomakkeen tietoja. Käyttöliittymäajuri ei voi estää vanhentuneen tiedon saapumista\footnote{Käyttäjä voisi esimerkiksi muokata selainkäyttöliittymällä uutisartikkelia, poistaa artikkelin ja käyttää \emph{takaisin} toimintoa ja palata takaisin muokkaukseen. Kun käyttäjä nyt tallentaa tehdyt muokkauset täytyy sovelluksen joko palauttaa poistettu artikkeli tai luoda lähetettyjen tietojen perusteella uusi tai käyttäjän lähettämää tieto hukkuu.}, joten käyttöliittymän toiminnallisuuden tai sovelluslogiikan täytyy ottaa siihen kantaa. Lisäksi istunnon koon täytyy olla pieni, koska sovelluksen generoimien sivujen sisältämien linkkien täytyy myös sisältää istunnon tiedot. HTTP-protokolla määrittelee tavallisten linkkien käyttämän GET-toiminnon maksimidatamääräksi 4 kilotavua ja lisäksi suuri istunto kasvattaa jokaista sivua, sillä osa istuntotiedosta joudutaan toistamaan jokaisen linkin yhteydessä. \cite{ietf:http}
+
+Koska kaikkien sovellusten tietojen lähettäminen jokaisen lomakkeen yhteydessä vaatisi huomattavan lisän tarvittavaan tiedonsiirtokaistaan, tulee ohjelman toteutuksessa erikseen määritellä lomakkeiden kautta siirtyvä tieto, ja tieto joka voidaan jakaa myös haarautettujen tai vanhentuneiden tapahtumien kanssa, jolloin se voidaan säilyttää palvelimella. Lisäksi ajurin rajapinta tulee suunnitella siten, ajuria käyttävää ohjelmaa ei tarvitse muuttaa XForms-tuen yleistyessä. Tavoitteena on, että myöskään ajuria ei tarvitsisi merkittävästi muuttaa, joten käytännössä toteutuksen pitäisi matkia XForms-määritystä niiltä osin kuin se on mahdollista.
+\cite{korpela:html_forms,w3:xforms}
+
+Käyttöliittymäajurin täytyy myös yrittää tunnistaa asiakasohjelma (selaintyyppi ja versio) ja kiertää jollakin tavalla siinä tunnetut ongelmat. Viallisten selainten tukeen kuluva työaika on helpompi perustella, koska ajuri on yhteinen monelle eri sovellukselle, joten kustannukset ohjelmaa kohden ovat pienempiä kuin perinteisellä mallilla.
+
+Koska käyttöliittymäajurin täytyy huolehtia kaikista selaimen käytöstä johtuvista ongelmista on sen käytännön toteutus oletettavasti kohtuullisen vaikea. HTML-kieltä tukevan ajurin ei kuitenkaan tarvitse ottaa kantaa käyttöliittymän yksityiskohtiin, ainoastaan eri komponenttien järjestykseen, sillä ulkonäölliset yksityiskohdat voidaan käsitellä asiakkaan ohjelmassa CSS:n avulla \cite{w3:css}. Sovellukselle voidaan helposti tuottaa erilaisia ulkoasuja (\alt{skins}) pelkästään luomalla erilaisia CSS-tiedostoja.
+
+
+\section{Suunnitelmaa}
+
+\emph{[ Ja taas vuotta viisaampana täytyy todeta, että kyseisen ajurin toteuttaminen oli vieläkin työläämpää kuin ajattelin. Erityisesti siitä saatava hyöty on vähintäänkin kyseenalainen verrattuna täydellisen toteutuksen vaatimaan työmäärään. ]}
+
+Tavoitteenani on tutkia tarkemmin käyttöliittymän toiminnallisuuden erottamista käyttöliittymän käytännön toteutuksesta ja pyrkiä kehittämään PHP-kielellä sovelluskehys, joka sisältää kuvaamani kaltaisen käyttöliittymäajurin. Tiedon tallennus tehdään erillisen ajurin kautta ja tarkoituksena on tukea MySQL ja PostgreSQL -tietokantoja.
+
+Sovelluskehyksen kehittäminen vaikuttaa parhaalta ratkaisulta, koska tällöin käyttöliittymäajurin kehitys saadaan toivottavasti helpommaksi. Lisäksi tällä tavalla sovelluslogiikkaan tulisi mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia ja uusien sovellusten teko nopeutuisi. Myös lokalisointiin tarvitava logiikka on yhteinen eri sovellusten välillä.
+
+Työ tehdään Koulutuksen tutkimuslaitoksen Peda.net-hankkeelle \cite{pedanet:home} ja toteutuskielenä on PHP, koska myös entiset järjestelmät on toteutettu sillä.
+
+Resurssien lukittamiseen (ja yleisemmin rinnakkaiseen muutosten hallintaan) liittyvä ongelma on vielä ratkaisematta.
+
+Tämän dokumentin sisältö perustuu pitkälti omien kokemusten varaan, enkä ole vielä löytänyt hyvää lähdemateriaalia -- olen pyrkinyt perustamaan päätelmäni World Wide Web Consortiumin (\alt{W3C}, \cite{w3:home}) ja Internet Engineerin Task Forcen (IETF, \cite{ietf:home}) julkaisemiin dokumentteihin.
