@@ -1,11 +1,18 @@
 \section{Oppimapin käytettävyyden arviointia}
 
+\begin{kuva}
+\includegraphics[width=10cm]{kuvat/oppimappi-kotisivu}
+\caption{Oppimappi: työpöytä-näkymä}
+\label{fig:oppimappi-kotisivu}
+\end{kuva}
+
 Oppimapin käyttöliittymän pääosat muodostuvat navigointipalkista,
-toimintovalikosta ja sisältöalueesta. Kuvassa \ref{fig:oppimappi1} näkyy
-Oppimapin kotisivu-näkymä. Tämä on Oppimapin aloitussivu
+toimintovalikosta ja sisältöalueesta. Kuvassa
+\ref{fig:oppimappi-kotisivu} on esitetty Oppimapin kotisivu-näkymä
+ylläpitäjän oikeuksilla. Tämä on Oppimapin aloitussivu
 sisäänkirjautumisen jälkeen. Yläreunassa näkyy Oppimapin otsikko (tässä
-esimerkissä ''Testiympäristö 0.5.3+'') ja linkit eri alueille Oppimapin
-sisällä: työpöytä, omat tiedostot, työkalut ja ylläpito. Vasemman
+esimerkissä ``Hankasalmen lukio'') ja linkit eri alueille Oppimapin
+sisällä: kotisivu, omat tiedostot, työtilat ja ylläpito. Vasemman
 reunan palkissa on aina sen hetkistä sisältöä koskevat toiminnot, tässä
 tapauksessa  vain ''palauta poistetut kohteet'', joka palauttaisi
 sisältölistaukseen ne dokumentit, työtilat ja kansiot, jotka käyttäjä
@@ -15,86 +22,140 @@ toimintoja. Nimestä näpäyttämällä pääsee käyttämään objektia ja
 objektin perässä olevaa toimintoa käyttämällä sen ominaisuuksiin voi
 vaikuttaa.
 
-\begin{kuva}
-\includegraphics[width=10cm]{kuvat/oppimappi1}
-\caption{Oppimappi: työpöytä-näkymä}
-\label{fig:oppimappi1}
-\end{kuva}
+Ensimmäiseksi havaitaan, että tässäkin ympäristössä suuri osa ikkunan
+pinta-alasta menee muuhun kuin itse sisältöön. Navigointi ja ympäristön
+otsikko valtaavat suuren osan käytettävissä olevasta alasta. Tämä on
+seurausta valitusta tyylitiedostosta. Kuvassa
+\ref{fig:oppimappi-kotisivu-nostyle} on esitetty sama näkymä kun
+CSS-tyylisivu on selaimen asetuksista valittu pois päältä. Tämä näkymä
+vastaa erityisryhmien käyttöliittymää; esimerkiksi sokealle käyttäjälle
+tieto esitettäisiin tämän näkymän mukaisessa järjestyksessä. Tässä
+erityisesti nykyistä näkyvää koskevat toiminnot esitetään sisällön
+\emph{jälkeen} -- tämä on tärkeää, koska yleensä käyttäjä on
+kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien lataamista tai JavaScript-tukea.
 
 \begin{kuva}
-\includegraphics[width=10cm]{kuvat/oppimappi-kansio}
-\caption{Oppimappi: esimerkki kurssin sisällöstä}
-\label{fig:oppimappi-kansio}
+\includegraphics[width=10cm]{kuvat/oppimappi-kotisivu-nostyle}
+\caption{Oppimappi: työpöytä-näkymä ilman CSS-tiedostoa}
+\label{fig:oppimappi-kotisivu-nostyle}
 \end{kuva}
+
+Tästä näkymästä myös nähdään, että kaikki sivun elementit ovat
+normaaleja linkkejä. Tämän ansiosta käyttäjä voi käsitellä sivun
+elementtejä aivan vastaavasti kuin tavallisenkin www"-sivun osia. Minkä
+tahansa ``painikkeen'' voi lisätä kirjanmerkkeihin tai toiminnon voi
+avata toiseen ikkunaan selaimen omilla työkaluilla. Esimerkiksi Mozilla
+Firefox "=selain avaa linkin uudessa ikkunassa, jos linkkiä on painettu
+keskimmäisellä hiiren painikkeella. Jos esimerkkikäyttäjämme avaa
+``Omat tiedostot > ylläpitäjä'' "=linkin uuteen ikkunaan, saadaan kuvan
+\ref{fig:oppimappi-new-window} mukainen tilanne. Olennaista tässä
+tilanteessa on, että kumpikin sivu toimii täysin itsenäisesti: toisessa
+ikkunassa voisi olla vaikkapa eri käyttäjän näkymä, kummankin ikkunan
+historia on erillinen eli takaisin"-painike toimii ja kummankin sivun
+voi liittää omiin kirjanmerkkeihin. Turvallisuussyistä kirjanmerkki
+tosin vanhentuu, jolloin kirjautuminen vaaditaan uudelleen sivulle
+palatessa. Mutta toisin kuin monessa muussa ympäristössä, Oppimapissa
+kirjautumisen jälkeen palataan kirjanmerkin osoittamaan toimintoon, ei
+ympäristön aloitussivulle.
 
 \begin{kuva}
-\includegraphics[width=10cm]{kuvat/oppimappi2}
-\caption{Oppimappi: esimerkki kansion tietojen muokkaamisesta}
-\label{fig:oppimappi2}
+\includegraphics[width=10cm]{kuvat/oppimappi-new-window}
+\caption{Oppimappi: linkin avaaminen uudessa ikkunassa}
+\label{fig:oppimappi-new-window}
 \end{kuva}
 
-Jos opettaja siirtyy esimerkiksi matematiikan kurssille, annettaisiin
-hänelle kuvan \ref{fig:oppimappi-kansio} mukainen näkymä. Tässä
-vasemmassa reunassa on edelleen yleisiä toimintoja, jotka koskevat tätä
-kurssia (tai kansiota). Lisäksi jokaisen kansion sisällä olevan
-objektin perässä on oikopolut vastaaviin useimmin käytettyihin
-toimintoihin; jos käyttäjä näpäyttää jonkin kansion sisällä olevan
-objektin nimeä, siirtyy hän sen objektin omaan näkymään, jossa tämän
-näkymän oikopolut löytyisivät sen näkymän vasemman reunan
-toimintopalkista. Jos käyttäjä valitsee ''Tehtäviä''-kansion perässä
-olevan ''Muokkaa''-toiminnon, pääsee hän muokkaamaan kansion tietoja
-kuvassa \ref{fig:oppimappi2} esitetyn käyttöliittymän kautta. Tai, jos
-käyttäjä valitsee esimerkiksi vasemman reunan palkista kohdan ''Luo
-uusi: tekstitiedosto'', pääsee hän kuvan \ref{fig:oppimappi3} kaltaiseen
-näkymään.
+Oppimappia voidaan arvioida myös luvussa
+\ref{label:kaytettavyydessa_huomioitavaa} esitettyjen kohtien
+perusteella:
 
-\begin{kuva}
-\includegraphics[width=10cm]{kuvat/oppimappi3}
-\caption{Oppimappi: uuden kansion luontinäkymä}
-\label{fig:oppimappi3}
-\end{kuva}
+\begin{description}
 
-Vaihtoehtoisesti käyttäjä voi näpäyttää vain ''Ohjeita kurssin
-opiskelijoille''-tiedoston nimeä, jolloin tämä tiedosto asetetaan
-aktiiviseksi näkymäksi (katso kuva \ref{fig:oppimappi4}). Tällöinkin
-tätä objektia (tekstitiedostoa) koskevat toiminnot löytyvät vasemman
-laidan toimintovalikosta ja sisältö näkyy valkoisella pohjalla
-sisältöalueella. Tässä esimerkissä on sallittu myös tiedoston
-kommentointi: lukija voi jättää kommentin tiedoston sisältöön liittyen.
+\item[ulkonäön taitto] Oppimapissa oletuksena käytetty tyylitiedosto
+mukailee Peda.net-hankkeen staattisia www"-sivuja. Kirjasimeksi on
+valittu groteski kirjasinleikkaus, sillä se on yleensä näytöllä
+paremmin luettava kuin antiikva. Tekstin kokoa ei ole määritelty
+absoluuttisesti vaan leipäteksti on käyttäjän selaimen oletuskoko.
+Oikein konfiguroitu www-selain käyttää siis aina optimaalista tekstin
+kokoa. Käyttäjä voi halutessaan käyttää omaa CSS-tyylitiedostoa.
 
-\begin{kuva}
-\includegraphics[width=9cm]{kuvat/oppimappi4}
-\caption{Oppimappi: esimerkki tekstitiedostosta}
-\label{fig:oppimappi4}
-\end{kuva}
+\item[yhdenmukaisuus] Koko sovelluksen ulkonäkö on määritelty yhdessä
+CSS-tyylitiedostossa. Koska HTML"-koodissa ei ole määritelty ulkoasua
+vaan ainoastaan sisällön rakenne ovat kaikki sivut keskenään
+yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu toiminta"-palkin
+kautta ja toiminnot tallennetaan aina lomakkeen lopussa olevasta
+``Tallenna''-painikkeella. Mikään, mikä ei näytä painikkeelta ei tee
+järjestelmään pysyviä, kaikkia käyttäjiä koskevia muutoksia ja
+toisaalta kaikkien painikkeiden painaminen tekee pysyviä muutoksia.
 
-Valitsemalla vasemman reunan toiminnoista kohdan ''Versiot'', käyttäjä
-pääsee katselemaan saman dokumentin vanhoja versioita. Vanhoista
-versioista vai esimerkiksi virheellisen muokkauksen tehtyään hakea
-haluamansa kohdan takaisin. Lisäksi tiedoston voi haarauttaa: vanhan
-version voi kopioida uudeksi tiedostoksi. Tulevaisuudessa tähän on
-tarkoitus tehdä vielä käyttöliittymä, joka esittää paremmin dokumentin
-historian, jos se on haarautettu useaksi tiedostoksi, tai jos nykyinen
-tiedosto on jonkin muun dokumentin haara.
+\item[saavutettavuus] Oppimapin sisältö on esitetty semanttisella
+merkinnällä ja esimerkiksi sivun ulkoasua ei ole tehty taulukolla.
+Tämän ansioista käyttö esimerkiksi puheselaimella onnistuu hyvin.
+Samoin kirjasinkokoa voi vapaasti muuttaa ja sovellus käyttää
+selaimessa asetettua tekstin kokoa. Suurta tekstiä tarvitseva käyttäjä
+on jo aikaisemmin säätänyt selaimensa haluamakseen.
 
-Tässä näkymässä listataan myös dokumentin sijainnit: koska dokumentin
-tai kansion voi \emph{linkittää} näkymään missä tahansa, on
-mahdollista, että tiedosto näkyisi esimerkiksi Matin omissa
-tiedostoissa samaan aikaan kun se näkyy Matin pitämän kurssin
-kurssimateriaalina. Merkittävänä erona moneen muuhun järjestelmän,
-oppimapissa myös kansioita voi linkittää. Tämän seurauksena esimerkiksi
-tiedoston poistamisessa järjestelmän täytyy tutkia, näkyykö tiedosto
-monessa eri paikassa. Olisi käyttäjän kannalta ikävää, jos hän
-vahingossa poistaisi jonkin tiedoston, koska luuli sen olevan
-ainoastaan hänen omissa tiedostoissaan, kun se todellisuudessa näkyikin
-myös hänen pitämänsä kurssin eräässä kansiossa. Toisaalta, jos tiedosto
-halutaan lopullisesti poistaa, on tärkeää, että käyttäjä voi poistaa
-tiedoston yhdellä toiminnolla riippumatta siitä, näkyykö se monessa eri
-paikassa.
+\item[personalisointi] Oppimappi tarjoaa mahdollisuuden vaihtaa
+käyttöliittymän ulkoasua (käyttäjä voi valita ulkonäön vaihtoehtoisista
+CSS-tyylisivuista) ja käyttöliittymän kieltä. Lisäksi järjestelmä kerää
+tapahtumahistoriaa käyttäjien toimista.
 
-\begin{kuva}
-\includegraphics[width=9cm]{kuvat/oppimappi5}
-\caption{Oppimappi: tekstitiedoston versioita}
-\label{fig:oppimappi5}
-\end{kuva}
+\item[tehokkuus] Oppimapin vasteaika on keskimäärin 0,04 sekuntia sivua
+kohden. Keskimääräinen sivu on noin 20 kilotavua, mutta tiedonsiirrossa
+käytetään gzip"-pakkausta, jos selain sitä tukee, jonka ansiosta
+siirrettävän datan määrä on noin 3 kilotavua sivua kohden. Tavallisella
+modeemillakin sivun pitäisi siis saapua aina alle 2 sekunnissa. Sivun
+ulkonäköön vaikuttava CSS-tiedosto ja ikonit tarvitsee siirtää vain
+ensimmäisellä sivulla, sen jälkeen ne ovat selaimen välimuistissa.
 
+\item[sisältö] Peda.net ei ota kantaa Oppimapilla tuotettavaan
+sisältöön. Käyttöliittymän tekstit ylläpidetään keskitetysti Peda.netin
+toimesta ja eri kieliversioita tehdään käyttäjien tarpeiden mukaan.
+Useinmmissa tapauksissa joku Peda.netin käyttäjistä tarjoutuu
+kääntämään tarvittavat merkkijonot uuden kielen tukemista varten.
+
+\item[luotettavuus] Oppimappi ei ole ollut vielä käytössä riittävän
+kauan, että toimintavarmuudesta voitaisiin sanoa mitään tarkkaa.
+Kuormitustestissä järjestelmä pystyy nykyisellä palvelimella tarjoamaan
+lähes 30 sivua sekunnissa jatkuvasti. Järjestelmä on ollut tätä
+kirjoitettaessa tuotantokäytössä kaksi viikkoa ilman huoltotaukoja.
+
+\item[navigointi] Oppimappi tarjoaa koko ajan linkit koko hierarkian
+päätasoille (kotisivu, omat tiedostot, työtilat ja ylläpito) ja muuten
+hierarkiassa edetään yksi taso kerrallaan alaspäin tai palaamalla
+suoraan mille tahansa edelliselle tasolle.
+
+\end{description}
+
+\subsection{Johtopäätöksiä Oppimapin käytettävyydestä}
+\label{oppimapin-kaytettavyys-yhteenveto}
+
+Yhteenvetona vaikuttaisi siltä, että käytettävyyden kannalta ainakin
+CSS-tyylisivuja pitäisi vielä kehittää. Erityisesti ikkunan pinta-ala
+on nyt tehottomassa käytössä, mutta sen korjaamiseksi täytyy poiketa
+usein käytetystä www"-sivustojen taitosta ja on vaikea sanoa ilman
+tarkempaa tutkimusta onko käytettävyyden kannalta parempi, että sivu
+näyttää samanlaiselta kuin muutkin, vai että sen käytön tehokkuus on
+teoriassa maksimaalinen. Samoin käytettävyyttä puheselaimilla ja
+braille"-näytöillä pitäisi tutkia vielä tarkemmin.
+
+Toiminnallisesti Oppimapissa on puutteena myös täysi rinnakkaisten
+muutosten hallinta. Tietokantaan tehdään lukituksia vain tiedon eheyden
+varmistamiseksi tallennuksen yhteydessä. Etuna on, että mitä tahansa
+tiedostoa voi muokata milloin tahansa, mutta jos samaa dokumenttia
+muokkaa samaan aikaan kaksi eri henkilöä, eivät muutokset yhdisty
+automaattisesti. Ainoastaan viimeisenä tallennettu versio jää voimaan.
+Versionhallinnan ansiosta vanhempikin versio jää järjestelmään, mutta
+muutoksien yhdistäminen pitää tehdä jälkikäteen käsityönä. Koska
+järjestelmä pitää kirjaa myös vanhoista versioista, tulevaisuudessa on
+mahdollista tehdä koneellinen muutosten yhdistäminen, jos eri
+henkilöiden tekemät muutokset eivät ole ristiriidassa keskenään.
+\cite{ritcher:three-way-merge}
+
+Toinen merkittävä puute on rinnakkaisissa muutoksissa tilanne, jossa
+henkilö A aloittaa dokumentin X muokkaamisen ja tämän jälkeen henkilö B
+poistaa dokumentin X. Virhetilannetta, jossa dokumentin X muutokset
+yritetään tallentaa, mutta dokumenttia X ei ole enää olemassa, ei
+ainakaan toistaiseksi käsitellä. Ongelmana on, pitäisikö järjestelmän
+palauttaa dokumentti X järjestelmään (miten? Eikö dokumenttia X voikaan
+oikeasti koskaan poistaa?) ja tallentaa muutos. Vai pitäisikö muutokset
+tallentaa uutena dokumenttina? Jos, niin minne ja millä nimellä?

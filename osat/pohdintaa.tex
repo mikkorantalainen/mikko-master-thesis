@@ -1,46 +1,48 @@
 \chapter{Pohdintaa}
 
-Tutkimuksen alkuperäinen tavoite oli kehittää selainkäyttöisten
+Tutkimuksen alkuperäinen tavoite oli selvittää selainkäyttöisten
 sovellusten käytettävyyttä ja helpottaa niiden valmistamista. Samoin
 tavoitteena oli dokumentoida Peda.net"-hankkeen kehityskaarta.
 Peda.netin uusin työkalu, Oppimappi, onnistuu ratkaisemaan
 käytettävyyteen liittyvät ongelmat HTML"-kielen antamissa rajoissa
-kohtuullisen hyvin, mutta siinä käytetty ratkaisumalli olettaa, että
-kukin osakokonaisuus on kohtuullisen itsenäinen ja koko käsiteltävä
-sovellus voidaan \emph{luontevasti} esittää puurakenteena tai
-kaksisuuntaisena puurakenteena\footnote{Esimerkiksi XML ei voi esittää
-kuin yksinkertaisia puurakenteita, mutta silti sitä voidaan käyttää
-minkä tahansa tiedon siirtämiseen tai tallentamiseen. Tulee kuitenkin
-huomata, että XML on huomattavan kömpelö esitysmuoto tietyn tyyppiselle
-tiedolle, esimerkiksi kuville.}. Ratkaisemattomaksi ongelmaksi
-vaikuttaa siis jäävän aidosti selainkäyttöisten käyttöliittymien
-suunnittelu yleisellä tasolla -- ainakin kun tavoitteena on yhtä aikaa
-kohtuullisen helppo sovelluksen toteutus ja hyvä käytettävyys.
+kohtuullisen hyvin. Rinnakkaiseen muutosten hallintaan täytyy vielä
+etsiä parempia ratkaisuja. Lisäksi Oppimapissa käytetty rakenne
+olettaa, että kukin dokumenttityyppi on itsenäinen osa järjestelmää ja
+koko käsiteltävä sovelluksen rakenne voidaan \emph{luontevasti} esittää
+puurakenteena tai kaksisuuntaisena puurakenteena.\footnote{Esimerkiksi
+XML ei voi esittää kuin yksinkertaisia puurakenteita, mutta silti sitä
+voidaan käyttää minkä tahansa tiedon siirtämiseen tai tallentamiseen.
+Tulee kuitenkin huomata, että XML on huomattavan kömpelö esitysmuoto
+tietyn tyyppiselle tiedolle, esimerkiksi kuville.}
+
+Ratkaisemattomaksi ongelmaksi vaikuttaa siis jäävän aidosti
+selainkäyttöisten käyttöliittymien suunnittelu ja kehittäminen
+yleisellä tasolla -- ainakin kun tavoitteena on yhtä aikaa kohtuullisen
+helppo sovelluksen toteutus ja hyvä käytettävyys.
 
 Tulevaisuuden tutkimuskohteiksi kannattaisi harkita jotain seuraavista:
 \begin{ol}
 \item Selainkäyttöisten sovellusten käytettävyys
 \item Lomakepohjaisen käyttöliittymän kuvaaminen tehokkaasti
+\item Rinnakkainen muutosten hallinta erikoistapauksineen
 \end{ol}
 
 Tavallisten www"-sivujen käytettävyydestä on kirjoitettu useita kirjoja
 ja lukemattomia artikkeleita, mutta selainkäyttöisten sovellusten
-käytettävyydestä ei ole juuri tutkimustuloksia näkynyt. Monella
+käytettävyydestä ei ole merkittäviä tutkimustuloksia näkynyt. Monella
 selainkäyttöisiä sovelluksia kehittävällä sovellussuunnittelijalla
 tuntuu olevan uskomus, että hyvä selainkäyttöinen sovellus muistuttaa
 mahdollisimman paljon tavallista käyttäjän käyttöjärjestelmässä
-toimivaa ohjelmaa. Itsekin ajattelin joskus näin, mutta olen sittemmin
-oppinut arvostamaan www"-selaimien toimintoja joita tavallisissa
-ohjelmissa ei näe. Omasta mielestäni käytettävyyttä lisäävät
-takaisin"-toiminto, joka on eräänlainen \emph{peruuta}"-toiminto -- tosin
-tällä kertaa lomaketasolla eikä toimintotasolla. Lisäksi käyttäjän
-voidaan olettaa tuntevan\footnote{Onko tämä oletus oikein? Itse olen
-nähnyt useita käyttäjiä, jotka eivät selvästi ole ymmärtäneet
-www"-selaimen käyttömallia ja vielä vähemmän he ovat osanneet käyttää
-omaa www"-selaintaan tehokkaasti.} käyttämänsä selaimen
-erityistoimintoja, jotka nopeuttavat tiedonhankintaa ja sivujen välillä
-navigointia. Eri sivujen ja dialogien välillä tulisi siis siirtyä
-tavallisten www"-sivujen tapaan. Vastakohtana tavalliset,
+toimivaa ohjelmaa. Tämä ei kuitenkaan voi pitää paikkaansa, koska
+aidosti selainkäyttöisen ohjelman käyttöympäristöä ei tunneta, kuten
+tässä tutkielmassa todettiin. 
+
+Lisäksi www"-selaimissa on toimintoja, joita tavallisia ohjelmia
+suunniteltaessa ei tarvitse ottaa huomioon. Takaisin"-toiminto ja
+laajemmassa mitassa sivuhistoria ovat kuitenkin käytettävyyttä lisääviä
+ominaisuuksia. Ongelmana on vain niiden tukeminen sovelluksissa.
+Selainkäyttöisen sovelluksen sivujen ja dialogien välillä tulisikin
+siis siirtyä tavallisten www"-sivujen tapaan. Vastakohtana tavalliset,
 käyttöjärjestelmässä toimivat sovellukset harvoin käyttävät useita
 dialogeja peräkkäin ja eivät siten sovellu selainkäyttöisen sovelluksen
 esimerkiksi. Useimmat ``tavalliset'' ohjelmat muokkaavatkin usein
@@ -59,3 +61,32 @@ tulisi painottua sellaisien ratkaisumallien etsimiseen, jotka eivät
 vaadi, että asiakassovellus (selain) suorittaisi mitään palvelimen
 tarjoamaa ohjelmakoodia tai skriptejä -- toiminnallisuus pitäisi pystyä
 toteuttamaan HTML"-kielen ja HTTP"-protokollan ehdoilla.
+
+Kolmas tutkimusta vaativa asia olisi selvittää, kuinka rinnakkain
+tehtyjä muutoksia voisi paremmin hallita? Luvussa
+\ref{oppimapin-kaytettavyys-yhteenveto} kuvailin muutamia
+ongelmatilanteita, joita usean käyttäjän tapauksessa voi syntyä, koska
+yhteys muokkaustoimintojen ja sovelluksen välillä ei ole
+reaaliaikainen. Reaaliaikaisuusvaatimusta tulee tulevaisuudessakin
+välttää, jotta sovellusta voidaan käyttää myös ``kenttäolosuhteissa'',
+mutta olisiko lopputulos parempi, jos dokumentin muokkaus sallittaisiin
+vain yhdelle käyttäjälle kerrallaan? Vai olisiko parempi sallia
+rinnakkaiset muutokset ja \emph{yrittää} yhdistää muutokset
+koneellisesti ja kysyä käyttäjältä lisäohjeita ongelmatilanteessa?
+
+Neljäs, myös tavallisia ohjelmia koskevia ongelma on, kuinka motivoida
+käyttäjät syöttämään metatietoa syötetystä tiedosta? Jos
+tulevaisuudessa arvioidaan www"-selaimien pystyvän tavuttamaan tekstiä,
+pitäsi tietokantaan pystyä jo nyt tallentamaan tieto siitä, millä
+kielellä käyttäjä on tietoa syöttänyt. Ei ole järkevää olettaa, että
+syötetty teksti olisi välttämättä samalla kielellä kirjoitettu kuin
+käyttöliittymä esitetään. Kuitenkin esimerkiksi englannin ja suomen
+kieltä tavutetaan eri tavalla, joten tavutus ei voi toimia, jos kieltä
+ei voi luotattavasti tunnistaa. Käyttäjä ei kuitenkaan koe järkevänä
+ilmoittaa kieltä nyt, kun selaimet eikä myöskään sovellus voi sitä
+tietoa vielä hyödyntää. Vastaavasti tulevaisuutta varten olisi hyvä
+kirjoittaa kuvaus jokaista dokumentin muutosta kohden; ei niinkään
+\emph{mitä} muutettiin, vaan \emph{miksi} muutos tehtiin. Käyttäjä ei
+usein koe, että tästäkään olisi mitään hyötyä, koska hän muistaa vielä,
+miksi hän teki muutoksen. Mutta muistaako hän sitä vuoden päästä? Entä
+jos sisältöä ylläpitää silloin eri henkilö?
