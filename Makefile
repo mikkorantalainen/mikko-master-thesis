@@ -69,7 +69,7 @@ clean:
 
 %.pdf:	%.tex %.dvi
 	@echo === Creating: $@
-	pdflatex $(LATEXARGS) $* | egrep -i $(FLAGS) $(ERR)
+	pdflatex $(LATEXARGS) $* | egrep -i $(FLAGS) $(ERR); true
 	egrep -q $(NOHYPHEN) $*.log && pdfinitex pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR); true
 	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
 	@echo ======= Done: $@

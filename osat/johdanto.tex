@@ -8,11 +8,12 @@ about future behavior. \end{chapterquote}
 Voidaan perustellusti väittää, että jokainen www-sivuja tehokkaasti
 lukeva ja verkossa olevaa materiaalia hyväkseenkäyttävä henkilö on
 tietoinen www-selainten perusominaisuuksista. Tärkein, erityisesti
-www-selaimelle tyypillinen toiminto, on ns. \emph{takaisin}-toiminto
-(\alt{back} tai \alt{backward}), jolla voidaan sivuhistoriassa palata
-edelliselle sivulle. Jos www-selainta käyttävä henkilö huomaa
-esimerkiksi sisällysluettelosta jonkin kohdan valittuaan, että valinta
-oli väärä, voi hän tämän toiminnon avulla välittömästi palata takaisin
+www-selaimelle tyypillinen toiminto on linkkien seuraaminen. Kokeneelle
+käyttäjälle \emph{takaisin}-toiminto (\alt{back} tai \alt{backward}),
+jolla voidaan sivuhistoriassa palata edelliselle sivulle on miltei yhtä
+arvokas. Jos www-selainta käyttävä henkilö huomaa esimerkiksi
+sisällysluettelosta jonkin kohdan valittuaan, että valinta oli väärä,
+voi hän tämän toiminnon avulla välittömästi palata takaisin
 sisällysluetteloon miettimättä olisiko valinnan seurauksena annetulla
 sivulla ollut jokin keino siirtyä sisällysluetteloon.
 
@@ -28,14 +29,14 @@ ikkunassa ja kirjanmerkin luominen.} Selainkäyttöisten ohjelmien
 kehittäjien yleinen kysymys onkin, \emph{kuinka takaisin-toiminnon
 käyttö voitaisiin estää}, kun oikea kysymys olisi, \strong{miksi} se
 pitäisi estää. Jos käyttäjä selvästi haluaa suorittaa kyseisen
-toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, että hän voisi
-tuon toiminnon tehdä?
+toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, jotta hän voisi
+sen tehdä?
 
 Kuvailen ensin selainkäyttöisten sovellusten toteuttamisessa usein
 huomiotta jätettyjä, mutta käytettävyyden kannalta varsinkin
 tulevaisuudessa, tärkeitä ongelmia. Esitän sitten näihin ongelmiin
 ratkaisumalleja, joista osaa olen työtehtävissäni päässyt kokeilemaan
-ja osa on jäänyt toistaiseksi liian työlääksi toteuttaa. Lopuksi
+ja osa on jäänyt toistaiseksi liian työläinä toteuttamatta. Lopuksi
 esittelen Peda.net -hankkeessa tekemiäni ohjelmistoja ja kerron niiden
 teknisistä ratkaisuista ja havaituista ongelmista sekä ehdotan
 suuntaviivoja tulevaisuuden tutkimusta varten.
@@ -122,7 +123,7 @@ väitettä, mutta perustelen näkemystäni seuraavissa luvuissa.
 \section{Käytettäviä www-sivuja}
 
 Tavallisten www-sivujen käytettävyydestä on kirjoitettu useita kirjoja.
-Ehkä tunnetuimpia on Jakob Nielsenin
+Ehkä tunnetuin on Jakob Nielsenin
 WWW-suunnittelu\cite{nielsen:usability} siitäkin huolimatta, että kirja
 on kirjoitettu vasta 1999. Nielsen käsittelee kirjassaan useita
 olemassa olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen --
@@ -143,13 +144,13 @@ sovelluksessa sisällölle varattu pinta-ala on alle puolet.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/www-korpela}
-\caption{Eräs esimerkki Korpelan sivustosta}
+\caption{Esimerkkinäkymä Korpelan sivustosta}
 \label{fig:www-korpela}
 \end{kuva}
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/www-nielsen}
-\caption{Eräs esimerkki Nielsenin sivustosta}
+\caption{Esimerkkinäkymä Nielsenin sivustosta}
 \label{fig:www-nielsen}
 \end{kuva}
 
@@ -169,15 +170,15 @@ Useilla sivuilla suuri osa sivun pinta-alasta on varattu navigoinnille.
 Sivujen tekijät kokevat usein -- jostain syystä -- että käyttäjä voi
 ``eksyä'', jos jokaiselta sivulta ei helposti pääse mille tahansa
 muulle sivulle. Eksyykö tavallisen kirjan lukija, kun joka sivulla ei
-lue jokaisen muun kappaleen sivunumeroita? Ei, hän sen sijaan palaa
+lue kaikkien muiden kappaleiden sivunumeroita? Ei, hän sen sijaan palaa
 sisällysluetteloon ja halutessaan tarkistaa asian sieltä. Aivan
 vastaavasti www-sivuston ensimmäinen sivu voisi olla sisällysluettelo.
-Tällä sivulla navigoinnille on varattu 100\% sivun pinta-alasta, joten
+Tällöin navigoinnille on varattu 100\% sivun pinta-alasta, joten
 navigointi voidaan suunnitella mahdollisimman tehokkaasti
 käytettäväksi. Muilla sivuilla riittää \emph{suhteellinen sijainti},
 joka vastaa kirjan yläreunassa usein toistettavaa nykyisen luvun nimeä.
 Sivun navigoinnista vastaa tällöin yksi linkki: ``Sisällysluettelo''.
-Edelleen, jos sivusto on mielekäs lukea tietyssä järjestyksessä kuten
+Mikäli sivusto on mielekäs lukea tietyssä järjestyksessä kuten
 tavallinen kirja, voidaan navigointiin liittää myös linkit ''Seuraava''
 ja ''Edellinen''.
 
@@ -419,7 +420,7 @@ sovellus on tehty väärin.
 huomioonotettavia asioita}
 \label{label:kaytettavyydessa_huomioitavaa}
 
-Sovelluksen käytettävyydessä huomioidaan herkästi pelkkä
+Sovelluksen käytettävyydessä huomioidaan usein pelkkä
 käyttöliittymä, vaikka käytettävyydessä merkitsee myös koko sovelluksen
 rakenne. Rakenne heijastuu usein sovelluksen toimintamalleihin;
 esimerkiksi verkko"-oppimisympäristössä perusrakenteena voisi olla
@@ -427,8 +428,8 @@ esimerkiksi verkko"-oppimisympäristössä perusrakenteena voisi olla
 valinta vaikuttaisi myöhemmin ympäristön tehokkaisiin
 toimintamalleihin.
 
-Verkkosovelluksen käytettävyyteen vaikuttavat erityisesti seuraavat
-asiat Beckerin ja Berkemeyerin mukaan \cite{becker:web_usability}:
+Verkkosovelluksen käytettävyyteen vaikuttavat Beckerin ja Berkemeyerin
+mukaan \cite{becker:web_usability} erityisesti seuraavat asiat:
 
 \begin{dl}
 
