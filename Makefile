@@ -17,6 +17,7 @@ RERUN		= "(There were undefined references|Rerun to get (cross-references|the ba
 FLAGS		= "-A1"
 #FLAGS		=
 ERR		= "warn|error|^\\!|^\\?|^l\.|^[*][*]"
+#LATEXARGS	= -interaction=batchmode
 LATEXARGS	= -interaction=nonstopmode
 
 all:	$(ALL)
@@ -27,7 +28,9 @@ remake:
 	make -s almost-clean all
 
 almost-clean:
-	rm -f $(SOURCEBASE).ps $(SOURCEBASE).dvi $(SOURCEBASE).pdf $(SOURCEBASE).toc $(SOURCEBASE).aux
+	rm -f $(SOURCEBASE).ps $(SOURCEBASE).dvi \
+		$(SOURCEBASE).pdf $(SOURCEBASE).toc $(SOURCEBASE).aux \
+		$(SOURCEBASE)-alt.pdf
 
 ps: $(SOURCEBASE).ps
 
@@ -46,7 +49,8 @@ clean:
 		$(SOURCEBASE).bbl $(SOURCEBASE).blg $(SOURCEBASE).brf $(SOURCEBASE).cb \
 		$(SOURCEBASE).ind $(SOURCEBASE).idx $(SOURCEBASE).ilg $(SOURCEBASE).inx \
 		$(SOURCEBASE).ps $(SOURCEBASE).dvi $(SOURCEBASE).pdf $(SOURCEBASE).toc \
-		$(SOURCEBASE).out latex.fmt pdflatex.fmt latex.log pdflatex.log texsys.aux
+		$(SOURCEBASE).out latex.fmt pdflatex.fmt latex.log \
+		pdflatex.log texsys.aux $(SOURCEBASE)-alt.pdf
 
 %.dvi:	%.tex
 	@echo === Creating: $@
@@ -62,11 +66,13 @@ clean:
 	dvips $< -o $@ 2>&1 | egrep -i $(FLAGS) $(ERR) || true
 	@echo ======= Done: $@
 
-%-alt.pdf: %.pdf
+%-alt.pdf: %.ps
 	@echo === Creating: $@
 	#dvipdf -sPAPERSIZE=a4 $< $@
 	#pdfopt $< $@
-	echo NOT SUPPORTED
+	#echo NOT SUPPORTED
+	#dvips -sPAPERSIZE=a4 -Ppdf $< -o $@ 2>&1 | egrep -i $(FLAGS) $(ERR) || true
+	ps2pdf -sPAPERSIZE=a4 $*.ps - > $@
 	@echo ======= Done: $@
 
 %.pdf:	%.tex %.dvi

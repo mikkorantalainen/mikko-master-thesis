@@ -5,12 +5,12 @@
 
 \def\CvsRevision$#1: #2 ${#2}
 \def\CvsDate$#1: #2 #3 ${#2}
-\def\filedate{\CvsDate$Date: 2004/05/03 09:59:35 $}
-\def\fileversion{\CvsRevision$Revision: 1.48 $}
-\def\fileinfo{JY MIT Gradut}
+\def\filedate{2004/10/10}
+\def\fileversion{1.48mtr1}
+\def\fileinfo{Modified JYU/MIT document class}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2004}[\filedate\space\fileversion\space\fileinfo]
-\typeout{gradu2004 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
+\typeout{File: gradu2004.cls\space\filedate \space v\fileversion \space \fileinfo}
 
 \newif\iffi
 \fitrue
@@ -120,14 +120,31 @@
 \usepackage[
 	plainpages=false,
 	pdfpagelabels,
-	pdftitle={Gradu},
+	pdftitle={Aidosti selainkäyttöiset sovellukset ja Peda.net},
+	pdfauthor={Mikko Rantalainen},
+	pdfsubject={Pro Gradu},
+	pdfproducer={LaTeX with gradu2004 document class (prod.)}
+	pdfcreator={Mikko Rantalainen with LaTeX and gradu2004 document class}
+	pdfkeywords={browser,web application, usability},
+	pdfstartview=Fit,
+% Fit (whole page), FitH (width), FitV (height), FitB (fit bounding box)	
+	pdfpagelayout=SinglePage,
+% SinglePage, OneColumn, TwoColumnLeft, TwoColumnRight
+	bookmarks=true,
+	bookmarksopen=true,
 	urlcolor=blue,
+	citecolor=red,
 	linktocpage,
 	a4paper,
 	colorlinks=true,
 	breaklinks=true,
+	%pdfpagemode=FullScreen,
+	%backref=true,
 	pagebackref]{hyperref}
-
+% .... \hypersetup{ ... } any time later to override
+% see http://www.tug.org/applications/hyperref/manual.html for more info
+%
+% also see http://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}

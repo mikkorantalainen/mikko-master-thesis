@@ -4,9 +4,9 @@
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `head,exlang,lang,vonx,nm-init,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
-%% finnish.mbs  (with options: `exlang,lang,vonx,nm-init,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
-%% merlin.mbs  (with options: `tail,exlang,lang,vonx,nm-init,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% merlin.mbs  (with options: `head,exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% finnish.mbs  (with options: `exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% merlin.mbs  (with options: `tail,exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
 %% ----------------------------------------
 %% *** JYU/MIT tyyli gradua varten ***
 %% 
@@ -396,7 +396,7 @@ FUNCTION {format.names}
   numnames 'namesleft :=
     { namesleft #0 > }
     { s nameptr
-      "{f.~}{vv~}{ll}{, jj}"
+      "{ff~}{vv~}{ll}{, jj}"
       format.name$
       bibinfo bibinfo.check
       't :=
@@ -1274,7 +1274,7 @@ FUNCTION {sort.format.names}
   numnames 'namesleft :=
     { namesleft #0 > }
     { s nameptr
-      "{ll{ }}{  f{ }}{  jj{ }}"
+      "{ll{ }}{  ff{ }}{  jj{ }}"
       format.name$ 't :=
       nameptr #1 >
         {
