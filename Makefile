@@ -1,6 +1,6 @@
 # Filename of (La)TeX file without extension. E.g. "book" for book.tex.
 SOURCEBASE = webui
-SOURCES    = osat/*.tex
+SOURCES    = osat/*.tex bibliography.bib gradu2.cls Makefile
 #-----------------------------------------------------------------------
 ALL	= $(SOURCEBASE).ps $(SOURCEBASE).pdf
 PREVIEW = $(SOURCEBASE).dvi
@@ -19,13 +19,21 @@ LATEXARGS	= -interaction=nonstopmode
 
 all:	$(ALL)
 
+extra: $(ALL) $(SOURCEBASE)-alt.pdf
+
+remake:
+	make -s almost-clean all
+
+almost-clean:
+	rm -f *.dvi *.ps *.pdf
+
 ps: $(SOURCEBASE).ps
 
 pdf: $(SOURCEBASE).pdf
 
 preview: $(PREVIEW)
 	@echo "Displaying preview. Press Q to quit..."
-	xdvi $<
+	xdvi -bg white $<
 
 preview2: $(PREVIEW2)
 	@echo "Displaying preview. Press Q to quit..."
@@ -36,29 +44,30 @@ clean:
 		*.inx *.ps *.dvi *.pdf *.toc *.out latex.fmt pdflatex.fmt
 
 %.dvi:	%.tex
-	@echo Creating $@ ...
-	latex $(LATEXARGS) $< | egrep -i $(ERR) ; true
+	@echo === Creating: $@
+	latex $(LATEXARGS) $< > /dev/null
 	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(ERR) && latex $(LATEXARGS) $< | egrep -i $(ERR) ; true
 	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(ERR)) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(ERR) ) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(ERR) ) || true
-	@echo Done $@...
+	@echo ======= Done: $@
 
 %.ps:	%.dvi
-	@echo Creating $@ ...
+	@echo === Creating: $@
 	dvips $< -o $@ 2>&1 | egrep -i $(ERR) || true
-	cp -f $@ preview.ps
-	@echo Done $@...
+	@echo ======= Done: $@
 
-#%.pdf:	%.dvi
-#	dvipdf $<
-#%.pdf:	%.ps %.dvi
-#	ps2pdf $<
+%-alt.pdf: %.dvi
+	@echo === Creating: $@
+	dvipdf $< $@
+	@echo ======= Done: $@
+
 %.pdf:	%.tex %.dvi
-	@echo Creating $@ ...
+	@echo === Creating: $@
 	pdflatex $(LATEXARGS) $* | egrep -i $(ERR)
 	egrep -q $(NOHYPHEN) $*.log && pdfinitex pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(ERR); true
-	@echo Done $@...
+	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(ERR) ) || true
+	@echo ======= Done: $@
 	
 
 dist: clean
