@@ -87,9 +87,21 @@ Nykyisin käytössä oleva OPSpron versio on Juha Lahden PHP-ohjelmointikielellä oh
 
 \subsection{Verkkoveräjä}
 
-Portaalissa eli \emph{Verkkoveräjässä} alkuperäisenä ideana oli tarjota koulun opettajalle mahdollisuus ylläpitää opiskelua tukevaa www-sivua tai sivustoa ilman ohjelmointitaitoa tai www-sivujen ylläpito-ohjelmistoja. Yleisempänä käyttötarkoituksena oli tukea myös yleisemmin www-sivujen tuotantoa - esimerkiksi koulun kotisivujen muodossa. Monilla kouluilla ei ollut tuohon aikaan, vuonna 2001, omia kotisivuja. Useinmiten koulun selaimessa näkyikin oletuksena ensimmäisenä paikallisen internet-operaattorin etusivu. Tämän katsottiin palvelevan huonosti itse opetustehtävää. Verkkoveräjän yhteydessä www-sivulla tarkoitetaan pelkän tekstin ja kuvien julkaisemisen lisäksi esimerkiksi verkkokeskustelua ja vastaavaa toimintaa. Sivu kootaan ns. moduuleista joita ladotaan käyttöliittymään palstoina. Ideana on, että yksi moduuli tarjoaa yhden toiminon: esimerkiksi kuva-mooduulilla voi sivulle liittää kuvan ja kuvatekstin.
+Portaalissa eli \emph{Verkkoveräjässä} alkuperäisenä ideana oli tarjota koulun opettajalle mahdollisuus ylläpitää opiskelua tukevaa www-sivua tai sivustoa ilman ohjelmointitaitoa tai www-sivujen ylläpito-ohjelmistoja. Yleisempänä käyttötarkoituksena oli tukea myös yleisemmin www-sivujen tuotantoa - esimerkiksi koulun kotisivujen muodossa. Monilla kouluilla ei ollut tuohon aikaan, vuonna 2001, omia kotisivuja. Useinmiten koulun selaimessa näkyikin oletuksena ensimmäisenä paikallisen internet-operaattorin etusivu. Tämän katsottiin palvelevan huonosti itse opetustehtävää. Verkkoveräjän yhteydessä www-sivulla tarkoitetaan pelkän tekstin ja kuvien julkaisemisen lisäksi esimerkiksi verkkokeskustelua ja vastaavaa toimintaa. Sivu kootaan ns. moduuleista joita ladotaan käyttöliittymään palstoina. Ideana on, että yksi moduuli tarjoaa yhden toiminon: esimerkiksi kuva-mooduulilla voi sivulle liittää kuvan ja kuvatekstin. Kuvassa \ref{fig:veraja1} on esimerkkinä Kuopion Klassillisen lukion veräjä alkuperäisen veräjän käyttöliittymän kautta katseltuna.
 
-Verkkoveräjä oli viimeinen Peda.net:sssä Perl-ohjelmointikielellä toteutettu ja julkaistu sovellus. Verkkoveräjä toimi MySQL-tietokannan päällä ja nykyisin käytössä oleva, Juha Lahden PHP-ohjelmointikielellä vuonna 2004 kirjoittama versio, käyttää edelleen pääpiirteiltään samaa tietokantaa. Keväällä 2004 verkkoveräjiä oli käytössä n. 13000.
+\begin{kuva}
+\includegraphics[width=\linewidth]{kuvat/lukio1}
+\caption{Kuopion Klassillisen lukion veräjä}
+\label{fig:veraja1}
+\end{kuva}
+
+Verkkoveräjä oli viimeinen Peda.net:sssä Perl-ohjelmointikielellä toteutettu ja julkaistu sovellus. Verkkoveräjä toimi MySQL-tietokannan päällä ja nykyisin käytössä oleva, Juha Lahden PHP-ohjelmointikielellä vuonna 2004 kirjoittama versio, käyttää edelleen pääpiirteiltään samaa tietokantaa. Keväällä 2004 verkkoveräjiä oli käytössä n. 13000. Kuvassa \ref{fig:veraja2} on Kuopion Klassillisen lukion veräjä uuden käyttöliittymän kautta katseltuna.
+
+\begin{kuva}
+\includegraphics[width=13cm]{kuvat/lukio2}
+\caption{Kuopion Klassillisen lukion veräjä (uusi käyttöliittymä)}
+\label{fig:veraja2}
+\end{kuva}
 
 \subsection{Portal2-prototyyppi}
 
@@ -104,6 +116,19 @@ Juha Lahti kirjoitti keväällä 2004 julkaistun kolmannen version; se sisälsi osan
 Yale2 eli Yet Another Learning Environment 2 on kokonaan PHP-ohjelmointikielellä vuonna 2003 uudelleenkirjoitettu versio Juha Lahden tekemästä YALE-prototyypistä. Yale2 on selainkäyttöinen oppimisympäristö yksittäisen koulun käyttöön. Yale2 tarjosi suljettujen, oppilaiden käyttöön luotujen kurssien luomisen ja ylläpidon lisäksi julkaisumahdollisuuden "kirjasto"-nimisen ominaisuuden muodossa.
 
 Yale2 on tätä kirjoittaessa (keväällä 2004) edelleen pienimuotoisessa testikäytössä, mutta sitä ei tulla virallisesti ottamaan käyttöön missään vaiheessa. Sovellus poistetaan käytöstä todennäköisesti tämän vuoden loppuun mennessä. Yale2 oli loogisesti Vihkon esiaste, jossa ei ollut versionhallintaa ja oikeuksien hallinta oli huomattavasti rajoittuneempaa. Lisäksi käyttöliittymän rakenteessa oli joitakin käytettävyysongelmia. Uuden version kehittämiseen päädyttiin, koska versionhallinnan ja kehittyneemmän oikeuksien hallinnan liittäminen tähän versioon arvioitiin työläämmäksi kuin kokonaan uuden järjestelmän kehittäminen.
+
+\begin{kuva}
+\includegraphics[width=13cm]{kuvat/yale21}
+\caption{YALE2: yksittäisen kurssin näkymä}
+\label{fig:yale21}
+\end{kuva}
+
+\begin{kuva}
+\includegraphics[width=12cm]{kuvat/yale22}
+\caption{YALE2: esimerkki kurssin materiaalin muokkaamisesta}
+\label{fig:yale22}
+\end{kuva}
+
 
 \input{osat/pedanet-vihko}
 
