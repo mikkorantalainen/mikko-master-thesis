@@ -162,7 +162,7 @@ toiminnallisuus
 / moduulit#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -207,7 +207,7 @@ toiminnallisuus
             <dia:string>#Sovelluslogiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -286,11 +286,11 @@ toiminnallisuus
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#tiedon käsittelyn
+            <dia:string>#Tiedon käsittelyn
 logiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -372,7 +372,7 @@ logiikka#</dia:string>
             <dia:string>#Käyttöliittymäajuri#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -454,7 +454,7 @@ logiikka#</dia:string>
             <dia:string>#HTML tai XHTML#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -536,7 +536,7 @@ logiikka#</dia:string>
             <dia:string>#CSS tai XSLT#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font family="courier new" style="0" name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>

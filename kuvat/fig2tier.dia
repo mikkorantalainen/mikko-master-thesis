@@ -1,8 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
   <dia:diagramdata>
     <dia:attribute name="background">
       <dia:color val="#ffffff"/>
+    </dia:attribute>
+    <dia:attribute name="pagebreak">
+      <dia:color val="#000099"/>
     </dia:attribute>
     <dia:attribute name="paper">
       <dia:composite type="paper">
@@ -46,7 +49,11 @@
         <dia:attribute name="visible_y">
           <dia:int val="1"/>
         </dia:attribute>
+        <dia:composite type="color"/>
       </dia:composite>
+    </dia:attribute>
+    <dia:attribute name="color">
+      <dia:color val="#d8e5e5"/>
     </dia:attribute>
     <dia:attribute name="guides">
       <dia:composite type="guides">
@@ -81,16 +88,16 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string># K&#228;ytt&#246;liittym&#228; #</dia:string>
+            <dia:string># Käyttöliittymä #</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,3.79469"/>
+            <dia:point val="38,3.75"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -129,13 +136,13 @@
             <dia:string>#Ohjelman logiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,9.79469"/>
+            <dia:point val="38,9.75"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

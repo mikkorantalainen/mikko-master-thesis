@@ -1,8 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
   <dia:diagramdata>
     <dia:attribute name="background">
       <dia:color val="#ffffff"/>
+    </dia:attribute>
+    <dia:attribute name="pagebreak">
+      <dia:color val="#000099"/>
     </dia:attribute>
     <dia:attribute name="paper">
       <dia:composite type="paper">
@@ -46,7 +49,11 @@
         <dia:attribute name="visible_y">
           <dia:int val="1"/>
         </dia:attribute>
+        <dia:composite type="color"/>
       </dia:composite>
+    </dia:attribute>
+    <dia:attribute name="color">
+      <dia:color val="#d8e5e5"/>
     </dia:attribute>
     <dia:attribute name="guides">
       <dia:composite type="guides">
@@ -58,22 +65,31 @@
   <dia:layer name="Background" visible="true">
     <dia:object type="Network - General Computer (Tower)" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="62,6"/>
+        <dia:point val="60.925,2.24318"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.91,2.16;63.09,7.1"/>
+        <dia:rectangle val="60.9169,2.20318;63.0843,7.30455"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="60.95,2.2"/>
+        <dia:point val="60.925,2.24318"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="2.1"/>
+        <dia:real val="2.15"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.8"/>
+        <dia:real val="3.71364"/>
       </dia:attribute>
-      <dia:attribute name="magnify">
-        <dia:real val="1"/>
+      <dia:attribute name="show_background">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="flip_horizontal">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="flip_vertical">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="padding">
+        <dia:real val="0"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -81,13 +97,13 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="courier new" style="0" name="Courier"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="1"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="62,6.94336"/>
+            <dia:point val="62,6.80455"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -101,10 +117,10 @@
     <dia:group>
       <dia:object type="Network - General Monitor (With Stand)" version="0" id="O1">
         <dia:attribute name="obj_pos">
-          <dia:point val="52,5"/>
+          <dia:point val="50.5,2.05"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="50.46,2.01;53.54,6.1"/>
+          <dia:rectangle val="50.475,2.025;53.525,6.35"/>
         </dia:attribute>
         <dia:attribute name="elem_corner">
           <dia:point val="50.5,2.05"/>
@@ -115,8 +131,17 @@
         <dia:attribute name="elem_height">
           <dia:real val="2.95"/>
         </dia:attribute>
-        <dia:attribute name="magnify">
-          <dia:real val="1"/>
+        <dia:attribute name="show_background">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="flip_horizontal">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="flip_vertical">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="padding">
+          <dia:real val="0"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -124,13 +149,13 @@
               <dia:string>##</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="1"/>
             </dia:attribute>
             <dia:attribute name="pos">
-              <dia:point val="52,5.94336"/>
+              <dia:point val="52,5.85"/>
             </dia:attribute>
             <dia:attribute name="color">
               <dia:color val="#000000"/>
@@ -146,7 +171,7 @@
           <dia:point val="54.0007,3.53515"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="53.4487,2.84046;54.5027,3.64046"/>
+          <dia:rectangle val="53.8257,2.88515;54.1757,3.88515"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -154,7 +179,7 @@
               <dia:string>#A#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -175,10 +200,10 @@
     <dia:group>
       <dia:object type="Network - General Monitor (With Stand)" version="0" id="O3">
         <dia:attribute name="obj_pos">
-          <dia:point val="52,16"/>
+          <dia:point val="50.5,13.05"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="50.46,13.01;53.54,17.1"/>
+          <dia:rectangle val="50.475,13.025;53.525,17.35"/>
         </dia:attribute>
         <dia:attribute name="elem_corner">
           <dia:point val="50.5,13.05"/>
@@ -189,8 +214,17 @@
         <dia:attribute name="elem_height">
           <dia:real val="2.95"/>
         </dia:attribute>
-        <dia:attribute name="magnify">
-          <dia:real val="1"/>
+        <dia:attribute name="show_background">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="flip_horizontal">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="flip_vertical">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="padding">
+          <dia:real val="0"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -198,13 +232,13 @@
               <dia:string>##</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="1"/>
             </dia:attribute>
             <dia:attribute name="pos">
-              <dia:point val="52,16.9434"/>
+              <dia:point val="52,16.85"/>
             </dia:attribute>
             <dia:attribute name="color">
               <dia:color val="#000000"/>
@@ -220,7 +254,7 @@
           <dia:point val="54.0007,14.5351"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="53.4487,13.8405;54.5027,14.6405"/>
+          <dia:rectangle val="53.8257,13.8851;54.1757,14.8851"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -228,7 +262,7 @@
               <dia:string>#C#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -249,10 +283,10 @@
     <dia:group>
       <dia:object type="Network - General Monitor (With Stand)" version="0" id="O5">
         <dia:attribute name="obj_pos">
-          <dia:point val="58,16"/>
+          <dia:point val="56.5,13.05"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="56.46,13.01;59.54,17.1"/>
+          <dia:rectangle val="56.475,13.025;59.525,17.35"/>
         </dia:attribute>
         <dia:attribute name="elem_corner">
           <dia:point val="56.5,13.05"/>
@@ -263,8 +297,17 @@
         <dia:attribute name="elem_height">
           <dia:real val="2.95"/>
         </dia:attribute>
-        <dia:attribute name="magnify">
-          <dia:real val="1"/>
+        <dia:attribute name="show_background">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="flip_horizontal">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="flip_vertical">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="padding">
+          <dia:real val="0"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -272,13 +315,13 @@
               <dia:string>##</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="1"/>
             </dia:attribute>
             <dia:attribute name="pos">
-              <dia:point val="58,16.9434"/>
+              <dia:point val="58,16.85"/>
             </dia:attribute>
             <dia:attribute name="color">
               <dia:color val="#000000"/>
@@ -294,7 +337,7 @@
           <dia:point val="60.0007,14.5351"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="59.4487,13.8405;60.5027,14.6405"/>
+          <dia:rectangle val="59.8257,13.8851;60.1757,14.8851"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -302,7 +345,7 @@
               <dia:string>#D#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -325,7 +368,7 @@
         <dia:point val="60,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.76,6.96;60.3382,13.32"/>
+        <dia:rectangle val="51.72,6.93;60.07,13.35"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="60,7"/>
@@ -334,11 +377,11 @@
       <dia:attribute name="text">
         <dia:string>#4:a4#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="59.0802,9.0411"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="4"/>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O8">
@@ -346,7 +389,7 @@
         <dia:point val="55,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,3.08254;60.05,4.4"/>
+        <dia:rectangle val="54.95,3.12723;60.05,4.4"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="55,4"/>
@@ -355,11 +398,11 @@
       <dia:attribute name="text">
         <dia:string>#3:a3#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="57.3069,3.77723"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O9">
@@ -367,7 +410,7 @@
         <dia:point val="55,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,4.08254;60.05,5.4"/>
+        <dia:rectangle val="54.95,4.12723;60.05,5.4"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="55,5"/>
@@ -376,11 +419,11 @@
       <dia:attribute name="text">
         <dia:string>#4:a4#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="57.3069,4.77723"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O10">
@@ -388,7 +431,7 @@
         <dia:point val="55,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,2.08254;60.05,3.4"/>
+        <dia:rectangle val="54.95,2.12723;60.05,3.4"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="55,3"/>
@@ -397,11 +440,11 @@
       <dia:attribute name="text">
         <dia:string>#2:a2#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="57.3069,2.77723"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O11">
@@ -409,7 +452,7 @@
         <dia:point val="52,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.8682,4.95;52.4,13.05"/>
+        <dia:rectangle val="49.7052,4.95;52.4,13.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="52,5"/>
@@ -418,11 +461,11 @@
       <dia:attribute name="text">
         <dia:string>#3:(a3)#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="50.6302,9.4411"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O1" connection="0"/>
@@ -433,7 +476,7 @@
         <dia:point val="52,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.96,4.96;58.32,13.24"/>
+        <dia:rectangle val="51.93,4.93;58.35,13.28"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="52,5"/>
@@ -442,11 +485,11 @@
       <dia:attribute name="text">
         <dia:string>#4:(a4)#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="54.4302,6.2161"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O1" connection="0"/>
@@ -457,7 +500,7 @@
         <dia:point val="55,2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,1.08254;60.05,2.4"/>
+        <dia:rectangle val="54.95,1.12723;60.05,2.4"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="55,2"/>
@@ -466,20 +509,20 @@
       <dia:attribute name="text">
         <dia:string>#1:a1#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="57.3069,1.77723"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
     </dia:object>
     <dia:group>
       <dia:object type="Network - General Monitor (With Stand)" version="0" id="O14">
         <dia:attribute name="obj_pos">
-          <dia:point val="46,16"/>
+          <dia:point val="44.5,13.05"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="44.46,13.01;47.54,17.1"/>
+          <dia:rectangle val="44.475,13.025;47.525,17.35"/>
         </dia:attribute>
         <dia:attribute name="elem_corner">
           <dia:point val="44.5,13.05"/>
@@ -490,8 +533,17 @@
         <dia:attribute name="elem_height">
           <dia:real val="2.95"/>
         </dia:attribute>
-        <dia:attribute name="magnify">
-          <dia:real val="1"/>
+        <dia:attribute name="show_background">
+          <dia:boolean val="true"/>
+        </dia:attribute>
+        <dia:attribute name="flip_horizontal">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="flip_vertical">
+          <dia:boolean val="false"/>
+        </dia:attribute>
+        <dia:attribute name="padding">
+          <dia:real val="0"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -499,13 +551,13 @@
               <dia:string>##</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="1"/>
             </dia:attribute>
             <dia:attribute name="pos">
-              <dia:point val="46,16.9434"/>
+              <dia:point val="46,16.85"/>
             </dia:attribute>
             <dia:attribute name="color">
               <dia:color val="#000000"/>
@@ -521,7 +573,7 @@
           <dia:point val="48.0007,14.5351"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="47.4487,13.8405;48.5027,14.6405"/>
+          <dia:rectangle val="47.8257,13.8851;48.1757,14.8851"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -529,7 +581,7 @@
               <dia:string>#B#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -552,7 +604,7 @@
         <dia:point val="52,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.68,4.96;52.04,13.24"/>
+        <dia:rectangle val="45.65,4.93;52.07,13.28"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="52,5"/>
@@ -561,11 +613,11 @@
       <dia:attribute name="text">
         <dia:string>#1:(a1)#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="48.3802,7.9911"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="0"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O1" connection="0"/>
@@ -576,7 +628,7 @@
         <dia:point val="46,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.7309,3.67509;50.731,13.0457"/>
+        <dia:rectangle val="44.7309,3.6294;50.7514,13.066"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="46,13"/>
@@ -600,15 +652,15 @@
         <dia:point val="45.8052,4.2161"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.5312,3.52141;49.0792,4.32141"/>
+        <dia:rectangle val="44.1052,3.54485;47.5264,4.6086"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#2:&quot;Takaisin&quot;#</dia:string>
+            <dia:string>#2:"Takaisin"#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
@@ -630,7 +682,7 @@
         <dia:point val="60,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.8211,5.95528;60.0447,13.3578"/>
+        <dia:rectangle val="45.7764,5.93292;60.0671,13.3801"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="60,6"/>
@@ -639,11 +691,11 @@
       <dia:attribute name="text">
         <dia:string>#2:a2#</dia:string>
       </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="56.5052,7.2911"/>
-      </dia:attribute>
-      <dia:attribute name="type">
-        <dia:int val="4"/>
       </dia:attribute>
     </dia:object>
   </dia:layer>

@@ -124,16 +124,19 @@
 	pdfauthor={Mikko Rantalainen},
 	pdfsubject={Pro Gradu},
 	pdfproducer={LaTeX with gradu2004 document class (prod.)}
-	pdfcreator={Mikko Rantalainen with LaTeX and gradu2004 document class}
+	pdfcreator={Mikko Rantalainen with gradu2004 document class}
 	pdfkeywords={browser,web application, usability},
 	pdfstartview=Fit,
-% Fit (whole page), FitH (width), FitV (height), FitB (fit bounding box)	
+% Fit (whole page), FitH (width), FitV (height), FitB (fit bounding box)
 	pdfpagelayout=SinglePage,
 % SinglePage, OneColumn, TwoColumnLeft, TwoColumnRight
 	bookmarks=true,
 	bookmarksopen=true,
-	urlcolor=blue,
-	citecolor=red,
+	urlcolor=black,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	pagecolor=black,
 	linktocpage,
 	a4paper,
 	colorlinks=true,

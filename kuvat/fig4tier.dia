@@ -1,8 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
   <dia:diagramdata>
     <dia:attribute name="background">
       <dia:color val="#ffffff"/>
+    </dia:attribute>
+    <dia:attribute name="pagebreak">
+      <dia:color val="#000099"/>
     </dia:attribute>
     <dia:attribute name="paper">
       <dia:composite type="paper">
@@ -46,7 +49,11 @@
         <dia:attribute name="visible_y">
           <dia:int val="1"/>
         </dia:attribute>
+        <dia:composite type="color"/>
       </dia:composite>
+    </dia:attribute>
+    <dia:attribute name="color">
+      <dia:color val="#d8e5e5"/>
     </dia:attribute>
     <dia:attribute name="guides">
       <dia:composite type="guides">
@@ -82,7 +89,7 @@
           <dia:point val="54,19"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="51.23,18.3053;56.77,19.1053"/>
+          <dia:rectangle val="52.25,18.35;55.75,19.35"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -90,7 +97,7 @@
               <dia:string>#sovellus 2#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -134,7 +141,7 @@
           <dia:point val="38,19"/>
         </dia:attribute>
         <dia:attribute name="obj_bb">
-          <dia:rectangle val="35.23,18.3053;40.77,19.1053"/>
+          <dia:rectangle val="36.25,18.35;39.75,19.35"/>
         </dia:attribute>
         <dia:attribute name="text">
           <dia:composite type="text">
@@ -142,7 +149,7 @@
               <dia:string>#sovellus 1#</dia:string>
             </dia:attribute>
             <dia:attribute name="font">
-              <dia:font name="Courier"/>
+              <dia:font family="courier new" style="0" name="Courier"/>
             </dia:attribute>
             <dia:attribute name="height">
               <dia:real val="0.8"/>
@@ -185,17 +192,17 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#K&#228;ytt&#246;liittym&#228;n
+            <dia:string>#Käyttöliittymän
 toiminnallisuus#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,3.39469"/>
+            <dia:point val="38,3.35"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -234,13 +241,13 @@ toiminnallisuus#</dia:string>
             <dia:string>#Sovelluslogiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,9.79469"/>
+            <dia:point val="38,9.75"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -313,17 +320,17 @@ toiminnallisuus#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#tiedon k&#228;sittelyn
+            <dia:string>#Tiedon käsittelyn
 logiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="38,15.3947"/>
+            <dia:point val="38,15.35"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -396,16 +403,16 @@ logiikka#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#K&#228;ytt&#246;liittym&#228;ajuri#</dia:string>
+            <dia:string>#Käyttöliittymäajuri#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="46,-6.20531"/>
+            <dia:point val="46,-6.25"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -421,7 +428,7 @@ logiikka#</dia:string>
         <dia:point val="46,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.4732,-5.60206;46.5268,2.60206"/>
+        <dia:rectangle val="37.4356,-5.63499;46.5644,2.63499"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="46,-5"/>
@@ -478,17 +485,17 @@ logiikka#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#K&#228;ytt&#246;liittym&#228;n
+            <dia:string>#Käyttöliittymän
 toiminnallisuus#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="54,3.39469"/>
+            <dia:point val="54,3.35"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -527,13 +534,13 @@ toiminnallisuus#</dia:string>
             <dia:string>#Sovelluslogiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="54,9.79469"/>
+            <dia:point val="54,9.75"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -606,17 +613,17 @@ toiminnallisuus#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#tiedon k&#228;sittelyn
+            <dia:string>#Tiedon käsittelyn
 logiikka#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
-            <dia:font name="Courier"/>
+            <dia:font family="sans" style="0" name="Helvetica"/>
           </dia:attribute>
           <dia:attribute name="height">
             <dia:real val="0.8"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="54,15.3947"/>
+            <dia:point val="54,15.35"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -669,7 +676,7 @@ logiikka#</dia:string>
         <dia:point val="46,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.4732,-5.60206;54.5268,2.60206"/>
+        <dia:rectangle val="45.4356,-5.63499;54.5644,2.63499"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="46,-5"/>

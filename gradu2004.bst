@@ -4,9 +4,9 @@
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `head,exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
-%% finnish.mbs  (with options: `exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
-%% merlin.mbs  (with options: `tail,exlang,lang,vonx,ed-au,nmlm,x2,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% merlin.mbs  (with options: `head,exlang,lang,vonx,ed-au,nmlm,x6,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% finnish.mbs  (with options: `exlang,lang,vonx,ed-au,nmlm,x6,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
+%% merlin.mbs  (with options: `tail,exlang,lang,vonx,ed-au,nmlm,x6,m1,dt-end,tit-it,thtit-a,vnum-h,volp-com,pgsep-s,jwdpg,jwdvol,num-xser,pub-date,pub-xpar,isbn,issn,blk-com,au-col,finnish,pp,ed,xedn,and-xcom,url,url-nl,em-it,{}')
 %% ----------------------------------------
 %% *** JYU/MIT tyyli gradua varten ***
 %% 
@@ -404,7 +404,7 @@ FUNCTION {format.names}
         {
           nameptr #1
           #1 + =
-          numnames #2
+          numnames #6
           > and
             { "others" 't :=
               #1 'namesleft := }
@@ -1280,7 +1280,7 @@ FUNCTION {sort.format.names}
         {
           nameptr #1
           #1 + =
-          numnames #2
+          numnames #6
           > and
             { "others" 't :=
               #1 'namesleft := }

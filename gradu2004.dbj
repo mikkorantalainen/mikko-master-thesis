@@ -136,7 +136,7 @@ End of customized bst file
   ,nmlm%: Limited authors (et al replaces missing names)
 %------\ans=l(==nmlm)-------
 %>>NUMBER OF AUTHORS:
-    ,x2%: Maximum of 2 authors
+    ,x6%: Maximum of 6 authors
     ,m1%: Minimum of 1 authors
 %<<TYPEFACE FOR AUTHORS IN LIST OF REFERENCES:
     %: (def) Normal font for author names 
