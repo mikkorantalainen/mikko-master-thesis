@@ -1,5 +1,6 @@
 # Filename of (La)TeX file without extension. E.g. "book" for book.tex.
 SOURCEBASE = webui
+SOURCES    = osat/*.tex
 #-----------------------------------------------------------------------
 ALL	= $(SOURCEBASE).ps $(SOURCEBASE).pdf
 PREVIEW = $(SOURCEBASE).dvi
@@ -63,3 +64,9 @@ clean:
 dist: clean
 	@echo "Creating $(TGZ) ..."
 	( cd .. ; tar cvf - $(DIRBASE) | gzip -9 > $(TGZ) )
+
+$(SOURCEBASE).tex : $(SOURCES)
+	touch $@
+
+loop:
+	while true; do make -s; sleep 1; done
