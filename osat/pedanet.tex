@@ -97,6 +97,20 @@ paremmin pienille lapsille soveltuvan version. Online
 verkkojulkaisuvälineen nimeksi tuli myöhemmin Verkkolehti, jonka uusin
 versio on nykyisin Pedanetin toiseksi käytetyin työkalu.
 
+Työkalujen merkitys johtuu todennäköisesti siitä, että koulujen
+verkottuminen oli pääasiassa seurausta Opetushallituksen
+Tietosuomi"-hankeen tavoitteista. Opetushallitus pyrki kannustamaan
+opettajia hankkimaan tarvittavia taitoja tietoverkon käyttämiseen
+opetuksessa. Käytännössä tuohon aikaan tiedon julkaiseminen verkossa
+vaati paljon teknistä ymmärrystä ja Pedanetin helppokäyttöiset työkalut
+antoivat mahdollisuuden tuottaa sisältöä verkkoon ymmärtämättä teknisiä
+yksityiskohtia. Paljon merkitystä on ollut ilmeisesti myös sillä, että
+Pedanetin ohjelmat ovat aina toimineet hankkeen palvelimilla, joten
+koulujen ei ole tarvinnut asentaa niitä varten erillisiä sovelluksia. 
+Varsinkin pienemmissä kouluissa atk-järjestelyistä vastaa usein
+matematiikan tai fysiikan opettaja, joten aikaa suuriin
+ohjelmistoasennuksiin ei yleensä ole.
+
 Projektissa työskentelivät pääasiassa Juha Lahti tekniikasta vastaavana
 henkilönä, joka myös toteuttu palvelinsovellusten ohjelmointia ja
 toimintaa koordinoi Pentti Pirhonen, joka oli virkavapalla Jämsän
@@ -107,12 +121,17 @@ palvelinohjelmistojen kehittämistä. Pedanetin levittämisestä vastasi
 tähän aikaa pääasiassa Täydennyskoulutuskeskus, joka koulutti
 Pedanet-työvälineiden käyttöä.
 
-[*** lisää tähän käytössä olleet välineet vaiheen lopussa ***]
-
+Ensimmäisen vaiheen aikana nimi Pedanet vaihtui epävirallisesti
+Peda.netiksi ja internet"-osoite muuttui sijainnista
+\url{http://pedanet.jyu.fi/} osoitteeseen \url{http://peda.net/}, jossa
+se nykyisinkin toimii.
 
 \subsection{Peda.netin ensimmäisen vaiheen sovellustuotantoa}
 
-Kuten yllä mainitsin, Juha Lahden Online"-ympäristö oli merkittävässä roolissa onnistuneissa pilottiprojekteissa. Tämä aluksi Online"-nimellä kulkenut ympäristö nimettiin myöhemmin Verkkolehdeksi ja sen versiohistoria on seuraava:
+Kuten yllä mainitsin, Juha Lahden Online"-ympäristö oli merkittävässä
+roolissa onnistuneissa pilottiprojekteissa. Tämä aluksi Online"-nimellä
+kulkenut ympäristö nimettiin myöhemmin Verkkolehdeksi ja sen
+versiohistoria on seuraava:
 
 \begin{ol}
 
@@ -132,11 +151,87 @@ ongelmia korjattiin.
 tallennettiin SQL"-tietokantaan. Järjestelmä toimi
 Perl-ohjelmointikielellä ja tietokannan tehtävää hoiti miniSQL.
 
-%tästä versiosta kurssitarjotin, Mikko Rantalainen, 1999
-
 \end{ol}
+Verkkolehden lisäksi oli käytössä Jyväskylän yliopistolla Cum Laude
+"-työprojektina toteutettu OPSpro-sovellus. Osa Keski"-Suomen koulusta
+käytti myös 1999 kirjoittamaani Kurssitarjotin"-sovellusta. Pedanetin
+toiminnassa oli jo tuolloin havaittavissa nopea ohjelmistonkehityksen
+tahti; olennaista oli saada jotakin valmiiksi ja palautetta käyttäjiltä
+-- tässä tapauksessa opettajilta.
 
-%verkkolehti 4 2000-2001 php, mysql
+
+\section{Pedanet vaihe II, 2000--2001}
+
+Pedanet"-hankkeen ensimmäisen vaiheen rahoitus kesti vuoden 1999
+loppuun asti. KTL haki 1999 rahoitusta Pedanet-hankkeen toista vaihetta
+varten. Hankesuunnitelman perusteluissa luki muun muassa:
+
+\begin{quote} Syntyneiden palveluiden laajamittainen käyttöönotto ja
+edelleen kehittäminen voidaan parhaiten turvata vuosille 2000--2001
+ajoittuvalla uudella hankkeella, joka uuden valtakunnallisen
+tietoyhteiskuntastrategian mukaisesti profioidaan selvästi verkon
+sisältöjen ja palvelujen kehittämishankkeeksi. \end{quote}
+
+Hankesuunnitelman 12 osaprojektista vain muutama jatkoi toisen vaiheen
+rahoituksen loppumisen jälkeen:
+
+\begin{description}
+
+\item[Liikennekasvatuksen verkkopalvelu liikenne.peda.net,] jonka
+tavoitteena oli luoda yhteistyössä Liikenneturvan kanssa koulujen
+liikenneasvatusta tukeva verkkopalvelu. Sivuston ylläpito on jatkunut tähän päivään saakka.
+
+\item[Oppiaineiden verkkoympäristöt,] jonka tavoitteena oli kehittää
+opettajien tarpeisiin oppiainekohtaisia työkaluja syyskuussa 1999
+lähetetyn kyselyn perusteella. Käytännössä palautteen perusteella
+kehitettiin Verkkoveräjän olemassaolevia moduuleita tai luotiin uusia, paremmin tarpeeseen sopivia.
+
+\item[Verkkotiedottamisjärjestelmien kehittäminen erilaisiin
+koulutoimen tarpeisiin,] jonka tavoitteena oli kartoittaa koulutoimen
+tiedottamistarpeet ja tarjota verkkotiedottamisympäristöjä. Käytännössä
+tiedotus hoidettiin Verkkoveräjän moduulien avulla. Myös Verkkolehteä käytettiin joissakin kouluissa.
+
+\item[EU"-koulutusohjelmien verkkopalveluiden kehittäminen,] jonka
+keskeisenä osana oli tukea Sokrates"-koulutusohjelman eri osioissa
+mukana olevia kouluja. Koska koulut sijaitsivat maantieteellisesti
+kaukana toisistaan eivät oppilaat voineet nähdä toisiaan kasvotusten
+vaan kommunikointi tapahtui oppimisympäristöjen kautta. Käytännössä
+verkkolehdestä tehtiin tämän projektin puitteissa englanninkielinen
+versio projektin tarpeisiin.
+
+
+\item[Keski"-Suomen kouluverkon laajakaistainfrastruktuurin kehitys],
+joka käytännössä koordinoi kuntien verkottumishankkeita. Pedanet auttoi
+muun muassa rahoituksen hakemisessa Opetushallitukselta ja tiedotti eri
+rahoitusvaihtoehdoista. Pedanet ei sinänsä toteuttanut yhteyksien
+rakentamista.
+
+\end{description}
+
+\subsection{Peda.netin toisen vaiheen sovellustuotantoa}
+
+Hankkeen toisen vaiheen aikana kehitettiin kouluille useita uusia
+sovelluksia. Myös aikaisemmin käytössä olleita työkaluja, Verkkolehteä
+ja OPSpro"-sovellusta päivitettiin. Verkkolehden vuoden 2000 lopussa
+valmistunut neljäs versio, josta käyttäjät edelleen käyttivät vain
+nimitystä ``Verkkolehti'', oli itse asiassa Juha Lahden opinnäytetyö.
+Tämä verkkolehden versio pysyikin käytössä Verkkolehden viidenteen,
+vuonna 2004 julkaistuun versioon -- tällä kertaa virallisesti
+``Verkkolehti 2'' -- saakka.
+
+Toisen vaiheen aikana kehitin itse OPSpro"-sovelluksen toisen version,
+joka olikin hetken ajan käytössä, mutta koulut eivät ilmeisesti olleet
+vielä valmiita eräisiin sen ominaisuuksiin: erityisesti käyttäjien
+hallinta tuotti ongelmia. Muissa työkaluissa oli tuohon aikaan
+ylläpitoon vain yksi salasana koulua kohden ja tähän verrattuna usean
+käyttäjätunnuksen ylläpito oli liian vaativaa. Samoin rakenteisen
+dokumentin kappaleiden oikeuksien hallinta osoittautui liian vaikeaksi.
+OPSpro2-sovelluksen jälkeen tein ensimmäisen version Verkkoveräjästä
+vuonna 2001.
+
+Juha teki vielä OSPpro-sovelluksesta syksyllä 2001 Verkkolehden
+ohjelmakoodin pohjalta yksinkertaisemman version. Tämä OPSpro-version
+on vielä nykyisinkin käytössä.
 
 %veräjän v3 (virallisesti "2") kesä-joulu 2003 (php, mysql)
 
@@ -144,84 +239,30 @@ Perl-ohjelmointikielellä ja tietokannan tehtävää hoiti miniSQL.
 
 %sosiaalinen innovaatio
 
-\begin{comment}
+% Omat softat:
+% Toisen asteen kurssitarjotin (1999)
+% OPSpro2 (2000)
+% Verkkoveräjä (työnimi: Portaali, 2001)
+% Verkkoveräjä 2 (työnimi: Portal2, 2002)
+% YALE2 eli \alt{Yet Another Learning Environment 2} (2003)
+% Oppimappi (työnimi: Vihko, 2003--2004)
 
-\section{Hankkeen toteutus alkoi pienin askelin}
+\section{Hankkeen rahoitus loppui, uusi toimintamalli edessä}
 
-Ensimmäisinä työtehtävinäni suunnittelin ja toteutin silloisen
-Pedanetin staattisen www"-sivuston. Kuvassa \ref{pedanet:cce} on
-esimerkki sivujen silloisesta  ulkonäöstä -- pääsivut olivat tosin
-tyyliltään punaiset. Samaan aikaan Juha Lahti teki verkkolehden
-ensimmäisiä versioita, joista ei nykyisin ole jäljellä edes
-kuvaruutukaappauksia. Teknisesti Pedanet toimi jo silloin
-Linux"-alustalla, tietokantana tosin oli tuolloin miniSQL, joka
-myöhemmin osoittautui täysin riittämättömäksi Pedanetin tarpeisiin.
-Ohjelmistoympäristönä oli Apache ja Perl. WWW"-selaimissa Netscape
-Navigator 4.0 oli markkinajohtaja, mutta Microsoft valtasi Internet
-Explorer "=selaimellaan markkinoita.
+Pedanet"-hankkeen toinen vaihe päättyi vuoden 2001 lopussa ja muuttui
+silloin Jyväskylän yliopiston Koulutuksen tutkimuslaitoksen
+koordinoimaksi tutkimus- ja kehittämishankkeeksi -- nyt nimenä oli jo
+virallisestikin Peda.net. Tästä eteenpäin Peda.net on toiminut
+omarahoitteisena jäseniltä kerättyjen vuosimaksujen turvin.
 
-\begin{kuva}
-\includegraphics[width=10cm]{kuvat/pedanet-cce}
-\caption{Esimerkki Pedanetin ylläpitämien sivujen ulkonäöstä vuodelta
-1998}
-\label{pedanet:cce}
-\end{kuva}
-
-Nykymittapuulla arvioiden Pedanetin sivustojen ulkonäkö ja käytettävyys
-oli aika heikko, mutta verrattuna moniin sen aikaisiin sivustoihin
-Pedanet oli aika edistynyt.
-
-\end{comment}
-
-\section{Hanke kehittyy työkalujen kautta}
-
-Vuosien kuluessa nimi Pedanet vaihtui Peda.netiksi ja
-internet"-osoite muuttui sijainnista \url{http://pedanet.jyu.fi/}
-osoitteeseen \url{http://peda.net/}, jossa se nykyisinkin toimii.
-Kirjoittaja työskenteli hankkeessa aina silloin tällöin, välillä
-tuntipalkalla, välillä pätkätöissä. Taitojen kehittyessä toimeni
-vaihtuivat staattisten www"-sivujen tekemisestä palvelinohjelmistojen
-kehittämiseen; vuosien saatossa olen kehittänyt seuraavat ohjelmistot
-Peda.net "=hankkeessa:
-
-\begin{ol}
-\item Toisen asteen kurssitarjotin (1999)
-\item OPSpro2 (2000)
-\item Verkkoveräjä (työnimi: Portaali, 2001)
-\item Verkkoveräjä 2 (työnimi: Portal2, 2002)
-\item YALE2 eli \alt{Yet Another Learning Environment 2} (2003)
-\item Oppimappi (työnimi: Vihko, 2003--2004)
-\end{ol}
-
-Jokaisen sovelluksen tarkempi tarkempi kuvaus seuraa myöhemmin. Näiden
-sovellusten lisäksi Juha Lahti on kehittänyt Verkkolehden ja OPSpron
-eri versioita. Molempien uusimmat versiot ovat tätä kirjoittaessa
-tuotantokäytössä ja ne ovat Juhan kehittämiä. Myös nykyisin käytössä
-oleva Veräjän versio on Juhan PHP"-ohjelmointikielellä vuonna 2004
-kirjoittama. Veräjä käyttää edelleen vuoden 2001 tietokantaa pienin
-muutoksin, joten kaikki alkuperäiseen Verkkoveräjään tuotettu sisältö
-on edelleen käytettävissä Veräjän uuden käyttöliittymän kautta.
-
-\section{Hankkeen rahoitus muuttuu}
-
-Pedanet"-hankkeen toinen vaihe päättyi vuonna 2002 ja muuttui silloin
-Jyväskylän yliopiston Koulutuksen tutkimuslaitoksen koordinoimaksi
-tutkimus- ja kehittämishankkeeksi -- nyt nimenä oli jo virallisestikin
-Peda.net. Tästä eteenpäin Peda.net on toiminut omarahoitteisena
-jäseniltä kerättyjen vuosimaksujen turvin.
-
-Peda.net"-kouluverkon jäsenet saavat jäsenmaksun vastineena vapaan
-käyttöoikeuden kaikkiin Peda.netin kehittämiin ja ylläpitämiin
-sovelluksiin ja pääsevät halutessaan osallistumaan uusien sovellusten
-kehittämiseen. Peda.netillä oli vuoden 2004 tammikuussa jäseninä 70
-kuntaa (jäsenkunnan kaikilla kouluilla on vapaa käyttöoikeus kaikkiin
-Peda.net"-verkkotyövälineisiin) ja sen lisäksi yksittäisiä kouluja tai
-oppilaitoksia oli yli 50 kunnassa. Toiminta on voittoa
-tavoittelematonta.
-
-Hankkeessa työskentelee tällä hetkellä kolme täysipäiväistä
-työntekijää: Jaana Kettunen, Juha Lahti ja Jarkko Lampinen. Kirjoittaja
-toimii neljäntenä työntekijänä puolipäiväisenä.
+Peda.net"-kouluverkon jäsenet saavat vuosittaisen jäsenmaksun
+vastineena vapaan käyttöoikeuden kaikkiin Peda.netin kehittämiin ja
+ylläpitämiin sovelluksiin ja pääsevät halutessaan osallistumaan uusien
+sovellusten kehittämiseen. Peda.netillä oli vuoden 2004 tammikuussa
+jäseninä 70 kuntaa (jäsenkunnan kaikilla kouluilla on vapaa
+käyttöoikeus kaikkiin Peda.net"-verkkotyövälineisiin) ja sen lisäksi
+yksittäisiä kouluja tai oppilaitoksia oli yli 50 kunnassa. Toiminta on
+voittoa tavoittelematonta.
 
 \section{Tutkimustyö}
 
@@ -241,7 +282,12 @@ kansainvälisiä asiantutkijoita.
 
 \section{Kokonaiskuva nykytilanteesta}
 
-[*** kirjoita tämä luku ***]
+Hankkeessa työskentelee nykyisin kolme täysipäiväistä työntekijää:
+Jaana Kettunen, Juha Lahti ja Jarkko Lampinen. Kirjoittaja toimii
+neljäntenä työntekijänä puolipäiväisenä. Kaikki Peda.netin palvelut
+pyörivät neljällä Koulutuksen tutkimuslaitoksen kellarissa pyörivällä
+Linux"-palvelimella.
+
 
 \section{Peda.netissä kirjoittajan kehittämiä sovelluksia ja
 prototyyppejä}
