@@ -58,16 +58,34 @@ Koska käyttöliittymäajurin täytyy huolehtia kaikista selaimen käytöstä johtuvist
 
 \section{Nelikerroksisen mallin käytännön ongelmia}
 
-** tähän juttua, miksi en käyttänyt tätä mallia loppujen lopuksi **
+Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net-hankkeessa tehtävän Vihko-nimisen työkalun valmistuksessa\footnote{Vihko-työkalusta kerrotaan tarkemmin luvussa \ref{pedanet-vihko}}. Peda.net-hankkeessa on päätetty yhdenmukaistaa sovellusten toimintaympäristöksi Apache/PHP-ohjelmointiympäristö ja MySQL-tietokanta, joten tämä asetti käytännön rajoituksia ohjelman loogiseen rakenteeseen; nykyisin käytössä oleva PHP-kielen versio 4 ei tue moniperintää eikä rajapintaluokkia, joten luokkahierarkian toteuttaminen vaati lievää luovuutta ja teoriittisesta mallista poikkeamista.
 
-\emph{[ Ja taas vuotta viisaampana täytyy todeta, että kyseisen ajurin toteuttaminen oli vieläkin työläämpää kuin ajattelin. Erityisesti siitä saatava hyöty on vähintäänkin kyseenalainen verrattuna täydellisen toteutuksen vaatimaan työmäärään. ]}
+Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä luokkahierarkiasta. Kuvassa \ref{fig:vihko-big-picture} on puolestaan mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä MySQL-tietokanta ja Vihko PHP-sovellus toimivat Peda.net-hankkeen ylläpitämällä palvelimella ja HTML ja CSS ohjaavat ohjelman toimintaa sovelluksen käyttäjän koneessa toimivassa www-selaimessa.
 
-Tavoitteenani on tutkia tarkemmin käyttöliittymän toiminnallisuuden erottamista käyttöliittymän käytännön toteutuksesta ja pyrkiä kehittämään PHP-kielellä sovelluskehys, joka sisältää kuvaamani kaltaisen käyttöliittymäajurin. Tiedon tallennus tehdään erillisen ajurin kautta ja tarkoituksena on tukea MySQL ja PostgreSQL -tietokantoja.
+\begin{kuva}
+\includegraphics[width=\linewidth]{kuvat/vihko-schema-orig}
+\caption{Alkuperäistä suunnitelmaa Vihkon toteuttamiseksi}
+\label{fig:vihko-schema-orig}
+\end{kuva}
 
-Sovelluskehyksen kehittäminen vaikuttaa parhaalta ratkaisulta, koska tällöin käyttöliittymäajurin kehitys saadaan toivottavasti helpommaksi. Lisäksi tällä tavalla sovelluslogiikkaan tulisi mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia ja uusien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava logiikka on yhteinen eri sovellusten välillä.
+\begin{kuva}
+\includegraphics[width=7cm]{kuvat/vihko-big-picture}
+\caption{Osa toteutetusta Vihkon rakenteesta}
+\label{fig:vihko-big-picture}
+\end{kuva}
 
-Työ tehdään Koulutuksen tutkimuslaitoksen Peda.net-hankkeelle \cite{pedanet:home} ja toteutuskielenä on PHP, koska myös entiset järjestelmät on toteutettu sillä.
+Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että PHP-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli aika heikko ja lisäksi käytetystä arkkitehtuurista johtuen täydellisen käyttöliittymäajurin tekeminen alkoi varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
 
-Resurssien lukittamiseen (ja yleisemmin rinnakkaiseen muutosten hallintaan) liittyvä ongelma on vielä ratkaisematta.
+\section{Sovelluskehys avuksi}
 
-Tämän dokumentin sisältö perustuu pitkälti omien kokemusten varaan, enkä ole vielä löytänyt hyvää lähdemateriaalia -- olen pyrkinyt perustamaan päätelmäni World Wide Web Consortiumin (\alt{W3C}, \cite{w3:home}) ja Internet Engineering Task Forcen (IETF, \cite{ietf:home}) julkaisemiin dokumentteihin.
+Koska varsinaisen sovelluslogiikan ja käyttäjän välissä on vielä useita tasoja -- köyhän miehen käyttöliittymäajuri, HTML ja CSS -- päädyin siihen johtopäätökseen, että täydellistä käyttöliittymäajuria ei kannata tehdä. Lisäksi, koska PHP rajaa ainakin toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia ei sen kehittämisen helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
+
+Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current} esitettyyn ratkaisuun. Tässäkin luokkahierarkia on ensisilmäyksellä vähintäänkin outo, mutta ratkaisun taustalla kummittelee vaillinainen oliotuki PHP-kielessä. Tätä kirjoittaessa PHP5 on jo ilmestynyt ja siinä joitakin ongelmia onkin korjattu, mutta sen tuotantokäyttöä kannattanee harkita aikaisintaan ensi vuonna.
+
+\begin{kuva}
+\includegraphics[width=\linewidth]{kuvat/vihko-schema-current}
+\caption{Osa toteutetusta Vihkon rakenteesta}
+\label{fig:vihko-schema-current}
+\end{kuva}
+
+Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi. Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa Vihkon moduuleiksi. Kaikki Vihkon moduulit peritään luokasta \emph{Document} (ks. kuva \ref{fig:vihko-schema-current}).

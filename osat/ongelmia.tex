@@ -11,7 +11,7 @@ Esimerkiksi Microsoft Windows -käyttöjärjestelmässä toimiva Microsoft Word -ohje
 
 \section{HTTP on yhteydetön protokolla}
 
-WWW-sivujen taustalla toimiva HTTP-protokolla eli \alt{HyperText Transfer Protocol} ei pidä yhteyttä palvelimeen koko ajan, vaan looginen yhteys\footnote{HTTP 1.1 lisäsi mahdollisuuden pitää varsinainen tietoliikenneyhteys auki eri sivujen hakujen välillä, mutta HTTP-palvelin tai selain voi esimerkiksi vähäisten resurssien vuoksi katkaista yhteyden käyttääkseen siihen käytettyjä resursseja hetkellisesti muualla.} katkeaa välittömästi yksittäisen sivun saamisen jälkeen. Erityisesti selain ei lähetä palvelimelle mitään tietoa esimerkiksi takaisin-toiminnon suorittamisesta tai uuden ikkunan avaamisesta. Palvelin ei voi edes tietää sitä, onko käyttäjä jo siirtynyt toiselle sivustolle, sulkenut selaimen vai onko käyttäjä esimerkiksi kirjoittamassa vain pitkää tekstiä johonkin lomakekenttään.
+WWW-sivujen taustalla toimiva HTTP-protokolla eli \alt{HyperText Transfer Protocol} vastaa varsinaisesta tiedonsiirrosta. HTTP on Internet Engineering Task Forcen (IETF, \cite{ietf:home}) määrittelemä protokolla erityisesti hypertekstin siirtämiseksi. Myöhemmin HTTP-protokollaa on laajennettu hyvin monenlaisen tiedon siirtämiseen. HTTP ei kuitenkaan pidä yhteyttä palvelimeen koko ajan, vaan looginen yhteys\footnote{HTTP 1.1 lisäsi mahdollisuuden pitää varsinainen tietoliikenneyhteys auki eri sivujen hakujen välillä, mutta HTTP-palvelin tai selain voi esimerkiksi vähäisten resurssien vuoksi katkaista yhteyden käyttääkseen siihen käytettyjä resursseja hetkellisesti muualla.} katkeaa välittömästi yksittäisen sivun saamisen jälkeen. Erityisesti selain ei lähetä palvelimelle mitään tietoa esimerkiksi takaisin-toiminnon suorittamisesta tai uuden ikkunan avaamisesta. Palvelin ei voi edes tietää sitä, onko käyttäjä jo siirtynyt toiselle sivustolle, sulkenut selaimen vai onko käyttäjä esimerkiksi kirjoittamassa vain pitkää tekstiä johonkin lomakekenttään.
 
 \subsection{Varoittavia esimerkkejä}
 
@@ -23,7 +23,7 @@ Jos palvelimella ajetaan yksinkertaiseen tapahtumankäsittelijään perustuvaa sove
 \label{fig:kirjasto1}
 \end{kuva}
 
-Toinen hyvä esimerkki on Jyväskylän Yliopiston kirjaston hakupalvelu. Etsiessäni Jakob Nielsenin ''WWW-suunnittelu'' -kirjaa, saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin tältä osin juuri niinkuin odotankin\footnote{Maininnan arvoinen on totaalisen hyödytön sivun otsikko ''WebVoyage Record View~1''. Tosin, vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole pysyviä.}. Siirryn hetkeksi tarkistamaan toisessa selaimen ikkunassa, että tämä oli juuri se kirja, jota toisella sivustolla suositeltiin ja nostan tämän ikkunan esiin muiden alta muutaman minuutin myöhemmin (ks. kuva \ref{fig:kirjasto2}). Mitä ihmettä? Juuri hakemani tiedot on hukattu, koska ''yhteytesi tietokantaan on katkennut aikarajoituksen vuoksi''. Ei minua käyttäjänä kiinnosta mistä tiedot haetaan -- erityisesti minua ei kiinnosta kuinka pitkän yhteyden tietokanta kerrallaan sallii. Palvelun tekijällä on selvästikin ollut ajatuksena valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä aktiivisessa käytössä. Jostain syystä on päätetty, että jos käyttäjä ei tee jotain muutaman minuutin sisällä niin silloin ''oikea'' toimenpide on \emph{poistaa hakutulokset tai muu vastaava sisältö}. Eikö mitenkään olisi ollut mahdollista, että kun palvelimen aikaraja menee umpeen, käyttäjälle luovutettu sivu jätetään ennalleen ja huolehditaan aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä vielä yrittää tehdä jotain muuta.
+Toinen hyvä esimerkki on Jyväskylän Yliopiston kirjaston hakupalvelu. Etsiessäni Jakob Nielsenin ''WWW-suunnittelu'' -kirjaa, saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin tältä osin juuri niinkuin odotankin\footnote{Maininnan arvoinen on totaalisen hyödytön sivun otsikko ''WebVoyage Record View~1''. Tosin, vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole pysyviä.}. Siirryn hetkeksi tarkistamaan toisessa selaimen ikkunassa, että tämä oli juuri se kirja, jota toisella sivustolla suositeltiin ja nostan tämän ikkunan esiin muiden alta muutaman minuutin myöhemmin (ks. kuva \ref{fig:kirjasto2}). Mitä ihmettä? Juuri hakemani tiedot on hukattu, koska ''yhteytesi tietokantaan on katkennut aikarajoituksen vuoksi''. Ei minua käyttäjänä kiinnosta mistä tiedot haetaan -- erityisesti minua ei kiinnosta kuinka pitkän yhteyden tietokanta kerrallaan sallii. Palvelun tekijällä on selvästikin ollut ajatuksena valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä aktiivisessa käytössä. Jostain syystä on päätetty, että jos käyttäjä ei tee jotain muutaman minuutin sisällä niin silloin ''oikea'' toimenpide on \emph{poistaa hakutulokset tai muu vastaava sisältö}. Sovellusta tehdessä olisi ehkä kannattanut miettiä olisiko sovellus mahdollista toteuttaa siten, että tietokantapalvelimen aikarajan umpeutuessa käyttäjälle luovutettu sivu jätetään ennalleen ja huolehditaan aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä vielä yrittää tehdä jotain muuta.
  
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto2}
@@ -33,7 +33,7 @@ Toinen hyvä esimerkki on Jyväskylän Yliopiston kirjaston hakupalvelu. Etsiessäni
 
 \subsection{Selainkäyttöiset ohjelmat pitää suunnitella toisin!}
 
-Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän rajoituksen vuoksi perinteisen mallin mukaisesti toteutettu ohjelma toimii epävakaasti selainkäyttöisenä.
+Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän rajoituksen vuoksi sokeasti perinteisen mallin mukaisesti toteutettu ohjelma toimii epävakaasti selainkäyttöisenä.
 
 \section{Ohjelmakerroksia}
 \label{tiers}
@@ -79,7 +79,7 @@ Istunnon haarautuminen liittyy hyvin läheisesti \emph{takaisin}-toimintoon. Siin
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=14cm]{kuvat/fork}
+\includegraphics[width=10cm]{kuvat/fork}
 \caption{Kaavio istunnon haarautumisesta}
 \label{fig:fork}
 \end{center}
