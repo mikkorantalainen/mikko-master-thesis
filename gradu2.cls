@@ -75,7 +75,7 @@
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
 \RequirePackage{everyshi}[1994/12/09]
-\RequirePackage{hyperref}
+\RequirePackage[plainpages=false,pdfpagelabels,pagebackref]{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
