@@ -138,10 +138,10 @@ ensimmäisen vaiheen aikana seuraavasti:
 
 \item Vitikkalan ala"-asteella oli kehitetty ja kokeiltu erilaisia
 pieniä ohjelmia opetustyön tueksi. Näiden perusteella oli tehty
-yksinkertainen www"-sivujen tuot\-ta\-mis\-ym\-pä\-ris\-tö, johon lisäsi siihen
-tiedostojen lähettämistoiminnon (\alt{file upload}). Tiedostojen
-lähettäminen oli tuolloin ilmestyneiden www"-selainten uusi ominaisuus.
-Aikaisemmin koulun www"-sivujen ylläpidossa piti kirjoittaa
+yksinkertainen www"-sivujen tuottamisympäristö, johon
+lisäsi siihen tiedostojen lähettämistoiminnon (\alt{file upload}).
+Tiedostojen lähettäminen oli tuolloin ilmestyneiden www"-selainten uusi
+ominaisuus. Aikaisemmin koulun www"-sivujen ylläpidossa piti kirjoittaa
 HTML"-kielinen sivun kuvaus käsin ja päivittää sivut
 FTP"-tiedonsiirtosovelluksella. Tämä oli ensimmäinen Peda.netin
 tarjoama työväline, jota muutama koulu käytti. Teknisesti työkalu oli
@@ -228,10 +228,10 @@ rakentamista.
 
 Hankkeen toisen vaiheen aikana kehitettiin kouluille useita uusia
 sovelluksia. Myös aikaisemmin käytössä olleita työkaluja, Verkkolehteä
-ja OPSpro"-sovellusta päivitettiin. Verkkolehden vuoden 2000 lopussa
+ja OPSpro"-sovellusta, päivitettiin. Verkkolehden vuoden 2000 lopussa
 valmistunut neljäs versio, josta käyttäjät käyttivät vain nimitystä
 \emph{Verkkolehti}, oli itse asiassa Juha Lahden opinnäytetyö. Tämä
-verkkolehden versio pysyikin käytössä Verkkolehden viidenteen, vuonna
+verkkolehden versio on ollut käytössä Verkkolehden viidenteen, vuonna
 2004 julkaistuun versioon -- tällä kertaa virallisesti
 \emph{Verkkolehti 2} -- saakka.
 
@@ -241,8 +241,8 @@ tein ensimmäisen version Verkkoveräjästä, joka pysyikin käytössä sen
 PHP"-ohjelmointikielellä uudelleenkirjoittamiseen saakka vuonna 2004.
 
 Juha teki vielä OSPpro"-sovelluksesta syksyllä 2001 Verkkolehden
-ohjelmakoodin pohjalta yksinkertaisemman version. Tämä OPSpro"-versio
-on vielä nykyisinkin käytössä.
+ohjelmakoodin pohjalta yksinkertaisemman version. Se on
+OPSpro"-sovelluksen nykyisin toiminnassa oleva versio.
 
 %veräjän v3 (virallisesti "2") kesä-joulu 2003 (php, mysql)
 
@@ -263,10 +263,10 @@ on vielä nykyisinkin käytössä.
 Pedanet"-hankkeen toinen vaihe päättyi vuoden 2001 lopussa ja vakiintui
 silloin Jyväskylän yliopiston Koulutuksen tutkimuslaitoksen
 koordinoimaksi tutkimus- ja kehittämishankkeeksi -- nyt hankkeen nimen
-kirjoitusasuksi vakiinnutettiin virallisestikin Peda.net. Tästä eteenpäin
-Peda.net pyrki toimimaan omarahoitteisena ja onkin nykyisin siihen
-tavoitteeseen päässyt kouluverkon jäseniltä kerättyjen vuosimaksujen
-turvin. Siirtymävaiheessa omarahoitteiseksi Koulutuksen
+kirjoitusasuksi vakiinnutettiin virallisestikin Peda.net. Tästä
+eteenpäin Peda.net pyrki toimimaan omarahoitteisena ja onkin nykyisin
+siihen tavoitteeseen päässyt kouluverkon jäseniltä kerättyjen
+vuosimaksujen turvin. Siirtymävaiheessa omarahoitteiseksi Koulutuksen
 tutkimuslaitoksen rooli hankkeessa oli merkittävä.
 
 Peda.net"-kouluverkon jäsenet saavat vuosittaisen jäsenmaksun
@@ -300,10 +300,13 @@ kansainvälisiä asiantutkijoita.
 Hankkeessa työskentelee nykyisin kolme täysipäiväistä työntekijää:
 Jaana Kettunen, Juha Lahti ja Jarkko Lampinen. Toimin itse neljäntenä
 työntekijänä, toistaiseksi puolipäiväisenä. Hankkeen Linux"-palvelimien
-ylläpidosta vastaavat Juha Lahti ja Mikko Rantalainen.
+ylläpidosta ja sovellussuunnittelusta vastaavat Juha Lahti ja Mikko
+Rantalainen. Jarkko Lampinen toimii Peda.net"-työvälineiden koulutuksen
+vastuuhenkilönä ja Jaana Kettunen pitää hankkeen pyörät pyörimässä.
 
-Liitteissä \ref{peda.net-tilastot} ja \ref{peda.net-toimintasuunnitelma} on esitetty Peda.net"-hankkeen tilastotietoja sekä toimintasuunnitelmaa. 
-%\newpage{} % HACK!
+Liitteissä \ref{peda.net-tilastot} ja
+\ref{peda.net-toimintasuunnitelma} on esitetty Peda.net"-hankkeen
+tilastotietoja sekä lähitulevaisuuden toimintasuunnitelmaa. 
 
 \section{Hankkeessa kehittämiäni sovelluksia ja prototyyppejä}
 
@@ -341,19 +344,18 @@ osin Verkkolehden vuonna 1999 tehtyyn versioon.
 Kurssitarjotin kehitettiin siihen aikaa yleiseen (selainkäyttöisten
 sovellusten) tyyliin, jossa ohjelman toiminta ja käyttöliittymän
 toimintaan liittyvä koodi oli sidottu melko tiukasti toisiinsa. Lisäksi
-normaali tietojen selailu "=käyttöliittymä ja ylläpitokäyttöliittymä
-toimivat omina sovelluksinaan käyttäen yhteistä tietokantaa. Ohjelman
-ylläpito todettiin hankalaksi ohjelman heikon rakenteen,
-miniSQL"-tietokannan rajoittuneisuuden ja kokonaisuuden sirpaleisuuden
-vuoksi (selailu ja ylläpito käyttivät osittain poikkeavia
-käyttöliittymiä, mikä puolestaan koettiin huonona käytettävyytenä --
-tämän korjaaminen taas oli työlästä ohjelman heikon teknisen
-rakenteen seurauksena). Sovellukseen tehtiin pieniä korjauksia syksyllä
-2000, ja silloin virallinen nimi oli ``Toisen asteen yhteys'' ja
-yhteyshenkilöksi oli vaihtunut Taina Roivainen. Uutta, täysin korjattua
-versiota ei alettu koskaan tekemään, vaan seuraavana projektina
-siirryin kehittämään OPSpron uutta versiota. Peda.netin kehittämän
-kurssitarjottimen käyttö loppui kesällä 2001.
+sovelluksen lukukäyttöliittymä toimi erillisenä sovelluksena
+ylläpitokäyttöliittymästä. Ohjelman ylläpito todettiin hankalaksi
+ohjelman heikon rakenteen, miniSQL"-tietokannan rajoittuneisuuden ja
+kokonaisuuden sirpaleisuuden vuoksi; selailu ja ylläpito käyttivät
+osittain poikkeavia käyttöliittymiä, mikä puolestaan koettiin huonona
+käytettävyytenä -- tämän korjaaminen taas olisi ollut työlästä ohjelman
+heikon teknisen rakenteen seurauksena. Sovellukseen tehtiin pieniä
+korjauksia syksyllä 2000. Tuolloin projektin virallinen nimi oli
+``Toisen asteen yhteys'' ja yhteyshenkilöksi oli vaihtunut Taina
+Roivainen. Uutta, täysin korjattua versiota ei alettu koskaan tekemään,
+vaan seuraavana projektina siirryin kehittämään OPSpron uutta versiota.
+Peda.netin ylläpitämän kurssitarjottimen käyttö loppui kesällä 2001.
 
 \subsection{OPSpro2"-prototyyppi}
 
@@ -367,7 +369,7 @@ kuvilla sekä ääni- ja videoleikkeillä. \\
 \mbox{}\hfill\mbox{---~\emph{OPSpro"-esittely}} \end{quote}
 
 \begin{kuva}
-\includegraphics[width=11.5cm]{kuvat/opspro21}
+\includegraphics[width=11.0cm]{kuvat/opspro21}
 \caption{Kuva OPSpro2"-prototyypin käyttöliittymästä}
 \end{kuva}
 
@@ -597,17 +599,17 @@ arvioitiin työläämmäksi kuin kokonaan uuden järjestelmän kehittäminen.
 \label{pedanet-oppimappi}
 
 Peda.net Oppimappi on nykyinen kehitysprojektini, joka tarjoaa
-yksittäisen koulun kaikille kursseille riittävän oppimisympäristön.Tämä
-sovellus ei tue kurssien järjestämistä usean eri oppilaitoksen kesken,
-vaan se on suunniteltu yksittäisen koulun tarpeita varten. Rajaukseen
-päädyttiin, koska ohjelman toteuttamisen työmäärän arvioitiin kasvavan
-liian suureksi nykyisiin resursseihin verrattuna. Sovellusta on
-kehitetty kesästä 2003 alkaen ja se julkaistiin syksyllä 2004. Kuten
-selainkäyttöisten sovellusten tapauksessa yleensä, julkaisu ei tarkoita
-sovelluksen kehityksen lopettamista tässäkään tapauksessa. Uusia
-ominaisuuksia tullaan lisäämään julkaisun jälkeen käyttäjien toiveiden
-mukaan. Samoin käyttöliittymä käännetään eri kielille. Tähän mennessä
-käyttöliittymä on päätetty tarjota ainakin suomen-, ruotsin-,
+yksittäisen koulun kaikille kursseille riittävän oppimisympäristön.
+Tämä sovellus ei tue kurssien järjestämistä usean eri oppilaitoksen
+kesken, vaan se on suunniteltu yksittäisen koulun tarpeita varten.
+Rajaukseen päädyttiin, koska ohjelman toteuttamisen työmäärän
+arvioitiin kasvavan liian suureksi nykyisiin resursseihin verrattuna.
+Sovellusta on kehitetty kesästä 2003 alkaen ja se julkaistiin syksyllä
+2004. Kuten selainkäyttöisten sovellusten tapauksessa yleensä, julkaisu
+ei tarkoita sovelluksen kehityksen lopettamista tässäkään tapauksessa.
+Uusia ominaisuuksia tullaan lisäämään julkaisun jälkeen käyttäjien
+toiveiden mukaan. Samoin käyttöliittymä käännetään eri kielille. Tähän
+mennessä käyttöliittymä on päätetty tarjota ainakin suomen-, ruotsin-,
 englannin-, saksan- ja saamenkielisenä.
 
 \begin{kuva}

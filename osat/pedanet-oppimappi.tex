@@ -23,16 +23,18 @@ vaikuttaa.
 \end{kuva}
 
 Ensimmäiseksi havaitaan, että tässäkin ympäristössä suuri osa ikkunan
-pinta"-alasta menee muuhun kuin itse sisältöön. Navigointi ja ympäristön
-otsikko valtaavat suuren osan käytettävissä olevasta alasta. Tämä on
-seurausta valitusta tyylitiedostosta. Kuvassa
+pinta"-alasta menee muuhun kuin itse sisältöön. Navigointi ja
+ympäristön otsikko valtaavat suuren osan käytettävissä olevasta alasta.
+Tämä on seurausta valitusta tyylitiedostosta. Kuvassa
 \ref{fig:oppimappi-kotisivu-nostyle} on esitetty sama näkymä kun
 CSS"-tyylisivu on selaimen asetuksista valittu pois päältä. Tämä näkymä
 vastaa erityisryhmien käyttöliittymää; esimerkiksi sokealle käyttäjälle
 tieto esitettäisiin tämän näkymän mukaisessa järjestyksessä. Tässä
 erityisesti nykyistä näkyvää koskevat toiminnot esitetään sisällön
 \emph{jälkeen} -- tämä on tärkeää, koska yleensä käyttäjä on
-kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien lataamista tai JavaScript"-tukea.
+kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin
+kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien
+lataamista tai JavaScript"-tukea.
 
 \begin{kuva}
 \includegraphics[width=10cm]{kuvat/oppimappi-kotisivu-nostyle}
@@ -132,27 +134,29 @@ linkit ovat sinisiä ja alleviivattuja, joten ne on helppo havaita.
 
 Yhteenvetona vaikuttaisi siltä, että käytettävyyden kannalta ainakin
 CSS"-tyylisivuja pitäisi vielä kehittää. Erityisesti ikkunan pinta"-ala
-on nyt tehottomassa käytössä, mutta sen korjaamiseksi täytyy poiketa
-usein käytetystä www"-sivustojen taitosta ja on vaikea sanoa ilman
-tarkempaa tutkimusta onko käytettävyyden kannalta parempi, että sivu
+on nyt tehottomassa käytössä, mutta sen korjaamiseksi täytyisi poiketa
+usein käytetystä www"-sivustojen taitosta. On vaikea sanoa ilman
+tarkempaa tutkimusta, onko käytettävyyden kannalta parempi, että sivu
 näyttää samanlaiselta kuin muutkin, vai että sen käytön tehokkuus on
 teoriassa maksimaalinen. Samoin käytettävyyttä puheselaimilla ja
 braille"-näytöillä pitäisi tutkia vielä tarkemmin.
 
 Toiminnallisesti Oppimapissa on puutteena myös täysi rinnakkaisten
 muutosten hallinta. Tietokantaan tehdään lukituksia vain tiedon eheyden
-varmistamiseksi tallennuksen yhteydessä. Etuna on, että mitä tahansa
-tiedostoa voi muokata milloin tahansa, mutta jos samaa dokumenttia
-muokkaa samaan aikaan kaksi eri henkilöä, eivät muutokset yhdisty
-automaattisesti. Ainoastaan viimeisenä tallennettu versio jää voimaan.
-Versionhallinnan ansiosta vanhempikin versio jää järjestelmään, mutta
-muutoksien yhdistäminen pitää tehdä jälkikäteen käsityönä. Koska
-järjestelmä pitää kirjaa myös vanhoista versioista, tulevaisuudessa on
-mahdollista tehdä koneellinen muutosten yhdistäminen, jos eri
-henkilöiden tekemät muutokset eivät ole ristiriidassa keskenään.
-\cite{ritcher:three-way-merge}
+varmistamiseksi tallennuksen yhteydessä, mutta tiedostoa ei lukita koko
+muokkauksen ajaksi. Etuna on, että mitä tahansa tiedostoa voi muokata
+milloin tahansa, mutta jos samaa dokumenttia muokkaa samaan aikaan
+kaksi eri henkilöä, eivät muutokset yhdisty automaattisesti. Ainoastaan
+viimeisenä tallennettu versio jää voimaan. Versionhallinnan ansiosta
+vanhempikin versio tallentuu järjestelmään, mutta muutoksien
+yhdistäminen pitää tehdä jälkikäteen käsityönä. Koska järjestelmä pitää
+kirjaa myös vanhoista versioista, tulevaisuudessa on mahdollista tehdä
+koneellinen muutosten yhdistäminen, jos eri henkilöiden tekemät
+muutokset eivät ole ristiriidassa keskenään. Selainkäyttöliittymän
+kehittäminen ristiriitaisten muutosten yhdistämiseen tulee olemaan
+haastava tehtävä. \cite{ritcher:three-way-merge}
 
-Toinen merkittävä puute on rinnakkaisissa muutoksissa tilanne, jossa
+Yleisempänä ongelmana on rinnakkaisissa muutoksissa tilanne, jossa
 henkilö $A$ aloittaa dokumentin $X$ muokkaamisen ja tämän jälkeen
 henkilö $B$ poistaa dokumentin $X$. Jos $A$ nyt yrittää tallentaa
 tekemänsä muutokset, niin haluttu tulos ei ole itsestään selvä.
@@ -160,8 +164,10 @@ Oppimappi ei toistaiseksi osaa käsitellä tilannetta, jossa dokumentin
 $X$ muutokset yritetään tallentaa, mutta dokumenttia $X$ ei ole enää
 olemassa. Näin tapahtuessa käyttäjälle annetaan vain virheilmoitus,
 jossa toistetaan käyttäjän syöttämä tieto, jotta hän voi kopioida sen
-talteen toiseen ohjelmaan. Ongelmana on, pitäisikö järjestelmän
-palauttaa dokumentti $X$ järjestelmään (miten? Eikö dokumenttia $X$
-voikaan oikeasti koskaan poistaa?) ja tallentaa muutos. Vai pitäisikö
-muutokset tallentaa uutena dokumenttina? Jos, niin minne ja millä
-nimellä? Myös hakemisto, jossa tiedosto oli, on voitu poistaa.
+talteen toiseen paikkaan. Ongelmana on, pitäisikö järjestelmän
+palauttaa dokumentti $X$ järjestelmään. Jos tämän pitää olla
+mahdollista, ei järjestelmä voikaan koskaan poistaa dokumenttia $X$
+oikeasti, ainoastaan piilottaa se näkyvistä. Vaihtoehtoisesti muokattu
+sisältö voitaisiin tallentaa uudeksi tiedostoksi. Tässä mallissa
+ongelmana on, mihin uusi tiedosto pitäisi luoda? Myös hakemisto, jossa
+tiedosto oli, on voitu poistaa.

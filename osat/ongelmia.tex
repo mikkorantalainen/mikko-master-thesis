@@ -63,11 +63,11 @@ Toinen varoittava esimerkki on Jyväskylän Yliopiston kirjaston
 hakupalvelu. Etsiessäni Jakob Nielsenin ``WWW suunnittelu'' "=kirjaa,
 saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on
 kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin
-tältä osin juuri niinkuin odotankin\footnote{Maininnan arvoinen on myös
+tältä osin juuri niinkuin odotankin.\footnote{Maininnan arvoinen on myös
 totaalisen hyödytön sivun otsikko ``WebVoyage Record View~1''. Tosin,
 vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki
 toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole
-pysyviä.}.
+pysyviä.}
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto1}
@@ -131,7 +131,7 @@ tallennusmedialle.
 
 \begin{kuva}
 \includegraphics[width=5cm]{kuvat/fig2tier}
-\caption{Kaavio kaksikerroksista ohjelma"-arkkitehtuurista}
+\caption{Kaavio kaksikerroksisesta ohjelma"-arkkitehtuurista}
 \label{fig:2tier}
 \end{kuva}
 
@@ -173,25 +173,24 @@ esittää HTML"-kielen avulla. HTML on kuitenkin suunniteltu staattisten
 dokumenttien esittämiseen \cite{w3:html}. Myös
 selaimet\footnote{HTML"-standardissa käytetään sana ``selain'' sijasta
 sanaa ``käyttäjäagentti'' korostamaan sitä seikkaa, että sivuja ei
-välttämättä selailla, vaan tietokoneagentti -- ikäänkuin robotti -- käy
-käyttäjän puolesta lukemassa sivuja ja tekee niistä vaikkapa
-yhteenvetoja. Esimerkki usein käytetystä agentista voisi olla Google.
-Myös selain voisi hoitaa agentin tehtävää keräämällä sivustosta
-esimerkiksi vain linkit normaalien sivujen näyttämisen sijasta.} on
-suunniteltu pääasiassa staattisten sivukokonaisuuksien lukemiseen ja
-sen vuoksi selaimissa onkin esimerkiksi \emph{takaisin}"-toiminto
-(\alt{Back}). Lisäksi selaimet käyttävät sivujen tiedonsiirrossa
-HTTP"-protokollaa, jonka seurauksena käyttöliittymät eivät ole koko
-ajan yhteydessä palvelimen päässä toimivaan sovelluslogiikkaan.
-Perinteiset käyttöliittymien suunnittelutavat ja toteutusmallit
-soveltuvat huonosti selainkäyttöisen käyttöliittymän toteutukseen.
-Esittelen seuraavassa muutamia suurimpia ongelmia, jotka syntyvät
-pohjalla olevista arkkitehtuurieroista. Tulee kuitenkin huomata, että
-osa ongelmista syntyy siitä, että kokenut www"-selaimen käyttäjä
-odottaa \emph{enemmän vapauksia} ohjelman käyttötavoissaan johtuen
-siitä, että tavallisten www"-sivujen yhteydessä erilaisia käyttötapoja
-on useita. Hyvä selainkäyttöinen ohjelma pystyykin vastaamaan näihin
-odotuksiin.
+välttämättä selailla, vaan (tietokone)agentti käy käyttäjän puolesta
+lukemassa sivuja ja tekee niistä vaikkapa yhteenvetoja. Esimerkki usein
+käytetystä agentista voisi olla Google. Myös selain voisi olla enemmän
+kuin pelkkä selain esimerkiksi keräämällä sivustosta vain linkit
+normaalien sivujen näyttämisen sijasta.} on suunniteltu pääasiassa
+staattisten sivukokonaisuuksien lukemiseen ja sen vuoksi selaimissa
+onkin esimerkiksi \emph{takaisin}"-toiminto (\alt{Back}). Lisäksi
+selaimet käyttävät sivujen tiedonsiirrossa HTTP"-protokollaa, jonka
+seurauksena käyttöliittymät eivät ole koko ajan yhteydessä palvelimen
+päässä toimivaan sovelluslogiikkaan. Perinteiset käyttöliittymien
+suunnittelutavat ja toteutusmallit soveltuvat huonosti selainkäyttöisen
+käyttöliittymän toteutukseen. Esittelen seuraavassa muutamia suurimpia
+ongelmia, jotka syntyvät pohjalla olevista arkkitehtuurieroista. Tulee
+kuitenkin huomata, että osa ongelmista syntyy siitä, että kokenut
+www"-selaimen käyttäjä odottaa \emph{enemmän vapauksia} ohjelman
+käyttötavoissaan johtuen siitä, että tavallisten www"-sivujen
+yhteydessä erilaisia käyttötapoja on useita. Hyvä selainkäyttöinen
+ohjelma pystyykin vastaamaan näihin odotuksiin.
 
 \section{Yhteydetön käyttöliittymä}
 
@@ -210,14 +209,14 @@ siirtymistä. Ongelma voidaan osittain kiertää käyttämällä
 JavaScript"-skriptikieltä asiakkaan selainohjelmassa, mutta koska
 verkkoympäristössä asiakasohjelmaan ei voi luottaa, täytyy sama
 sovelluslogiikka olla myös palvelimen
-päässä\footnote{JavaScript"-skriptikielellä voi esimerkiksi tarkistaa
+päässä.\footnote{JavaScript"-skriptikielellä voi esimerkiksi tarkistaa
 onko syötekenttään käyttäjän kirjoittama tieto laskun viitenumero
 laskemalla onko viitenumeron viimeinen tarkistusnumero oikein. Jos
 tarkistusnumero ei toimi, näytetään varoitusikkuna ja pyydetään
 käyttäjää syöttämään tieto uudelleen. Kuitenkin, turvallisuussyistä
 sama tarkistus täytyy tehdä myös palvelimella (koska muuten
 pahantahtoinen asiakas voisi muuttaa selaimessa toimivaa
-JavaScript"-ohjelmaa ja lähettää virheellisen numeron järjestelmään).}.
+JavaScript"-ohjelmaa ja lähettää virheellisen numeron järjestelmään).}
 Tästä seuraa, että sama toiminnallisuus täytyy esittää kahdella eri
 ohjelmointikielellä (JavaScript ja kieli, jolla palvelimen logiikka on
 tehty). Seurauksena on koko järjestelmän huomattavasti vaikeampi

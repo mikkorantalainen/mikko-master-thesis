@@ -23,7 +23,7 @@ käyttöliittymän toiminnallisuuden kuvaamiseen ja käyttöliittymäajuriin
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[width=10cm]{kuvat/fig4tier}
-\caption{Kaavio nelikerroksista arkkitehtuurista usean sovelluksen
+\caption{Kaavio nelikerroksisesta arkkitehtuurista usean sovelluksen
 tapauksessa}
 \label{fig:4tier}
 
@@ -227,8 +227,8 @@ tarvittaessa laitekohtaisesti.
 
 Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net"-hankkeessa
 tehtävän Oppimappi"-nimisen työkalun
-valmistuksessa\footnote{Oppimappi"-työkalusta kerrotaan tarkemmin
-luvussa \ref{pedanet-oppimappi}}. Peda.net"-hankkeessa on päätetty
+valmistuksessa.\footnote{Oppimappi"-työkalusta kerrotaan tarkemmin
+luvussa \ref{pedanet-oppimappi}} Peda.net"-hankkeessa on päätetty
 yhdenmukaistaa sovellusten toimintaympäristöksi Apache"-www"-palvelimen
 päällä toimiva PHP"-ohjelmointiympäristö sekä MySQL"-tietokanta, joten
 tämä asetti käytännön rajoituksia ohjelman loogiseen rakenteeseen;
@@ -251,7 +251,7 @@ luokkahierarkiasta.
 %käyttäjän koneessa toimivassa www"-selaimessa.
 
 \begin{kuva}
-\includegraphics[width=\linewidth]{kuvat/oppimappi-schema-orig}
+\includegraphics[width=15.4cm]{kuvat/oppimappi-schema-orig}
 \caption{Alkuperäistä suunnitelmaa Oppimapin toteuttamiseksi}
 \label{fig:oppimappi-schema-orig}
 \end{kuva}
@@ -264,10 +264,10 @@ varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
 \section{Käyttöliittymäajurin yksinkertaistaminen}
 
 Päädyin siihen johtopäätökseen, ettei täydellistä käyttöliittymäajuria
-kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän
-välissä on niin useita tasoja. Jakamalla käyttöliittymä sopivasti HTML
-ja CSS -kielien vastuulle, käyttöliittymäajuri voidaan pitää hyvin
-yksinkertaisena. Tätä on havainnollistettu kuvassa
+kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän välissä
+on niin useita tasoja. Jakamalla käyttöliittymän toteutus osittain HTML
+ja CSS "=kielien vastuulle, voidaan käyttöliittymäajuri pitää
+kohtuullisen yksinkertaisena. Tätä on havainnollistettu kuvassa
 \ref{fig:oppimappi-big-picture}. Lisäksi, koska PHP rajaa ainakin
 toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia
 suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
@@ -278,7 +278,6 @@ helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
 \caption{Oppimapin rakenne kerroksina}
 \label{fig:oppimappi-big-picture}
 \end{kuva}
-
 
 Kuvassa \ref{fig:oppimappi-schema-current} on  esitetty Oppimapissa
 loppujen lopuksi käytetty ratkaisumalli. Tässäkin luokkahierarkia on
@@ -322,19 +321,19 @@ sivulla. Automaattinen parametrien uudelleennimeäminen mahdollistaa
 myös sen, ettei yksittäistä moduulia ohjelmoitaessa tarvitse
 tarkistaa mitä nimiä muut moduulit käyttävät.
 
-Esimerkiksi jos moduuli, jonka id"-numero on \code{251} asettaa sivulle
-parametrin, jonka nimi on \code{foo}, käytetään todellisena parametrin
-nimenä merkkijonoa \code{p251xfoo}. Nimen muunnos tapahtuu
+Jos esimerkiksi moduuli, jonka id"-numero on \code{251}, asettaa
+sivulle parametrin, jonka nimi on \code{foo}, käytetään todellisena
+parametrin nimenä merkkijonoa \code{p251xfoo}. Nimen muunnos tapahtuu
 automaattisesti luokan \class{DocumentUI} toimesta.  Lisäksi
 \class{DocumentUI}"-luokka ylläpitää automaattisesti istuntotietoa.
 Tämä toteutetaan globaalin \code{session}"-parametrin avulla, joka
 sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen
-tietojen muuttumattomuudesta. Kaikkiin toimintoihin lisätään myös
-kullakin hetkellä käytössä olevan moduulin tunniste sekä edellisen
-käytössä olleen moduulin tunniste. Näiden tietojen avulla moduulin
-kaikista toiminnoista palataan oletuksena takaisin samaan moduuliin,
-mutta esimerkiksi \emph{tallenna}"-toiminnon jälkeen voidaan palata
-edelliseen moduuliin. Tämän voi ajatella vastaavan tavallisessa
+tietojen muuttumattomuudesta. Sivun kaikkiin toimintolinkkeihin
+lisätään myös kullakin hetkellä käytössä olevan moduulin tunniste sekä
+edellisen käytössä olleen moduulin tunniste. Näiden tietojen avulla
+moduulin kaikista toiminnoista palataan oletuksena takaisin samaan
+moduuliin, mutta esimerkiksi \emph{tallenna}"-toiminnon jälkeen voidaan
+palata edelliseen moduuliin. Tämän voi ajatella vastaavan tavallisessa
 käyttöjärjestelmässä ikkunan sulkemista, jonka jälkeen aktiiviseksi
 vaihtuisi edellinen ikkuna.
 
@@ -342,26 +341,31 @@ Oppimappi erottelee istuntoon liittyvän tiedon kahteen eri ryhmään:
 ikkunakohtaiset tiedot ja yleiset asetukset. Kaikki yleiset asetukset
 tallennetaan palvelimen tietokantaan ja ne haetaan tietokannasta
 jokaisen sivun generoinnin alussa. Tietojen hakeminen aina jokaisen
-sivun alussa lisää palvelimen kuormaa hieman, mutta se mahdollistaa
-kuorman jakamisen eri edustakoneiden kesken, sillä Oppimappia ajava
-edustakone ei tallenna mitään tietoja käyttäjästä. Asetukset ja tiedot,
-jotka ovat aikaan sidottuja ja joiden vaikutuksen pitää näkyä selaimen
-historia"-toimintoja käytettäessä tallennetaan jokaiseen sivuun
-upotettuna. Tällä hetkellä ne koodataan kaikkiin linkkeihin, mutta
-tulevaisuudessa ne olisi mahdollista sijoittaa sivun sijainnin
-osoittavaan polkuun. Koska HTML"-standardi määrittelee suhteellisen viittauksen mahdollisuuden linkeissä, voisi Oppimappi sijoittaa kaikki sivukohtaiset tiedot sivun osoitteeseen.
+sivun alussa lisää palvelimen kuormaa. Toisaalta se mahdollistaa
+kuorman jakamisen helposti eri edustakoneiden kesken, sillä Oppimappia
+ajava edustakone ei tallenna mitään tietoja käyttäjästä. Asetukset ja
+tiedot, jotka ovat aikaan sidottuja ja joiden vaikutuksen pitää näkyä
+selaimen historia"-toimintoja käytettäessä, tallennetaan jokaiseen
+sivuun upotettuna. Tällä hetkellä ne koodataan kaikkiin linkkeihin,
+mutta tulevaisuudessa ne olisi mahdollista sijoittaa sivun sijainnin
+osoittavaan polkuun. Koska HTML sallii suhteellisten linkkien
+käyttämien, voisi Oppimappi upottaa kaikki sivukohtaiset tiedot sivun
+osoitteeseen, jolloin ne toistuvat automaattisesti kaikissa
+suhteellisissa linkeissä.
 
 Esimerkiksi osoitteessa
 \code{http://peda.net/mappi""?session=databasetest/""1/""9325""35/""53""252""\&=4""/6""/1}
 oleva Oppimapin dokumentti voitaisiin siirtää osoitteeseen 
-\code{http://""peda.""net/""mappi/""databasetest.""1.""932535.""53252/""4.""6.""1},
-jolloin uuteen sivuun viitatessa ei tarvisisi toistaa enää istuntoon
-liittyvää tietoa vaan ainoastaan sivukohtaiset muutokset. Tällöin
-esimerkiksi linkki \verb!<a href="?x=y">linkkiteksti</a>! osoittaisi
-automaattisesti samaan istuntoon ja samaan dokumenttiin ja selain
-lähettäisi linkin mukana parametrin $x$ arvolla ``y''. Nykyisin
-kaikissa linkeissä pitää aina toistaa parametrit \code{session} ja
-\code{d}.
+\code{http://""peda.""net/""mappi/""databasetest.""1.""932535.""53252/""4.""6.""1}.
+Nyt tältä sivulta toiselle Oppimapin sivulle linkitettäessä ei
+tarvisisi toistaa enää istuntoon liittyvää tietoa vaan ainoastaan
+sivukohtaiset muutokset. Esimerkiksi linkki
+\verb!<a href="?x=y">linkkiteksti</a>! osoittaisi automaattisesti
+samaan istuntoon ja samaan dokumenttiin ja selain lähettäisi linkin
+mukana parametrin $x$ arvolla ``y''. Nykyisin kaikissa linkeissä pitää
+aina toistaa parametrit \code{session} ja \code{d}. Ongelmaa ei voi
+kiertää esimerkiksi keksien (\alt{cookies}) avulla, koska ne eivät
+toimi yhteistyössä selaimen historia"-toimintojen kanssa.
 
 Koska kaikki nämä tiedot viedään jokaiseen sivuun upotettuna, toimii
 edelliseen näkymään palaaminen myös historian kautta avatuissa sivuissa
