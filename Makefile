@@ -62,9 +62,11 @@ clean:
 	dvips $< -o $@ 2>&1 | egrep -i $(FLAGS) $(ERR) || true
 	@echo ======= Done: $@
 
-%-alt.pdf: %.dvi
+%-alt.pdf: %.pdf
 	@echo === Creating: $@
-	dvipdf -sPAPERSIZE=a4 $< $@
+	#dvipdf -sPAPERSIZE=a4 $< $@
+	#pdfopt $< $@
+	echo NOT SUPPORTED
 	@echo ======= Done: $@
 
 %.pdf:	%.tex %.dvi
@@ -89,3 +91,9 @@ loop:
 
 fast-loop:
 	while true; do make -s $(SOURCEBASE).dvi; sleep 1; done
+
+
+images:
+	@echo "Compiling images..."
+	( cd kuvat; find -name "*.eps" | perl -npe "s/^(.*)([.]eps)$$/epstopdf \$$1.eps -o \$$1.pdf/" | sh )
+

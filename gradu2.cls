@@ -1,6 +1,7 @@
 % Originally written by Antti-Juhani Kaijanaho on December 2002.
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
+% Modified by Mikko Rantalainen
 
 \def\CvsRevision$#1: #2 ${#2}
 \def\CvsDate$#1: #2 #3 ${#2}
@@ -8,8 +9,8 @@
 \def\fileversion{\CvsRevision$Revision: 1.48 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
-\typeout{gradu2 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
+\ProvidesClass{gradu2004}[\filedate\space\fileversion\space\fileinfo]
+\typeout{gradu2004 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
 
 \newif\iffi
 \fitrue
@@ -115,7 +116,12 @@
   \gdef\@chapapp{\appendixname}%
   \gdef\thechapter{\@Alph\c@chapter}}
 
-
+\ifx\pdfoutput\undefined
+\usepackage[dvips]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\pdfcompresslevel=9
+\fi
 
 %\usepackage{graphicx}
 %\usepackage{epstopdf}
@@ -233,13 +239,13 @@
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{%
- \ClassWarning{gradu2}{\textbackslash author is deprecated!}%
+ \ClassWarning{gradu2004}{\textbackslash author is deprecated!}%
  \gdef\gradu@author{#1 \ifoldtitle\else(Use \textbackslash setauthor!)\fi}
  \gdef\gradu@rohtau{#1 \ifoldtitle\else(Use \textbackslash setauthor!)\fi}
 }
 \newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
 \renewcommand{\date}[1]{%
-  \ClassWarning{gradu2}{\textbackslash date is deprecated!}%
+  \ClassWarning{gradu2004}{\textbackslash date is deprecated!}%
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\gdef\year{#3}}
@@ -268,7 +274,7 @@
 
 
 \newcommand{\gradu@toolate}{%
-  \ClassError{gradu2}{%
+  \ClassError{gradu2004}{%
     \iffi%
     Bibliografiatietoja ei voi antaa enaa dokumentin alun jalkeen.%
     \else%
@@ -557,9 +563,9 @@
   {\normalfont\bfseries\normalsize}%
 }
 
-\renewcommand\subsubsection{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
-\renewcommand\paragraph{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
-\renewcommand\subparagraph{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
+\renewcommand\subsubsection{\ClassError{gradu2004}{Don't use sectioning below subsection}{}}
+\renewcommand\paragraph{\ClassError{gradu2004}{Don't use sectioning below subsection}{}}
+\renewcommand\subparagraph{\ClassError{gradu2004}{Don't use sectioning below subsection}{}}
 
 \setcounter{secnumdepth}{2}
 

@@ -83,3 +83,11 @@
 % vaadi siistit tavutukset ja rivitykset
 \fussy
 
+
+% http://www.wlug.org.nz/PdfLatexNotes
+
+% if using pdflatex, we must use our .pdf images instead of .(e?)ps
+\ifx\pdfoutput\undefined
+\else
+\DeclareGraphicsExtensions{.pdf,.gif,.jpg} % the formats we have images in
+\fi

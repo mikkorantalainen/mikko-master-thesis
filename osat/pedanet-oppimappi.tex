@@ -2,7 +2,7 @@
 
 Oppimapin käyttöliittymän pääosat muodostuvat navigointipalkista,
 toimintovalikosta ja sisältöalueesta. Kuvassa
-\ref{fig:oppimappi-kotisivu} on esitetty Oppimapin kotisivu-näkymä
+\ref{fig:oppimappi-kotisivu} on esitetty Oppimapin kotisivu"-näkymä
 ylläpitäjän oikeuksilla. Tämä on Oppimapin aloitussivu
 sisäänkirjautumisen jälkeen. Yläreunassa näkyy Oppimapin otsikko (tässä
 esimerkissä ``Hankasalmen lukio'') ja linkit eri alueille Oppimapin
@@ -23,20 +23,20 @@ vaikuttaa.
 \end{kuva}
 
 Ensimmäiseksi havaitaan, että tässäkin ympäristössä suuri osa ikkunan
-pinta-alasta menee muuhun kuin itse sisältöön. Navigointi ja ympäristön
+pinta"-alasta menee muuhun kuin itse sisältöön. Navigointi ja ympäristön
 otsikko valtaavat suuren osan käytettävissä olevasta alasta. Tämä on
 seurausta valitusta tyylitiedostosta. Kuvassa
 \ref{fig:oppimappi-kotisivu-nostyle} on esitetty sama näkymä kun
-CSS-tyylisivu on selaimen asetuksista valittu pois päältä. Tämä näkymä
+CSS"-tyylisivu on selaimen asetuksista valittu pois päältä. Tämä näkymä
 vastaa erityisryhmien käyttöliittymää; esimerkiksi sokealle käyttäjälle
 tieto esitettäisiin tämän näkymän mukaisessa järjestyksessä. Tässä
 erityisesti nykyistä näkyvää koskevat toiminnot esitetään sisällön
 \emph{jälkeen} -- tämä on tärkeää, koska yleensä käyttäjä on
-kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien lataamista tai JavaScript-tukea.
+kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien lataamista tai JavaScript"-tukea.
 
 \begin{kuva}
 \includegraphics[width=10cm]{kuvat/oppimappi-kotisivu-nostyle}
-\caption{Oppimappi: työpöytä-näkymä ilman CSS-tiedostoa}
+\caption{Oppimappi: työpöytä"-näkymä ilman CSS"-tiedostoa}
 \label{fig:oppimappi-kotisivu-nostyle}
 \end{kuva}
 
@@ -71,20 +71,20 @@ perusteella:
 \begin{dl}
 
 \item[Ulkonäön taitto:] Oppimapissa oletuksena käytetty tyylitiedosto
-mukailee Peda.net-hankkeen staattisia www"-sivuja. Kirjasimeksi on
+mukailee Peda.net"-hankkeen staattisia www"-sivuja. Kirjasimeksi on
 valittu groteski kirjasinleikkaus, sillä se on yleensä näytöllä
 paremmin luettava kuin antiikva. Tekstin kokoa ei ole määritelty
 absoluuttisesti vaan leipäteksti on käyttäjän selaimen oletuskoko.
-Oikein konfiguroitu www-selain käyttää siis aina optimaalista tekstin
-kokoa. Käyttäjä voi halutessaan käyttää omaa CSS-tyylitiedostoa.
+Oikein konfiguroitu www"-selain käyttää siis aina optimaalista tekstin
+kokoa. Käyttäjä voi halutessaan käyttää omaa CSS"-tyylitiedostoa.
 
-\item[Yhdenmukaisuus] ja johdonmukaisuus: koko sovelluksen ulkonäkö on määritelty yhdessä
-CSS"-tyylitiedostossa. Koska HTML"-koodissa ei ole määritelty ulkoasua
-vaan ainoastaan sisällön rakenne ovat kaikki sivut keskenään
-yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu toiminta"-palkin
-kautta ja toiminnot tallennetaan aina lomakkeen lopussa olevasta
-``Tallenna''-painikkeella. Mikään, mikä ei näytä painikkeelta ei tee
-järjestelmään pysyviä, kaikkia käyttäjiä koskevia muutoksia ja
+\item[Yhdenmukaisuus] ja johdonmukaisuus: koko sovelluksen ulkonäkö on
+määritelty yhdessä CSS"-tyylitiedostossa. Koska HTML"-koodissa ei ole
+määritelty ulkoasua vaan ainoastaan sisällön rakenne ovat kaikki sivut
+keskenään yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu
+toiminta"-palkin kautta ja toiminnot tallennetaan aina lomakkeen lopussa
+olevasta ``Tallenna''-painikkeella. Mikään, mikä ei näytä painikkeelta
+ei tee järjestelmään pysyviä, kaikkia käyttäjiä koskevia muutoksia ja
 toisaalta kaikkien painikkeiden painaminen tekee pysyviä muutoksia.
 
 \item[Saavutettavuus:] Oppimapin sisältö on esitetty semanttisella
@@ -96,7 +96,7 @@ on jo aikaisemmin säätänyt selaimensa haluamakseen.
 
 \item[Personalisointi:] Oppimappi tarjoaa mahdollisuuden vaihtaa
 käyttöliittymän ulkoasua (käyttäjä voi valita ulkonäön vaihtoehtoisista
-CSS-tyylisivuista) ja käyttöliittymän kieltä. Lisäksi järjestelmä kerää
+CSS"-tyylisivuista) ja käyttöliittymän kieltä. Lisäksi järjestelmä kerää
 tapahtumahistoriaa käyttäjien toimista.
 
 \item[Tehokkuus:] Oppimapin vasteaika on keskimäärin 0,04 sekuntia sivua
@@ -104,7 +104,7 @@ kohden. Keskimääräinen sivu on noin 20 kilotavua, mutta tiedonsiirrossa
 käytetään gzip"-pakkausta, jos selain sitä tukee, jonka ansiosta
 siirrettävän datan määrä on noin 3 kilotavua sivua kohden. Tavallisella
 modeemillakin sivun pitäisi siis saapua aina alle 2 sekunnissa. Sivun
-ulkonäköön vaikuttava CSS-tiedosto ja ikonit tarvitsee siirtää vain
+ulkonäköön vaikuttava CSS"-tiedosto ja ikonit tarvitsee siirtää vain
 ensimmäisellä sivulla, sen jälkeen ne ovat selaimen välimuistissa.
 
 \item[Sisältö:] Peda.net ei ota kantaa Oppimapilla tuotettavaan
@@ -131,7 +131,7 @@ linkit ovat sinisiä ja alleviivattuja, joten ne on helppo havaita.
 \label{oppimapin-kaytettavyys-yhteenveto}
 
 Yhteenvetona vaikuttaisi siltä, että käytettävyyden kannalta ainakin
-CSS-tyylisivuja pitäisi vielä kehittää. Erityisesti ikkunan pinta-ala
+CSS"-tyylisivuja pitäisi vielä kehittää. Erityisesti ikkunan pinta"-ala
 on nyt tehottomassa käytössä, mutta sen korjaamiseksi täytyy poiketa
 usein käytetystä www"-sivustojen taitosta ja on vaikea sanoa ilman
 tarkempaa tutkimusta onko käytettävyyden kannalta parempi, että sivu

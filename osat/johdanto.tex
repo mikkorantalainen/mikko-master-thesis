@@ -1,32 +1,32 @@
 \chapter{Johdanto}
 
 \begin{chapterquote}{Jakob Nielsen's Alertbox, 2001-08-05} To design an
-easy-to-use interface, pay attention to what users do, not what they
-say. Self-reported claims are unreliable, as are user speculations
+easy"-to"-use interface, pay attention to what users do, not what they
+say. Self"-reported claims are unreliable, as are user speculations
 about future behavior. \end{chapterquote}
 
-Voidaan perustellusti väittää, että jokainen www-sivuja tehokkaasti
+Voidaan perustellusti väittää, että jokainen www"-sivuja tehokkaasti
 lukeva ja verkossa olevaa materiaalia hyväkseenkäyttävä henkilö on
-tietoinen www-selainten perusominaisuuksista. Tärkein, erityisesti
-www-selaimelle tyypillinen toiminto on linkkien seuraaminen. Kokeneelle
-käyttäjälle \emph{takaisin}-toiminto (\alt{back} tai \alt{backward}),
+tietoinen www"-selainten perusominaisuuksista. Tärkein, erityisesti
+www"-selaimelle tyypillinen toiminto on linkkien seuraaminen. Kokeneelle
+käyttäjälle \emph{takaisin}"-toiminto (\alt{back} tai \alt{backward}),
 jolla voidaan sivuhistoriassa palata edelliselle sivulle, on miltei yhtä
-arvokas. Jos www-selainta käyttävä henkilö huomaa esimerkiksi
+arvokas. Jos www"-selainta käyttävä henkilö huomaa esimerkiksi
 sisällysluettelosta jonkin kohdan valittuaan, että valinta oli väärä,
 voi hän tämän toiminnon avulla välittömästi palata takaisin
 sisällysluetteloon miettimättä olisiko valinnan seurauksena annetulla
 sivulla ollut jokin keino siirtyä sisällysluetteloon.
 
-Välittömästi linkkien seuraamisen jälkeen www-sivuja käyttävä henkilö
-oppiikin takaisin-toiminnon käytön. Jos verkossa linkkien
-seuraamistaito vastaa lukemaan oppimista, niin takaisin-toiminnon
+Välittömästi linkkien seuraamisen jälkeen www"-sivuja käyttävä henkilö
+oppiikin takaisin"-toiminnon käytön. Jos verkossa linkkien
+seuraamistaito vastaa lukemaan oppimista, niin takaisin"-toiminnon
 käyttö vastaa kirjoittamista. Tästä huolimatta selainkäyttöisessä
-sovelluksessa takaisin-toiminnon käyttäminen aiheuttaa liian usein
+sovelluksessa takaisin"-toiminnon käyttäminen aiheuttaa liian usein
 ohjelman rikkoutumisen.\footnote{Muita usein tavallisten sivujen
 yhteydessä käytettyjä toimintoja, jotka eivät toimi monessa
 selainkäyttöisessä sovelluksessa, ovat mm. linkin avaaminen toisessa
 ikkunassa ja kirjanmerkin luominen.} Selainkäyttöisten ohjelmien
-kehittäjien yleinen kysymys onkin, \emph{kuinka takaisin-toiminnon
+kehittäjien yleinen kysymys onkin, \emph{kuinka takaisin"-toiminnon
 käyttö voitaisiin estää}, kun oikea kysymys olisi, \strong{miksi} se
 pitäisi estää. Jos käyttäjä selvästi haluaa suorittaa kyseisen
 toiminnon, niin eikö jotain pitäisi tehdä sen hyväksi, jotta hän voisi
@@ -37,7 +37,7 @@ huomiotta jätettyjä, mutta käytettävyyden kannalta varsinkin
 tulevaisuudessa, tärkeitä ongelmia. Esitän sitten näihin ongelmiin
 ratkaisumalleja, joista osaa olen työtehtävissäni päässyt kokeilemaan
 ja osa on jäänyt toistaiseksi liian työläinä toteuttamatta. Lopuksi
-esittelen Peda.net -hankkeessa tekemiäni ohjelmistoja ja kerron niiden
+esittelen Peda.net "=hankkeessa tekemiäni ohjelmistoja ja kerron niiden
 teknisistä ratkaisuista ja havaituista ongelmista sekä ehdotan
 suuntaviivoja tulevaisuuden tutkimusta varten.
 
@@ -58,7 +58,7 @@ soveltuu siihen tehtävään, johon se on suunniteltu. Luonnollisesti
 tähän vaatimukseen sisältyy se, että tuote \emph{toimii}.
 Tietokoneohjelmien tapauksessa käytettävyys käsittelee nimenomaan
 ihmisen ja koneen välistä rajapintaa. Käytettävyys jakautuu useisiin
-osa-alueisiin. Näitä osa-alueita ovat eri lähteiden mukaan ainakin
+osa"-alueisiin. Näitä osa"-alueita ovat eri lähteiden mukaan ainakin
 \cite{keinonen:kaytettavyys, diamondbullet:usability,
 parkkinen:kaytettavyys}:
 
@@ -112,35 +112,34 @@ ohjelmien näköisiksi ja niitä jopa suunnitellaan tavallisten ohjelmien
 kehittämisessä hyviksi havaittujen mallien mukaisesti. Tarkoitan tässä
 yhteydessä tavallisella ohjelmalla käyttöjärjestelmän oman
 käyttöliittymän mukaista ohjelmaa. Koska selainkäyttöistä ohjelmaa
-kuitenkin käytetään www-selaimella, tulisi ohjelman toimia
+kuitenkin käytetään www"-selaimella, tulisi ohjelman toimia
 mahdollisimman tarkasti samalla tavalla kuin muutkin selaimella
 käsiteltävät asiat tai johdonmukaisuutta ohjelman toimimisessa ei voida
 koskaan saavuttaa. Siis selainkäyttöisen ohjelman käyttöliittymän
-pitäisi poiketa tavallisesta www-sivusta niin vähän kuin mahdollista.
+pitäisi poiketa tavallisesta www"-sivusta niin vähän kuin mahdollista.
 En ole löytänyt tutkimustuloksia suoraan tukemaan tai kumoamaan tätä
 väitettä, mutta perustelen näkemystäni seuraavissa luvuissa.
 
-\section{Käytettäviä www-sivuja}
+\section{Käytettäviä www"-sivuja}
 
-Tavallisten www-sivujen käytettävyydestä on kirjoitettu useita kirjoja.
+Tavallisten www"-sivujen käytettävyydestä on kirjoitettu useita kirjoja.
 Ehkä tunnetuin on Jakob Nielsenin
-WWW-suunnittelu\cite{nielsen:usability} siitäkin huolimatta, että kirja
-on kirjoitettu vasta 1999. Nielsen käsittelee kirjassaan useita
-olemassa olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen --
-painottuen erityisesti käytettävyyden esteisiin. Kirja on itse asiassa
-kokoelma Nielsenin \url{useit.com}-sivustolla julkaistuista
-artikkeleista hiottuna paperille paremmin sopivaan muotoon.
-Kotimaisesta tuotannosta mainitsemisen arvoinen on Jukka Korpelan ja
-Tero Linjaman kirjoittama
-Web-suunnittelu\cite{korpela:web-suunnittelu}.
+WWW"-suunnittelu\cite{nielsen:usability} siitäkin huolimatta, että kirja
+on kirjoitettu vasta 1999. Nielsen käsittelee kirjassaan useita olemassa
+olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen -- painottuen
+erityisesti käytettävyyden esteisiin. Kirja on itse asiassa kokoelma
+Nielsenin \href{http://useit.com/}{useit.com}"-sivustolla julkaistuista
+artikkeleista hiottuna paperille paremmin sopivaan muotoon. Kotimaisesta
+tuotannosta mainitsemisen arvoinen on Jukka Korpelan ja Tero Linjaman
+kirjoittama Web"-suunnittelu\cite{korpela:web-suunnittelu}.
 
-Molempien kirjojen mukaan www-sivun käytettävyyden kannalta on tärkeää
+Molempien kirjojen mukaan www"-sivun käytettävyyden kannalta on tärkeää
 painottua nimenomaan \emph{sisällön} esittämiseen; navigointiin ja sivun
-koristeluun ei tule tuhlata aikaa -- tai sivun pinta-alaa. Nielsen jopa
-arvioi karkeasti www-sivun käytettävyyttä laskemalla kuinka suuri
-prosenttiosuus koko sivun pinta-alasta on varattu itse sisällölle.
-Turhan monessa www-sivussa ja erityisesti selainkäyttöisessä
-sovelluksessa sisällölle varattu pinta-ala on alle puolet.
+koristeluun ei tule tuhlata aikaa -- tai sivun pinta"-alaa. Nielsen jopa
+arvioi karkeasti www"-sivun käytettävyyttä laskemalla kuinka suuri
+prosenttiosuus koko sivun pinta"-alasta on varattu itse sisällölle.
+Turhan monessa www"-sivussa ja erityisesti selainkäyttöisessä
+sovelluksessa sisällölle varattu pinta"-ala on alle puolet.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/www-korpela}
@@ -166,14 +165,14 @@ selvästikin ajatelleet, että ulkonäköön keskitytään siinä vaiheessa kun
 ei keksi enää mitään tärkeää sanottavaa. Sitten on aikaa keskittyä myös
 epäolennaiseen, kuten sivun ulkonäköön.
 
-Useilla sivuilla suuri osa sivun pinta-alasta on varattu navigoinnille.
+Useilla sivuilla suuri osa sivun pinta"-alasta on varattu navigoinnille.
 Sivujen tekijät kokevat usein -- jostain syystä -- että käyttäjä voi
 ``eksyä'', jos jokaiselta sivulta ei helposti pääse mille tahansa
 muulle sivulle. Eksyykö tavallisen kirjan lukija, kun joka sivulla ei
 lue kaikkien muiden kappaleiden sivunumeroita? Ei, hän sen sijaan palaa
 sisällysluetteloon ja halutessaan tarkistaa asian sieltä. Aivan
-vastaavasti www-sivuston ensimmäinen sivu voisi olla sisällysluettelo.
-Tällöin navigoinnille on varattu 100\% sivun pinta-alasta, joten
+vastaavasti www"-sivuston ensimmäinen sivu voisi olla sisällysluettelo.
+Tällöin navigoinnille on varattu 100\% sivun pinta"-alasta, joten
 navigointi voidaan suunnitella mahdollisimman tehokkaasti
 käytettäväksi. Muilla sivuilla riittää \emph{suhteellinen sijainti},
 joka vastaa kirjan yläreunassa usein toistettavaa nykyisen luvun nimeä.
@@ -184,9 +183,9 @@ ja ''Edellinen''.
 
 Joskus näkee sivuilla myös linkkejä, joista ei tiedä, pitäisikö itkeä
 vai nauraa. Kamalimmat esimerkit ovat varmastikin ``Takaisin'', joka
-\emph{yrittää} tehdä saman kuin selaimen takaisin-toiminto, ja ``Sivun
+\emph{yrittää} tehdä saman kuin selaimen takaisin"-toiminto, ja ``Sivun
 alkuun'', joka \emph{yrittää} vierittää näkymän takaisin sivun alkuun.
-Jos selaimessa on jo takaisin-painike ja käyttäjä tietää \emph{missä}
+Jos selaimessa on jo takaisin"-painike ja käyttäjä tietää \emph{missä}
 se on ja \emph{mitä} se tekee, miksi enää tarjota samaa toimintoa
 epävarmasti toimivana versiona itse sivulla? Ja jos selaimen käyttäjä
 pääsee \emph{aina} sivun alkuun painamalla näppäimistössä olevaa
@@ -194,14 +193,14 @@ pääsee \emph{aina} sivun alkuun painamalla näppäimistössä olevaa
 sivun lopussa, jolloin siihen täytyy yrittää osua hiirellä ja sen
 toiminta on vielä silloinkin epävarmaa\footnote{''Sivun alkuun'' ja
 ''Takaisin'' -toimintoja yritetään matkia käyttämällä
-JavaScript-skriptikieltä. Kaikki selaimet eivät kuitenkaan tue
-JavaScript-kieltä. Edellä mainitut toiminnot on \emph{mahdollista}
+JavaScript"-skriptikieltä. Kaikki selaimet eivät kuitenkaan tue
+JavaScript"-kieltä. Edellä mainitut toiminnot on \emph{mahdollista}
 toteuttaa siten, että ne tulevat sivulle näkyviin, jos ja vain jos
 selain todellakin voi toteuttaa tavoitellun toiminnon. Usein henkilöt,
 jotka osaisivat tehdä skriptin oikein, ymmärtävät kuitenkin jättää
 tuollaiset turhat, käytettävyyden kannalta negatiiviset asiat pois.}.
 
-Jos käytettävä www-sivu on aina joko navigointi-sivu tai sisältösivu,
+Jos käytettävä www"-sivu on aina joko navigointi"-sivu tai sisältösivu,
 niin kuinka tätä mallia voisi vielä parantaa? Koska sisältösivulla on 
 korkeintaan kolme navigointiin liittyvää linkkiä: sisällysluettelo,
 edellinen ja seuraava, saadaan parempi käytettävyys aikaiseksi
@@ -288,7 +287,7 @@ Myös Edward Tufte kirjoittaa kirjassaan
 \begin{ol}
 
 \item Näytöllä pitäisi olla informaatiota, ei navigointi tai
-ylläpito-ikoneita. Informaatiosta pitäisi tehdä käyttöliittymä --
+ylläpito"-ikoneita. Informaatiosta pitäisi tehdä käyttöliittymä --
 esimerkiksi jonkin sanan, joka itsessään olisi informatiivinen,
 näpäyttämisen pitäisi antaa lisätietoja aiheeseen liittyen.
 
@@ -304,13 +303,13 @@ selkeämpää ja se vie usein vähemmän tilaa?
 
 \end{ol}
 Mielenkiintoisesti edellä mainitussa listassa Tufte ei kirjoittanut
-www-sivuista. Kommentit koskivat erästä info-päätettä. Lukijalle
-pitäisi olla selvää, että samat kommentit ovat kuitenkin
-käyttökelpoisia myös useimpien www-sivujen suhteen.
+www"-sivuista. Kommentit koskivat erästä info"-päätettä. Selvää
+on, että samat kommentit ovat kuitenkin
+käyttökelpoisia myös useimpien www"-sivujen suhteen.
 
 \section{Käytännön kompromisseja}
 
-Vaikka www-sivustolla kannattaisikin jakaa sisältö ja sisällysluettelo
+Vaikka www"-sivustolla kannattaisikin jakaa sisältö ja sisällysluettelo
 (navigointi) omiksi sivuikseen, on suuri osa \emph{olemassa olevista}
 sivustoista tehty toisin. Tähän on useita syitä, joista vähäpätöisimpiä
 eivät ole historialliset syyt ja sisällölliset ongelmat. Esimerkiksi
@@ -336,8 +335,8 @@ käyttää sivulla mahdollisimman pelkistettyä navigointia, joka kuitenkin
 \label{mixedos-target}
 
 Koska selainkäyttöisiä sovelluksia käytetään selaimella, aivan kuin
-tavallisia www-sivujakin, pitäisi tällaisen sovelluksen käytön
-muistuttaa mahdollisimman paljon tavallisen www-sivun käyttämistä. Osa
+tavallisia www"-sivujakin, pitäisi tällaisen sovelluksen käytön
+muistuttaa mahdollisimman paljon tavallisen www"-sivun käyttämistä. Osa
 selainkäyttöisen sovelluksen käyttöliittymästä muodostuu aina
 www"-selaimesta. Ero tavallisen www"-sivun ja selainkäyttöisen
 sovelluksen ikkunan välillä voi olla käyttäjälle hämärä. Käyttäjä ei
@@ -346,7 +345,7 @@ samalla tavalla kuin muut www"-sivuja näyttävät ikkunat ja siksi
 selainkäyttöisen sovelluksen pitäisikin toimia samoin kuin tavallisen
 www"-sivun.
 
-Eri www-sivustot poikkeavat toisistaan merkittävästi esimerkiksi taiton
+Eri www"-sivustot poikkeavat toisistaan merkittävästi esimerkiksi taiton
 osalta, joten ulkonäön yksityiskohdat eivät ole niin merkittävässä
 osassa käytettävyyden kannalta kuin varsinainen toiminnallisuus.
 Aidosti selainkäyttöisen sovelluksen tekijä ei voi myöskään tietää,
@@ -383,18 +382,18 @@ käytettynä}
 \end{kuva}
 
 Yhdenmukaisuuden kannalta tärkeintä olisi siis saada sovellus
-\emph{toimimaan} muiden www-sivujen tapaan. Tavallisten www-sivujen
+\emph{toimimaan} muiden www"-sivujen tapaan. Tavallisten www"-sivujen
 yhteydessä \emph{selaimen} tärkeimpiä ominaisuuksia ovat:
 
 \begin{ol*}
 \item Linkkien seuraaminen
-\item Takaisin-toiminnon käyttäminen
+\item Takaisin"-toiminnon käyttäminen
 \item Linkin avaaminen uuteen ikkunaan
 \item Kirjanmerkkien käyttö
 \end{ol*}
 
 Näistä ainoastaan linkkien seuraaminen toimii (melkein) kaikissa
-selainkäyttöisissä sovelluksissa. Takaisin-painikkeen painaminen antaa
+selainkäyttöisissä sovelluksissa. Takaisin"-painikkeen painaminen antaa
 jonkinlaisen virheilmoituksen monessa selainkäyttöisessä sovelluksessa.
 Linkin avaaminen uuteen ikkunaan on tärkeä ominaisuus sen vuoksi, että
 tällä tavalla kulkemisen sivustolla tai sovelluksen sisällä voi
@@ -404,7 +403,7 @@ kaksi kirjanmerkkiä ja hyppiä niiden välillä. Tai saattaisin avata
 kaksi kirjan kopiota eri kohdista ja laittaa nuo kirjojen kopiot
 vierekkäin, jolloin voisin helposti katsella molempia kohtia yhtä
 aikaa. Harvalla on kuitenkaan samasta kirjasta kahta kopiota, mutta
-www-sivusta (tai selainkäyttöisen sovelluksen näytöstä) saa tehtyä
+www"-sivusta (tai selainkäyttöisen sovelluksen näytöstä) saa tehtyä
 kopion selaimen omilla toiminnoilla. Parhaimmillaan uuden ikkunan
 avaaminen on yhtä helppoa kuin linkkien
 seuraaminen.\footnote{Esimerkiksi Mozilla Firefox -selaimessa voi avata
