@@ -69,7 +69,7 @@ Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä luokkahierark
 \end{kuva}
 
 \begin{kuva}
-\includegraphics[width=7cm]{kuvat/vihko-big-picture}
+\includegraphics[width=6.5cm]{kuvat/vihko-big-picture}
 \caption{Osa toteutetusta Vihkon rakenteesta}
 \label{fig:vihko-big-picture}
 \end{kuva}
@@ -88,4 +88,6 @@ Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current} esitettyyn ratka
 \label{fig:vihko-schema-current}
 \end{kuva}
 
-Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi. Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa Vihkon moduuleiksi. Kaikki Vihkon moduulit peritään luokasta \emph{Document} (ks. kuva \ref{fig:vihko-schema-current}).
+Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi. Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa Vihkon moduuleiksi.
+
+Kaikki Vihkon moduulit peritään luokasta \class{Document} (ks. kuva \ref{fig:vihko-schema-current}) ja kaikki moduulit saavat oman nimiavaruuden käyttämilleen parametreille. Esimerkiksi jos moduuli, jonka id-numero on \code{251} asettaa sivulle parametrin, jonka nimi on \code{foo}, käytetään todellisena parametrin nimenä merkkijonoa \code{p251xfoo}. Muunnos takaisinpäin tapahtuu automaattisesti \class{Document}-luokan toimesta. Eri moduulien parametrit sijoitetaan omiin nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi mahdollista suorittaa rinnakkain samalla sivulla. Automaattinen uudelleennimeäminen mahdollistaa sen, että yksittäistä moduulia ohjelmoitaessa ei tarvitse tarkistaa mitä nimiä muut moduulit käyttävät. Lisäksi \class{Document}-luokka ylläpitää automaattisesti istuntotietoa johon kuuluu globaali \code{session}-parametri, joka sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen. Lisäksi kaikkiin toimintoihin lisätään tällä hetkellä käytössä olevan moduulin tunniste ja edellisen käytössä olleen moduulin tunniste. Näiden tietojen avulla moduulin kaikista toiminnoista palataan oletuksena takaisin samaan moduuliin, mutta esimerkiksi \emph{tallenna}-toiminnon jälkeen voidaan palata edelliseen moduuliin (joka usein on kansio).
