@@ -226,49 +226,59 @@ tarvittaessa laitekohtaisesti.
 \section{Nelikerroksisen mallin käytännön ongelmia}
 
 Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net"-hankkeessa
-tehtävän Vihko"-nimisen työkalun
-valmistuksessa\footnote{Vihko"-työkalusta kerrotaan tarkemmin luvussa
-\ref{pedanet"-vihko}}. Peda.net"-hankkeessa on päätetty yhdenmukaistaa
-sovellusten toimintaympäristöksi Apache/PHP"-ohjelmointiympäristö ja
-MySQL"-tietokanta, joten tämä asetti käytännön rajoituksia ohjelman
-loogiseen rakenteeseen; nykyisin käytössä oleva PHP"-kielen versio 4 ei
-tue moniperintää eikä rajapintaluokkia, joten luokkahierarkian
-toteuttaminen vaati lievää luovuutta ja teoriittisesta mallista
-poikkeamista.
+tehtävän Oppimappi"-nimisen työkalun
+valmistuksessa\footnote{Oppimappi"-työkalusta kerrotaan tarkemmin
+luvussa \ref{pedanet-oppimappi}}. Peda.net"-hankkeessa on päätetty
+yhdenmukaistaa sovellusten toimintaympäristöksi Apache"-www"-palvelimen
+päällä toimiva PHP"-ohjelmointiympäristö sekä MySQL"-tietokanta, joten
+tämä asetti käytännön rajoituksia ohjelman loogiseen rakenteeseen;
+nykyisin käytössä oleva PHP"-kielen versio 4 ei tue moniperintää eikä
+rajapintaluokkia, joten luokkahierarkian toteuttaminen vaati osin
+teoriittisesta mallista poikkeamista.
+
+% Oppimappia voi käyttää sekä MySQL
+% että PostgreSQL "=tietokantojen päällä. Nykyisellä palvelimella MySQL
+% toimii nopeammin.
 
 Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä
-luokkahierarkiasta. Kuvassa \ref{fig:vihko-big-picture} on puolestaan
-mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä
-MySQL"-tietokanta ja Vihko PHP"-sovellus toimivat Peda.net"-hankkeen
-ylläpitämällä palvelimella ja HTML ja CSS ohjaavat ohjelman toimintaa
-sovelluksen käyttäjän koneessa toimivassa www"-selaimessa.
+luokkahierarkiasta.
+
+%Kuvassa \ref{fig:vihko-big-picture} on puolestaan
+%mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä
+%MySQL"-tietokanta ja Oppimappi PHP"-sovellus toimivat
+%Peda.net"-hankkeen ylläpitämällä palvelimella ja ohjelman
+%käyttöliittymä esitetään HTML ja CSS "=kielien avulla sovelluksen
+%käyttäjän koneessa toimivassa www"-selaimessa.
 
 \begin{kuva}
 \includegraphics[width=\linewidth]{kuvat/vihko-schema-orig}
-\caption{Alkuperäistä suunnitelmaa Vihkon toteuttamiseksi}
+\caption{Alkuperäistä suunnitelmaa Oppimapin toteuttamiseksi}
 \label{fig:vihko-schema-orig}
-\end{kuva}
-
-\begin{kuva}
-\includegraphics[width=6.5cm]{kuvat/vihko-big-picture}
-\caption{Osa toteutetusta Vihkon rakenteesta}
-\label{fig:vihko-big-picture}
 \end{kuva}
 
 Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että
 PHP"-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli
-aika heikko ja lisäksi käytetystä arkkitehtuurista johtuen täydellisen
-käyttöliittymäajurin tekeminen alkoi varmistumaan liian työlääksi siitä
-saataviin etuihin verrattuna.
+aika heikko. Lisäksi täydellisen käyttöliittymäajurin tekeminen alkoi
+varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
 
 \section{Sovelluskehys avuksi}
 
-Koska varsinaisen sovelluslogiikan ja käyttäjän välissä on vielä useita
-tasoja -- köyhän miehen käyttöliittymäajuri, HTML ja CSS -- päädyin
-siihen johtopäätökseen, että täydellistä käyttöliittymäajuria ei
-kannata tehdä. Lisäksi, koska PHP rajaa ainakin toistaiseksi natiivin
-käyttöliittymän kehittämisen mahdollisuuksia ei sen kehittämisen
+Päädyin siihen johtopäätökseen, että täydellistä käyttöliittymäajuria
+ei kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän
+välissä on niin useita tasoja, jakamalla käyttöliittymä sopivasti HTML
+ja CSS -kielien vastuulle, käyttöliittymäajuri voidaan pitää hyvin
+yksinkertaisena. Tätä on havainnollistettu kuvassa
+\ref{fig:vihko-big-picture} Lisäksi, koska PHP rajaa ainakin
+toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia
+suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
 helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
+
+\begin{kuva}
+\includegraphics[width=4.5cm]{kuvat/vihko-big-picture}
+\caption{Oppimapin rakenne kerroksina}
+\label{fig:vihko-big-picture}
+\end{kuva}
+
 
 Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current}
 esitettyyn ratkaisuun. Tässäkin luokkahierarkia on ensisilmäyksellä
@@ -279,37 +289,47 @@ kannattanee harkita aikaisintaan ensi vuonna.
 
 \begin{kuva}
 \includegraphics[width=\linewidth]{kuvat/vihko-schema-current}
-\caption{Osa toteutetusta Vihkon rakenteesta}
+\caption{Osa toteutetusta Oppimapin rakenteesta}
 \label{fig:vihko-schema-current}
 \end{kuva}
 
-Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi
+Oppimapin kehittämisessä havaittujen ongelmien ratkaisemiseksi
 sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska
 tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi.
 Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan
-liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä
+liittymätöntä ohjelmakoodia, joten uusien, samaa sovelluskehystä
 käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava
 logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa
-vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa
-Vihkon moduuleiksi.
+vaikuttaa siltä, että suurin osa Peda.netin tulevista sovelluksista
+voidaan kirjoittaa Oppimapin moduuleiksi. Oppimapin rakenteesta voidaan
+tarvittaessa rakentaa myös muita toimintaympäristöjä jättämällä osa
+käytössä olevista moduuleista pois tai korvaamalla niitä uusilla.
 
-Kaikki Vihkon moduulit peritään luokasta \class{Document} (ks. kuva
+Kaikki Oppimapin moduulit peritään luokasta \class{Document} (ks. kuva
 \ref{fig:vihko-schema-current}) ja kaikki moduulit saavat oman
-nimiavaruuden käyttämilleen parametreille. Esimerkiksi jos moduuli,
-jonka id"-numero on \code{251} asettaa sivulle parametrin, jonka nimi on
-\code{foo}, käytetään todellisena parametrin nimenä merkkijonoa
-\code{p251xfoo}. Muunnos takaisinpäin tapahtuu automaattisesti
-\class{Document}"-luokan toimesta. Eri moduulien parametrit sijoitetaan
-omiin nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi
-mahdollista suorittaa rinnakkain samalla sivulla. Automaattinen
-uudelleennimeäminen mahdollistaa sen, että yksittäistä moduulia
-ohjelmoitaessa ei tarvitse tarkistaa mitä nimiä muut moduulit
-käyttävät. Lisäksi \class{Document}"-luokka ylläpitää automaattisesti
-istuntotietoa johon kuuluu globaali \code{session}"-parametri, joka
-sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen.
-Lisäksi kaikkiin toimintoihin lisätään tällä hetkellä käytössä olevan
-moduulin tunniste ja edellisen käytössä olleen moduulin tunniste.
-Näiden tietojen avulla moduulin kaikista toiminnoista palataan
-oletuksena takaisin samaan moduuliin, mutta esimerkiksi
-\emph{tallenna}"-toiminnon jälkeen voidaan palata edelliseen moduuliin
-(joka usein on kansio).
+nimiavaruuden käyttämilleen parametreille. Tämä on olennaista, koska
+istuntoon liittyvää tietoa täytyy kuljettaa kaikkien linkkien
+osoitteissa. Eri moduulien parametrit sijoitetaan omiin
+nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi mahdollista
+esittää rinnakkain samalla sivulla. Automaattinen uudelleennimeäminen
+mahdollistaa myös sen, että yksittäistä moduulia ohjelmoitaessa ei
+tarvitse tarkistaa mitä nimiä muut moduulit käyttävät. Esimerkiksi jos
+moduuli, jonka id"-numero on \code{251} asettaa sivulle parametrin,
+jonka nimi on \code{foo}, käytetään todellisena parametrin nimenä
+merkkijonoa \code{p251xfoo}. Nimen muunnos tapahtuu automaattisesti
+\class{DocumentUI}"-luokan toimesta.  Lisäksi
+\class{DocumentUI}"-luokka ylläpitää automaattisesti istuntotietoa,
+johon kuuluu globaali \code{session}"-parametri, joka sisältää
+käyttäjän ja tietokannan tunnistetiedot sekä varmenteen tietojen
+muuttumattomuudesta. Kaikkiin toimintoihin lisätään myös kullakin
+hetkellä käytössä olevan moduulin tunniste sekä edellisen käytössä
+olleen moduulin tunniste. Näiden tietojen avulla moduulin kaikista
+toiminnoista palataan oletuksena takaisin samaan moduuliin, mutta
+esimerkiksi \emph{tallenna}"-toiminnon jälkeen voidaan palata
+edelliseen moduuliin. Tämän voi ajatella vastaavan tavallisessa
+käyttöjärjestelmässä ikkunan sulkemista, jonka jälkeen aktiiviseksi
+vaihtuisi edellinen ikkuna.
+
+Koska kaikki nämä tiedot viedään jokaiseen sivuun upotettuna, toimii
+edellliseen näkymään palaaminen myös historian kautta avatuissa
+sivuissa oikein. Myöskään ikkunan kahdentaminen ei aiheuta ongelmia.
