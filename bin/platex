@@ -21,6 +21,7 @@ platex - a (PDF)LaTeX compiler script
           --ps         Generate PS version in addition to DVI
           --help       Display usage and exit successfully
           --version    Display version and exit successfully
+	  --fussy      Display overfull hbox warnings
 
         Commands marked with asterisk (*) also have matching
 	--no prefix. For example, --nodebug to force debug off.
@@ -55,8 +56,8 @@ use Term::ANSIColor qw(:constants);
 my $term = new Term::ReadLine 'mk';
 
 # command line settable parameters
-our ( $verbose, $clean, $pdf, $ps, $print_log ) =
-    ( 0,        0,      1,    0,   0   );
+our ( $verbose, $clean, $pdf, $ps, $print_log, $fussy  ) =
+    ( 0,        0,      1,    0,   0,          0       );
 
 my @warnings_to_skip = (
 #   'Package hyperref Warning: Token not allowed in a PDFDocEncoded string',
@@ -72,9 +73,12 @@ GetOptions(
     'ps!'       => \$ps,
     'help'      => \&help,
     'version'   => \&version,
+    'fussy'     => \$fussy,
 ) or help();
 
 #die("log output not implemented") if $log;
+
+my $bibtex_counter = 0; # number of times bibtex has been already run
 
 my $linenum = 1;
 my $errorfile = "platex-errors.log";
@@ -117,20 +121,22 @@ sub compile
 	# may become invisible, so add the original dir to TEXINPUTS:
 	# use kpsewhich to find the effective value of TEXINPUTS since it may be
 	# unset and then has to be taken from texmf.cnf
-	my $texinputs=`kpsewhich --expand-var '\$TEXINPUTS'`;
+	my $texinputs=sys("kpsewhich --expand-var '\$TEXINPUTS'");
 	my $log;
 
 	my $counter = 0;
-	RETRY: for (my $i = 1; $i < 5; $i++)
+	RETRY: for (my $i = 1; $i <= 4; $i++)
 	{
+		debug("platex: running latex again.\n") if ($i > 1);
+		
 		my $command =
-			"TEXINPUTS=$ENV{PWD}:".$texinputs.
+		#	"TEXINPUTS=$ENV{PWD}:".$texinputs.
         		"latex ".
         		"-interaction=batchmode ".
-			"-file-line-error-style ".
+		#	"-file-line-error-style ".
         		"$basename";
 		$counter++;
-		my $discard = `$command`; # backticks!
+		my $discard = sys($command);
         		
 		$log = parse_log("$basename.log");
 		if (check_no_errors($log))
@@ -143,20 +149,36 @@ sub compile
 		}
 	}
 
-
 	if (check_no_errors($log) )
 	{
+		$fussy and check_overfull($log);
+
 		print("Had to run latex $counter times.\n") if ($counter > 1 and $verbose >= 0) or ($verbose > 1);
-		print($log) if $print_log;
+		print("\nLog follows:\n".$log) if $print_log;
 		exit(0); # all ok.
 	}
 	else
 	{
-		print("Had to run latex $counter times.\n") unless $verbose < -1;
+		print("Tried to run latex $counter times and errors still remain.\n");
 		display_errors($log);
+		warn("Failed to compile $basename.\n") unless $verbose < -2;
 		exit(1); # there were errors
 	}
 }
+
+sub check_overfull($)
+{
+	my ($log) = @_;
+
+	while ( $log =~ m/^([\/a-z0-9_.-]*?): Overfull \\hbox \([0-9.]+pt too wide\) in paragraph at lines (\d+)--(\d+)/mig )
+	{
+		print("$1: cannot nicely break lines $2-$3.\n");
+	}
+	
+	return 1;
+}
+
+
 
 sub parse_log($)
 {
@@ -172,6 +194,7 @@ sub parse_log($)
 	$log = <LOG>; # read all of log at once
 
 	$log =~ s/file:line:error style messages enabled.//gsm;
+	$log =~ s/^\*\*[a-zA-Z0-9._-]+?$//sm;
 
 	$log =~ s/([^\n]{79})\n/$1/gsm; # combine broken lines (remove linefeed if line length is 79 chars)
 	$log =~ s/\(1in=[.0-9]+pt, 1cm=[.0-9]+pt\)//gsm; # this looks like file line but is not! Remove it!
@@ -217,8 +240,8 @@ sub parse_log($)
 		$log =~ s/^Package: (color|everyshi|fontenc|inputenc|geometry|keyval|babel|tocbibind|graphicx|graphics|trig|hyperref|url|backref|nameref|listings) \d{4}\/\d\d\/\d\d +v?(er)? ?\d.*?$//gsm;
 	}
 	
-	$log =~ s/\\openout\d+ = `(.*?)'\./creating file: $1/gsm if ($verbose > 0);
-	$log =~ s/^File: ([a-z\/0-9_-]+\.(eps|pdf|png|jpg|gif)) Graphic file.*?\n\s*<\1>/$verbose ? "included graphics: $1\n" : ""/gmie;
+	$log =~ s/\\openout\d+ = `(.*?)'\./$verbose >= -2 ? "creating file: $1" : ""/gsme;
+	$log =~ s/^File: ([a-z\/0-9_-]+\.(eps|pdf|png|jpg|gif)) Graphic file.*?\n\s*<\1>/$verbose >= -2  ? "included graphics: $1\n" : ""/gmie;
 	
 	if ($verbose < 0)
 	{
@@ -275,7 +298,7 @@ sub parse_log($)
 sub debug($)
 {
 	my ($msg) = @_;
-	print($msg) if $verbose > 2;
+	warn($msg) if $verbose > 2;
 	return 1;
 }
 
@@ -284,17 +307,16 @@ sub check_no_errors($)
 {
 	my ($log) = @_;
 	
-	$log =~ m/warn/smi and debug("Found a warning.\n") and return 0;
-	$log =~ m/error/smi and debug("Found an error.\n") and return 0;
-	$log =~ m/^\!/smi and debug("Found a !-warning.\n") and return 0;
+	$log =~ m/warning/smi and debug("platex: found a warning.\n") and return 0;
+	$log =~ m/error/smi and debug("platex: found an error.\n") and return 0;
+	$log =~ m/: \!/smi and debug("platex: found a !-warning.\n") and return 0;
 
-	$log =~ m/There were undefined references/smi and debug("Undefined refernces (run bibtex?).\n") and return 0;
-	$log =~ m/Rerun to get (cross-references|the bars) right/smi and debug("Found a suggestion to rerun.\n") and return 0;
-	$log =~ m/^\*\*/smi and debug("Found a **-warning.\n") and return 0;
+	$log =~ m/There were undefined references/smi and debug("platex: undefined refernces (run bibtex?).\n") and return 0;
+	$log =~ m/Rerun to get (cross-references|the bars) right/smi and debug("platex: found a suggestion to rerun.\n") and return 0;
+	$log =~ m/: \*\*/smi and debug("platex: found a **-warning.\n") and return 0;
 
-	$log =~ m/No hyphenation patterns were loaded for/smi and debug("No hyphenation patterns (run initex?).\n") and return 0;
+	$log =~ m/No hyphenation patterns were loaded for/smi and debug("platex: no hyphenation patterns (run initex?).\n") and return 0;
 	
-	#print("check_errors(): not yet implemented\n");
 	return 1;
 }
 
@@ -305,29 +327,68 @@ sub try_to_fix_errors($)
 
 	if ($log =~ m/No hyphenation patterns were loaded for/smi)
 	{
-		warn("No hyphenation patterns were found.\n");
 		if (-f "language.dat")
 		{
-			warn("Running initex...\n");
-			$discard = `latex -ini latex.ltx`; # backticks !
+			warn("platex: no hyphenation patterns were found. Running latex -ini latex.ltx...\n") unless $verbose < 0;
+			$discard = sys("latex -ini latex.ltx");
 		}
 		else
 		{
-			warn("platex: language.dat not found. Write one and run 'latex -ini latex.ltx'.\n");
+			warn("platex: language.dat not found. Write one and run 'latex -ini latex.ltx'.\n") unless $verbose < 0;
 		}
 	}
 	
-	if ($log =~ m/There were undefined references/smi)
+	if ($log =~ m/There were undefined references/smi and $bibtex_counter < 1)
 	{
-		warn("Undefined references. Running bibtex to fix the issue.\n");
-		$discard = `bibtex $basename`; # backticks !
+		warn("platex: undefined references. Running bibtex to fix the issue...\n") unless $verbose < 0;
+		$discard = sys("bibtex $basename");
+		$bibtex_counter++;
 	}
 }
 
 sub display_errors($)
 {
 	my ($log) = @_;
-	print($log);
+	if ($verbose > 1)
+	{
+		print("\nThere were some problems. Log follows:\n".$log);
+	}
+	else
+	{
+		print("\nThere were some problems. Some of the log follows:\n");
+
+		my (@lines,$line,$counter);
+
+		$counter = 0;
+
+		# filter log
+		@lines = split(/\n/,$log);
+		foreach $line (@lines)
+		{
+			if ($line =~ m/warning/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/error/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/: \!/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/There were undefined references/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/Rerun to get (cross-references|the bars) right/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/: \*\*/smi)
+			{ $counter+=3; }
+			elsif ($line =~ m/No hyphenation patterns were loaded for/smi)
+			{ $counter+=3; }
+
+			if ($counter > 0)
+			{
+				print($line."\n");
+				$counter--;
+			}
+		}
+		
+		print("\n");
+	}
 	return 1;
 }
 
@@ -471,62 +532,6 @@ sub tex_dep {
     join " ", ( sort keys %inc );
 }
 
-sub parse_aux {
-    # Parse aux_file for bib files.
-    # Return $bib_files set if aux_file exists
-    # leave $bib_files unchanged if aux_file does not exist (or cannot be opened)
-    return '' unless open( AUX, "$basename.aux" );
-    while (<AUX>) {
-        if (/^\\bibdata\{(.*)\}/) {
-            my @bib_files = split /,\s*/, $1;
-            for (@bib_files) {
-                s/\.bib$//;    # remove .bib extension, is any
-                chomp($_ = `kpsewhich $_.bib`);
-                $_ or die "bib-file $_ not found\n";
-            }
-            close(AUX);
-
-            # needed because texi2pdf does not detect changes in .bib
-            # files - if any included .bib file is newer than the .log
-            # file, remove the .bbl file:
-            for (@bib_files) {
-               -e "$basename.bbl" &&
-               -M $_ < -M "$basename.log" and unlink "$basename.bbl";
-            }
-            return @bib_files;
-        }
-    }
-}
-
-sub handle_options {
-
-    ( my $myname = $0 ) =~ s/.*\///;      # program name
-
-    my ( $systemrcfile, $userrcfile, $rc_file ) = (
-        catfile( rootdir,    'etc',          "${myname}rc" ),
-        catfile( $ENV{HOME}, ".${myname}rc" ),
-        ".${myname}rc"
-    );
-
-    my @rcfiles =
-      ();    # here we'll remember which rc-files were read, so we can report
-             # about them when $quiet appears to be false
-    unless ( defined $ENV{NORC} ) {
-        for ( $systemrcfile, $userrcfile, $rc_file ) {
-            if ( -s $_ ) {
-                push @rcfiles, $_;
-                unless ( my $return = do $_ ) {
-                   die "Couldn't parse file $_: $@\n" if $@;
-                   die "Couldn't do file $_: $!\n" unless defined $return;
-                   die "Couldn't run file $_\n" unless $return;
-                }
-            }
-        }
-    }
-
-    GetOptions(@_) or help();
-}
-
 sub help {
     # help displays the contents of the NAME and SYNOPSIS pod sections
     # and then asks the user whether she wants to see the full man page
@@ -589,13 +594,20 @@ sub executable {
     return undef;
 }
 
-sub sys {
-    warn "system call: @_\n" if $verbose > 1;
-    system("@_") and do {
-        warn "platex: error executing @_\n";
-        return 1;
-    };
-    return 0;
+sub sys($) {
+	my ($cmd) = @_;
+	$cmd =~ s/\n/ /g;
+	my ($result);
+	warn "platex: running command: $cmd\n" if $verbose > 1;
+	$result = `$cmd`; # backtics, run command !
+	if ($?)
+	{
+		warn("platex: error running command '$cmd': $?\n") if $verbose > 1;
+		warn("platex: command returned:\n---\n$result---\n") if $verbose > 1;
+		#exit(1);
+		return 0;
+	}
+	return $result;
 }
 
 =head1 HOW IT WORKS
