@@ -1,0 +1,11 @@
+% File    : language.dat
+% Purpose : specify which hypenation patterns to load 
+%           while running iniTeX 
+% english must be always loaded and we need aliases for it
+american ushyph1.tex
+=USenglish
+=english
+% load english too
+finnish		fi8hyph.tex
+% and the "language" without hyphenation:
+nohyphenation zerohyph.tex
