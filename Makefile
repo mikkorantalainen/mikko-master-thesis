@@ -72,6 +72,7 @@ clean:
 
 dist: clean
 	@echo "Creating $(TGZ) ..."
+	-svnversion . > VERSION
 	( cd .. ; tar cvf - $(DIRBASE) | gzip -9 > $(TGZ) )
 
 $(SOURCEBASE).tex : $(SOURCES)
