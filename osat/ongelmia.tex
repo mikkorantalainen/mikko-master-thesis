@@ -1,4 +1,5 @@
 \chapter{Selainkäyttöliittymän ongelmia}
+\label{ongelmia}
 
 \begin{chapterquote}{Microsoft Internet Information Server}
 \strong{Server Application Error:} The server has encountered an error while loading an application during the processing of your request. Please refer to the event log for more detail information. Please contact the server administrator for assistance.
@@ -35,6 +36,7 @@ Toinen hyvä esimerkki on Jyväskylän Yliopiston kirjaston hakupalvelu. Etsiessäni
 Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän rajoituksen vuoksi perinteisen mallin mukaisesti toteutettu ohjelma toimii epävakaasti selainkäyttöisenä.
 
 \section{Ohjelmakerroksia}
+\label{tiers}
 
 Ohjelmistotuotannossa käyttäjän kanssa vuorovaikutuksessa toimiva ohjelmisto pyritään perinteisesti jakamaan kahteen tai kolmeen kerrokseen. Kaksikerroksisessa mallissa (kuva \ref{fig:2tier}) ohjelman logiikka erotetaan käyttöliittymälogiikasta ja kolmikerroksisessa mallissa (kuva \ref{fig:3tier}) ohjelman logiikka jaetaan vielä sovelluslogiikkaan ja tiedon käsittelyn logiikkaan. Molemmissa malleissa käyttöliittymä pidetään omassa kerroksessaan erityisesti siksi, että vaihtoehtoisen käyttöliittymän rakentaminen olisi mahdollisimman helppoa. Käytännössä käyttöliittymästä vastaava kerros kutsuu melkein kaikkien toimintojen yhteydessä sovelluslogiikkaa ja itse käyttöliittymäkerroksessa on kohtuullisen vähän ohjelmakoodia. Voisi sanoa, että käyttöliittymäkerroksen tehtävä on tulkita käyttäjälle näkyvästä käyttöliittymästä syntyneet tapahtumat eri toiminnoiksi, jotka sitten edelleen ohjataan sovelluslogiikan käsiteltäväksi. Tämän ansiosta ohjelma on yleensä helppo siirtää esimerkiksi toimimaan jonkin toisen grafiikkakirjaston päälle. Kolmikerrosmallissa etuna on helppo siirrettävyys myös uudelle tallennusmedialle.
 
