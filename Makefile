@@ -42,8 +42,11 @@ preview2: $(PREVIEW2)
 	gv $<
 
 clean:
-	rm -f *.aux *.log *.bbl *.blg *.brf *.cb *.ind *.idx *.ilg  \
-		*.inx *.ps *.dvi *.pdf *.toc *.out latex.fmt pdflatex.fmt
+	rm -f $(SOURCEBASE).aux $(SOURCEBASE).lof $(SOURCEBASE).lot $(SOURCEBASE).log \
+		$(SOURCEBASE).bbl $(SOURCEBASE).blg $(SOURCEBASE).brf $(SOURCEBASE).cb \
+		$(SOURCEBASE).ind $(SOURCEBASE).idx $(SOURCEBASE).ilg $(SOURCEBASE).inx \
+		$(SOURCEBASE).ps $(SOURCEBASE).dvi $(SOURCEBASE).pdf $(SOURCEBASE).toc \
+		$(SOURCEBASE).out latex.fmt pdflatex.fmt
 
 %.dvi:	%.tex
 	@echo === Creating: $@
