@@ -45,7 +45,7 @@ clean:
 
 %.dvi:	%.tex
 	@echo === Creating: $@
-	latex $(LATEXARGS) $< > /dev/null
+	latex $(LATEXARGS) $< > /dev/null ; true
 	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(ERR) && latex $(LATEXARGS) $< | egrep -i $(ERR) ; true
 	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(ERR)) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(ERR) ) ; true

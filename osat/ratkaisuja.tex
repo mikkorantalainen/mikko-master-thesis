@@ -240,10 +240,10 @@ teoriittisesta mallista poikkeamista.
 % että PostgreSQL "=tietokantojen päällä. Nykyisellä palvelimella MySQL
 % toimii nopeammin.
 
-Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä
+Kuvassa \ref{fig:oppimappi-schema-orig} on esitetty osa alkuperäisestä
 luokkahierarkiasta.
 
-%Kuvassa \ref{fig:vihko-big-picture} on puolestaan
+%Kuvassa \ref{fig:oppimappi-big-picture} on puolestaan
 %mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä
 %MySQL"-tietokanta ja Oppimappi PHP"-sovellus toimivat
 %Peda.net"-hankkeen ylläpitämällä palvelimella ja ohjelman
@@ -251,9 +251,9 @@ luokkahierarkiasta.
 %käyttäjän koneessa toimivassa www"-selaimessa.
 
 \begin{kuva}
-\includegraphics[width=\linewidth]{kuvat/vihko-schema-orig}
+\includegraphics[width=\linewidth]{kuvat/oppimappi-schema-orig}
 \caption{Alkuperäistä suunnitelmaa Oppimapin toteuttamiseksi}
-\label{fig:vihko-schema-orig}
+\label{fig:oppimappi-schema-orig}
 \end{kuva}
 
 Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että
@@ -268,19 +268,19 @@ ei kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän
 välissä on niin useita tasoja, jakamalla käyttöliittymä sopivasti HTML
 ja CSS -kielien vastuulle, käyttöliittymäajuri voidaan pitää hyvin
 yksinkertaisena. Tätä on havainnollistettu kuvassa
-\ref{fig:vihko-big-picture} Lisäksi, koska PHP rajaa ainakin
+\ref{fig:oppimappi-big-picture} Lisäksi, koska PHP rajaa ainakin
 toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia
 suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
 helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
 
 \begin{kuva}
-\includegraphics[width=4.5cm]{kuvat/vihko-big-picture}
+\includegraphics[width=4.5cm]{kuvat/oppimappi-big-picture}
 \caption{Oppimapin rakenne kerroksina}
-\label{fig:vihko-big-picture}
+\label{fig:oppimappi-big-picture}
 \end{kuva}
 
 
-Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current}
+Päädyin loppujen lopuksi kuvassa \ref{fig:oppimappi-schema-current}
 esitettyyn ratkaisuun. Tässäkin luokkahierarkia on ensisilmäyksellä
 vähintäänkin outo, mutta ratkaisun taustalla kummittelee vaillinainen
 oliotuki PHP-kielessä. Tätä kirjoittaessa PHP5 on jo ilmestynyt ja
@@ -288,9 +288,9 @@ siinä joitakin ongelmia onkin korjattu, mutta sen tuotantokäyttöä
 kannattanee harkita aikaisintaan ensi vuonna.
 
 \begin{kuva}
-\includegraphics[width=\linewidth]{kuvat/vihko-schema-current}
+\includegraphics[width=\linewidth]{kuvat/oppimappi-schema-current}
 \caption{Osa toteutetusta Oppimapin rakenteesta}
-\label{fig:vihko-schema-current}
+\label{fig:oppimappi-schema-current}
 \end{kuva}
 
 Oppimapin kehittämisessä havaittujen ongelmien ratkaisemiseksi
@@ -306,7 +306,7 @@ tarvittaessa rakentaa myös muita toimintaympäristöjä jättämällä osa
 käytössä olevista moduuleista pois tai korvaamalla niitä uusilla.
 
 Kaikki Oppimapin moduulit peritään luokasta \class{Document} (ks. kuva
-\ref{fig:vihko-schema-current}) ja kaikki moduulit saavat oman
+\ref{fig:oppimappi-schema-current}) ja kaikki moduulit saavat oman
 nimiavaruuden käyttämilleen parametreille. Tämä on olennaista, koska
 istuntoon liittyvää tietoa täytyy kuljettaa kaikkien linkkien
 osoitteissa. Eri moduulien parametrit sijoitetaan omiin
