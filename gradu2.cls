@@ -84,6 +84,7 @@
 
 \RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
+%\RequirePackage{hyperref}
 %\RequirePackage[plainpages=false,pdfpagelabels,pagebackref]{hyperref}
 %\RequirePackage[plainpages=false,pdfpagelabels]{hyperref}
 %\usepackage[plainpages=false,pdfpagelabels,ps2pdf,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true]{hyperref}
@@ -105,9 +106,24 @@
 \fi %nottoc
 \fi %numbib
 
+%\usepackage{appendix}
+
+\renewcommand\appendix{\par
+  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \gdef\@chapapp{\appendixname}%
+  \gdef\thechapter{\@Alph\c@chapter}}
+
+
+
+%\usepackage{graphicx}
+%\usepackage{epstopdf}
+
 %\usepackage[ps2pdf,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true]{hyperref}
-\usepackage[ps2pdf,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true]{hyperref}
 %\usepackage[pdftex,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,hypertexnames=false,breaklinks=true]{hyperref}
+
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
@@ -498,13 +514,6 @@
 \addcontentsline{toc}{chapter}{\termlistname}
 }
 
-\renewcommand\appendix{\par
-  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
-  \setcounter{chapter}{0}%
-  \setcounter{section}{0}%
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
-
 \def\@makechapterhead#1{%
   \vspace*{2em}%
   {\parindent \z@ \raggedright \normalfont
@@ -574,3 +583,5 @@
   \fi%
   \gradu@thebibliography{#1}%
 }
+
+%\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true]{hyperref}
