@@ -1,0 +1,30 @@
+% k‰ytet‰‰n pakettia amssymb mathbb{} funktion hakuun
+%\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\newcommand{\strong}[1]{\textbf{#1}}
+\newcommand{\class}[1]{\texttt{#1}}
+\newcommand{\method}[1]{\texttt{#1}}
+\newcommand{\command}[1]{\texttt{#1}}
+\newcommand{\keyword}[1]{\texttt{#1}}
+\newcommand{\element}[1]{\texttt{#1}}
+\newcommand{\attribute}[1]{\texttt{#1}}
+\newcommand{\tag}[1]{\texttt{#1}}
+\newcommand{\alt}[1]{\textsl{#1}}
+\newcommand{\term}[1]{\textsl{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\newenvironment{cmds}
+  {\begin{description}\renewcommand{\makelabel}[1]{\texttt{\textbackslash##1}\hfill}}
+  {\end{description}}
+
+\newenvironment{terms}
+  {\begin{description}}
+  {\end{description}}
+
+% all these settings require Listings package version 1.0. Usually only version 0.20 is available.
+%\lstset{extendedchars=true,basicstyle=\ttfamily,firstnumber=1,breaklines=true,xleftmargin=6mm}
+\lstset{extendedchars=true,basicstyle=\ttfamily}
+
+\hyphenation{mo-zilla net-scape in-ter-net ex-plor-er XHTML HTML SMIL SVG}

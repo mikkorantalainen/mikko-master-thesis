@@ -1,60 +1,42 @@
-\documentclass[finnish,latin1,nocopyright,nonumbib]{gradu2}
-% options for gradu2: (no)copyright, (no)numbib, newtitle, shortthesis, altsubsec
+% Copyright (c) 2004 Mikko Rantalainen
+% Permission is granted to copy, distribute and/or modify this
+% document under the terms of the GNU Free Documentation
+% License, Version 1.2 or any later version published by the
+% Free Software Foundation; with no Invariant Sections, no
+% Front-Cover Texts, and no Back-Cover Texts.  A copy of the
+% license is included in the section entitled "GNU Free
+% Documentation License".
 
-\title{Aidosti selainkäyttöisten sovellusten suunnittelu ja toteutus}
-\translatedtitle{Design and Implementation of Truly Web Based User Interfaces}
+\documentclass[finnish,latin1,newtitle]{gradu2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	M E T A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Aidosti selainkäyttöisten sovellusten suunnittelu ja toteutus, esimerkkinä Peda.net}
+\translatedtitle{Design and Implementation of Truly Web Accessible Applications, case Peda.net}
 
 \input{osat/tiivistelma}
 
-%\author{Mikko Rantalainen}{mira@cc.jyu.fi}
 \setauthor{Mikko}{Rantalainen}
-\setdate{01}{06}{2004}
-\tyyppi{Pro Gradu -ehdotus}
-\type{A Master's Thesis Candidate}
+%\setdate{01}{06}{2004}
+%\tyyppi{Pro Gradu -ehdotus}
+%\type{A Master's Thesis Candidate}
 
 \yhteystiedot{Mikko Rantalainen \texttt{<mikko.rantalainen@iki.fi>}}
-\license{ffff}
-%\copyrightowner{Mikko Rantalainen}
-%\copyrightyear{2004}
+\license{Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License,, Version 1.2 or any later version published by the Free Software Foundation}
 
-% käytetään pakettia amssymb mathbb{} funktion hakuun
-%\usepackage{amssymb}
-\usepackage{listings}
-\usepackage{graphicx}
+\input{osat/tyylit}
 
-\newcommand{\strong}[1]{\textbf{#1}}
-\newcommand{\class}[1]{\texttt{#1}}
-\newcommand{\method}[1]{\texttt{#1}}
-\newcommand{\command}[1]{\texttt{#1}}
-\newcommand{\keyword}[1]{\texttt{#1}}
-\newcommand{\element}[1]{\texttt{#1}}
-\newcommand{\attribute}[1]{\texttt{#1}}
-\newcommand{\tag}[1]{\texttt{#1}}
-\newcommand{\alt}[1]{\textsl{#1}}
-\newcommand{\term}[1]{\textsl{#1}}
-\newcommand{\code}[1]{\texttt{#1}}
-
-\newenvironment{cmds}
-  {\begin{description}\renewcommand{\makelabel}[1]{\texttt{\textbackslash##1}\hfill}}
-  {\end{description}}
-
-\newenvironment{terms}
-  {\begin{description}}
-  {\end{description}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	D O C U M E N T
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\hyphenation{mo-zilla net-scape in-ter-net ex-plor-er XHTML HTML SMIL SVG}
-
-% all these settings require Listings package version 1.0. Usually only version 0.20 is available.
-%\lstset{extendedchars=true,basicstyle=\ttfamily,firstnumber=1,breaklines=true,xleftmargin=6mm}
-\lstset{extendedchars=true,basicstyle=\ttfamily}
-
 \input{osat/esipuhe}
-\input{osat/sanasto}
 
-% start the content (end of header)
-\mainmatter
+\mainmatter % reset page numbering to arabic, print TOC
 
 \input{osat/ongelmia}
 \input{osat/ratkaisuja}
@@ -62,10 +44,14 @@
 \input{osat/pedanet}
 \input{osat/pedanet-vihko}
 
+\input{osat/sanasto}
+
 \input{osat/kiitokset}
 
-%\cite{refresh} -- REFRESH BIBLIOGRAPHY (Makefile trigger)
-%%% Bibliography:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	B I B L I O G R A P H Y
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \bibliographystyle{bibtexstyle}
 \bibliography{bibliography}
 
