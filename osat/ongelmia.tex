@@ -2,20 +2,72 @@
 \label{ongelmia}
 
 \begin{chapterquote}{Microsoft Internet Information Server}
-\strong{Server Application Error:} The server has encountered an error while loading an application during the processing of your request. Please refer to the event log for more detail information. Please contact the server administrator for assistance.
-\end{chapterquote}
+\strong{Server Application Error:} The server has encountered an error
+while loading an application during the processing of your request.
+Please refer to the event log for more detail information. Please
+contact the server administrator for assistance. \end{chapterquote}
 
-Syitä siihen, että esimerkiksi takaisin-toiminnon käyttö rikkoo monia selainkäyttöisiä sovelluksia, täytyy etsiä perinteisen ohjelmistokehityksen malleista. Viimeistään graafisten käyttöliittymien myötä on tullut yleiseksi tapahtumankäsittelijään perustuva käyttöliittymän ohjelmointimalli. Siinä ohjelman tilaa ohjaillaan erilaisilla tapahtumilla (\alt{events}) ja ohjelma toimii aina sen hetkisen \emph{tilan} mukaan.
+Syitä siihen, että esimerkiksi takaisin"-toiminnon käyttö rikkoo monia
+selainkäyttöisiä sovelluksia, täytyy etsiä perinteisen
+ohjelmistokehityksen malleista. Viimeistään graafisten käyttöliittymien
+myötä on tullut yleiseksi tapahtumankäsittelijään perustuva
+käyttöliittymän ohjelmointimalli. Siinä ohjelman tilaa ohjaillaan
+erilaisilla tapahtumilla (\alt{events}) ja ohjelma toimii aina sen
+hetkisen \emph{tilan} mukaan.
 
-Esimerkiksi Microsoft Windows -käyttöjärjestelmässä toimiva Microsoft Word -ohjelma on tällainen. Sen tekijät ovat tehneet oletuksen, että käyttöjärjestelmä ilmoittaa kaikista ohjelmalle tehtävistä asioista. Tämä ilmoitus tapahtuu käytännössä siten, että käyttöjärjestelmä lähettää ohjelmalle tapahtuman. Käyttöjärjestelmä on suunniteltu siten, että kaikista ohjelmaa kiinnostavista tapahtumista todellakin menee tieto ohjelmalle asti ja tapahtumankäsittelijä toimiikin hyvin. Selainkäyttöiset ohjelmat eivät kuitenkaan toimi tällaisessa ympäristössä.
+Esimerkiksi Microsoft Windows "=käyttöjärjestelmässä toimiva Microsoft
+Word "=teks\-tinkäsittelyohjelma on tällainen. Sen tekijät ovat tehneet
+oletuksen, että käyttöjärjestelmä ilmoittaa kaikista ohjelmalle
+tehtävistä asioista. Tämä ilmoitus tapahtuu käytännössä siten, että
+käyttöjärjestelmä lähettää ohjelmalle tapahtuman. Käyttöjärjestelmä
+onkin suunniteltu siten, että \emph{kaikista} ohjelmaa kiinnostavista
+tapahtumista todellakin menee tieto ohjelmalle asti ja siten
+tapahtumankäsittelijä toimii hyvin. Selainkäyttöiset ohjelmat eivät
+kuitenkaan toimi tällaisessa ympäristössä -- osa tapahtumista voi
+hukkua tai niitä ei koskaan lähetetä, joten selaimessa käyttäjälle
+näkyvä tila voi olla eri kuin palvelimen tapahtumien avulla muodostama
+tila.
 
 \section{HTTP on yhteydetön protokolla}
 
-WWW-sivujen taustalla toimiva HTTP-protokolla eli \alt{HyperText Transfer Protocol} vastaa varsinaisesta tiedonsiirrosta. HTTP on Internet Engineering Task Forcen (IETF, \cite{ietf:home}) määrittelemä protokolla erityisesti hypertekstin siirtämiseksi. Myöhemmin HTTP-protokollaa on laajennettu hyvin monenlaisen tiedon siirtämiseen. HTTP ei kuitenkaan pidä yhteyttä palvelimeen koko ajan, vaan looginen yhteys\footnote{HTTP 1.1 lisäsi mahdollisuuden pitää varsinainen tietoliikenneyhteys auki eri sivujen hakujen välillä, mutta HTTP-palvelin tai selain voi esimerkiksi vähäisten resurssien vuoksi katkaista yhteyden käyttääkseen siihen käytettyjä resursseja hetkellisesti muualla.} katkeaa välittömästi yksittäisen sivun saamisen jälkeen. Erityisesti selain ei lähetä palvelimelle mitään tietoa esimerkiksi takaisin-toiminnon suorittamisesta tai uuden ikkunan avaamisesta. Palvelin ei voi edes tietää sitä, onko käyttäjä jo siirtynyt toiselle sivustolle, sulkenut selaimen vai onko käyttäjä esimerkiksi kirjoittamassa vain pitkää tekstiä johonkin lomakekenttään.
+WWW"-sivujen taustalla toimiva HTTP"-protokolla eli \alt{HyperText
+Transfer Protocol} vastaa varsinaisesta tiedonsiirrosta. HTTP on
+Internet Engineering Task Forcen (IETF, \cite{ietf:home}) määrittelemä
+protokolla erityisesti hypertekstin siirtämiseksi. Myöhemmin
+HTTP"-protokollaa on laajennettu hyvin monenlaisen tiedon siirtämiseen.
+HTTP ei kuitenkaan pidä yhteyttä palvelimeen koko ajan, vaan looginen
+yhteys\footnote{HTTP 1.1 lisäsi mahdollisuuden pitää varsinainen
+tietoliikenneyhteys auki eri sivujen hakujen välillä, mutta
+HTTP"-palvelin tai selain voi esimerkiksi vähäisten resurssien vuoksi
+katkaista yhteyden käyttääkseen siihen varattuja resursseja
+väliaikaisesti muualla.} katkeaa välittömästi yksittäisen sivun saamisen
+jälkeen. Erityisesti selain ei lähetä palvelimelle mitään tietoa
+esimerkiksi takaisin"-toiminnon suorittamisesta tai uuden ikkunan
+avaamisesta. Palvelin ei voi edes tietää sitä, onko käyttäjä jo
+siirtynyt toiselle sivustolle, sulkenut selaimen vai onko käyttäjä
+esimerkiksi kirjoittamassa vain pitkää tekstiä johonkin lomakekenttään.
 
 \subsection{Varoittavia esimerkkejä}
 
-Jos palvelimella ajetaan yksinkertaiseen tapahtumankäsittelijään perustuvaa sovellusta, saa se ensin tiedon siitä, että käyttäjä haluaa siirtyä johonkin tilaan (esimerkiksi valinta siirtyä sisällysluettelosta lukuun 1.3), mutta sovellukselle ei tule tietoa siitä, että käyttäjä tämän jälkeen palasi takaisin sisällysluetteloon käyttämällä takaisin-toimintoa. Jos käyttäjä tämän jälkeen valitsee sovelluksessa "Muokkaa"-toiminnon, tulee muokkaus sovelluksen tilan perusteella osoittaa lukuun 1.3, mutta käyttäjän mielestä sisällysluetteloon.
+Jos palvelimella ajetaan yksinkertaiseen tapahtumankäsittelijään
+perustuvaa sovellusta, saa se ensin tiedon siitä, että käyttäjä haluaa
+siirtyä johonkin tilaan (esimerkiksi valinta siirtyä
+sisällysluettelosta lukuun 1.3), mutta sovellukselle ei tule tietoa
+siitä, että käyttäjä tämän jälkeen palasi takaisin sisällysluetteloon
+käyttämällä takaisin"-toimintoa. Jos käyttäjä tämän jälkeen valitsee
+sovelluksessa ``muokkaa''"-toiminnon, tulee muokkaus sovelluksen tilan
+perusteella osoittaa lukuun 1.3, mutta käyttäjän mielestä
+sisällysluetteloon.
+
+Toinen varoittava esimerkki on Jyväskylän Yliopiston kirjaston
+hakupalvelu. Etsiessäni Jakob Nielsenin ``WWW suunnittelu'' "=kirjaa,
+saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on
+kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin
+tältä osin juuri niinkuin odotankin\footnote{Maininnan arvoinen on myös
+totaalisen hyödytön sivun otsikko ``WebVoyage Record View~1''. Tosin,
+vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki
+toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole
+pysyviä.}.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto1}
@@ -23,59 +75,215 @@ Jos palvelimella ajetaan yksinkertaiseen tapahtumankäsittelijään perustuvaa sove
 \label{fig:kirjasto1}
 \end{kuva}
 
-Toinen hyvä esimerkki on Jyväskylän Yliopiston kirjaston hakupalvelu. Etsiessäni Jakob Nielsenin ''WWW-suunnittelu'' -kirjaa, saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin tältä osin juuri niinkuin odotankin\footnote{Maininnan arvoinen on totaalisen hyödytön sivun otsikko ''WebVoyage Record View~1''. Tosin, vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole pysyviä.}. Siirryn hetkeksi tarkistamaan toisessa selaimen ikkunassa, että tämä oli juuri se kirja, jota toisella sivustolla suositeltiin ja nostan tämän ikkunan esiin muiden alta muutaman minuutin myöhemmin (ks. kuva \ref{fig:kirjasto2}). Mitä ihmettä? Juuri hakemani tiedot on hukattu, koska ''yhteytesi tietokantaan on katkennut aikarajoituksen vuoksi''. Ei minua käyttäjänä kiinnosta mistä tiedot haetaan -- erityisesti minua ei kiinnosta kuinka pitkän yhteyden tietokanta kerrallaan sallii. Palvelun tekijällä on selvästikin ollut ajatuksena valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä aktiivisessa käytössä. Jostain syystä on päätetty, että jos käyttäjä ei tee jotain muutaman minuutin sisällä niin silloin ''oikea'' toimenpide on \emph{poistaa hakutulokset tai muu vastaava sisältö}. Sovellusta tehdessä olisi ehkä kannattanut miettiä olisiko sovellus mahdollista toteuttaa siten, että tietokantapalvelimen aikarajan umpeutuessa käyttäjälle luovutettu sivu jätetään ennalleen ja huolehditaan aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä vielä yrittää tehdä jotain muuta.
- 
+Siirryn hetkeksi tarkistamaan toisessa selaimen ikkunassa, että tämä
+oli juuri se kirja, jota toisella sivustolla suositeltiin ja nostan
+tämän ikkunan esiin muiden alta muutamaa minuuttia myöhemmin. Suureksi
+hämmästyksekseni juuri hakemani tiedot on hukattu, koska ``yhteytesi
+tietokantaan on katkennut aikarajoituksen vuoksi'' (ks. kuva
+\ref{fig:kirjasto2}). Ei minua käyttäjänä kiinnosta mistä tiedot
+haetaan ja erityisesti minua ei kiinnosta kuinka pitkän yhteyden
+tietokanta kerrallaan sallii. Palvelun tekijällä on selvästikin ollut
+ajatuksena valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä
+aktiivisessa käytössä. Jostain syystä on päätetty, että jos käyttäjä ei
+tee jotain muutaman minuutin sisällä niin silloin ``oikea'' toimenpide
+on \emph{poistaa hakutulokset tai muu vastaava sisältö}. Sovellusta
+tehdessä olisi ehkä kannattanut miettiä, olisiko sovellus mahdollista
+toteuttaa siten, että tietokantapalvelimen aikarajan umpeutuessa
+käyttäjälle luovutettu sivu jätetään ennalleen ja huolehditaan
+aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä vielä yrittää
+tehdä jotain muuta.
+
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto2}
 \caption{Kirjaston hakupalvelun tulos kolme minuuttia haun jälkeen}
 \label{fig:kirjasto2}
 \end{kuva}
 
-\subsection{Selainkäyttöiset ohjelmat pitää suunnitella toisin!}
+\subsection{Selainkäyttöiset ohjelmat tulee suunnitella toisin}
 
-Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän rajoituksen vuoksi sokeasti perinteisen mallin mukaisesti toteutettu ohjelma toimii epävakaasti selainkäyttöisenä.
+Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole
+syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei
+voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän
+rajoituksen vuoksi sokeasti perinteisen mallin mukaisesti toteutettu
+ohjelma toimii epävakaasti selainkäyttöisenä.
 
-\section{Ohjelmakerroksia}
+\section{Perinteisten mallien sopimattomuus verkkoon}
 \label{tiers}
 
-Ohjelmistotuotannossa käyttäjän kanssa vuorovaikutuksessa toimiva ohjelmisto pyritään perinteisesti jakamaan kahteen tai kolmeen kerrokseen. Kaksikerroksisessa mallissa (kuva \ref{fig:2tier}) ohjelman logiikka erotetaan käyttöliittymälogiikasta ja kolmikerroksisessa mallissa (kuva \ref{fig:3tier}) ohjelman logiikka jaetaan vielä sovelluslogiikkaan ja tiedon käsittelyn logiikkaan. Molemmissa malleissa käyttöliittymä pidetään omassa kerroksessaan erityisesti siksi, että vaihtoehtoisen käyttöliittymän rakentaminen olisi mahdollisimman helppoa. Käytännössä käyttöliittymästä vastaava kerros kutsuu melkein kaikkien toimintojen yhteydessä sovelluslogiikkaa ja itse käyttöliittymäkerroksessa on kohtuullisen vähän ohjelmakoodia. Voisi sanoa, että käyttöliittymäkerroksen tehtävä on tulkita käyttäjälle näkyvästä käyttöliittymästä syntyneet tapahtumat eri toiminnoiksi, jotka sitten edelleen ohjataan sovelluslogiikan käsiteltäväksi. Tämän ansiosta ohjelma on yleensä helppo siirtää esimerkiksi toimimaan jonkin toisen grafiikkakirjaston päälle. Kolmikerrosmallissa etuna on helppo siirrettävyys myös uudelle tallennusmedialle.
+Ohjelmistotuotannossa käyttäjän kanssa vuorovaikutuksessa toimiva
+ohjelmisto pyritään perinteisesti jakamaan kahteen tai kolmeen
+kerrokseen. Kaksikerroksisessa mallissa (kuva \ref{fig:2tier}) ohjelman
+logiikka erotetaan käyttöliittymälogiikasta ja kolmikerroksisessa
+mallissa (kuva \ref{fig:3tier}) ohjelman logiikka jaetaan vielä
+sovelluslogiikkaan ja tiedon käsittelyn logiikkaan. Molemmissa
+malleissa käyttöliittymä pidetään omassa kerroksessaan erityisesti
+siksi, että vaihtoehtoisen käyttöliittymän rakentaminen olisi
+mahdollisimman helppoa. Käytännössä käyttöliittymästä vastaava kerros
+kutsuu melkein kaikkien toimintojen yhteydessä sovelluslogiikkaa ja
+itse käyttöliittymäkerroksessa on kohtuullisen vähän ohjelmakoodia.
+Voisi sanoa, että käyttöliittymäkerroksen tehtävä on tulkita
+käyttäjälle näkyvästä käyttöliittymästä syntyneet tapahtumat eri
+toiminnoiksi, jotka sitten edelleen ohjataan sovelluslogiikan
+käsiteltäväksi. Tämän ansiosta ohjelma on yleensä helppo siirtää
+esimerkiksi toimimaan jonkin toisen grafiikkakirjaston päälle.
+Kolmikerrosmallissa etuna on helppo siirrettävyys myös uudelle
+tallennusmedialle.
 
 \begin{kuva}
 \includegraphics[width=5cm]{kuvat/fig2tier}
-\caption{Kaavio kaksikerroksista ohjelma-arkkitehtuurista}
+\caption{Kaavio kaksikerroksista ohjelma"-arkkitehtuurista}
 \label{fig:2tier}
 \end{kuva}
 
 \begin{kuva}
 \includegraphics[width=5cm]{kuvat/fig3tier}
-\caption{Kaavio kolmikerroksisesta ohjelma-arkkitehtuurista}
+\caption{Kaavio kolmikerroksisesta ohjelma"-arkkitehtuurista}
 \label{fig:3tier}
 \end{kuva}
 
-Verkossa toimivissa eli useinmiten selainkäyttöisissä ohjelmissa eteen tulee perinteisessä mallissa kohtaamattomia ongelmia: käyttöliittymän toiminta on yhteydetön, käyttäjä voi haarauttaa istunnon ja järjestelmä ei voi erottaa verkon virheellistä toimintaa ja käyttäjän hieman tavallisesta poikkeavaa käyttäytymistä toisistaan. Lisäksi eri selainohjelmien toteutuksissa on usein merkittäviä ohjelmavirheitä. Nämä asiat kuuluvat käyttöliittymäkerrokseen, sillä ne eivät ole ohjelman toimintalogiikan (eli sovelluslogiikan) kannalta olennaista tietoa. Ongelmana vain on, että käyttöliittymän toteutuksesta tulee hyvin työläs ja jos selainkäyttöisiä ohjelmia tehdään useita, joudutaan käyttöliittymään kuuluva kerros kirjoittamaan yhä uudelleen ja uudelleen.
+Verkossa toimivissa eli useinmiten selainkäyttöisissä ohjelmissa eteen
+tulee perinteisessä mallissa kohtaamattomia ongelmia: käyttöliittymän
+toiminta on yhteydetön, käyttäjä voi haarauttaa istunnon ja järjestelmä
+ei voi erottaa verkon virheellistä toimintaa ja käyttäjän hieman
+tavallisesta poikkeavaa käyttäytymistä toisistaan. Lisäksi eri
+selainohjelmien toteutuksissa on usein merkittäviä ohjelmavirheitä.
+Nämä asiat kuuluvat käyttöliittymäkerrokseen, sillä ne eivät ole
+ohjelman toimintalogiikan (eli sovelluslogiikan) kannalta olennaista
+tietoa. Ongelmana vain on, että käyttöliittymän toteutuksesta tulee
+hyvin työläs ja jos selainkäyttöisiä ohjelmia tehdään useita, joudutaan
+käyttöliittymään kuuluva kerros kirjoittamaan yhä uudelleen ja
+uudelleen.
 
-Teknisten ongelmien lisäksi tulee ottaa huomioon myös käyttäjien tottumukset ja selainohjelmien pääasiallinen käyttötarkoitus: www-sivujen selailu. Eri selainohjelmissa on erilaisia erikoistoimintoja tavallisten sivujen selailun nopeuttamiseksi ja tehostamiseksi. Selaimella käytettävien ohjelmien tulisi toimia mahdollisuuksien rajoissa aivan kuin tavallisten www-sivujenkin. Jos selainkäyttöistä ohjelmaa ei voi käyttää kuten tavallisia www-sivuja, joutuu käyttäjä opettelemaan jälleen yhden uuden ohjelman käyttöliittymän ja hän joutuu aina tätä ohjelmaa käyttäessään toimimaan eri tavalla kuin muilla www-sivuilla. Näin, vaikka käyttöliittymä \emph{näyttääkin} www-sivulta ja se näytetään www-selaimessa. Tällainen lisää käyttäjän muistikuormaa ja heikentää osaltaan sovelluksen käytettävyyttä.
+Teknisten ongelmien lisäksi tulee ottaa huomioon myös käyttäjien
+tottumukset ja selainohjelmien pääasiallinen käyttötarkoitus:
+www"-sivujen selailu. Eri selainohjelmissa on erilaisia
+erikoistoimintoja tavallisten sivujen selailun nopeuttamiseksi ja
+tehostamiseksi. Jos selainkäyttöistä ohjelmaa ei voi käyttää kuten
+tavallisia www"-sivuja, joutuu käyttäjä opettelemaan jälleen yhden
+uuden ohjelman käyttöliittymän ja hän joutuu aina tätä ohjelmaa
+käyttäessään toimimaan eri tavalla kuin muilla www"-sivuilla. Tämä
+lisää käyttäjän muistikuormaa ja heikentää osaltaan sovelluksen
+käytettävyyttä.
 
-\section{Miksi se on näin vaikeaa?}
+\section{Käyttöliittymän esittäminen verkon ehdoilla}
 
-Verkossa toimivissa selainpohjaisissa käyttöliittymissä perustavan laatuinen ongelma on, että sivut tai käyttöliittymän lomakkeet täytyy esittää HTML-kielen avulla. HTML on kuitenkin suunniteltu pääasiassa staattisten dokumenttien esittämiseen \cite{w3:html}. Myös selaimet\footnote{HTML-standardissa käytetään selaimen sijasta sanaa ''käyttäjäagentti'' korostamaan sitä seikkaa, että sivuja ei välttämättä selailla, vaan tietokoneagentti -- ikäänkuin robotti -- käy käyttäjän puolesta lukemassa sivuja ja tekee niistä vaikkapa yhteenvetoja. Esimerkki usein käytetystä agentista voisi olla Google. Myös selain voisi hoitaa agentin tehtävää keräämällä sivustosta esimerkiksi vain linkit normaalien sivujen näyttämisen sijasta.} on suunniteltu pääasiassa staattisten sivukokonaisuuksien lukemiseen ja sen vuoksi selaimissa onkin esimerkiksi \emph{takaisin}-toiminto (\alt{Back}). Lisäksi selaimet käyttävät sivujen tiedonsiirrossa HTTP-protokollaa, jonka seurauksena käyttöliittymät eivät ole koko ajan yhteydessä palvelimen päässä toimivaan sovelluslogiikkaan. Perinteiset käyttöliittymien suunnittelutavat ja toteutusmallit soveltuvat huonosti selainkäyttöisen käyttöliittymän toteutukseen. Esittelen seuraavassa muutamia suurimpia ongelmia, jotka syntyvät pohjalla olevista arkkitehtuurieroista. Tulee kuitenkin huomata, että osa ongelmista syntyy siitä, että kokemus www-selaimen käyttäjä odottaa \emph{enemmän vapauksia} ohjelman käyttötavoissaan. Hyvä selainkäyttöinen ohjelma pystyy vastaamaan näihin odotuksiin.
+Verkossa toimivissa selainpohjaisissa käyttöliittymissä perustavan
+laatuinen ongelma on, että sivut tai käyttöliittymän lomakkeet täytyy
+esittää HTML"-kielen avulla. HTML on kuitenkin suunniteltu staattisten
+dokumenttien esittämiseen \cite{w3:html}. Myös selaimet
+\footnote{HTML"-standardissa käytetään sana ``selain'' sijasta sanaa
+``käyttäjäagentti'' korostamaan sitä seikkaa, että sivuja ei
+välttämättä selailla, vaan tietokoneagentti -- ikäänkuin robotti -- käy
+käyttäjän puolesta lukemassa sivuja ja tekee niistä vaikkapa
+yhteenvetoja. Esimerkki usein käytetystä agentista voisi olla Google.
+Myös selain voisi hoitaa agentin tehtävää keräämällä sivustosta
+esimerkiksi vain linkit normaalien sivujen näyttämisen sijasta.} on
+suunniteltu pääasiassa staattisten sivukokonaisuuksien lukemiseen ja
+sen vuoksi selaimissa onkin esimerkiksi \emph{takaisin}"-toiminto
+(\alt{Back}). Lisäksi selaimet käyttävät sivujen tiedonsiirrossa
+HTTP"-protokollaa, jonka seurauksena käyttöliittymät eivät ole koko
+ajan yhteydessä palvelimen päässä toimivaan sovelluslogiikkaan.
+Perinteiset käyttöliittymien suunnittelutavat ja toteutusmallit
+soveltuvat huonosti selainkäyttöisen käyttöliittymän toteutukseen.
+Esittelen seuraavassa muutamia suurimpia ongelmia, jotka syntyvät
+pohjalla olevista arkkitehtuurieroista. Tulee kuitenkin huomata, että
+osa ongelmista syntyy siitä, että kokenut www"-selaimen käyttäjä
+odottaa \emph{enemmän vapauksia} ohjelman käyttötavoissaan johtuen
+siitä, että tavallisten www"-sivujen yhteydessä erilaisia käyttötapoja
+on useita. Hyvä selainkäyttöinen ohjelma pystyykin vastaamaan näihin
+odotuksiin.
 
 \section{Yhteydetön käyttöliittymä}
 
-WWW-selaimet käyttävät tiedon siirtoon HTTP-yhteyttä tai SSL-salattua HTTP-yhteyttä (tästä käytetään usein lyhennystä \alt{HTTPS}). Molemmat näistä yhteysmalleista ovat loogisesti yhteydettömiä, vaikka tehokkuuden vuoksi todelliset toteutukset pitävätkin yhteyden usein auki eri dokumenttien noutamisen välillä. Selain voi milloin tahansa katkaista entisen yhteyden ja luoda uuden, mutta tämä ei saa vaikuttaa ohjelman toimintaan.
+WWW"-selaimet käyttävät tiedon siirtoon HTTP"-yhteyttä tai SSL"-salattua
+HTTP"-yhteyttä (tästä käytetään usein lyhennystä \alt{HTTPS}). Molemmat
+näistä yhteysmalleista ovat loogisesti yhteydettömiä, vaikka
+tehokkuuden vuoksi todelliset toteutukset pitävätkin yhteyden usein
+auki eri dokumenttien noutamisen välillä. Selain voi milloin tahansa
+katkaista entisen yhteyden ja luoda uuden, mutta tämä ei saa vaikuttaa
+ohjelman toimintaan.
 
-Yhteydettömän toiminnan vuoksi käyttöliittymän toiminnot täytyy suunnitella siten, että yhdellä lomakkeella tehtävät toiminnot eivät vaadi ohjelman sisältöön puuttumista ennen seuraavalle lomakkeelle siirtymistä. Ongelma voidaan osittain kiertää käyttämällä JavaScript-skriptikieltä asiakkaan selainohjelmassa, mutta koska verkkoympäristössä asiakasohjelmaan ei voi luottaa, täytyy sama sovelluslogiikka olla myös palvelimen päässä\footnote{JavaScript-skriptikielellä voi esimerkiksi tarkistaa onko syötekenttään käyttäjän kirjoittama tieto laskun viitenumero laskemalla onko viitenumeron viimeinen tarkistusnumero oikein. Jos tarkistusnumero ei toimi, näytetään varoitusikkuna ja pyydetään käyttäjää syöttämään tieto uudelleen. Kuitenkin, turvallisuussyistä sama tarkistus täytyy tehdä myös palvelimella (koska muuten pahantahtoinen asiakas voisi muuttaa selaimessa toimivaa JavaScript-ohjelmaa ja lähettää virheellisen numeron järjestelmään).}. Tästä seuraa, että sama toiminnallisuus täytyy esittää kahdella eri ohjelmointikielellä (JavaScript ja kieli, jolla palvelimen logiikka on tehty). Seurauksena on koko järjestelmän huomattavasti vaikeampi ylläpito, koska eri kielillä tehtyjen toimintojen täytyy vastata toisiaan. Vaihtoehtona on myös toteuttaa kevyt tarkistus selaimen päässä, jossa pyritään karsimaan suurimmat virheet pois, mutta syötetyn tiedon oikeellisuus täytyy edelleen tarkistaa myös palvelimen päässä.
+Yhteydettömän toiminnan vuoksi käyttöliittymän toiminnot täytyy
+suunnitella siten, että yhdellä lomakkeella tehtävät toiminnot eivät
+vaadi ohjelman sisältöön puuttumista ennen seuraavalle lomakkeelle
+siirtymistä. Ongelma voidaan osittain kiertää käyttämällä
+JavaScript"-skriptikieltä asiakkaan selainohjelmassa, mutta koska
+verkkoympäristössä asiakasohjelmaan ei voi luottaa, täytyy sama
+sovelluslogiikka olla myös palvelimen
+päässä\footnote{JavaScript"-skriptikielellä voi esimerkiksi tarkistaa
+onko syötekenttään käyttäjän kirjoittama tieto laskun viitenumero
+laskemalla onko viitenumeron viimeinen tarkistusnumero oikein. Jos
+tarkistusnumero ei toimi, näytetään varoitusikkuna ja pyydetään
+käyttäjää syöttämään tieto uudelleen. Kuitenkin, turvallisuussyistä
+sama tarkistus täytyy tehdä myös palvelimella (koska muuten
+pahantahtoinen asiakas voisi muuttaa selaimessa toimivaa
+JavaScript"-ohjelmaa ja lähettää virheellisen numeron järjestelmään).}.
+Tästä seuraa, että sama toiminnallisuus täytyy esittää kahdella eri
+ohjelmointikielellä (JavaScript ja kieli, jolla palvelimen logiikka on
+tehty). Seurauksena on koko järjestelmän huomattavasti vaikeampi
+ylläpito, koska eri kielillä tehtyjen toimintojen täytyy vastata
+toisiaan. Vaihtoehtona on myös toteuttaa kevyt tarkistus selaimen
+päässä, jossa pyritään karsimaan suurimmat virheet pois, mutta syötetyn
+tiedon oikeellisuus täytyy edelleen tarkistaa myös palvelimen päässä.
+Lisäksi tulee huomata, että jos osa toiminnoista \emph{vaatii}
+JavaScript-kielen tukea, ei sovellus enää toimi millä tahansa
+www-selaimella.
 
-\section{Ongelmallinen takaisin-painike}
+\section{Ongelmallinen takaisin"-painike}
 
-Kuten edellä mainitsin, selaimet on suunniteltu pääasiassa staattisten dokumenttien käyttämiseen. Lisäksi HTTP-protokollan määritys erikseen huomauttaa, että asiakasohjelman historiatietojen käytön ei tarvitse hakea tietoja palvelimelta \cite[kappale 13.13]{ietf:http}. Esimerkkitapaus ongelmatilanteesta on esitetty kuvassa \ref{fig:fork}. Esimerkissä käyttäjä siirtyy ensin sovelluslogiikan luomalle sivulle (lomakkeelle) $A$, valitsee toiminnon $a_1$ ja siirtyy sen seurauksena sivulle $B$. Tämän jälkeen käyttäjä voi käyttää selaimen \emph{takaisin}-toimintoa ja palata takaisin sivulle $A$. Koska tämä on siirtyminen selainohjelman historiatiedoissa, ei asiasta protokollan mukaisesti tarvitse ilmoittaa palvelimelle, joten sovelluslogiikan näkökulmasta asiakas on edelleen sivulla $B$. Tämän jälkeen asiakas valitsee edellisestä poikkeavan toiminnon $a_2$. Palvelinohjelman tulee tässä vaiheessa kyetä huomaamaan, että vaikka sen tarjoama lomake olikin $B$, on käyttäjän valitsema toiminto $a_2$ ja toimintoon liittyvä tieto on peräisin lomakkeelta $A$, eikä lomakkeelta $B$.
+Kuten edellä mainitsin, selaimet on suunniteltu staattisten
+dokumenttien käyttämiseen. Lisäksi HTTP"-protokollan määritys erikseen
+huomauttaa, että asiakasohjelman historiatietojen käytön ei tarvitse
+hakea tietoja palvelimelta \cite[kappale 13.13]{ietf:http}.
+Esimerkkitapaus ongelmatilanteesta on esitetty kuvassa \ref{fig:fork}.
+Esimerkissä käyttäjä siirtyy ensin sovelluslogiikan luomalle sivulle
+(lomakkeelle) $A$, valitsee toiminnon $a_1$ ja siirtyy sen seurauksena
+sivulle $B$. Tämän jälkeen käyttäjä voi käyttää selaimen
+\emph{takaisin}"-toimintoa ja palata takaisin sivulle $A$. Koska tämä on
+siirtyminen selainohjelman historiatiedoissa, ei asiasta protokollan
+mukaisesti tarvitse ilmoittaa palvelimelle, joten sovelluslogiikan
+näkökulmasta asiakas on edelleen sivulla $B$. Tämän jälkeen asiakas
+valitsee edellisestä poikkeavan toiminnon $a_2$. Palvelinohjelman tulee
+tässä vaiheessa kyetä huomaamaan, että vaikka sen tarjoama lomake
+olikin $B$, on käyttäjän valitsema toiminto $a_2$ ja toimintoon
+liittyvä tieto on peräisin lomakkeelta $A$, eikä lomakkeelta $B$.
 
-Usein tähän ongelmaan käytetty ``ratkaisu'' on kertoa käyttäjälle, että sovelluksessa \emph{ei saa} käyttää \emph{takaisin}-toimintoa.\footnote{Tämä rajoitus seuraa yleensä siitä, sovellus yrittää pitää istunnon tilaa yllä. Usein tähän käytetään keksejä (\alt{cookies}). Näiden suurin ongelma on, että niihinkään ei voida helposti vaikuttaa historiatoimintojen yhteydessä ja lisäksi ne ovat globaaleja kaikkien selainohjelman ikkunoiden kesken. Jos istuntoa kuvaavassa keksissä säilytetään myös käyttäjän tunnistetietoja ei sovellukseen voi kirjautua monella eri käyttäjätunnuksella samanaikaisesti - paitsi jos käyttää eri selainohjelmaa jokaista käyttäjää kohden!} Olennaista on kuitenkin huomata, että käyttäjä teki tietoisen päätöksen käyttäessään -- tai yrittäessään käyttää -- kyseistä toimintoa ja varmastikin hän olisi halunnut sen tekevän jotain muuta, kuin näyttävän virheilmoituksen.
+Usein tähän ongelmaan käytetty ``ratkaisu'' on kertoa käyttäjälle, että
+sovelluksessa \emph{ei saa} käyttää
+\emph{takaisin}"-toimintoa.\footnote{Tämä rajoitus seuraa yleensä siitä,
+sovellus yrittää pitää istunnon tilaa yllä. Usein tähän käytetään
+keksejä (\alt{cookies}). Näiden suurin ongelma on, että niihinkään ei
+voida helposti vaikuttaa historiatoimintojen yhteydessä ja lisäksi ne
+ovat globaaleja kaikkien selainohjelman ikkunoiden kesken. Jos istuntoa
+kuvaavassa keksissä säilytetään myös käyttäjän tunnistetietoja ei
+sovellukseen voi kirjautua monella eri käyttäjätunnuksella
+samanaikaisesti -- paitsi jos käyttää eri selainohjelmaa jokaista
+käyttäjää kohden.} Olennaista on kuitenkin huomata, että käyttäjä teki
+tietoisen päätöksen käyttäessään -- tai yrittäessään käyttää --
+kyseistä toimintoa ja varmastikin hän olisi halunnut sen tekevän jotain
+muuta, kuin näyttävän virheilmoituksen.
+
 %Ohjelma tulee siis tehdä sellaiseksi, että se pystyy vastaanottamaan ja käsittelemään \emph{mahdollisimman suuren} osan käyttäjän lähettämästä tiedosta, vaikka muuttuneen tilanteen vuoksi osa siitä ei olisikaan relevanttia.
 
 \section{Istunnon haarautuminen}
 
-Istunnon haarautuminen liittyy hyvin läheisesti \emph{takaisin}-toimintoon. Siinä erona, käyttäjä kahdentaa aktiivisen lomakkeen $A$ ja valitsee ensimmäisessä ikkunassa toiminnon $a_3$ ja toisessa ikkunassa toiminnon $a_4$. Järjestelmä palauttaa toiminnon $a_3$ seurauksena sivun $C$ ja toiminnon $a_4$ seurauksena sivun $D$. Järjestelmän kannalta tämä tapahtuma näyttää täsmälleen samalta kuin \emph{takaisin}-toiminnon käyttökin, mutta merkittävä ero syntyy siitä, että seuraavaksi käyttäjä voi tuottaa rinnakkaisia tapahtumia sekä lomakkeelle $C$, että lomakkeelle $D$. Ei siis riitä, että palvelinohjelma pitää kirjaa käyttäjän toimintahistoriasta ja osaa peruuttaa lähetettyjen kutsujen mukaan oikeaan tilanteeseen; lisäksi ohjelman pitää kyetä haarauttamaan istuntoja epäsuorien tapahtumien kautta. Täysin oikean istuntoa kuvaavan tiedon ylläpitäminen palvelimella onkin vähintäänkin hyvin työlästä ellei mahdotonta. Istunnon tiedot täytyy siis jotenkin saada siirtymään selainohjelmassa ikkunakohtaisesti, jolloin ikkunan kahdentaminen kahdentaa myös istunnon.
+Istunnon haarautuminen liittyy hyvin läheisesti
+\emph{takaisin}"-toimintoon. Siinä erona, käyttäjä kahdentaa aktiivisen
+lomakkeen $A$ ja valitsee ensimmäisessä ikkunassa toiminnon $a_3$ ja
+toisessa ikkunassa toiminnon $a_4$. Järjestelmä palauttaa toiminnon
+$a_3$ seurauksena sivun $C$ ja toiminnon $a_4$ seurauksena sivun $D$.
+Järjestelmän kannalta tämä tapahtuma näyttää täsmälleen samalta kuin
+\emph{takaisin}"-toiminnon käyttökin, mutta merkittävä ero syntyy siitä,
+että seuraavaksi käyttäjä voi tuottaa rinnakkaisia tapahtumia sekä
+lomakkeelle $C$, että lomakkeelle $D$. Ei siis riitä, että
+palvelinohjelma pitää kirjaa käyttäjän toimintahistoriasta ja osaa
+peruuttaa lähetettyjen kutsujen mukaan oikeaan tilanteeseen; lisäksi
+ohjelman pitää kyetä haarauttamaan istuntoja epäsuorien tapahtumien
+kautta. Täysin oikean istuntoa kuvaavan tiedon ylläpitäminen
+palvelimella onkin vähintäänkin hyvin työlästä ellei mahdotonta.
+Istunnon tiedot täytyy siis jotenkin saada siirtymään selainohjelmassa
+ikkunakohtaisesti, jolloin ikkunan kahdentaminen kahdentaa myös
+istunnon.
 
 \begin{figure}[htb]
 \begin{center}
@@ -85,13 +293,73 @@ Istunnon haarautuminen liittyy hyvin läheisesti \emph{takaisin}-toimintoon. Siin
 \end{center}
 \end{figure}
 
+\section{Selaimen historia-toiminnot}
+
+Todellisuudessa takaisin-painike ja uusien ikkunoiden avaaminen on vain
+pieni osa itse varsinaista ongelmaa. Selaimet pitävät kirjaa kaikista
+vierailluista sivuista ja koska selainkäyttöisten sovellusten täytyy
+esittää käyttöliittymänsä HTML"-sivuina, kirjautuvat myös tälläisen
+sovelluksen kaikki näytöt historia"-tietoihin. Sivuhistorian kautta
+kävijä voi palata \emph{suoraan mille tahansa sivulle} milloin tahansa.
+Ei siis riitä, että varaudutaan siihen, että käyttäjä voi palata
+edelliselle sivulle takaisin"-painikkeella, vaan kaikkien aikaisemmin
+näytettyjen sivujen täytyy toimia.
+
+Historiatoimintojen vuoksi ainoastaan takaisin"-painikkeen testaaminen
+ei riitä testausvaiheessa. Tämän seurauksena pelkästään takaisin- ja
+eteenpäin "-painikkeiden testaaminen järjestelmällisellä menetelmällä
+\cite{lucca:web_application_testing} ei ole riittävä
+testimenetelmä ohjelman oikean toiminnan varmistamiseksi.
+
+Käytännössä tämä tarkoittaa sitä, että palvelimen päässä ei kannata
+yrittää pitää kirjaa siitä, mikä näkymä käyttäjälle on annettu ja
+erityisesti ei tule arvata, mikä näkymä kävijän selaimessa on
+aktiivinen.
+
 \section{Verkon virheiden havaitseminen on mahdotonta}
 
-Yhteydettömästä käyttöliittymästä seuraa myös, että palvelin ei voi tunnistaa tietoverkon virheellistä toimintaa esimerkiksi asiakkaan selaimen sulkemisesta tai asiakkaan tietokoneen jumiutumisesta. Yllämainitut ongelmatilanteet  näkyvät palveliohjelmalle täysin samalla tavalla kuin, jos asiakas vain käyttäisi epätavallisen kauan aikaa lomakkeen täyttämiseen. Tämän vuoksi mikään toiminto ei saisi lukittaa resursseja siihen asti kunnes ``käyttäjän istunto loppuu''. Käytännössä tällaisia resurssien lukittamisia kuitenkin tarvitaan ja usein ratkaisuna on käyttää maksimiaikaa lukitukselle; kun käyttäjä valitsee esimerkiksi uutisartikkelin muokattavaksi, merkitään muokattava artikkeli lukituksi, jolloin muut eivät voi sitä muokata. Lukitus puretaan kun käyttäjä tallentaa muokatun artikkelin tai kun ennaltamäärätty maksimiaika lukitukselle on kulunut. Tässäkin on tietenkin ongelmana, että ongelmatilanteissa lukittu resurssi on käyttökelvoton valittuun aikarajaan asti. Parempi vaihtoehto olisikin sallia rinnakkaisten muutosten tekeminen.
+Yhteydettömästä käyttöliittymästä seuraa myös, että palvelin ei voi
+tunnistaa tietoverkon virheellistä toimintaa esimerkiksi asiakkaan
+selaimen sulkemisesta tai asiakkaan tietokoneen jumiutumisesta.
+Yllämainitut ongelmatilanteet  näkyvät palveliohjelmalle täysin samalla
+tavalla kuin, jos asiakas vain käyttäisi epätavallisen kauan aikaa
+lomakkeen täyttämiseen. Tämän vuoksi mikään toiminto ei saisi lukittaa
+resursseja siihen asti kunnes ``käyttäjän istunto loppuu''. Käytännössä
+tällaisia resurssien lukittamisia kuitenkin tarvitaan ja usein
+ratkaisuna on käyttää maksimiaikaa lukitukselle; kun käyttäjä valitsee
+esimerkiksi uutisartikkelin muokattavaksi, merkitään muokattava
+artikkeli lukituksi, jolloin muut eivät voi sitä muokata. Lukitus
+puretaan kun käyttäjä tallentaa muokatun artikkelin tai kun
+ennaltamäärätty maksimiaika lukitukselle on kulunut. Tässäkin on
+tietenkin ongelmana, että ongelmatilanteissa lukittu resurssi on
+käyttökelvoton valittuun aikarajaan asti. Parempi vaihtoehto olisikin
+sallia rinnakkaisten muutosten tekeminen esimerkiksi versionhallinnan avustamana.
 
 \section{Selainten virheelliset toteutukset}
 
-Kun palvelimen ohjelmisto on saatu toimimaan ja kaikki edellämainitut ongelmat on otettu huomioon, havaitaan, että eri selainohjelmat eivät toimi eri standardeissa määrätyllä tavalla. Useimmat vioista vaikuttavat ainoastaan käyttäjälle näkyvän lomakkeen ulkoasuun -- esimerkiksi joku teksti on suhteessa muuhun käyttöliittymään suuremmalla tekstillä kuin pitäisi. Kuitenkin osa vioista voi estää tiettyjen toimintojen käytön: esimerkiksi HTML-määrityksen mukaan yhden \code{file}-tyyppisen lomake-elementin tulee tarjota mahdollisuus usean tiedoston siirtämiseen yhtä aikaa. Ainoa yleisesti käytössä oleva selain, joka toimii tässä mielessä määrityksen mukaisesti, on \emph{Opera}. Tämä näkyy myös yleisimmissä palvelinpään toteutuksissa siten, että Operalla monta tiedostoa yhtä aikaa lähetettäessä, tapahtuu palvelinpäässä yleensä virhe tiedostoja vastaanotettaessa, koska palvelinohjelmiston kehittäjä ei ole lukenut määritystä vaan ainoastaan tarkkaillut kuinka yleisimmät selaimet toimivat.
-\cite{korpela:file_input}
+Kun palvelimen ohjelmisto on saatu toimimaan ja kaikki edellämainitut
+ongelmat on otettu huomioon, havaitaan, että eri selainohjelmat eivät
+toimi eri standardeissa määrätyllä tavalla. Useimmat vioista
+vaikuttavat ainoastaan käyttäjälle näkyvän lomakkeen ulkoasuun --
+esimerkiksi joku teksti on suhteessa muuhun käyttöliittymään
+suuremmalla tekstillä kuin pitäisi. Kuitenkin osa vioista voi estää
+tiettyjen toimintojen käytön: esimerkiksi HTML"-määrityksen mukaan
+yhden \code{file}"-tyyppisen lomake"-elementin tulee tarjota
+mahdollisuus usean tiedoston siirtämiseen yhtä aikaa. Ainoa yleisesti
+käytössä oleva selain, joka toimii tässä mielessä määrityksen
+mukaisesti, on Opera. Tämä näkyy myös yleisimmissä palvelinpään
+toteutuksissa siten, että Operalla monta tiedostoa yhtä aikaa
+lähetettäessä, tapahtuu palvelinpäässä yleensä virhe tiedostoja
+vastaanotettaessa, koska palvelinohjelmiston kehittäjä ei ole lukenut
+määritystä vaan ainoastaan tarkkaillut kuinka yleisimmät selaimet
+toimivat. \cite{korpela:file_input}
 
-Toinen yleinen virhe selainten toteutuksessa on tiedon lähettäminen UTF-8 koodauksella ilman siitä ilmoittamista -- protokollan mukaan oletuksena tulee tällöin käyttää ISO-8859-1-merkistöä jonka seurauksena kaikki ASCII-merkistön ulkopuoliset merkit siirretään väärin. Tässä siis puutteellisen toiminnan lisäksi tuhoutuu myös tietoa. Tämä ongelma voidaan kiertää lähettämällä lomakkeella näkymätön kenttä, jonka sisältö on tunnettu ja sisältää ASCII-merkistön ulkopuolisia merkkejä, ja tarkastelemalla kuinka selain koodaa tämän kentän sisällön.
+Toinen yleinen virhe selainten toteutuksessa on tiedon lähettäminen
+UTF-8"-koodauksella ilman siitä ilmoittamista -- protokollan mukaan
+oletuksena tulee tällöin käyttää ISO-8859-1"-merkistöä, jonka
+seurauksena kaikki ASCII"-merkistön ulkopuoliset merkit siirretään
+väärin. Tässä siis puutteellisen toiminnan lisäksi tuhoutuu myös
+tietoa. Tämä ongelma voidaan kiertää esimerkiksi lähettämällä
+lomakkeella näkymätön kenttä, jonka sisältö on tunnettu ja sisältää
+ASCII"-merkistön ulkopuolisia merkkejä, ja tarkastelemalla kuinka
+selain koodaa tämän kentän sisällön.

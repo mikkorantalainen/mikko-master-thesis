@@ -5,11 +5,20 @@ Neo: "You mean I can dodge bullets?"\\
 Morpheus: "I mean when you are ready, you won't have to."
 \end{chapterquote}
 
-Kuten luvussa \ref{ongelmia} kuvasin, selainkäyttöisten ohjelmien käyttöliittymien toteuttamisessa on useita ongelmia. Kuvailen tässä luvussa ratkaisuvaihtoehtoja tuossa luvussa kuvattujen ongelmien ratkaisemiseksi. Osa suunnittelemistani ratkaisuvaihtoehdoista osoittautui epäkäytännöllisiksi, mutta kuvailen ne siitä huolimatta antamaan kuvaa ratkaisujen kehityskaaresta.
+Kuten luvussa \ref{ongelmia} kuvasin, selainkäyttöisten ohjelmien
+käyttöliittymien toteuttamisessa on useita ongelmia. Kuvailen tässä
+luvussa ratkaisuvaihtoehtoja tuossa luvussa kuvattujen ongelmien
+ratkaisemiseksi. Osa suunnittelemistani ratkaisuvaihtoehdoista
+osoittautui epäkäytännöllisiksi, mutta kuvailen ne siitä huolimatta
+antamaan kuvaa ratkaisujen kehityskaaresta.
 
-\section{Lisää kerroksia}
+\section{Käyttöliittymäkerroksen jakaminen osiin}
 
-Ensimmäisenä ajatuksena oli jakaa luvussa \ref{tiers} kuvattu kolmikerroksinen malli vielä kerran, päätyen nelikerroksiseen rakenteeseen. Tässä mallissa käyttöliittymäkerros jaetaan käyttöliittymän toiminnallisuuden kuvaamiseen ja käyttöliittymäajuriin (kuva \ref{fig:4tier}).
+Ensimmäisenä ajatuksena oli jakaa luvussa \ref{tiers} kuvattu
+kolmikerroksinen malli vielä kerran, päätyen nelikerroksiseen
+rakenteeseen. Tässä mallissa käyttöliittymäkerros jaetaan
+käyttöliittymän toiminnallisuuden kuvaamiseen ja käyttöliittymäajuriin
+(kuva \ref{fig:4tier}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -19,48 +28,201 @@ Ensimmäisenä ajatuksena oli jakaa luvussa \ref{tiers} kuvattu kolmikerroksinen m
 \end{center}
 \end{figure}
 
-Jaon etuna eri sovellusten käyttöliittymät saadaan toimimaan vastaavalla ulkonäöllä ja mahdollisimman pitkälti vastaavilla toiminnoilla. Tämä onnistuu jakamalla käyttöliittymäajuri eri sovellusten kesken. Suunnittelemalla käyttöliittymän toiminnallisuuden ja käyttöliittymäajurin rajapinta sopivasti, helpottuu käyttöliittymän kirjoittaminen verrattuna entiseen malliin, jossa käyttöliittymää kirjoitettaessa jouduttiin kirjoittamaan koodi myös käyttöliittymän eri osien, kuten erilaisten painikkeiden, hallintaan. Uudessa mallissa käyttöliittymän kuvauksessa vain ilmoitetaan, että käyttäjän tulee valita annetusta listasta kaksi tai kolme kohtaa. Käyttöliittymäajuri voisi sitten toteuttaa tuon esityksen esimerkiksi ryhmällä \alt{radio button} -tyyppisiä grafiikkaelementtejä tai vaihtoehtoisesti valintalaatikon (\alt{select box}) avulla. WWW-käytössä käyttöliittymäajurin muodostamaa lopputulosta voitaisiin vielä hioa kirjoittamalla lomakekohtaisia ulkonäköasetuksia CSS-kielellä \cite{w3:css}.
+Jaon etuna eri sovellusten käyttöliittymät saadaan toimimaan
+vastaavalla ulkonäöllä ja mahdollisimman pitkälti vastaavilla
+toiminnoilla. Tämä onnistuu jakamalla käyttöliittymäajuri eri
+sovellusten kesken. Suunnittelemalla käyttöliittymän toiminnallisuuden
+ja käyttöliittymäajurin rajapinta sopivasti, helpottuu käyttöliittymän
+kirjoittaminen verrattuna entiseen malliin, jossa käyttöliittymää
+kirjoitettaessa jouduttiin kirjoittamaan koodi myös käyttöliittymän eri
+osien, kuten erilaisten painikkeiden, hallintaan. Uudessa mallissa
+käyttöliittymän kuvauksessa vain ilmoitetaan, että käyttäjän tulee
+valita annetusta listasta kaksi tai kolme kohtaa. Käyttöliittymäajuri
+voisi sitten toteuttaa tuon esityksen esimerkiksi ryhmällä \alt{radio
+button} -tyyppisiä grafiikkaelementtejä tai vaihtoehtoisesti
+valintalaatikon (\alt{select box}) avulla. WWW-käytössä
+käyttöliittymäajurin muodostamaa lopputulosta voitaisiin vielä hioa
+kirjoittamalla lomakekohtaisia ulkonäköasetuksia CSS-kielellä
+\cite{w3:css}.
 
-Käyttöliittymäajuri keskustelee www-selaimen kanssa, mutta vaihtoehtoisesti sen voisi toteuttaa natiivilla sovelluksella. Tällöin edes ohjelman käyttöliittymän kuvausta ei tarvitsisi muuttaa vaikka käyttöympäristö vaihtuisi selainkäyttöisestä natiiviksi. Koska toiminnallisuuden täytyy kuitenkin olla lomakepohjainen toimiakseen \emph{hyvin} selaimen kautta, ei tällainen natiivikäyttöliittymä olisi merkittävästi parempi kuin selainpohjainen käyttöliittymäkään. Väitänkin, että selainkäyttöisten ohjelmien käyttöliittymien logiikka ja dialogien rakenne pitääkin suunnitella eri tavalla kuin perinteisten, käyttöjärjestelmän omien sääntöjen mukaan toimivien sovellusten.
+Käyttöliittymäajuri keskustelee www-selaimen kanssa, mutta
+vaihtoehtoisesti sen voisi toteuttaa natiivilla sovelluksella. Tällöin
+edes ohjelman käyttöliittymän kuvausta ei tarvitsisi muuttaa vaikka
+käyttöympäristö vaihtuisi selainkäyttöisestä natiiviksi. Koska
+toiminnallisuuden täytyy kuitenkin olla lomakepohjainen toimiakseen
+\emph{hyvin} selaimen kautta, ei tällainen natiivikäyttöliittymä olisi
+merkittävästi parempi kuin selainpohjainen käyttöliittymäkään.
+Väitänkin, että selainkäyttöisten ohjelmien käyttöliittymien logiikka
+ja dialogien rakenne pitääkin suunnitella eri tavalla kuin
+perinteisten, käyttöjärjestelmän omien sääntöjen mukaan toimivien
+sovellusten.
 
 \subsection{Tiedon käsittelyn logiikka}
 
-Tämä kerros toteutetaan käyttämällä jotain olemassaolevaa tietokantaa, esimerkiksi MySQL tai PostgreSQL. Teoriassa tietokannan pitäisi ymmärtää ja valvoa kaikki tiedon esitysmalliin liittyvät rajoitukset, mutta koska tietokantoja käsitellään käytännössä aina SQL-kielen avulla, ei riippuvuustietoja voida kattavasti esittää tietokantavalmistajasta riippumattomalla tavalla. Jos ohjelmasta halutaan siirrettävä, jolloin sitä voidaan käyttää monen eri tietokantaohjelmiston kanssa, täytyy melkein kaikki tarkistukset tehdä sovelluslogiikassa. Tietokannan tehokkuus voidaan maksimoida ohjelmoimalla tarkistukset ja rajoitukset tietokannan omilla työkaluilla, mutta siirrettävyys menetetään. Pyrin itse pitämään selainkäyttöiset sovellukset tietokantariippumattomina, koska olen kokenut, että käytännössä eri tietokannan käyttämisestä saatava nopeusero on suurempi kuin yksittäisen tietokannan hienosäätämisestä saatava nopeusero. Eli pitkällä aikavälillä suurin nopeuden kasvattaminen saataisiin aikaiseksi vaihtamalla tietokantaa aina sen hetkisen sisällön ja käyttöprofiilin mukaisesti nopeiten toimivaan.
-Koska tietokantasovelluksissakin on virheitä, ei tällaisesta tietokannasta toiseen siirtymistä voi kuitenkaan kovin usein suositella. Tämän tutkielman kannalta tarkka jako ei ole olennaista.
+Tämä kerros toteutetaan käyttämällä jotain olemassaolevaa tietokantaa,
+esimerkiksi MySQL tai PostgreSQL. Teoriassa tietokannan pitäisi
+ymmärtää ja valvoa kaikki tiedon esitysmalliin liittyvät rajoitukset,
+mutta koska tietokantoja käsitellään käytännössä aina SQL-kielen
+avulla, ei riippuvuustietoja voida kattavasti esittää
+tietokantavalmistajasta riippumattomalla tavalla. Jos ohjelmasta
+halutaan siirrettävä, jolloin sitä voidaan käyttää monen eri
+tietokantaohjelmiston kanssa, täytyy melkein kaikki tarkistukset tehdä
+sovelluslogiikassa. Tietokannan tehokkuus voidaan maksimoida
+ohjelmoimalla tarkistukset ja rajoitukset tietokannan omilla
+työkaluilla, mutta siirrettävyys menetetään. Pyrin itse pitämään
+selainkäyttöiset sovellukset tietokantariippumattomina, koska olen
+kokenut, että käytännössä eri tietokannan käyttämisestä saatava
+nopeusero on suurempi kuin yksittäisen tietokannan hienosäätämisestä
+saatava nopeusero. Eli pitkällä aikavälillä suurin nopeuden
+kasvattaminen saataisiin aikaiseksi vaihtamalla tietokantaa aina sen
+hetkisen sisällön ja käyttöprofiilin mukaisesti nopeiten toimivaan.
+Koska tietokantasovelluksissakin on virheitä, ei tällaisesta
+tietokannasta toiseen siirtymistä voi kuitenkaan kovin usein
+suositella. Tämän tutkielman kannalta tarkka jako ei ole olennaista.
 
 \subsection{Sovelluslogiikka}
 
-Sovelluslogiikka vastaa sovelluksen ``älystä''. Teoriassa tässä kerroksessa ei oteta mitään kantaa sovelluksen käyttöliittymään. Käytännössä tämä kerros on todennäköisesti tehokkainta sulauttaa osittain käyttöliittymän toiminnallisuuden kanssa. Näin sen vuoksi, että sovelluslogiikkaan ei yleensä ohjelmoida ominaisuuksia, joita käyttöliittymän toiminnallisuus ei tarvitse. Toisaalta käyttöliittymään ei voida lisätä ominaisuuksia, joita sovelluslogiikka ei voi tukea. Eli kaikki muutokset täytyy kuitenkin tehdä molempiin osiin! Lisäksi sulauttamisen haittojen voi neljän kerroksen mallissa olettaa olevan kohtuullisen pieniä, koska käyttöliittymän toiminnallisuus ei ole enää niin tiukasti sidottu itse käyttöliittymän ulkonäköön.
+Sovelluslogiikka vastaa sovelluksen ``älystä''. Teoriassa tässä
+kerroksessa ei oteta mitään kantaa sovelluksen käyttöliittymään.
+Käytännössä tämä kerros on todennäköisesti tehokkainta sulauttaa
+osittain käyttöliittymän toiminnallisuuden kanssa. Näin sen vuoksi,
+että sovelluslogiikkaan ei yleensä ohjelmoida ominaisuuksia, joita
+käyttöliittymän toiminnallisuus ei tarvitse. Toisaalta käyttöliittymään
+ei voida lisätä ominaisuuksia, joita sovelluslogiikka ei voi tukea. Eli
+kaikki muutokset täytyy kuitenkin tehdä molempiin osiin! Lisäksi
+sulauttamisen haittojen voi neljän kerroksen mallissa olettaa olevan
+kohtuullisen pieniä, koska käyttöliittymän toiminnallisuus ei ole enää
+niin tiukasti sidottu itse käyttöliittymän ulkonäköön.
 
 \subsection{Käyttöliittymän toiminnallisuus}
 
-Käyttöliittymän toiminnallisuudesta vastaava kerros kuvaa käyttöliittymän toiminnan abstraktilla tavalla: ``tästä taulukosta täytyy valita 2-5 riviä'' tai ``käyttäjän tulee syöttää lomakkeelle kaksi merkkijonoa. Näiden merkkijonojen nimet ja tyypit ovat 'käyttäjätunnus':merkkijono ja 'salasana':salattu merkkijono.'' Tämä kerros ei ota kantaa siihen missä järjestyksessä taulukon sarakkeet ja rivit näytetään tai siihen, syötetäänkö käyttäjätunnus tekstikenttään vai napauttelemalla hiirellä jonkin kuvan eri kohtia.
+Käyttöliittymän toiminnallisuudesta vastaava kerros kuvaa
+käyttöliittymän toiminnan abstraktilla tavalla: ``tästä taulukosta
+täytyy valita 2-5 riviä'' tai ``käyttäjän tulee syöttää lomakkeelle
+kaksi merkkijonoa. Näiden merkkijonojen nimet ja tyypit ovat
+'käyttäjätunnus':merkkijono ja 'salasana':salattu merkkijono.'' Tämä
+kerros ei ota kantaa siihen missä järjestyksessä taulukon sarakkeet ja
+rivit näytetään tai siihen, syötetäänkö käyttäjätunnus tekstikenttään
+vai napauttelemalla hiirellä jonkin kuvan eri kohtia.
 
-Teoriassa tämä kerros voisi generoida yksinkertaisen XML-sivun, joka muutettaisiin XHTML tai HTML -sivuksi selaimen toimintoja varten. Tällöin käyttöliittymäajurin voisi kirjoittaa esimerkiksi XSLT-kielellä. Käytännössä tällaisen ajurin kirjoittaminen muodostuu oletettavasti niin hankalaksi, että paremmalta vaihtoehdolta tuntuu kirjoittaa käyttöliittymäajuri kirjastoksi, joka linkitetään\footnote{Joissakin ohjelmointiympäristöissä ohjelmakoodi käännetään objektitiedostoiksi, jotka yhdistetään \emph{linkittämällä} valmiin ohjelman tuottamiseksi. Vasta näin tuotettu valmis ohjelma voidaan suorittaa. Toisaalta, esimerkiksi PHP-kielisissä ohjelmissa manuaalinen linkitys ei ole tarpeen, sillä se suoritetaan automaattisesti ohjelman käynnistyessä.} ohjelmaan sitä tehtäessä. Linkitys pitää tehdä uudelleen kirjaston päivityksen yhteydessä, mutta itse käyttöliittymän toiminnallisuuteen ei tarvitse puuttua. Tässäkin mallissa eri sovellusten käyttöliittymät saadaan säilymään yhdenmukaisina pelkästään linkittämällä kaikki sovellukset uudelleen aina käyttöliittymäajurin päivityksen jälkeen.
+Teoriassa tämä kerros voisi generoida yksinkertaisen XML-sivun, joka
+muutettaisiin XHTML tai HTML -sivuksi selaimen toimintoja varten.
+Tällöin käyttöliittymäajurin voisi kirjoittaa esimerkiksi
+XSLT-kielellä. Käytännössä tällaisen ajurin kirjoittaminen muodostuu
+oletettavasti niin hankalaksi, että paremmalta vaihtoehdolta tuntuu
+kirjoittaa käyttöliittymäajuri kirjastoksi, joka
+linkitetään\footnote{Joissakin ohjelmointiympäristöissä ohjelmakoodi
+käännetään objektitiedostoiksi, jotka yhdistetään \emph{linkittämällä}
+valmiin ohjelman tuottamiseksi. Vasta näin tuotettu valmis ohjelma
+voidaan suorittaa. Toisaalta, esimerkiksi PHP-kielisissä ohjelmissa
+manuaalinen linkitys ei ole tarpeen, sillä se suoritetaan
+automaattisesti ohjelman käynnistyessä.} ohjelmaan sitä tehtäessä.
+Linkitys pitää tehdä uudelleen kirjaston päivityksen yhteydessä, mutta
+itse käyttöliittymän toiminnallisuuteen ei tarvitse puuttua. Tässäkin
+mallissa eri sovellusten käyttöliittymät saadaan säilymään
+yhdenmukaisina pelkästään linkittämällä kaikki sovellukset uudelleen
+aina käyttöliittymäajurin päivityksen jälkeen.
 \cite{w3:xml_v1_0,w3:xhtml,w3:xslt}
 
 \subsection{Käyttöliittymäajuri}
 
-Tämä kerros vastaa siitä kuinka käyttäjä pystyy tekemään eri valinnat ja toiminnot. Jos, käyttöliittymässä on kuvattu, että lomakkeella on 10 vaihtoehtoa, joista pitää valita täsmälleen yksi, niin tällöin selainkäyttöisen sovelluksen käyttöliittymäajuri voi näyttää sivulla 10 linkkiä, joista käyttäjä painaa yhtä. Vaihtoehtoisesti ajuri voisi näyttää lomakkeen jossa on 10 \alt{radio button} -tyyppistä elementtiä ja OK-painike. Kolmas vaihtoehto olisi näyttää \alt{combobox}-alasvetovalikko yhdistettynä JavaScript-käsittelijään, joka lähettäisi lomakkeen välittömästi käyttäjän näpäytettyä jotain kohtaa. Optimaalisessa tapauksessa käyttöliittymäajuri osaisi käyttää kaikkia näitä vaihtoehtoja ja käyttäjä voisi omissa asetuksissaan valita millä tyylillä hän haluaa käyttää erityyppisiä lomakkeita.
+Tämä kerros vastaa siitä kuinka käyttäjä pystyy tekemään eri valinnat
+ja toiminnot. Jos, käyttöliittymässä on kuvattu, että lomakkeella on 10
+vaihtoehtoa, joista pitää valita täsmälleen yksi, niin tällöin
+selainkäyttöisen sovelluksen käyttöliittymäajuri voi näyttää sivulla 10
+linkkiä, joista käyttäjä painaa yhtä. Vaihtoehtoisesti ajuri voisi
+näyttää lomakkeen jossa on 10 \alt{radio button} -tyyppistä elementtiä
+ja OK-painike. Kolmas vaihtoehto olisi näyttää
+\alt{combobox}-alasvetovalikko yhdistettynä JavaScript-käsittelijään,
+joka lähettäisi lomakkeen välittömästi käyttäjän näpäytettyä jotain
+kohtaa. Optimaalisessa tapauksessa käyttöliittymäajuri osaisi käyttää
+kaikkia näitä vaihtoehtoja ja käyttäjä voisi omissa asetuksissaan
+valita millä tyylillä hän haluaa käyttää erityyppisiä lomakkeita.
 
-Koska selainkäyttöisen sovelluksen käyttäjä voi haarauttaa istunnon ja tästä toiminnosta ei synny tapahtumaa palvelimelle, täytyy kaikki tieto kuljettaa lomakkeen muun tiedon yhteydessä. Tällöin tieto kahdentuu automaattisesti kun käyttäjä kahdentaa istunnon (avaa uuden ikkunan, jossa on sama sovellus toiminnassa) ja \emph{takaisin}-toiminnon yhteydessä selain käyttää automaattisesti entisen lomakkeen tietoja, sillä nuo tiedot sisältyy siihen sivuun, jota selain käyttää sivun näyttämiseen. Käyttöliittymäajuri ei voi estää vanhentuneen tiedon saapumista\footnote{Käyttäjä voisi esimerkiksi muokata selainkäyttöliittymällä uutisartikkelia, poistaa artikkelin ja käyttää \emph{takaisin} toimintoa ja palata takaisin muokkaukseen. Kun käyttäjä nyt tallentaa tehdyt muokkaukset täytyy sovelluksen joko palauttaa poistettu artikkeli tai luoda lähetettyjen tietojen perusteella uusi tai käyttäjän lähettämää tieto hukkuu.}, joten käyttöliittymän toiminnallisuuden tai sovelluslogiikan täytyy ottaa siihen kantaa. Lisäksi istunnon koon täytyy olla pieni, koska sovelluksen generoimien sivujen sisältämien linkkien täytyy myös sisältää istunnon tiedot\footnote{WWW-sivulla olevat linkit käyttävät aina GET-metodia HTTP-yhteyksiä käytettäessä, jossa kaikki linkin parametrit pitää siirtää tekstinä osoitteen lopussa. Istuntoon liittyvät tiedot täytyy siis toistaa sivun \emph{jokaisen} linkin lopussa ja sivu kasvaa huomattavan nopeasti linkkien lukumäärän mukaan jos istunto-tietoa on paljon.}. HTTP-protokolla määrittelee tavallisten linkkien käyttämän GET-toiminnon maksimidatamääräksi 4 kilotavua ja lisäksi suuri istunto kasvattaa jokaista sivua, sillä osa istuntotiedosta joudutaan toistamaan jokaisen linkin yhteydessä. \cite{ietf:http}
+Koska selainkäyttöisen sovelluksen käyttäjä voi haarauttaa istunnon ja
+tästä toiminnosta ei synny tapahtumaa palvelimelle, täytyy kaikki tieto
+kuljettaa lomakkeen muun tiedon yhteydessä. Tällöin tieto kahdentuu
+automaattisesti kun käyttäjä kahdentaa istunnon (avaa uuden ikkunan,
+jossa on sama sovellus toiminnassa) ja \emph{takaisin}-toiminnon
+yhteydessä selain käyttää automaattisesti entisen lomakkeen tietoja,
+sillä nuo tiedot sisältyy siihen sivuun, jota selain käyttää sivun
+näyttämiseen. Käyttöliittymäajuri ei voi estää vanhentuneen tiedon
+saapumista\footnote{Käyttäjä voisi esimerkiksi muokata
+selainkäyttöliittymällä uutisartikkelia, poistaa artikkelin ja käyttää
+\emph{takaisin} toimintoa ja palata takaisin muokkaukseen. Kun käyttäjä
+nyt tallentaa tehdyt muokkaukset täytyy sovelluksen joko palauttaa
+poistettu artikkeli tai luoda lähetettyjen tietojen perusteella uusi
+tai käyttäjän lähettämää tieto hukkuu.}, joten käyttöliittymän
+toiminnallisuuden tai sovelluslogiikan täytyy ottaa siihen kantaa.
+Lisäksi istunnon koon täytyy olla pieni, koska sovelluksen generoimien
+sivujen sisältämien linkkien täytyy myös sisältää istunnon
+tiedot\footnote{WWW-sivulla olevat linkit käyttävät aina GET-metodia
+HTTP-yhteyksiä käytettäessä, jossa kaikki linkin parametrit pitää
+siirtää tekstinä osoitteen lopussa. Istuntoon liittyvät tiedot täytyy
+siis toistaa sivun \emph{jokaisen} linkin lopussa ja sivu kasvaa
+huomattavan nopeasti linkkien lukumäärän mukaan jos istunto-tietoa on
+paljon.}. HTTP-protokolla määrittelee tavallisten linkkien käyttämän
+GET-toiminnon maksimidatamääräksi 4 kilotavua ja lisäksi suuri istunto
+kasvattaa jokaista sivua, sillä osa istuntotiedosta joudutaan
+toistamaan jokaisen linkin yhteydessä. \cite{ietf:http}
 
-Koska \emph{kaikkien} sovellusten tietojen lähettäminen jokaisen lomakkeen yhteydessä vaatisi huomattavan lisän tarvittavaan tiedonsiirtokaistaan, tulee ohjelman toteutuksessa erikseen jakaa istunto-tiedot kahteen osaan: lomakkeiden kautta siirtyvä tieto, ja tieto joka voidaan jakaa myös haarautettujen tai vanhentuneiden tapahtumien kanssa. Tällöin jaettu tieto voidaan säilyttää palvelimella. Tällaista jaettua tietoa olisivat esimerkiksi käyttäjän henkilökohtaiset asetukset, jotka voidaan jakaa eri ikkunoiden kesken. Esimerkiksi valittu sivuston tyyli tai päivämäärien esitysmuoto olisi tällaista tietoa. Istuntotietoa olisi taas esimerkiksi tieto siitä, mitä toimintoja käyttäjä käytti saapuessaan nykyiseen näkymään, jos tätä tietoa tarvitaan tulevaisuudessa.
+Koska \emph{kaikkien} sovellusten tietojen lähettäminen jokaisen
+lomakkeen yhteydessä vaatisi huomattavan lisän tarvittavaan
+tiedonsiirtokaistaan, tulee ohjelman toteutuksessa erikseen jakaa
+istunto-tiedot kahteen osaan: lomakkeiden kautta siirtyvä tieto, ja
+tieto joka voidaan jakaa myös haarautettujen tai vanhentuneiden
+tapahtumien kanssa. Tällöin jaettu tieto voidaan säilyttää
+palvelimella. Tällaista jaettua tietoa olisivat esimerkiksi käyttäjän
+henkilökohtaiset asetukset, jotka voidaan jakaa eri ikkunoiden kesken.
+Esimerkiksi valittu sivuston tyyli tai päivämäärien esitysmuoto olisi
+tällaista tietoa. Istuntotietoa olisi taas esimerkiksi tieto siitä,
+mitä toimintoja käyttäjä käytti saapuessaan nykyiseen näkymään, jos
+tätä tietoa tarvitaan tulevaisuudessa.
 
-Tulevaisuudessa selainkäyttöisen sovelluksen käyttöliittymäajuri voisi tuottaa XForms-määrityksen mukaisia lomakkeita, jolloin käyttöliittymän toiminnallisuus ja ulkonäkö voidaan pitää erillään www-selaimeen asti. Ikävä kyllä XForms on hyvin heikosti tuettu nykyisissäkin selaimissa ja mikään ei viittaa siihen, että tilanteeseen olisi tulossa nopeasti muutosta.
-\cite{korpela:html_forms,w3:xforms}
+Tulevaisuudessa selainkäyttöisen sovelluksen käyttöliittymäajuri voisi
+tuottaa XForms-määrityksen mukaisia lomakkeita, jolloin käyttöliittymän
+toiminnallisuus ja ulkonäkö voidaan pitää erillään www-selaimeen asti.
+Ikävä kyllä XForms on hyvin heikosti tuettu nykyisissäkin selaimissa ja
+mikään ei viittaa siihen, että tilanteeseen olisi tulossa nopeasti
+muutosta. \cite{korpela:html_forms,w3:xforms}
 
 \subsection{Huomioita käyttöliittymäajurin toteuttamiseen liittyen}
 
-Käyttöliittymäajurin täytyy yrittää tunnistaa asiakasohjelma (selaintyyppi ja versio) ja kiertää jollakin tavalla siinä tunnetut ongelmat. Viallisten selainten tukeen kuluva työaika on helpompi perustella, koska ajuri on yhteinen monelle eri sovellukselle, joten kustannukset ohjelmaa kohden ovat pienempiä kuin perinteisellä mallilla.
+Käyttöliittymäajurin täytyy yrittää tunnistaa asiakasohjelma
+(selaintyyppi ja versio) ja kiertää jollakin tavalla siinä tunnetut
+ongelmat. Viallisten selainten tukeen kuluva työaika on helpompi
+perustella, koska ajuri on yhteinen monelle eri sovellukselle, joten
+kustannukset ohjelmaa kohden ovat pienempiä kuin perinteisellä
+mallilla.
 
-Koska käyttöliittymäajurin täytyy huolehtia kaikista selaimen käytöstä johtuvista ongelmista, on sen toteuttaminen vaikeaa. HTML-kieltä tukevan ajurin ei kuitenkaan tarvitse ottaa kantaa käyttöliittymän yksityiskohtiin, ainoastaan eri komponenttien järjestykseen, sillä ulkonäölliset yksityiskohdat voidaan käsitellä asiakkaan ohjelmassa CSS-kielen avulla \cite{w3:css}. Sovellukselle voidaan helposti tuottaa erilaisia ulkoasuja (\alt{skins}) pelkästään luomalla erilaisia CSS-tiedostoja.
+Koska käyttöliittymäajurin täytyy huolehtia kaikista selaimen käytöstä
+johtuvista ongelmista, on sen toteuttaminen vaikeaa. HTML-kieltä
+tukevan ajurin ei kuitenkaan tarvitse ottaa kantaa käyttöliittymän
+yksityiskohtiin, ainoastaan eri komponenttien järjestykseen, sillä
+ulkonäölliset yksityiskohdat voidaan käsitellä asiakkaan ohjelmassa
+CSS-kielen avulla \cite{w3:css}. Sovellukselle voidaan helposti tuottaa
+erilaisia ulkoasuja (\alt{skins}) pelkästään luomalla erilaisia
+CSS-tiedostoja.
 
 \section{Nelikerroksisen mallin käytännön ongelmia}
 
-Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net-hankkeessa tehtävän Vihko-nimisen työkalun valmistuksessa\footnote{Vihko-työkalusta kerrotaan tarkemmin luvussa \ref{pedanet-vihko}}. Peda.net-hankkeessa on päätetty yhdenmukaistaa sovellusten toimintaympäristöksi Apache/PHP-ohjelmointiympäristö ja MySQL-tietokanta, joten tämä asetti käytännön rajoituksia ohjelman loogiseen rakenteeseen; nykyisin käytössä oleva PHP-kielen versio 4 ei tue moniperintää eikä rajapintaluokkia, joten luokkahierarkian toteuttaminen vaati lievää luovuutta ja teoriittisesta mallista poikkeamista.
+Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net-hankkeessa
+tehtävän Vihko-nimisen työkalun
+valmistuksessa\footnote{Vihko-työkalusta kerrotaan tarkemmin luvussa
+\ref{pedanet-vihko}}. Peda.net-hankkeessa on päätetty yhdenmukaistaa
+sovellusten toimintaympäristöksi Apache/PHP-ohjelmointiympäristö ja
+MySQL-tietokanta, joten tämä asetti käytännön rajoituksia ohjelman
+loogiseen rakenteeseen; nykyisin käytössä oleva PHP-kielen versio 4 ei
+tue moniperintää eikä rajapintaluokkia, joten luokkahierarkian
+toteuttaminen vaati lievää luovuutta ja teoriittisesta mallista
+poikkeamista.
 
-Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä luokkahierarkiasta. Kuvassa \ref{fig:vihko-big-picture} on puolestaan mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä MySQL-tietokanta ja Vihko PHP-sovellus toimivat Peda.net-hankkeen ylläpitämällä palvelimella ja HTML ja CSS ohjaavat ohjelman toimintaa sovelluksen käyttäjän koneessa toimivassa www-selaimessa.
+Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä
+luokkahierarkiasta. Kuvassa \ref{fig:vihko-big-picture} on puolestaan
+mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä
+MySQL-tietokanta ja Vihko PHP-sovellus toimivat Peda.net-hankkeen
+ylläpitämällä palvelimella ja HTML ja CSS ohjaavat ohjelman toimintaa
+sovelluksen käyttäjän koneessa toimivassa www-selaimessa.
 
 \begin{kuva}
 \includegraphics[width=\linewidth]{kuvat/vihko-schema-orig}
@@ -74,13 +236,27 @@ Kuvassa \ref{fig:vihko-schema-orig} on esitetty osa alkuperäisestä luokkahierark
 \label{fig:vihko-big-picture}
 \end{kuva}
 
-Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että PHP-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli aika heikko ja lisäksi käytetystä arkkitehtuurista johtuen täydellisen käyttöliittymäajurin tekeminen alkoi varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
+Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että
+PHP-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli
+aika heikko ja lisäksi käytetystä arkkitehtuurista johtuen täydellisen
+käyttöliittymäajurin tekeminen alkoi varmistumaan liian työlääksi siitä
+saataviin etuihin verrattuna.
 
 \section{Sovelluskehys avuksi}
 
-Koska varsinaisen sovelluslogiikan ja käyttäjän välissä on vielä useita tasoja -- köyhän miehen käyttöliittymäajuri, HTML ja CSS -- päädyin siihen johtopäätökseen, että täydellistä käyttöliittymäajuria ei kannata tehdä. Lisäksi, koska PHP rajaa ainakin toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia ei sen kehittämisen helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
+Koska varsinaisen sovelluslogiikan ja käyttäjän välissä on vielä useita
+tasoja -- köyhän miehen käyttöliittymäajuri, HTML ja CSS -- päädyin
+siihen johtopäätökseen, että täydellistä käyttöliittymäajuria ei
+kannata tehdä. Lisäksi, koska PHP rajaa ainakin toistaiseksi natiivin
+käyttöliittymän kehittämisen mahdollisuuksia ei sen kehittämisen
+helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
 
-Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current} esitettyyn ratkaisuun. Tässäkin luokkahierarkia on ensisilmäyksellä vähintäänkin outo, mutta ratkaisun taustalla kummittelee vaillinainen oliotuki PHP-kielessä. Tätä kirjoittaessa PHP5 on jo ilmestynyt ja siinä joitakin ongelmia onkin korjattu, mutta sen tuotantokäyttöä kannattanee harkita aikaisintaan ensi vuonna.
+Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current}
+esitettyyn ratkaisuun. Tässäkin luokkahierarkia on ensisilmäyksellä
+vähintäänkin outo, mutta ratkaisun taustalla kummittelee vaillinainen
+oliotuki PHP-kielessä. Tätä kirjoittaessa PHP5 on jo ilmestynyt ja
+siinä joitakin ongelmia onkin korjattu, mutta sen tuotantokäyttöä
+kannattanee harkita aikaisintaan ensi vuonna.
 
 \begin{kuva}
 \includegraphics[width=\linewidth]{kuvat/vihko-schema-current}
@@ -88,6 +264,33 @@ Päädyin loppujen lopuksi kuvassa \ref{fig:vihko-schema-current} esitettyyn ratka
 \label{fig:vihko-schema-current}
 \end{kuva}
 
-Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi. Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa Vihkon moduuleiksi.
+Vihkon kehittämisessä havaittujen ongelmien ratkaisemiseksi
+sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska
+tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi.
+Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan
+liittymätöntä ohjelmakoodia joten uusien, samaa sovelluskehystä
+käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava
+logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa
+vaikuttaa, että suurin osa tulevista sovelluksista voidaan kirjoittaa
+Vihkon moduuleiksi.
 
-Kaikki Vihkon moduulit peritään luokasta \class{Document} (ks. kuva \ref{fig:vihko-schema-current}) ja kaikki moduulit saavat oman nimiavaruuden käyttämilleen parametreille. Esimerkiksi jos moduuli, jonka id-numero on \code{251} asettaa sivulle parametrin, jonka nimi on \code{foo}, käytetään todellisena parametrin nimenä merkkijonoa \code{p251xfoo}. Muunnos takaisinpäin tapahtuu automaattisesti \class{Document}-luokan toimesta. Eri moduulien parametrit sijoitetaan omiin nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi mahdollista suorittaa rinnakkain samalla sivulla. Automaattinen uudelleennimeäminen mahdollistaa sen, että yksittäistä moduulia ohjelmoitaessa ei tarvitse tarkistaa mitä nimiä muut moduulit käyttävät. Lisäksi \class{Document}-luokka ylläpitää automaattisesti istuntotietoa johon kuuluu globaali \code{session}-parametri, joka sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen. Lisäksi kaikkiin toimintoihin lisätään tällä hetkellä käytössä olevan moduulin tunniste ja edellisen käytössä olleen moduulin tunniste. Näiden tietojen avulla moduulin kaikista toiminnoista palataan oletuksena takaisin samaan moduuliin, mutta esimerkiksi \emph{tallenna}-toiminnon jälkeen voidaan palata edelliseen moduuliin (joka usein on kansio).
+Kaikki Vihkon moduulit peritään luokasta \class{Document} (ks. kuva
+\ref{fig:vihko-schema-current}) ja kaikki moduulit saavat oman
+nimiavaruuden käyttämilleen parametreille. Esimerkiksi jos moduuli,
+jonka id-numero on \code{251} asettaa sivulle parametrin, jonka nimi on
+\code{foo}, käytetään todellisena parametrin nimenä merkkijonoa
+\code{p251xfoo}. Muunnos takaisinpäin tapahtuu automaattisesti
+\class{Document}-luokan toimesta. Eri moduulien parametrit sijoitetaan
+omiin nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi
+mahdollista suorittaa rinnakkain samalla sivulla. Automaattinen
+uudelleennimeäminen mahdollistaa sen, että yksittäistä moduulia
+ohjelmoitaessa ei tarvitse tarkistaa mitä nimiä muut moduulit
+käyttävät. Lisäksi \class{Document}-luokka ylläpitää automaattisesti
+istuntotietoa johon kuuluu globaali \code{session}-parametri, joka
+sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen.
+Lisäksi kaikkiin toimintoihin lisätään tällä hetkellä käytössä olevan
+moduulin tunniste ja edellisen käytössä olleen moduulin tunniste.
+Näiden tietojen avulla moduulin kaikista toiminnoista palataan
+oletuksena takaisin samaan moduuliin, mutta esimerkiksi
+\emph{tallenna}-toiminnon jälkeen voidaan palata edelliseen moduuliin
+(joka usein on kansio).
