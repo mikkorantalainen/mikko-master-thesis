@@ -50,7 +50,7 @@ clean:
 
 %.dvi:	%.tex
 	@echo === Creating: $@
-	latex $(LATEXARGS) $< > /dev/null ; true
+	latex $(LATEXARGS) $< | grep non-existing-string ; true
 	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(FLAGS) $(ERR) && latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ; true
 	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(FLAGS) $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR)) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) ; true

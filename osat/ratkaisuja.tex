@@ -144,6 +144,7 @@ kaikkia näitä vaihtoehtoja ja käyttäjä voisi omissa asetuksissaan
 valita millä tyylillä hän haluaa käyttää erityyppisiä lomakkeita.
 
 \subsection{Käyttöliittymäajurille jää paljon vastuuta}
+\label{kaikki-data-sivulla}
 
 Koska selainkäyttöisen sovelluksen käyttäjä voi esimerkiksi haarauttaa
 istunnon ja tästä toiminnosta ei synny tapahtumaa palvelimelle, täytyy
@@ -260,30 +261,30 @@ PHP"-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli
 aika heikko. Lisäksi täydellisen käyttöliittymäajurin tekeminen alkoi
 varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
 
-\section{Sovelluskehys avuksi}
+\section{Käyttöliittymäajurin yksinkertaistaminen}
 
-Päädyin siihen johtopäätökseen, että täydellistä käyttöliittymäajuria
-ei kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän
-välissä on niin useita tasoja, jakamalla käyttöliittymä sopivasti HTML
+Päädyin siihen johtopäätökseen, ettei täydellistä käyttöliittymäajuria
+kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän
+välissä on niin useita tasoja. Jakamalla käyttöliittymä sopivasti HTML
 ja CSS -kielien vastuulle, käyttöliittymäajuri voidaan pitää hyvin
 yksinkertaisena. Tätä on havainnollistettu kuvassa
-\ref{fig:oppimappi-big-picture} Lisäksi, koska PHP rajaa ainakin
+\ref{fig:oppimappi-big-picture}. Lisäksi, koska PHP rajaa ainakin
 toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia
 suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
 helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
 
 \begin{kuva}
-\includegraphics[width=4.5cm]{kuvat/oppimappi-big-picture}
+\includegraphics[width=4.2cm]{kuvat/oppimappi-big-picture}
 \caption{Oppimapin rakenne kerroksina}
 \label{fig:oppimappi-big-picture}
 \end{kuva}
 
 
-Kuvassa \ref{fig:oppimappi-schema-current} on  esitetty loppujen
-lopuksi käytetty ratkaisumalli. Tässäkin luokkahierarkia on
-ensisilmäyksellä vähintäänkin outo, mutta ratkaisun taustalla
-kummittelee vaillinainen oliotuki PHP-kielessä. Tätä kirjoittaessa PHP5
-on jo ilmestynyt ja siinä joitakin ongelmia onkin korjattu, mutta sen
+Kuvassa \ref{fig:oppimappi-schema-current} on  esitetty Oppimapissa
+loppujen lopuksi käytetty ratkaisumalli. Tässäkin luokkahierarkia on
+hieman erikoinen, mutta ratkaisun taustalla kummittelee vaillinainen
+oliotuki PHP-kielessä. Tätä kirjoittaessa PHP"-kielen versio 5 on jo
+ilmestynyt ja siinä osa puutteista onkin korjattu, mutta sen
 tuotantokäyttöä kannattanee harkita aikaisintaan ensi vuonna.
 
 \begin{kuva}
@@ -292,43 +293,80 @@ tuotantokäyttöä kannattanee harkita aikaisintaan ensi vuonna.
 \label{fig:oppimappi-schema-current}
 \end{kuva}
 
-Oppimapin kehittämisessä havaittujen ongelmien ratkaisemiseksi
-sovelluskehyksen kehittäminen vaikutti parhaalta ratkaisulta, koska
-tällöin varsinaisen sovelluslogiikan koodi saadaan yksinkertaiseksi.
-Sovelluslogiikkaan tuli mahdollisimman vähän sovelluksen toimintaan
-liittymätöntä ohjelmakoodia, joten uusien, samaa sovelluskehystä
-käyttävien sovellusten teko nopeutuisi. Myös lokalisointiin tarvittava
-logiikka on yhteinen eri sovellusten välillä. Tätä kirjoittaessa
-vaikuttaa siltä, että suurin osa Peda.netin tulevista sovelluksista
-voidaan kirjoittaa Oppimapin moduuleiksi. Oppimapin rakenteesta voidaan
-tarvittaessa rakentaa myös muita toimintaympäristöjä jättämällä osa
-käytössä olevista moduuleista pois tai korvaamalla niitä uusilla.
+Käytännössä käyttöliittymästä vastaavan kerroksen pilkkominen osiin
+selaimen sekä palvelimen vastuulle aiheutti sen, että
+käyttöliittymäajurin piti ymmärtää enemmän selaimen toiminnasta.  Tämän
+seurauksena arvioin, että helpoin ratkaisumalli olisi kehittää
+sovelluskehys Oppimapin kehittämiseksi. Tulevaisuudessa, kun Oppimapin
+lisäksi tehdään uusia työkaluja, voidaan sovelluskehys käyttää
+uudelleen. Myös lokalisointiin tarvittava logiikka on yhteinen eri
+sovellusten välillä. Itse Oppimappi on vain eri tiedostotyyppejä
+toteuttavien moduulien ohjelmakoodi itse sovelluskehyksen rinnalla.
+Tällä hetkellä vaikuttaa lisäksi siltä, että suurin osa Peda.netin
+tulevista sovelluksista voidaan kirjoittaa Oppimapin moduuleiksi sen
+sijaan, että niistä tehtäisiin omia, samaa sovelluskehystä käyttäviä
+sovelluksia. Oppimapista voidaan myös tarvittaessa rakentaa muita
+toimintaympäristöjä jättämällä osa käytössä olevista moduuleista pois
+tai korvaamalla niitä uusilla.
+
+\subsection{Tiedon siirto lomakkeiden välillä}
 
 Kaikki Oppimapin moduulit peritään luokasta \class{Document} (ks. kuva
 \ref{fig:oppimappi-schema-current}) ja kaikki moduulit saavat oman
 nimiavaruuden käyttämilleen parametreille. Tämä on olennaista, koska
 istuntoon liittyvää tietoa täytyy kuljettaa kaikkien linkkien
-osoitteissa. Eri moduulien parametrit sijoitetaan omiin
-nimiavaruuksiinsa sen vuoksi, että useita moduuleita olisi mahdollista
-esittää rinnakkain samalla sivulla. Automaattinen uudelleennimeäminen
-mahdollistaa myös sen, että yksittäistä moduulia ohjelmoitaessa ei
-tarvitse tarkistaa mitä nimiä muut moduulit käyttävät. Esimerkiksi jos
-moduuli, jonka id"-numero on \code{251} asettaa sivulle parametrin,
-jonka nimi on \code{foo}, käytetään todellisena parametrin nimenä
-merkkijonoa \code{p251xfoo}. Nimen muunnos tapahtuu automaattisesti
-\class{DocumentUI}"-luokan toimesta.  Lisäksi
-\class{DocumentUI}"-luokka ylläpitää automaattisesti istuntotietoa,
-johon kuuluu globaali \code{session}"-parametri, joka sisältää
-käyttäjän ja tietokannan tunnistetiedot sekä varmenteen tietojen
-muuttumattomuudesta. Kaikkiin toimintoihin lisätään myös kullakin
-hetkellä käytössä olevan moduulin tunniste sekä edellisen käytössä
-olleen moduulin tunniste. Näiden tietojen avulla moduulin kaikista
-toiminnoista palataan oletuksena takaisin samaan moduuliin, mutta
-esimerkiksi \emph{tallenna}"-toiminnon jälkeen voidaan palata
+osoitteissa, kuten luvussa \ref{kaikki-data-sivulla} selitin. Eri
+moduulien parametrit sijoitetaan puolestaan omiin nimiavaruuksiinsa,
+jotta useita moduuleita olisi mahdollista esittää rinnakkain samalla
+sivulla. Automaattinen parametrien uudelleennimeäminen mahdollistaa
+myös sen, ettei yksittäistä moduulia ohjelmoitaessa tarvitse
+tarkistaa mitä nimiä muut moduulit käyttävät.
+
+Esimerkiksi jos moduuli, jonka id"-numero on \code{251} asettaa sivulle
+parametrin, jonka nimi on \code{foo}, käytetään todellisena parametrin
+nimenä merkkijonoa \code{p251xfoo}. Nimen muunnos tapahtuu
+automaattisesti luokan \class{DocumentUI} toimesta.  Lisäksi
+\class{DocumentUI}"-luokka ylläpitää automaattisesti istuntotietoa.
+Tämä toteutetaan globaalin \code{session}"-parametrin avulla, joka
+sisältää käyttäjän ja tietokannan tunnistetiedot sekä varmenteen
+tietojen muuttumattomuudesta. Kaikkiin toimintoihin lisätään myös
+kullakin hetkellä käytössä olevan moduulin tunniste sekä edellisen
+käytössä olleen moduulin tunniste. Näiden tietojen avulla moduulin
+kaikista toiminnoista palataan oletuksena takaisin samaan moduuliin,
+mutta esimerkiksi \emph{tallenna}"-toiminnon jälkeen voidaan palata
 edelliseen moduuliin. Tämän voi ajatella vastaavan tavallisessa
 käyttöjärjestelmässä ikkunan sulkemista, jonka jälkeen aktiiviseksi
 vaihtuisi edellinen ikkuna.
 
+Oppimappi erottelee istuntoon liittyvän tiedon kahteen eri ryhmään:
+ikkunakohtaiset tiedot ja yleiset asetukset. Kaikki yleiset asetukset
+tallennetaan palvelimen tietokantaan ja ne haetaan tietokannasta
+jokaisen sivun generoinnin alussa. Tietojen hakeminen aina jokaisen
+sivun alussa lisää palvelimen kuormaa hieman, mutta se mahdollistaa
+kuorman jakamisen eri edustakoneiden kesken, sillä Oppimappia ajava
+edustakone ei tallenna mitään tietoja käyttäjästä. Asetukset ja tiedot,
+jotka ovat aikaan sidottuja ja joiden vaikutuksen pitää näkyä selaimen
+historia"-toimintoja käytettäessä tallennetaan jokaiseen sivuun
+upotettuna. Tällä hetkellä ne koodataan kaikkiin linkkeihin, mutta
+tulevaisuudessa ne olisi mahdollista sijoittaa sivun sijainnin
+osoittavaan polkuun. Koska HTML"-standardi määrittelee suhteellisen viittauksen mahdollisuuden linkeissä, voisi Oppimappi sijoittaa kaikki sivukohtaiset tiedot sivun osoitteeseen.
+
+Esimerkiksi osoitteessa
+\code{http://peda.net/mappi""?session=databasetest/""1/""9325""35/""53""252""\&=4""/6""/1}
+oleva Oppimapin dokumentti voitaisiin siirtää osoitteeseen 
+\code{http://""peda.""net/""mappi/""databasetest.""1.""932535.""53252/""4.""6.""1},
+jolloin uuteen sivuun viitatessa ei tarvisisi toistaa enää istuntoon
+liittyvää tietoa vaan ainoastaan sivukohtaiset muutokset. Tällöin
+esimerkiksi linkki \verb!<a href="?x=y">linkkiteksti</a>! osoittaisi
+automaattisesti samaan istuntoon ja samaan dokumenttiin ja selain
+lähettäisi linkin mukana parametrin $x$ arvolla ``y''. Nykyisin
+kaikissa linkeissä pitää aina toistaa parametrit \code{session} ja
+\code{d}.
+
 Koska kaikki nämä tiedot viedään jokaiseen sivuun upotettuna, toimii
-edelliseen näkymään palaaminen myös historian kautta avatuissa
-sivuissa oikein. Myöskään ikkunan kahdentaminen ei aiheuta ongelmia.
+edelliseen näkymään palaaminen myös historian kautta avatuissa sivuissa
+oikein. Myöskään ikkunan kahdentaminen ei aiheuta ongelmia.
+Kirjanmerkkien käyttö toimii lukuunottamatta sitä, että tietoturvan
+lisäämiseksi annetut linkit vanhenevat tunnin kuluessa -- kirjanmerkkiä
+voidaan käyttää tämänkin jälkeen, mutta sitä käytettäessä
+käyttäjätunnus ja salasana kysytään ensin uudelleen.
