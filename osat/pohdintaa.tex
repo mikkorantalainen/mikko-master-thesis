@@ -30,37 +30,38 @@ Tulevaisuuden tutkimuskohteiksi kannattaisi harkita jotain seuraavista:
 Tavallisten www"-sivujen käytettävyydestä on kirjoitettu useita kirjoja
 ja lukemattomia artikkeleita, mutta selainkäyttöisten sovellusten
 käytettävyydestä ei ole merkittäviä tutkimustuloksia näkynyt. Monella
-selainkäyttöisiä sovelluksia kehittävällä sovellussuunnittelijalla
-tuntuu olevan uskomus, että hyvä selainkäyttöinen sovellus muistuttaa
-mahdollisimman paljon tavallista käyttäjän käyttöjärjestelmässä
-toimivaa ohjelmaa. Tämä ei kuitenkaan voi pitää paikkaansa, koska
-aidosti selainkäyttöisen ohjelman käyttöympäristöä ei tunneta, kuten
-tässä tutkielmassa todettiin. 
+selainkäyttöisiä ohjelmia kehittävällä sovellussuunnittelijalla
+vaikuttaa olevan uskomus, että hyvä selainkäyttöinen sovellus
+muistuttaa mahdollisimman paljon tavallista käyttäjän
+käyttöjärjestelmässä toimivaa ohjelmaa. Tämä ei kuitenkaan voi pitää
+paikkaansa, koska aidosti selainkäyttöisen ohjelman käyttöympäristöä ei
+tunneta, kuten tässä tutkielmassa todettiin luvussa
+\ref{mixedos-target}. 
 
 Lisäksi www"-selaimissa on toimintoja, joita tavallisia ohjelmia
-suunniteltaessa ei tarvitse ottaa huomioon. Takaisin"-toiminto ja
-laajemmassa mitassa sivuhistoria ovat kuitenkin käytettävyyttä lisääviä
-ominaisuuksia. Ongelmana on vain niiden tukeminen sovelluksissa.
-Selainkäyttöisen sovelluksen sivujen ja dialogien välillä tulisikin
-siis siirtyä tavallisten www"-sivujen tapaan. Vastakohtana tavalliset,
-käyttöjärjestelmässä toimivat sovellukset harvoin käyttävät useita
-dialogeja peräkkäin ja eivät siten sovellu selainkäyttöisen sovelluksen
-esimerkiksi. Useimmat ``tavalliset'' ohjelmat muokkaavatkin usein
-\emph{sen hetkistä} dialogia sen sijasta, että näyttäisivät käyttäjän
-toimien tulokset uudessa dialogissa tai sivussa, kuten www"-sivut
-toimivat.
+suunniteltaessa ei tarvitse ottaa huomioon. Takaisin"-toiminto, ja
+laajemmassa mitassaan sivuhistoria, ovat kuitenkin käytettävyyttä
+lisääviä ominaisuuksia. Ongelmana on vain niiden tukeminen
+sovelluksissa. Selainkäyttöisen sovelluksen sivujen ja dialogien
+välillä tulisikin siis siirtyä tavallisten www"-sivujen tapaan.
+Vastakohtana tavalliset, käyttöjärjestelmässä toimivat sovellukset
+harvoin käyttävät useita dialogeja peräkkäin ja eivät siten sovellu
+selainkäyttöisen sovelluksen esimerkiksi. ``Tavalliset'' ohjelmat
+muokkaavatkin usein \emph{sen hetkistä} dialogia sen sijasta, että
+näyttäisivät käyttäjän toimien tulokset uudessa dialogissa tai sivussa,
+kuten www"-sivut toimivat.
 
-Toinen tärkeä tutkimuskohde on kuinka lomakepohjaisia käyttöliittymiä
+Toinen tärkeä tutkimuskohde on, kuinka lomakepohjaisia käyttöliittymiä
 voitaisiin kuvata tehokkaasti. Erityisesti tulisi tutkia tarkemmin,
 kuinka erilaiset käsiteltävät ongelmat voidaan esittää lomakkeilla,
-joilla ei ole suoraa yhteyttä käsittelylogiikkaan. Nykyisin vallalla
-oleva malli on tässäkin matkia tavallisia sovelluksia ja välttää
-yhteydettömyyden ongelmat hakemalla koko lomake aina uudelleen ja
-uudelleen, vaikka lomakkeesta muuttuu vain pieniä osia. Erityisesti
-tulisi painottua sellaisien ratkaisumallien etsimiseen, jotka eivät
-vaadi, että asiakassovellus (selain) suorittaisi mitään palvelimen
-tarjoamaa ohjelmakoodia tai skriptejä -- toiminnallisuus pitäisi pystyä
-toteuttamaan HTML"-kielen ja HTTP"-protokollan ehdoilla.
+joilla ei ole suoraa, reaaliaikaista yhteyttä käsittelylogiikkaan.
+Nykyisin vallalla oleva malli on tässäkin matkia tavallisia sovelluksia
+ja välttää yhteydettömyyden ongelmat hakemalla koko lomake aina
+uudelleen ja uudelleen, vaikka lomakkeesta muuttuu vain pieniä osia.
+Erityisesti tulisi painottua sellaisien ratkaisumallien etsimiseen,
+jotka eivät vaadi, että asiakassovellus (selain) suorittaisi mitään
+palvelimen tarjoamaa ohjelmakoodia tai skriptejä -- toiminnallisuus
+pitäisi pystyä toteuttamaan HTML"-kielen ja HTTP"-protokollan ehdoilla.
 
 Kolmas tutkimusta vaativa asia olisi selvittää, kuinka rinnakkain
 tehtyjä muutoksia voisi paremmin hallita? Luvussa
@@ -77,7 +78,7 @@ koneellisesti ja kysyä käyttäjältä lisäohjeita ongelmatilanteessa?
 Neljäs, myös tavallisia ohjelmia koskevia ongelma on, kuinka motivoida
 käyttäjät syöttämään metatietoa syötetystä tiedosta? Jos
 tulevaisuudessa arvioidaan www"-selaimien pystyvän tavuttamaan tekstiä,
-pitäsi tietokantaan pystyä jo nyt tallentamaan tieto siitä, millä
+pitäisi tietokantaan pystyä jo nyt tallentamaan tieto siitä, millä
 kielellä käyttäjä on tietoa syöttänyt. Ei ole järkevää olettaa, että
 syötetty teksti olisi välttämättä samalla kielellä kirjoitettu kuin
 käyttöliittymä esitetään. Kuitenkin esimerkiksi englannin ja suomen
@@ -89,4 +90,7 @@ kirjoittaa kuvaus jokaista dokumentin muutosta kohden; ei niinkään
 \emph{mitä} muutettiin, vaan \emph{miksi} muutos tehtiin. Käyttäjä ei
 usein koe, että tästäkään olisi mitään hyötyä, koska hän muistaa vielä,
 miksi hän teki muutoksen. Mutta muistaako hän sitä vuoden päästä? Entä
-jos sisältöä ylläpitää silloin eri henkilö?
+jos sisältöä ylläpitää silloin eri henkilö? Peda.netin tekemissä
+työkaluissa käyttäjää pyydetään kirjoittamaan ainoastaan kuvaus, mutta
+sekin piti muuttaa valinnaiseksi, koska käyttäjät kokivat, että
+kuvauskentän vaatiminen heikentää ohjelman käytettävyyttä.

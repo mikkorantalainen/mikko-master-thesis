@@ -79,7 +79,7 @@ Oikein konfiguroitu www-selain käyttää siis aina optimaalista tekstin
 kokoa. Käyttäjä voi halutessaan käyttää omaa CSS-tyylitiedostoa.
 
 \item[yhdenmukaisuus] Koko sovelluksen ulkonäkö on määritelty yhdessä
-CSS-tyylitiedostossa. Koska HTML"-koodissa ei ole määritelty ulkoasua
+CSS"-tyylitiedostossa. Koska HTML"-koodissa ei ole määritelty ulkoasua
 vaan ainoastaan sisällön rakenne ovat kaikki sivut keskenään
 yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu toiminta"-palkin
 kautta ja toiminnot tallennetaan aina lomakkeen lopussa olevasta
@@ -152,10 +152,11 @@ henkilöiden tekemät muutokset eivät ole ristiriidassa keskenään.
 \cite{ritcher:three-way-merge}
 
 Toinen merkittävä puute on rinnakkaisissa muutoksissa tilanne, jossa
-henkilö A aloittaa dokumentin X muokkaamisen ja tämän jälkeen henkilö B
-poistaa dokumentin X. Virhetilannetta, jossa dokumentin X muutokset
-yritetään tallentaa, mutta dokumenttia X ei ole enää olemassa, ei
-ainakaan toistaiseksi käsitellä. Ongelmana on, pitäisikö järjestelmän
-palauttaa dokumentti X järjestelmään (miten? Eikö dokumenttia X voikaan
-oikeasti koskaan poistaa?) ja tallentaa muutos. Vai pitäisikö muutokset
-tallentaa uutena dokumenttina? Jos, niin minne ja millä nimellä?
+henkilö $A$ aloittaa dokumentin $X$ muokkaamisen ja tämän jälkeen
+henkilö $B$ poistaa dokumentin $X$. Virhetilannetta, jossa dokumentin
+$X$ muutokset yritetään tallentaa, mutta dokumenttia $X$ ei ole enää
+olemassa, ei ainakaan toistaiseksi käsitellä Oppimappi"-sovelluksessa.
+Ongelmana on, pitäisikö järjestelmän palauttaa dokumentti $X$
+järjestelmään (miten? Eikö dokumenttia $X$ voikaan oikeasti koskaan
+poistaa?) ja tallentaa muutos. Vai pitäisikö muutokset tallentaa uutena
+dokumenttina? Jos, niin minne -- myös hakemisto, jossa tiedosto oli on voitu poistaa -- ja millä nimellä?

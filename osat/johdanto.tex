@@ -106,7 +106,7 @@ navigointi voidaan suunnitella mahdollisimman tehokkaasti
 käytettäväksi. Muilla sivuilla riittää \emph{suhteellinen sijainti},
 joka vastaa kirjan yläreunassa usein toistettavaa nykyisen luvun nimeä.
 Sivun navigoinnista vastaa tällöin yksi linkki: ``Sisällysluettelo''.
-Lisäksi, jos sivusto on mielekäs lukea tietyssä järjestyksessä kuten
+Edelleen, jos sivusto on mielekäs lukea tietyssä järjestyksessä kuten
 tavallinen kirja, voidaan navigointiin liittää linkit ''Seuraava'' ja
 ''Edellinen''.
 
@@ -144,7 +144,9 @@ sivun sisälle.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/mozilla-linkbar}
-\caption{HTML-kieltä tukevat selaimet tarjoavat myös selaimeen integroidun navigoinnin. Huomaa painikkeet taaksepäin, eteenpäin ja sisällysluetteloon.}
+\caption{HTML-kieltä tukevat selaimet tarjoavat selaimeen integroidun
+navigoinnin. Huomaa painikkeet taaksepäin, eteenpäin ja
+sisällysluetteloon.}
 \label{fig:mozilla-linkbar}
 \end{kuva}
 
@@ -162,9 +164,9 @@ halumaansa linkkiä. Kun vertaa tätä sivuun, jossa navigointi ja sisältö
 on samalla sivulla, havaitaan, että sisällysluettelon käyttö ja
 esittäminen helpottuu, koska sille voidaan varata enemmän tilaa. Myös
 varsinaisen sisällön käyttö helpottuu, koska koko selaimen ikkuna
-voidaan varata sen käyttöön. Yhdistelmäsivulla joudutaan myös
-siirtymään sivun alkuun (tai loppuun) navigoinnin käyttämistä varten,
-joten ainoa etu yhdistelmäsivulla on, että ei tarvitse painaa
+voidaan varata sen käyttöön. Yhdistelmäsivullakin joudutaan siirtymään
+sivun alkuun (tai loppuun) navigoinnin käyttämistä varten, joten ainoa
+etu yhdistelmäsivulla on, että ei tarvitse painaa
 ''Sisällysluettelo''-linkkiä. Kun vastapuolella vaakakupissa on
 helppokäyttöisempi sisällysluettelo \emph{ja} parempi sisällön
 käytettävyys pitäisi valinnan olla helppo!
@@ -236,16 +238,20 @@ sanottavaa, on sivuston näyttänyt hienommalta, kun joka sivulla
 \emph{näyttää} olevan paljon sisältöä. Todellisuudessa suuri osa tuosta
 ''sisällöstä'' onkin vain navigointia).
 
-Koska useimmat verkon käyttäjät ovat siis tottuneet sivuihin, joissa
-sisällön lisäksi on paljon navigointielementtejä, täytyy ilmeisesti
+Koska useimmat verkon käyttäjät ovat siis tottuneet sivuihin, joissa on
+sisällön lisäksi myös paljon navigointielementtejä, täytyy ilmeisesti
 myös selainkäyttöisiin sovelluksiinkin laittaa ''turhia''
 navigointielementtejä mukaan. Teoriassa parempi olisi olla ilman, mutta
 käytännössä ohjelmassa saadaan parempi käytettävyys, kun käyttöliittymä
-ei poikkea liiaksi muista sivuista. Kaikki ``tavallisesta'' voimakkaasti poikkeava heikentää käytettävyyttä. Pitkällä aikavälillä navigoinnin
-määrää tulisi kuitenkin pyrkiä vähentämään, jolloin sisältöön
-voitaisiin keskittyä paremmin. Hyvä yleislinja voisi olla käyttää sivulla mahdollisimman pelkistettyä navigointia, joka kuitenkin \emph{näyttää} navigoinnilta.
+ei poikkea liiaksi muista sivuista. Kaikki ``tavallisesta''
+voimakkaasti poikkeava heikentää käytettävyyttä. Pitkällä aikavälillä
+navigoinnin määrää tulisi kuitenkin pyrkiä vähentämään, jolloin
+sisältöön voitaisiin keskittyä paremmin. Hyvä yleislinja voisi olla
+käyttää sivulla mahdollisimman pelkistettyä navigointia, joka kuitenkin
+\emph{näyttää} navigoinnilta.
 
 \section{Käytettävät selainkäyttöiset sovellukset}
+\label{mixedos-target}
 
 Koska selainkäyttöisiä sovelluksia käytetään samalla käyttöliittymällä
 (www-selaimella) kuin tavallisia www-sivujakin, pitäisi tällaisen
@@ -253,13 +259,38 @@ sovelluksen käytön muistuttaa mahdollisimman paljon tavallisen
 www-sivun käyttämistä. Eri www-sivustot poikkeavat toisistaan
 merkittävästi esimerkiksi taiton osalta, joten ulkonäön yksityiskohdat
 eivät ole niin merkittävässä osassa käytettävyyden kannalta kuin
-varsinainen toiminnallisuus. Lisäksi aidosti selainkäyttöisen
-sovelluksen tekijä ei voi tietää, missä käyttöjärjestelmässä sovellusta
+varsinainen toiminnallisuus. Aidosti selainkäyttöisen sovelluksen
+tekijä ei voi myöskään tietää, missä käyttöjärjestelmässä sovellusta
 käytetään, joten ulkonäöstä ei ole järkevää tehdä mitään tiettyä
-käyttöjärjestelmää matkivaa. Yhdenmukaisuuden kannalta tärkeintä olisi
-siis saada sovellus \emph{toimimaan} muiden www-sivujen tapaan.
-Mielestäni tavallisten www-sivujen yhteydessä \emph{selaimen}
-tärkeimpiä ominaisuuksia ovat:
+käyttöjärjestelmää matkivaa. Tätä ongelmaa kuvaavat seuraavat
+kuvakaappaukset. Näistä ensimmäisessä (kuva \ref{fig:mixedos}) on
+kuvattu, millaiselta täydellisesti Windows"-käyttöjärjestelmää matkiva
+selainkäyttöinen sovellus näyttäisi MacOS"-käyttöjärjestelmässä.
+Erityisesti tulee huomata, että MacOS"-järjestelmässä kunkin ohjelman
+valikko on kiinnitetty näytön yläreunaan kun taas
+Windows"-sovelluksissa se on kiinni ikkunan yläreunassa. Myös
+värimaailma ja ikonien tyyli poikkeaa käyttäjän odottamasta. Toisessa
+(\ref{fig:oppimappi-palm}) on esitetty Oppimappi"-työkalu PalmOS V
+"=kämmentietokoneen www"-selaimessa. Luonnollisesti jotain tavallista
+käyttöjärjestelmää matkiva sovellus toimisi huonosti tälläisessä
+ympäristössä.
+
+\begin{kuva}
+\includegraphics[width=13cm]{kuvat/mixedos}
+\caption{Kuva kuvitteellisesta Windows"-käyttöjärjestelmää matkivasta
+selainkäyttöisestä sovelluksesta MacOS"-ympäristössä}
+\label{fig:mixedos}
+\end{kuva}
+
+\begin{kuva}
+\includegraphics[width=7cm]{kuvat/oppimappi-palm}
+\caption{Peda.net Oppimappi Palm V "=kämmentietokoneen kautta käytettynä}
+\label{fig:oppimappi-palm}
+\end{kuva}
+
+Yhdenmukaisuuden kannalta tärkeintä olisi siis saada sovellus
+\emph{toimimaan} muiden www-sivujen tapaan. Mielestäni tavallisten
+www-sivujen yhteydessä \emph{selaimen} tärkeimpiä ominaisuuksia ovat:
 
 \begin{enumerate}
 \item Linkkien seuraaminen
