@@ -1,8 +1,5 @@
 #!/usr/bin/perl -w
-# pod corrections should be made in main.tex, from which 
-# the pod can be regenerated, at least most of it
-#
-# See perldoc Getopt::Long and section "Documentation and help texts"
+# run platex --man or perldoc platex to get documentation
 
 =head1 NAME
 
@@ -10,29 +7,37 @@ platex - a (PDF)LaTeX compiler script
 
 =head1 SYNOPSIS
 
-        platex [options] <file>
+        platex [options] <[--input] file>
 
         Options:
+
+          --input F    Set input filename to F
+
 	  --log        Output log always
 	  --verbose    Increase verbosity (may be repeated)
           --quiet      Decrease verbosity (may be repeated)
-          --clean      Remove generated files
-          --pdf        Generate PDF version in addition to DVI
-          --ps         Generate PS version in addition to DVI
-          --help       Display usage and exit successfully
-          --version    Display version and exit successfully
 	  --fussy      Display overfull hbox warnings
+
+          --clean      Remove some generated files
+          --cleanall   Remove all generated files
+          --pdf        Generate PDF output
+          --ps         Generate PS output
+          --dvi        Generate DVI output (default, if no other target)
+
+	  --repeat N   Set maximum repeat count to N
+
+          --help       Display usage and exit successfully
+          --man        Display man page and exit successfully
+          --version    Display version and exit successfully
 
         Commands marked with asterisk (*) also have matching
 	--no prefix. For example, --nodebug to force debug off.
 
 =head1 INTRODUCTION
 
-B<platex>
-
-is a Perl script that, in close collaboration with latex, pdflatex,
-bibtex and initex, compiles a latex document. To compile document
-main.tex, just run following command:
+B<platex> is a Perl script that, in close collaboration with latex,
+pdflatex, bibtex and initex, compiles a latex document. To compile
+document main.tex, just run following command:
 
         platex main
 
@@ -43,8 +48,9 @@ included files, and so on.
 =cut
 
 use strict;
+use Pod::Usage;
 use Getopt::Long;
-Getopt::Long::Configure("no_ignore_case");
+Getopt::Long::Configure("gnu_getopt","auto_help");
 use File::Basename;
 use File::Copy;
 use File::Spec;
@@ -53,87 +59,140 @@ use Term::ReadLine;
 use Term::ANSIColor qw(:constants);
 #use Config;
 
+$main::VERSION = "platex 0.1";
+
 my $term = new Term::ReadLine 'mk';
 
+my @actions = ();
+
 # command line settable parameters
-our ( $verbose, $clean, $pdf, $ps, $print_log, $fussy  ) =
-    ( 0,        0,      1,    0,   0,          0       );
+our ( $verbose, $repeat,  $print_log, $fussy  ) =
+    ( 0,        4,        0,          0       );
 
 my @warnings_to_skip = (
 #   'Package hyperref Warning: Token not allowed in a PDFDocEncoded string',
 #   'Package array Warning: Column [XY] is already defined on '
 );
 
-GetOptions(
-    'verbose'   => sub { $verbose++ },
-    'quiet'     => sub { $verbose-- },
-    'log'       => \$print_log,
-    'clean'     => \$clean,
-    'pdf!'      => \$pdf,
-    'ps!'       => \$ps,
-    'help'      => \&help,
-    'version'   => \&version,
-    'fussy'     => \$fussy,
-) or help();
+my $input = '';
 
-#die("log output not implemented") if $log;
+GetOptions(
+	'input|i=s'	=> \$input,
+
+	'log|l!'	=> \$print_log,
+	'verbose|v'	=> sub { $verbose++ },
+	'quiet|q'	=> sub { $verbose-- },
+	'fussy|f'	=> \$fussy,
+
+	'clean|c'	=> sub { push(@actions,"clean"); },
+	'cleanall|C'	=> sub { push(@actions,"cleanall"); },
+	'pdf|p'		=> sub { push(@actions,"pdf"); },
+	'ps|P'		=> sub { push(@actions,"ps"); },
+	'dvi|d'		=> sub { push(@actions,"dvi"); },
+
+	'repeat|r=i'	=> \$repeat,
+
+	'help|h|?'	=> sub { pod2usage(0); },
+	'man'	        => sub { pod2usage(-exitstatus => 0, -verbose => 2); },
+	'version|V'	=> \&version,
+) or pod2usage(2);
+
+$input = $ARGV[0] || '' unless $input;
+push(@actions,"dvi")    unless @actions;
 
 my $bibtex_counter = 0; # number of times bibtex has been already run
 
 my $linenum = 1;
 my $errorfile = "platex-errors.log";
 
-my $input = $ARGV[0]||'';
-$input =~ s/[.]tex$//; # remove extension, if any
-my ($volume,$dir,$source) = File::Spec->splitpath($input);
-my $sourcedir = ($volume or $dir) ? File::Spec->catdir($volume,$dir) : File::Spec->curdir();
-my $currentdir = File::Spec->curdir();
+if (! $input )
+{
+	warn("Missing file name to process.\n");
+	pod2usage(3); # exit with error status 3
+}
+my $basename = $input;
+$basename =~ s/[.]tex$//; # remove extension, if any
 
-#print("current directory: $currentdir\n");
-#print("source directory:  $sourcedir\n");
-#print("source document:   $source\n");
+-f $basename or -f $basename.".tex" or warn "platex: warning: input '$input' is not a regular file (tried $basename and $basename.tex).\n";
 
+warn("platex: list of actions to do: @actions\n") if $verbose > 2;
 
-chdir($sourcedir) or die "platex: cannot change to directory '$sourcedir'.\n";
+# main loop:
+foreach my $action (@actions)
+{
+	if ($action eq "clean")
+	{
+		warn("platex: removing unneeded generated files.\n") if $verbose >= 1;
+		clean();
+	}
+	elsif ($action eq "cleanall")
+	{
+		warn("platex: removing all generated files.\n") if $verbose >= 1;
+		cleanall();
+	}
+	elsif ($action eq "dvi")
+	{ compile("dvi"); }
+	elsif ($action eq "pdf")
+	{ compile("pdf"); }
+	elsif ($action eq "ps")
+	{ compile("ps"); }
+}
+exit(0); # all went okay.
 
--f $source or -f $source.".tex" or die "platex: cannot find '$source'.\n";
-
-chdir $sourcedir;
-
-my $basename = $source; # basename == old code
-
-if ($clean) {
-    print("Cleaning...\n");
-    $_ = tex_dep();
-    my @dep = split;
-    my @aux = ();
-    for (@dep) { push @aux,$_ if /\.aux/ }
-    
-    #sys("TEX_SOURCE_BASE=$basename make $makeopt -f $MK clean");
-    #$Clean and unlink "$basename.$target";
+sub clean
+{
+	rm("$basename.log");
+	rm("$basename.blg");
+	rm("$basename.ilg");
+	rm("$basename.ind");
+	rm("$basename.out");
+	rm("$basename.brf");
+	rm("$basename.idx");
+	rm("$basename.toc");
+	rm("$basename.lof");
+	rm("$basename.lot");
 }
 
-compile();
+sub cleanall
+{
+	clean();
+	rm("$basename.aux");
+	rm("$basename.bbl");
+	rm("$basename.dvi");
+	rm("$basename.ps");	
+	rm("$basename.pdf");	
+}
 
+sub rm($)
+{
+	my ($f) = @_;
+	warn("Removing '$f'\n") if $verbose >= 2;
+	$f =~ m/\.(dvi|log|aux|bbl|blg|ilg|toc|lof|lot|idx|ind|out|brf|pdf|ps)$/ or die("internal error");
+	my $c = unlink($f);
+	if ($c != 1 and ! ($! =~ m/No such file or directory/) )
+	{
+		warn("platex: failed to remove '$f': $!\n");
+	}
+}
+
+
+# compile($target): generates $basename.$target
 sub compile
 {
-	# since we changed dir to where the tex-source is, \input-ed local files
-	# may become invisible, so add the original dir to TEXINPUTS:
-	# use kpsewhich to find the effective value of TEXINPUTS since it may be
-	# unset and then has to be taken from texmf.cnf
-	my $texinputs=sys("kpsewhich --expand-var '\$TEXINPUTS'");
+	my ($target) = @_;
+	
+	$target =~ m/^(dvi|ps|pdf)$/ or die("platex: target '$target' not supported");
+
 	my $log;
 
 	my $counter = 0;
-	RETRY: for (my $i = 1; $i <= 4; $i++)
+	RETRY: for (my $i = 1; $i <= $repeat; $i++)
 	{
 		debug("platex: running latex again.\n") if ($i > 1);
 		
 		my $command =
-		#	"TEXINPUTS=$ENV{PWD}:".$texinputs.
         		"latex ".
-        		"-interaction=batchmode ".
-		#	"-file-line-error-style ".
+        		"-interaction=batchmode ". # never wait user input on error
         		"$basename";
 		$counter++;
 		my $discard = sys($command);
@@ -145,23 +204,34 @@ sub compile
 		}
 		else
 		{
-			try_to_fix_errors($log);
+			try_to_fix_errors($log) if ($i < $repeat); # try to fix unless this is last run
 		}
 	}
 
 	if (check_no_errors($log) )
 	{
+		print("All Done. Had to run latex $counter times.\n") if ($counter > 1 and $verbose >= 0) or ($verbose > 1);
+		print("\nLog follows:\n".$log) if $print_log;
+
 		$fussy and check_overfull($log);
 
-		print("Had to run latex $counter times.\n") if ($counter > 1 and $verbose >= 0) or ($verbose > 1);
-		print("\nLog follows:\n".$log) if $print_log;
-		exit(0); # all ok.
+		#if ($ps)
+		#{
+		#	print("platex: generating PS\n");
+		#	sys("dvips $basename -o $basename.ps");
+		#}
+		#if ($pdf)
+		#{
+		#	warn("platex: PDF output not yet supported.\n");
+		#}
 	}
 	else
 	{
-		print("Tried to run latex $counter times and errors still remain.\n");
+		print("Tried to run latex $counter times and errors still remain.\n") unless $verbose < -2;
+
+		print("\nLog follows:\n".$log) if $print_log;
+
 		display_errors($log);
-		warn("Failed to compile $basename.\n") unless $verbose < -2;
 		exit(1); # there were errors
 	}
 }
@@ -172,7 +242,7 @@ sub check_overfull($)
 
 	while ( $log =~ m/^([\/a-z0-9_.-]*?): Overfull \\hbox \([0-9.]+pt too wide\) in paragraph at lines (\d+)--(\d+)/mig )
 	{
-		print("$1: cannot nicely break lines $2-$3.\n");
+		print("$1: note: cannot nicely break lines $2-$3.\n");
 	}
 	
 	return 1;
@@ -184,7 +254,7 @@ sub parse_log($)
 {
 	my ($logfile) = @_;
 	my ($log, @lines, $line,@files,$file,$output);
-	open( LOG, $logfile ) or die("platex: cannot open log file '$logfile'.\n");
+	open(LOG, "<", $logfile) or die("platex: cannot open log file '$logfile'.\n");
 	local $/ = undef;
 
 	@files = ();
@@ -197,6 +267,7 @@ sub parse_log($)
 	$log =~ s/^\*\*[a-zA-Z0-9._-]+?$//sm;
 
 	$log =~ s/([^\n]{79})\n/$1/gsm; # combine broken lines (remove linefeed if line length is 79 chars)
+	$log =~ s/\n {15}/ /gsm; # combine broken lines
 	$log =~ s/\(1in=[.0-9]+pt, 1cm=[.0-9]+pt\)//gsm; # this looks like file line but is not! Remove it!
 	$log =~ s/\n\(Font\)\s+/ /gms; # No need for this either
 	$log =~ s/\n\(babel\)\s+/ /gms; # No need for this either
@@ -230,7 +301,7 @@ sub parse_log($)
 	#print($log) ; exit(0);
 
 	# only if BRIEF:
-	if ($verbose < 0)
+	if ($verbose < 3)
 	{
 		$log =~ s/^This is TeXk?, Version 3.14159.*?$//sm;
 		$log =~ s/^LaTeX2e <\d{4}\/\d\d\/\d\d>$//sm;
@@ -240,10 +311,10 @@ sub parse_log($)
 		$log =~ s/^Package: (color|everyshi|fontenc|inputenc|geometry|keyval|babel|tocbibind|graphicx|graphics|trig|hyperref|url|backref|nameref|listings) \d{4}\/\d\d\/\d\d +v?(er)? ?\d.*?$//gsm;
 	}
 	
-	$log =~ s/\\openout\d+ = `(.*?)'\./$verbose >= -2 ? "creating file: $1" : ""/gsme;
-	$log =~ s/^File: ([a-z\/0-9_-]+\.(eps|pdf|png|jpg|gif)) Graphic file.*?\n\s*<\1>/$verbose >= -2  ? "included graphics: $1\n" : ""/gmie;
+	$log =~ s/\\openout\d+ = `(.*?)'\./$verbose >= -1 ? "creating file: $1" : ""/gsme;
+	$log =~ s/^File: ([a-z\/0-9_-]+\.(eps|pdf|png|jpg|gif)) Graphic file.*?\n\s*<\1>/$verbose >= -1  ? "including graphics: $1\n" : ""/gmie;
 	
-	if ($verbose < 0)
+	if ($verbose < 3)
 	{
 		$log =~ s/^LaTeX Info: Redefining \\(url|ref|pageref) on input line \d+\.$//gsm;
 		#$log =~ s/^\s*LaTeX Font Info: .*?$//gsm;
@@ -257,9 +328,30 @@ sub parse_log($)
 		$log =~ s/\*hyperref using default driver \S+\*//gsm;
 	}
 
+	$log =~ s/Output written on ([^(]+) \((\d+) pages, (\d+) bytes\)./"creating $1 ($2 pages, ".sprintf("%.2f",$3\/1024)." KB)"/gsme;
+
+	# remove stupid help texts that still get putted into the log even with batchmode
+	$log =~ s/See the LaTeX manual or LaTeX Companion for explanation.//gsm;
+	$log =~ s/Type  H <return>  for immediate help.//gsm;
+	$log =~ s/^\s*\.\.\.\s*$//gsm;
+	$log =~ s/Try typing  <return>  to proceed.//gsm;
+	$log =~ s/If that doesn't work, type  X <return>  to quit.//gsm;
+	$log =~ s/Type X to quit or <RETURN> to proceed,//gsm;
+	$log =~ s/or enter new name. \(Default extension: cls\)//gsm;
+	$log =~ s/Enter file name://gsm;
+	$log =~ s/<read \*>//gsm;
+	$log =~ s/\*\*\* \(cannot \\read from terminal in nonstop modes\)//gsm;
+
+	$log =~ s/\^\^M/\n/gsm; # fix borken linefeeds
 	$log =~ s/\n+/\n/gsm; # remove empty lines
 	$log =~ s/^\s+//gsm; # remove indents
 
+	# XXX fix error and warning messages
+	$log =~ s/^\! LaTeX Error: ([^\n]+)\nl.(\d+) ([^\n]+)\n/error at line $2 near "$3": $1\n/gsm;
+	$log =~ s/^\! LaTeX Error: ([^\n]+)\n/error: $1\n/gsm;
+	$log =~ s/^\! Emergency stop.\n/error: cannot continue\n/gsm;
+	$log =~ s/^\! LaTeX Warning: ([^\n]+)\nl.(\d+) ([^\n]+)\n/error at line $2 near "$3": $1\n/gsm;
+	$log =~ s/^l\.(\d+)/at line $1/gsm;
 
 	#print($log) ; exit(0);
 	
@@ -271,14 +363,14 @@ sub parse_log($)
 			my $sfile = $file;
 			$file = $1;
 			$sfile =~ s#^/usr/share/texmf/tex/latex#...#;
-			$output .= "$sfile: loading [@files] $file\n" if $verbose > 1;
+			$output .= "$sfile: loading [@files] $file\n" if $verbose > 2;
 			push(@files,$file);
 		}
 		elsif ($line =~ /^[)]/)
 		{
 			my $sfile = $files[$#files-1] || "latex";
 			$sfile =~ s#^/usr/share/texmf/tex/latex#...#;
-			$output .= "$sfile: closing file $file\n" if $verbose > 1;
+			$output .= "$sfile: closing file $file\n" if $verbose > 2;
 			pop(@files);
 			$file = $files[$#files] || "latex"; # get last file name in stack or "latex" if no files open
 			
@@ -292,6 +384,7 @@ sub parse_log($)
 	}
 	#print($output);
 	#exit(0);
+	close(LOG);
 	return $output;
 }
 
@@ -331,6 +424,7 @@ sub try_to_fix_errors($)
 		{
 			warn("platex: no hyphenation patterns were found. Running latex -ini latex.ltx...\n") unless $verbose < 0;
 			$discard = sys("latex -ini latex.ltx");
+			#$discard = sys("pdflatex -ini pdflatex.ini");
 		}
 		else
 		{
@@ -392,206 +486,9 @@ sub display_errors($)
 	return 1;
 }
 
-
-sub show_error_and_edit {
-    my $noedit = shift;
-    my ( $p, @x ) = (0);
-    $linenum=0;
-    open( LOG, "$basename.log" );
-    while (<LOG>) {
-        while ( length == 80 ) { # concatenate continuation lines
-            chomp;
-            $_ .= <LOG>;
-        }
-        /^$/                 and next;
-        /^\s+/               and next;
-        #/Here is|Try typing/ and last;
-        if ( /^(Und|Ov)erfull/ ) { # skip to an empty line:
-            while(<LOG>) { 
-               chomp;
-               last if /^$/;
-            }
-            next;
-        }
-        next if /\(Font\)/;
-        next if /^LaTeX Font Info/;
-        next if /^File:/;
-        if ( /warning/i ) {
-            my $skip = 0;
-            for my $w (@warnings_to_skip) {
-                /$w/ and $skip++,last;
-            }
-            print unless $skip;
-            next; # the next will skip "! pdfTeX warning..."
-                  # which is otherwise seen as an error
-        }
-        # keep track of the file we are in:
-        unless ( $p ) { # but only up to the first error
-          s/\(\S+?\)//g;
-          while (
-              /(
-                        \(\S+\s # look for ( followed by perhaps filename
-                        |
-                        \) # or )
-                       )/gx
-            )
-          {
-              my $f = $1;    # and put what's found in $f
-              if ( $f ne ')' ) {
-                  push @x, $f;
-              } else {
-                  pop @x;
-              }
-          }
-        }
-
-        /^!/ || /^Runaway argument/ and do {
-            if ( $linenum ) { # this is the second error message
-                $p=20;
-            } else {  # first error's linenumber
-                $p++;
-                chomp;
-                $_ = BOLD . YELLOW . ON_RED . $_ . RESET . "\n";
-            }
-        };
-
-        /^l\.(\d+)/ && $p and do { # look for a line number only after an error
-            $linenum = $1;
-            chomp;
-            $_ = BOLD . BLACK . ON_GREEN . $_ . RESET . "\n";
-        };
-
-        if ($p) {
-            print;
-            last if ++$p > 20;    # this must be enough to see what's wrong
-        }
-    }
-    # if there is a bibtex log, show an exerpt:
-    if (-f "$basename.blg" ) {
-        open(LOG,"$basename.blg");
-        while(<LOG>) {
-           next if /^Th/;
-           last if /wiz_defined/;
-           print;
-        }
-    }
-    $p = 0;    # for the next run
-    ( $errorfile = ( pop @x )) =~ s/.//;
-    $errorfile =~ s/{.*//;    # file may have been reported
-                              # with {dependencyfiles} attached
-    $errorfile =~ s/ +$//; 
-    edit(1) unless $noedit;
-}
-
-sub edit {
-    my $x;
-    if ( $_[0] ) {
-        warn "error in $errorfile\n";
-        while ( ( $x = ask("\n=====> e(dit) q(uit) ") ) !~ /^(q|e)$/ ) {
-            warn "you must type e or q\n";
-        }
-        $x eq 'q' and quit();
-    }
-    $linenum||=1;
-    chomp ( my $edfile = $errorfile );
-    -f $edfile or die "Could not edit $edfile; vanished?\n";
-    sys( "$ENV{EDITOR} +$linenum $edfile");
-    $errorfile = '';
-    goto RESTART;
-}
-
-sub ask {
-    my $x = $term->readline( $_[0] );
-    chomp($x);
-    $x;
-}
-
-sub tex_dep {
-    # Scan fls file for: include files, bibtex mode,
-    # In bibtex mode, scan aux file for bib files
-    # Returns the included files
-
-    open( FLS, "$basename.fls" ) or do {
-        warn "Could not find file $basename.fls in " . (`pwd`) . "\n" if $verbose > 0;
-        return '';
-    };
-    my %inc = ();
-
-    $_ = <FLS>;
-    /^PWD / or die "$basename.fls is not a TeX fls file.\n";
-
-    while (<FLS>) {
-        chomp;
-        /^INPUT (.*)/ and do {
-            my $hit = $1;
-            $inc{$hit}++; # unless $hit =~ m|$skip_pattern|;
-        };
-    }
-    for ( parse_aux() ) { $inc{$_}++ }
-    print join "\n", "file dependencies:", ( sort keys %inc ), "\n" if $verbose > 0;
-    join " ", ( sort keys %inc );
-}
-
-sub help {
-    # help displays the contents of the NAME and SYNOPSIS pod sections
-    # and then asks the user whether she wants to see the full man page
-    open( IN, $0 );
-    while (<IN>) {
-        last if /=head1 NAME/;
-    }
-    while (<IN>) {
-        /=head1 SYNOPSIS/ and <IN>, next;
-        last if /^=/;
-        print;
-    }
- #   if (executable("perldoc",2)) {
- #       $|    = 1;
- #       @ARGV = ();    # force further input from stdin
- #       print("\ntype m to see the man page or anything else to quit: ");
- #       chomp( my $in = <> );
- #       exit 0 unless $in =~ /^m/;
- #       sys("perldoc $0");
- #       exit 0;
- #   }
-    exit 0;
-}
-
 sub version {
-    # version returns the CVS name and version information
-    my $mess = "No version number assigned yet";
-    open IN, $0;
-    while (<IN>) {
-        /^Version: (.*)$/
-          and $mess = "platex version $1", last;
-    }
-    print "$mess\n";
+    print "${main::VERSION}\n";
     exit 0;
-}
-
-sub executable {
-    # executable returns the full path of a named executable if it exists
-    # if it does not, it returns undef, or it dies, depending on the second argument
-    # arguments:
-    # 1. name of an executable
-    # 2. if 1, warn if executable is missing, if 2, make it lethal
-
-    my ( $ex, $needed ) = @_;
-    $needed||=0;
-    $ex =~ s/\s+.*//;
-    my $root = rootdir;
-    for my $dir (path) {
-        opendir( DOT, $dir =~ /^$root/ ? $dir : catdir(curdir,$dir) ) || next;
-        while ( my $e = readdir(DOT) ) {
-            next unless $e eq $ex;
-            $e = "$dir/$e";
-            next unless -f $e;
-            next unless -x $e;
-            return $e;
-        }
-    }
-    $needed and warn "executable $ex needed but not found\n";
-    $needed > 1 and exit 1;
-    return undef;
 }
 
 sub sys($) {
@@ -612,35 +509,23 @@ sub sys($) {
 
 =head1 HOW IT WORKS
 
-When working on a B<latex> document, the main activities--apart from
-thinking--consist of editing the sources, compiling with
-(B<pdf>)B<latex>, viewing the result (either a B<postscript> or B<pdf>
-file or B<latex> errormessages) and, perhaps, printing the document or
-parts of it.
+A B<latex> document, as well as any other TeX document, may need
+several passes of compilation in order to fulfill all cross references
+and bibliography references, fix longtable calculations, and build the
+indices. In a perfect world, latex, bibtex and friends would deal with
+this issue automatically. In the less-than-perfect world we live in,
+B<platex> tries to do the work for you by calling latex, pdflatex,
+bibtex and initex in correct order as many times as required.
 
-A B<latex> document, as well as any other TeX document, may need several
-passes of compilation in order to fulfill all cross references and
-bibliography references, fix longtable calculations, and build the
-indices. When you compile manually, you'll have to keep track of the
-often abundant messages of B<latex> to see if another compilation is
-needed. Most of that work can be taken out of your hands by using
-B<texi2pdf> (or B<texi2dvi>.) That is exactly what B<mk> does.
+B<platex> does not figure out whether or not the source is up to date.
+You may use B<make> for that. B<platex> is more like B<gcc> command.
 
-However, although B<texi2pdf> does look in the current directory for
-\included and \inputed files, it does not keep track of other files that
-you may have edited, such as style files, bibliography files, fontfiles,
-and so on, either in the current or in other directories. For that
-purpose, a recent contribution to B<ctan> by Tong Sun and Chris Beggy
-comes in handy: a makefile for B<make> that takes care of all of this,
-in cooperation with B<texi2pdf>. However, this makefile needs to be told
-on what files your sources depend (apart from included files in the
-current directory.)
-
-This problem is solved by the recent appearance of a new option for
-TeX: the -recorder option. This option tells TeX to maintain a F<.fls>
-file that logs all file dependencies that TeX finds in the sources.
-This is how the start of the current document's F<.fls> file,
-F<main.fls>, looks like:
+You probably have many files making up the source of your document. You
+may figure out correct Makefile depencies by running latex with the
+-recorder option. This option tells TeX to maintain a F<.fls> file that
+logs all file dependencies that TeX finds in the sources. This is how
+the start of the current document's F<.fls> file, F<main.fls>, looks
+like:
 
         PWD /home/wybo/CVSWORK/mk
         INPUT /tex/texmf/web2c/pdflatex.fmt
@@ -650,457 +535,150 @@ F<main.fls>, looks like:
         INPUT /texlive/texmf/tex/latex/base/article.cls
         [ 110 similar lines follow... ]
 
-Now here is how B<mk> works (supposing F<main.tex> to be the source):
+In the future B<platex> may support generating dependency files for make.
+
+=head2 How B<platex> does its thing
 
 =over 8
 
-=item 1 
+=item 1
 
-if there is no file F<main.fls> or if it is older than the source,
-B<latex> is run to generate it.
+B<platex> runs latex to compile source to DVI, parses the log (the log
+generated by LaTeX is far from nice) and looks for evidence on errors.
 
-=item 2 
+=item 2a
 
-F<main.fls> is scanned for lines starting with INPUT and the files on
-those lines are saved for B<make>.
+If no errors were found, B<platex> then proceeds to generate PS, PDF or
+other formats.
 
-=item 3 
+=item 2b
 
-B<make> is executed.
+If errors were found and the retry counter has not reached the maximum
+limit, B<platex> tries to fix the issue and goes back to step 1.
 
-=item 4 
+=item 3
 
-if an error occurred, the log file is displayed, starting at the error
-location, skipping irrelevant lines, and stopping at most 20 lines
-later. The error message and its line number in the source are
-highlighted in color. The line number is remembered for the editor to
-start at. The user is finally asked whether he wants to quit, or to edit
-the source and recycle from 1. on.
-
-=item 5 
-
-if no error occurred, the B<pdf> or B<postscript> output is displayed,
-using B<vpp>.
-
-=item 6 
-
-after the user has left the viewer (normally with `q' or `control-q')
-the user is asked (still running B<vpp>) whether he wants to quit, or
-(re-)edit the source, or to print (parts of) the document.
-
-=back
-
-=head1 PAGE SELECTION
-
-As said in the introduction, after a successful compilation and
-display of the resulting B<pdf> or B<postscript> output, the user is
-prompted with:
-
-          vpp command (h for help):
-
-upon typing `h' B<vpp> displays examples of possible commands:
-
-        Examples of print commands:
-          5          to print page 5
-          5-         to print pages 5 through the end
-          5-7        to print pages 5, 6 and 7
-          -7         to print the first 7 pages
-          5-7,19- to print pages 5, 6, 7 and 19 through the end
-          a          to print the whole document
-          a x3       to print 3 copies of the document
-          x3         the same
-          5 x3       to print 3 copies of page 5
-          t          print the whole document twosided
-          t 2-       print twosided starting at page 2
-          b          to print the whole document as an a5 size booklet
-          b -12      to print the first 12 pages as an a5 size booklet
-        Other commands:
-          e          edit the tex source and rerun mk
-          h          display this help
-          ?          display this help
-          q          quit
-        vpp command (h for help):
-
-With these examples, no further explanation should be necessary, except
-that, when twosided (`t') or booklet (`b') printing is selected,
-printing will be performed in two shifts, one for the front side and one
-for the backside. Between the shifts, another prompt appears:
-
-          printer ready? then turn stack and type return
-
-You will have to arrange your printer such that, with the printed sides
-up, the first page printed will be at the bottom of the stack, and the
-last page printed will be on top. Normally you will then have your
-output come out the back of your printer. `Turn the stack' then means:
-rotate it over the long side of the paper and feed it back into the
-printer for the other side to be printed.
-
-For further information on B<vpp>, look in its manpage by typing
-
-          vpp -h
-
-or read the article on B<vpp> elsewhere in this issue.
-
-=head1 LOCATING THE SOURCE
-
-B<mk> locates the B<latex> source in several steps:
-
-=over 8
-
-=item 1 
-
-If you supply no arguments, the file F<main.tex> in the current
-directory is assumed.
-
-=item 2 
-
-If you supply an argument (say F<myfile,>) B<mk> adds a F<.tex>
-extension if it isn't there and looks for F<myfile.tex> in the current
-directory.
-
-=item 3 
-
-if F<myfile.tex> is not found in the current directory, B<mk> looks in
-the `alternate directory` (say F</Documents>) if you have defined one
-(see the section `RC-files').
-
-=item 4 
-
-if the source was not found in /Documents, B<mk> thinks that you may
-have a subdirectory F<myfile> in /Documents where the source may live
-under the name F<main.tex>
-
-=item 5 
-
-if that file is not there, B<mk> now concludes that the source does not
-yet exist and reports this, telling at the saem time which files have
-been tried.
-
-=item 6 
-
-if you have defined a template file (see the section `RC-files'), B<mk>
-now gives you the opportunity to create a new B<latex> source from that
-template. If you confirm B<mk>'s question, B<mk> copies the template to
-the filename you supplied (or F<main.tex> if you did not) and starts
-your editor with the newly created file.
-
-=item 7 
-
-finally, if all the above did not lead to a source file, B<mk> dies.
+B<platex> reports the results and exists successfully if no problems
+were found and with non-zero exit code if there were warning or errors.
+`Overfull hbox' (meaning that LaTeX could not nicely break a line) is
+not considered to be an warning or error but it is reported if --fussy
+option is set.
 
 =back
 
 =head1 OPTIONS
 
-B<mk>
-comes with several options. Table 1 shows an overview. Options are shown
-in logically identical pairs, with the full version in the first column
-and the minimum shorthand (without the parameters) in the second.
-Options marked with a star are boolean options. Default values are shown
-in the last column. You can set boolean options to false by prefixing
-the option with `no', for example: --noquiet or -noq.
-
-Before evaluating any options, B<mk> will try to read a system rc-file,
-a user rc-file, and, finally an rc-file in the current directory. The
-default values for -marked options and for string options can be set in
-these files. See the section `RC-files' for more information.
+B<platex> comes with several options. Options below are shown in
+logically identical pairs, with the long version in the first column
+and the shorthand (without the parameters) below. Default values are
+described in text.
 
 You can also set option defaults in an alias. For example:
 
-        alias mk='mk -noquiet'
+        alias platex='platex -qq'
 
 =over 8
 
 =item --help
 
-Prints help information and lets you type `m' to display the complete
-man page or anything else to quit.
+=item -h
+
+Prints help information and exits succesfully.
 
 =item --version
 
-Prints name and (   -)version and then quits.
+=item -V
+
+Prints name and version and exits succesfully.
+
+=item --verbose
+
+=item -v
+
+Increases verbosity, default verbosity is zero.
 
 =item --quiet
 
-Suppresses messages about the progress B<mk> is making. This is
-the default.
+=item -q
 
-=item --rc <rc-file>
+Decreases verbosity, the opposite of --verbose.
 
-Read specified rc-file before processing. The contents of the rc-file
-may override options specified before the --rc option, therefore it is a
-good idea to have the habit of specifying the --rc option first.
+=item --repeat=<integer: maximum number of retries to compile source>
 
-=item --batch <printing command string>
+=item -r
 
-Prevents the --print option to interrogate the user about pages to be
-printed. Instead the document is printed according to the mandatory
-<printing command string>. Also sets viewing off. Thus the command
+Allow B<platex> to run up to this many times until giving up if there
+are still error messages in the output. Default is 4.
 
-        mk -batch '2-3 x3' test
+=item --log
 
-prints 3 copies of pages 2 and 3 of F<test.tex>, without viewing.
+=item -l
+
+Force log output. Normally the log or excerpts of it will be printed
+only if some errors are noticed. This parameter forces printing the
+full log (log verbosity is set by --verbose and --quiet flags).
 
 =item --clean
 
-Clean up (remove) all unnecessary files generated by B<latex> and
-B<bibtex> except for the B<pdf> or B<postscript> files.
+=item -c
 
-=item --Clean
+Remove all unnecessary files generated by B<latex> and B<bibtex> except
+for the B<dvi>, B<aux>, B<bbl>, B<pdf> or B<postscript> files. Keeping
+these files increases recompile times.
 
-Clean up (remove) all unnecessary files generated by B<latex> and
+=item --cleanall
 
-=item --print
+=item -C
 
-Present the print prompt. This is the default. This option is normally
-used to suppress the print prompt, for example when using B<mk> from
-other scripts that generate B<latex> documents that have only to be
-displayed or stored without even being displayed.
+Remove all file generated by B<platex>.
+
+=item --pdf
+
+=item -p
+
+Request B<platex> to generate PDF file. Off by default.
 
 =item --ps
 
-Generate B<postscript> version of document. The default is to generate a
-B<pdf> document.
+=item -P
 
-=item --view
+Request B<platex> to generate PostScript file. Off by default.
 
-Run the file viewer. This is the default. This option is normally used
-to suppress starting the viewer, for example when using B<mk> from other
-scripts that generate B<latex> documents that have only to be printed.
+=item --dvi
 
-=item --edit F<file>
+=item -d
 
-Normally, B<mk> lets you edit the main source file, but here you can
-specify another file to be edited instead. This is useful, for example,
-if you are are fixing a style file or another input file.
+Request B<platex> to generate DVI file. On by default, will be turned
+off if any other action is called for (e.g. --clean).
 
-=item --warn
+=item --input F<filename>
 
-After a successful run, scan the log file for warnings and repeat
-those. The array @warnings_to_skip, which can be set in the rc-files (see
-below) can be filled with regexp's that match warnings you don't want to
-see.  
+=item -i
 
-=back
+Use filename to get source to compile. If input name is not set with
+--input option, the first non-option parameter is considered to be the
+input file name and if one does not exists, an error message is printed
+and B<platex> exists with non-zero error status.
 
-=head1 RC-FILES AND CUSTOMIZATION
+=item --fussy
 
-Unless the environment variable NORC has been set, three rc-files are
-executed, if they exist, before reading the command line options, in the
-following order:
+=item -f
 
-=over 8
-
-=item 1 
-
-/etc/mkrc: the system rc-file
-
-=item 2 
-
-$HOME/.mkrc: the user rc-file
-
-=item 3 
-
-./.mkrc: the local rc-file
+After a B<successful> run, scan the log file for hints of ugly line
+breaks. If any is found, print status report to standard output.
 
 =back
 
-You can use these rc-files to set the default values for the options, by
-setting the Perl variable named after the long version of the options.
-For example:
+=head1 BUGS
 
-          $quiet=1; # run in quiet mode
+platex does not currently compute dependencies.
 
-So if you usually like B<mk> to work quietly, you can indicate so in
-your rc-file and change your mind in some cases by using the --noquiet
-(or perhaps -noq) option.
+Latex output parsing is far from perfect.
 
-Other variables that can be set in the rc-files, and their default
-values, are:
+=head1 AUTHORS
 
-=over 8
+Mikko Rantalainen C<mikko.rantalainen@peda.net>
 
-=item C<$latex = 'latex';>
-
-is the name of the latex executable. You use this as a trick to have B<mk>
-compile plain TeX sources with TeX for you by setting:
-
-        $latex = 'tex';
-
-=item C<$pdflatex = 'latex';>
-
-which sets the the name of the pdflatex executable. You use this as
-a trick to have B<mk> compile plain TeX sources with pdfTeX for you
-by setting:
-
-        $pdflatex = 'pdftex';
-
-
-=item C<$skip_pattern = '';> 
-
-changes. For example, if you use a write-protected TeX-tree in the
-directory F<texlive> it makes sense to set $skip_pattern='/^\/texlive/';
-
-=item C<$altdir = '';> 
-
-If $altdir is non-empty and a file to be compiled does not exist in the
-current directory, it will be given another try after prefixing it with
-the contents of $altdir. So if you like to have your B<latex> file in
-F</Documents/myfile.tex> you can set $altdir to /Documents and run B<mk>
-from any directory with:
-
-          mk myfile
-
-However, a directory like F</Documents> does not make much sense if many
-of your B<latex> documents do not consist of a single file, but are
-constituted of an ensemble of a main B<latex> source and one or more
-\included and \inputed files such as graphics. You will then probably
-prefer to have s subdirectory in F</Documents> for every B<latex>
-document. Therefore, if B<mk> does not find F<myfile.tex> in the
-alternate directory, it will assume that F<myfile> is a subdirectory
-with a main B<latex> source in it, called F<main.tex>.
-
-=item C<$default = 'main';> 
-
-This is the default for the basename of your B<latex> document.
-
-=item C<$template = '';> 
-
-Tells B<mk> to give the opportunity to create a copy of this file when a
-non-existent source is requested.
-
-=item C<@warning_to_skip = ();>
-
-When the B<--warn> option is used, warnings appearing in the log file will
-be reported after a successful run. Warnings matching any of the rexgexp's
-in this array will be skipped, however. For example, one could enter here:
-        
- @warnings_to_skip = (
-   'Package hyperref Warning: Token not allowed in a PDFDocEncoded string',
-   'Package array Warning: Column [XY] is already defined on '
- );
-
-The first message appears when the C<hyperref> package is used and section
-titles contain \LaTeX-commands, the second message appears when the
-C<ctable> package is used, because it intentionally changes the X and Y
-column specifiers.
-
-=back
-
-=head1 AUTHOR
-
-Wybo Dekker C<wybo@servalys.nl>
-
-=head1 VERSION
-
-Version: 1.55-mtr1 (2004-10-12)
+Wybo Dekker C<wybo@servalys.nl> (platex is loosely based on B<mk>)
 
 =cut
-
-__DATA__
-# Makefile for latex (don't remove this line - mk uses it for testing)
-# @Author: SUN, Tong
-# Copyright (c)2001, Tong SUN, all right reserved
-# @Home URL: http://xpt.sourceforge.net/
-
-ifndef SYNTAXCHK
-SYNTAXCHK = chktex
-endif
-
-ifndef DVIPS
-DVIPS=dvips
-endif
-
-ifndef DVIVIEWER
-DVIVIEWER=xdvi
-endif
-
-ifndef MAKEFILE
-MAKEFILE=Makefile
-endif
-
-.SUFFIXES: .bbl .tex .dvi .chk .ps .pdf 
-
-# Disable standard pattern rule:
-%.dvi: %.tex
-
-# Do not delete the following targets:
-.PRECIOUS: %.chk %.aux %.bbl
-
-.tex.bbl:
-	bibtex -t $* 
-
-%.chk: %.tex
-#	$(SYNTAXCHK) -o $@ $<
-	@touch $@
-
-%.dvi: %.tex %.chk
-	LATEX='latex -recorder -interaction=batchmode' texi2dvi -q $<
-
-%.ps : %.dvi %.chk
-	$(DVIPS) -o $@ $<
-	@[ $${TEX_DEST_DIR:+T} ] && mv $@ ${TEX_DEST_DIR} || true
-
-%.pdf : %.tex %.chk
-	PDFLATEX='pdflatex -recorder -interaction=batchmode' texi2pdf -p -q $<
-	@[ $${TEX_DEST_DIR:+T} ] && mv $@ ${TEX_DEST_DIR} || true
-
-
-dvi : $(TEX_SOURCE_BASE).chk $(TEX_SOURCE_BASE).dvi
-
-view: $(TEX_SOURCE_BASE).dvi
-	@TEX_DEST_DIR=$${TEX_DEST_DIR:-.}; \
-	$(DVIVIEWER) $$TEX_DEST_DIR/${TEX_SOURCE_BASE}.dvi &
-
-ps : $(TEX_SOURCE_BASE).ps
-
-pdf : $(TEX_SOURCE_BASE).pdf
-
-
-check:
-# Make sure the TEX_SOURCE_BASE is set and help set it if not.
-	@if [ $${TEX_SOURCE_BASE:+T} ]; then \
-	  printf "TEX_SOURCE_BASE=${TEX_SOURCE_BASE}\nTEX_DEST_DIR=${TEX_DEST_DIR}\n"; \
-	else  { \
-		if [ `ls *.tex | wc -l` = "1" ]; then \
-			TEX_SOURCE_BASE=`basename \`ls *.tex\` .tex`; \
-			true; \
-		else \
-			TEX_SOURCE_BASE=`echo $$PWD|tr '/' '\n'|tail -1`; \
-			true; \
-		fi; \
-	printf "\nPlease set\n\n export TEX_SOURCE_BASE=$$TEX_SOURCE_BASE\nor,\n setenv TEX_SOURCE_BASE $$TEX_SOURCE_BASE\n"; \
-	}; fi
-
-# .............................................................. &ss ...
-.PHONY : help usage check clean cleangen clean-bak clean-th
-
-help:
-	@echo Tools used:
-	@echo
-	texi2pdf --help
-	@echo
-	@echo "To see the usage of this make file, type 'make usage'"
-	@echo " (need to set the environment var MAKEFILE if you "
-	@echo "  have change the default name/location of this Makefile"
-	@echo "  which requires the -f parameter for the make)"
-
-usage:
-	@cat ${MAKEFILE} | sed -n '/ [Cc]ommentary/,/ [Cc]ommentary/ p' | cut -c3-
-
-clean:
-	rm -f ${TEX_SOURCE_BASE}.chk ${TEX_SOURCE_BASE}.dvi ${TEX_SOURCE_BASE}.log ${TEX_SOURCE_BASE}.fls ${TEX_SOURCE_BASE}.aux ${TEX_SOURCE_BASE}.bbl ${TEX_SOURCE_BASE}.blg ${TEX_SOURCE_BASE}.ilg ${TEX_SOURCE_BASE}.toc ${TEX_SOURCE_BASE}.lof ${TEX_SOURCE_BASE}.lot ${TEX_SOURCE_BASE}.idx ${TEX_SOURCE_BASE}.ind ${TEX_SOURCE_BASE}.out
-
-cleangen :
-	rm -f *.chk *.dvi *.log *.aux *.bbl *.blg *.ilg *.toc *.lof *.lot *.idx *.ind *.out *.ps *.pdf
-
-clean-bak : clean
-	rm -f *~
-
-clean-th : clean
-	rm -f *.txt *.html *.css
-
-# .............................................................. &ss ...
-
-$(TEX_SOURCE_BASE).pdf: $(TEX_DEP)
-$(TEX_SOURCE_BASE).ps: $(TEX_DEP)
