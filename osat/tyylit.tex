@@ -34,3 +34,23 @@
 \lstset{extendedchars=true,basicstyle=\ttfamily}
 
 \hyphenation{mo-zilla net-scape in-ter-net ex-plor-er XHTML HTML SMIL SVG}
+
+
+\newenvironment{ul}
+  {\begin{itemize}}
+  {\end{itemize}}
+
+\newenvironment{ol}
+  {\begin{enumerate}}
+  {\end{enumerate}}
+
+% usage:
+% \mycite[page no]{books bibname}{cited text}
+% or
+% \mycite{source}{cited text}
+\def\myempty{}
+\newcommand*{\mycite}[3][]{\begin{quote} \textit{``#3''}
+    \def\temp{#1}%
+    \ifx\temp\myempty \cite{#2}
+    \else \cite[#1]{#2}
+    \fi  \end{quote}}

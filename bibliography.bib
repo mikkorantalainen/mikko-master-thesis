@@ -1,25 +1,53 @@
-% use @book, @booklet, @inbook, @mastersthesis, @misc, @phdthesis, @techreport, @unpublished
+@Unpublished{pedanet:esiselvitys,
+  title = 	 {{K}eski-{S}uomen {PEDANET} -hanke},
+  month =	 dec,
+  year =	 1996,
+  organization = {Jyväskylän Yliopisto},
+  author =	{Neittaanmäki, P. and Juutilanen, P. and Hautamäki, J. and Kotikoski, S. and Lehmonen, J. and Välijärvi, J.},
+  note =	{Työryhmän Keski-Suomen liitolle toimittama esiselvitys}
+}
 
-@Book{patton,
+@Book{tufte:explanations,
+  title = 	{{V}isual {E}xplanations: {I}mages and {Q}uantities, {E}vidence and {N}arrative},
+  author =	{{T}ufte, {E}dward},
+  publisher =	{Graphics Press},
+  isbn =	{0961392126},
+  year =	1997,
+}
+
+@Misc{greenspun:nielsen,
+  title = 	{What can we learn from {J}akob {N}ielsen},
+  author =	{{G}reenspun, {P}hilip},
+  month =	jun,
+  year =	2004,
+  url =		{http://philip.greenspun.com/ancient-history/nielsen}
+}
+
+
+@inbook{patton,
   title = 	{{H}ow to {U}se {Q}ualitative {M}ethods in {E}valuation},
   author =	{Patton, Michael Quinn},
   publisher =	{Sage Publications},
   asin =	{B000112984},
   year =	1997,
+  pages =	{146--149}
 }
+
 
 @Misc{korpela:www,
   title = 	{Datatekniikka ja viestintä},
   month =	jun,
   year =	2004,
-  url =		{http://www.cs.tut.fi/~jkorpela/}
+  url =		{http://www.cs.tut.fi/~jkorpela/},
+  author =	"Korpela, Jukka"
 }
 
 @Misc{nielsen:www,
   title = 	{{J}akob {N}ielsen's {C}olumn on {W}eb {U}sability},
   month =	jun,
   year =	2004,
-  url =		{http://www.useit.com/alertbox/}
+  url =		{http://www.useit.com/alertbox/},
+  author =	"Nielsen, Jakob"
 }
 
 @Misc{w3:home,
@@ -27,7 +55,8 @@
   month =	 apr,
   year =	 2003,
   organization = {W3C},
-  url = {http://www.w3.org/}
+  url = 	{http://www.w3.org/},
+  key = 	"W3C"
 }
 
 @Misc{ietf:home,
@@ -35,7 +64,8 @@
   month =	 apr,
   year =	 2003,
   organization = {IETF},
-  url = {http://www.ietf.org/}
+  url = {http://www.ietf.org/},
+  key =		"IETF"
 }
 
 @Manual{w3:xml_v1_0,
@@ -143,7 +173,7 @@
   url = {http://www.w3.org/Style/CSS/}
 }
 @Manual{w3:xhtml,
-  title = 	 {XHTML 1.0 The Extensible HyperText Markup Language (Second Edition)},
+  title = 	 {{XHTML} 1.0 {T}he {E}xtensible {H}yper{T}ext {M}arkup {L}anguage ({S}econd {E}dition)},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
@@ -151,7 +181,7 @@
 }
 
 @Manual{w3:xhtml2,
-  title = 	 {XHTML 2.0},
+  title = 	 {{XHTML} 2.0},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
@@ -159,7 +189,7 @@
 }
 
 @Manual{w3:xhtml_basic,
-  title = 	 {XHTML Basic},
+  title = 	 {{XHTML} {B}asic},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
@@ -167,7 +197,7 @@
 }
 
 @Manual{w3:xforms,
-  title = 	 {XForms - The Next Generation of Web Forms},
+  title = 	 {{XForms} - {T}he {N}ext {G}eneration of {W}eb {F}orms},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
@@ -175,21 +205,21 @@
 }
 
 @Manual{w3:svg,
-  title = 	 {Scalable Vector Graphics (SVG) 1.0 Specification},
+  title = 	 {{S}calable {V}ector {G}raphics ({SVG}) 1.0 {S}pecification},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
   url = {http://www.w3.org/TR/SVG/}
 }
 @Manual{w3:svg_basic,
-  title = 	 {Mobile SVG Profiles: SVG Tiny and SVG Basic},
+  title = 	 {{M}obile {SVG} {P}rofiles: {SVG} {T}iny and {SVG} {B}asic},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
   url = {http://www.w3.org/TR/SVGMobile/}
 }
 @Manual{w3:smil,
-  title = 	 {Synchronized Multimedia},
+  title = 	 {{S}ynchronized {M}ultimedia},
   month =	 apr,
   year =	 2003,
   organization = {W3C},
@@ -197,7 +227,7 @@
 }
 
 @Manual{ms:html+time,
-  title = 	 {HTML+TIME 2.0 Reference},
+  title = 	 {{HTML+TIME} 2.0 {R}eference},
   month =	 apr,
   year =	 2003,
   organization = {Microsoft},
@@ -341,16 +371,17 @@
   url = {http://www.imsproject.org/}
 }
 
-@Misc{pedanet:home,
+@Manual{pedanet:home,
   title = 	 {Peda.net - kouluverkko},
   month =	 apr,
   year =	 2003,
-  organization = {Koulutuksen tutkimuslaitos},
-  url = {http://peda.net/}
+  organization = "Peda.net",
+  url = 	"http://peda.net/",
+  key = 	"Peda.net"
 }
 
 @Manual{ietf:http,
-  title = 	 {Hypertext Transfer Protocol -- HTTP/1.1},
+  title = 	 {{H}yper{T}ext {T}ransfer {P}rotocol -- HTTP/1.1},
   month =	 apr,
   year =	 2003,
   organization = {IETF, Network Working Group},
@@ -358,7 +389,7 @@
 }
 
 @Misc{korpela:file_input,
-  title = 	 {File input (or "upload") in HTML forms},
+  title = 	 {File input (or `upload') in HTML forms},
   author =	 {Jukka K. Korpela},
   month =	 apr,
   year =	 2003,

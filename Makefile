@@ -81,3 +81,6 @@ $(SOURCEBASE).tex : $(SOURCES)
 
 loop:
 	while true; do make -s; sleep 1; done
+
+fast-loop:
+	while true; do make -s $(SOURCEBASE).dvi; sleep 1; done

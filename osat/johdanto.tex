@@ -40,13 +40,26 @@ Jos käytettävässä www-sivu on aina joko navigointi-sivu (siis jonkin tason sisäl
 
 Tälläisilla sivuilla navigointi tapahtuu aina sisällysluettelon kautta tai lukemalla koko sivusto kirjoittajan suunnittelemassa järjestyksessä. Navigointiin pääsee \emph{aina} painamalla näppäimistön \alt{home}-näppäintä ja valitsemalla sivun alusta linkki ''Sisällysluettelo''\footnote{Jos selain tukee \element{link}-elementtiä, ei sivulla tarvitse edes navigoida, sillä \element{link}-elementillä voidaan kertoa selaimelle, mistä sivuston sisällysluettelo löytyy. Selain voi sitten tarjota sisällysluetteloon siirtymiseen vaikka erillisen pikanäppäimen tai painikkeen!}. Sisällysluettelosta pääsee mihin tahansa sivuun suoraan painamalla haluamaanssa linkkiä. Kun vertaa tätä sivuun, jossa navigointi ja sisältö on samalla sivulla, havaitaan, että sisällysluettelon käyttö ja esittäminen helpottuu, koska sille voidaan varata enemmän tilaa. Myös varsinaisen sisällön käyttö helpottuu, koska koko selaimen ikkuna voidaan varata sen käyttöön. Yhdistelmäsivulla joudutaan myös siirtymään sivun alkuun (tai loppuun) navigoinnin käyttämistä varten, joten ainoa etu yhdistelmäsivulla on, että ei tarvitse painaa ''Sisällysluettelo''-linkkiä. Kun vastapuolella vaakakupissa on helppokäyttöisempi sisällysluettelo \emph{ja} parempi sisällön käytettävyys pitäisi valinnan olla helppo!
 
+Myös Edward Tufte kirjoittaa kirjassaan \cite[146--149]{tufte:explanations} seuraavia huomioita:
+
+\begin{enumerate}
+\item Näytöllä pitäisi olla informaatiota, ei navigointi tai ylläpito-ikoneita. Informaatiosta pitäisi tehdä käyttöliittymä -- esimerkiksi jonkin sanan, joka itsessään olisi informatiivinen, näpäyttämisen pitäisi antaa lisätietoja aiheeseen liittyen.
+\item Anna käyttäjälle pääsy koko tarjolla olevan informaation yleisnäkymään (esimerkiksi sisällysluettelo) sen sijasta, että hänen täytyy kulkea usean peräkkäisen näytön kautta.
+\item Järjestele tieto käyttäjän oletettavan kiinnostuksen mukaan sen sijaan, että tiedon järjestys matkisi yrityksen sisäistä rakennetta.
+\item Miksi käyttää ikoneita navigointiin, kun sanojen käyttö on selkeämpää ja se vie usein vähemmän tilaa?
+\end{enumerate}
+
+Mielenkiintoisesti edellä mainitussa listassa Tufte ei kirjoittanut www-sivuista. Kommentit koskivat erästä info-päätettä. Lukijalle pitäisi olla selvää, että samat kommentit ovat kuitenkin käyttökelpoisia myös useimpien www-sivujen suhteen.
+
 \section{Käytännön kompromisseja}
 
 Vaikka www-sivustolla kannattaisikin jakaa sisältö ja sisällysluettelo (l. navigointi) omiksi sivuikseen, on suuri osa \emph{olemassaolevista} sivustoista tehty toisin. Tähän on useita syitä, joista vähäpätöisimpiä eivät ole historialliset syyt (esimerkiksi \element{link}-elementtin tuki on ollut vanhoissa selaimissa huono) ja sisällöllisiä (kun on ollut todellisuudessa vain hyvin vähän sanottavaa on sivuston näyttänyt hienommalta, kun joka sivulla \emph{näyttää} olevan paljon sisältöä, vaikka suuri osa tuosta ''sisällöstä'' onkin vain navigointia).
 
+Koska useimmat verkon käyttäjät ovat siis tottuneet sivuihin joissa sisällön lisäksi on paljon navigointielementtejä, täytyy ilmeisesti myös selainkäyttöisiin sovelluksiinkin laittaa ''turhia'' navigointielementtejä mukaan. Teoriassa parempi olisi olla ilman, mutta käytännössä ohjelmassa saadaan parempi käytettävyys, kun käyttöliittymä ei poikkea liiaksi muista sivuista. Pitkällä aikavälillä navigoinnin määrää tulisi kuitenkin pyrkiä vähentämään, jolloin sisältöön voitaisiin keskittyä paremmin.
+
 \section{Käytettävät selainkäyttöiset sovellukset}
 
-Koska selainkäyttösiä sovelluksia käytetään samalla käyttöliittymällä (www-selaimella) kuin tavallisia www-sivujakin pitäisi tälläisen sovelluksen käytön muistuttaa mahdollisimman paljon tavallisen www-sivun käyttämistä. Ulkonäöllisesti eri www-sivustot poikkeavat toisistaan merkittävästi muutenkin, joten tietyt fonttien värit ja muut ulkonäön yksityiskohdat eivät ole niin merkittävässä osassa käytettävyyden kannalta kuin varsinainen toiminnallisuus. Pitäisi itseäni keskivertoa huomattavasti kokeneempana verkon käyttäjänä (käytän verkon palveluita paljon, teen niitä itse ja ymmärrän myös taustalla toimivaa tekniikkaa) pidän tavallisten www-sivujen yhteydessä tärkeimpänä seuraavia ominaisuuksia:
+Koska selainkäyttösiä sovelluksia käytetään samalla käyttöliittymällä (www-selaimella) kuin tavallisia www-sivujakin pitäisi tälläisen sovelluksen käytön muistuttaa mahdollisimman paljon tavallisen www-sivun käyttämistä. Ulkonäöllisesti eri www-sivustot poikkeavat toisistaan merkittävästi muutenkin, joten tietyt fonttien värit ja muut ulkonäön yksityiskohdat eivät ole niin merkittävässä osassa käytettävyyden kannalta kuin varsinainen toiminnallisuus. Pidän itseäni keskivertoa huomattavasti kokeneempana verkon käyttäjänä (käytän verkon palveluita paljon, teen niitä itse ja ymmärrän myös taustalla toimivaa tekniikkaa) mielestäni tavallisten www-sivujen yhteydessä selaimen tärkeimpiä ominaisuuksia ovat:
 
 \begin{enumerate}
 \item Linkkien käyttäminen
