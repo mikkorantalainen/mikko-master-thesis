@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+
+if (@ARGV < 1)
+{
+	print("
+Usage: platex source[.tex]
+
+Runs latex source.tex (and bibtex and initex) as many times as many
+times as required to correctly compile the source. Also pretty output.
+");
+
+	exit(1);
+}
+
+main($ARGV[0]);
+
+sub main($)
+{
+	my ($f,@opts) = @_;
+	my $verbose = 1;
+	
+
+	print("Compiling $f...\n") unless ! $verbose;
+	
+	exit(0); # all ok.
+}
