@@ -1,6 +1,6 @@
 # Filename of (La)TeX file without extension. E.g. "book" for book.tex.
 SOURCEBASE = webui
-SOURCES    = osat/[a-z]*.tex bibliography.bib gradu2.cls Makefile
+SOURCES    = osat/[a-z]*.tex bibliography.bib gradu2004.cls Makefile
 #-----------------------------------------------------------------------
 ALL	= $(SOURCEBASE).ps $(SOURCEBASE).pdf
 PREVIEW = $(SOURCEBASE).dvi

@@ -127,7 +127,7 @@
 %\usepackage{epstopdf}
 
 %\usepackage[ps2pdf,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true]{hyperref}
-\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,breaklinks=true,pagebackref]{hyperref}
 %\usepackage[pdftex,plainpages=false,pdfpagelabels,pdftitle={Gradu},urlcolor=blue,linktocpage,a4paper,colorlinks=true,hypertexnames=false,breaklinks=true]{hyperref}
 
 
