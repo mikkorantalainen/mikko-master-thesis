@@ -127,9 +127,12 @@
 \fi
 
 \AtBeginDocument{%
-\pagenumbering{roman}
 \selectdefaultlanguage
+% use unique page numbers as names for non-numbered title pages
+\pagenumbering{Roman}
 \maketitle
+% restart numbering
+\pagenumbering{roman}
 }
 
 \newcounter{TotPages}
@@ -276,6 +279,23 @@
 \fi
 }
 
+% copy of article.cls::emptytitlepage minus the setcounter commands
+\newenvironment{emptytitlepage}
+    {%
+      \if@twocolumn
+        \@restonecoltrue\onecolumn
+      \else
+        \@restonecolfalse\newpage
+      \fi
+      \thispagestyle{empty}
+      %\setcounter{page}\@ne
+    }%
+    {\if@restonecol\twocolumn \else \newpage \fi
+     \if@twoside\else
+        %\setcounter{page}\@ne
+     \fi
+    }
+
 \renewcommand{\maketitle}{%
 \iffi
     \def\gradu@tyo{\gradu@aine{} %
@@ -284,7 +304,7 @@
     \def\gradu@tyo{\gradu@type{} \gradu@aine{} \gradu@linja}%
 \fi
 \ifoldtitle%
-  \begin{titlepage}%
+  \begin{emptytitlepage}%
     \vspace*{7truecm plus 1truecm minus 3truecm}%
     \centerline{\textbf{\gradu@author}}%
     \vspace{2truecm}%
@@ -312,9 +332,9 @@
 \fi
     \center{\textbf{\gradu@laitos}}%
     \center{\textbf{\gradu@paikka}}%
-  \end{titlepage}%
+  \end{emptytitlepage}%
   \newpage%
-  \begin{titlepage}%
+  \begin{emptytitlepage}%
 \iffi%
     \noindent\textbf{Tekij\"a:} \gradu@author\par%
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
@@ -348,10 +368,10 @@
     \medskip%
     \noindent\gradu@license%
 \fi%
-  \end{titlepage}%
+  \end{emptytitlepage}%
 \else%
   % ------------- NEW TITLEPAGE FORMAT -------------
-  \begin{titlepage}%
+  \begin{emptytitlepage}%
     \vspace*{5truecm plus 2truecm minus 3truecm}%
     \centerline{\textbf{\gradu@author}}%
     \vspace{2truecm}%
@@ -379,9 +399,9 @@
 \fi
     \center{\textbf{\gradu@laitos}}%
     \center{\textbf{\gradu@paikka}}%
-  \end{titlepage}%
+  \end{emptytitlepage}%
 \ifcopyright%
-  \begin{titlepage}%
+  \begin{emptytitlepage}%
     \mbox{}\vfill%
     \centering%
     \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
@@ -391,7 +411,7 @@
     \noindent \gradu@yliopisto\\%
     \gradu@paikka~\number\year
     %\par\vfill%
-  \end{titlepage}%
+  \end{emptytitlepage}%
 \fi%
   \iffi%
     \def\gradu@finnishtitle{\gradu@title}%
@@ -401,7 +421,7 @@
     \def\gradu@englishtitle{\gradu@title}%
   \fi%
   \def\gradu@finnishabstract{%
-    \begin{titlepage}%
+    \begin{emptytitlepage}%
       %\selectlanguage{finnish}%
       \section*{Tiivistelm\"a}%
       \gradu@rohtau\\%
@@ -415,10 +435,10 @@
       \noindent\gradu@ysa%
       \noindent\textbf{Avainsanat: } \gradu@avainsanat%
       %\selectdefaultlanguage%
-    \end{titlepage}%
+    \end{emptytitlepage}%
   }%
   \def\gradu@englishabstract{%
-    \begin{titlepage}%
+    \begin{emptytitlepage}%
       \section*{Abstract}%
       \gradu@rohtau\\%
       {\def\\{ }\gradu@englishtitle{} / \gradu@author}\\%
@@ -430,7 +450,7 @@
       \bigskip%
       \noindent\gradu@acmccs%
       \noindent\textbf{Keywords: } \gradu@keywords%
-    \end{titlepage}%
+    \end{emptytitlepage}%
   }%
 \iffi
   \newpage%
