@@ -36,14 +36,6 @@
 \hyphenation{mo-zilla net-scape in-ter-net ex-plor-er XHTML HTML SMIL SVG}
 
 
-\newenvironment{ul}
-  {\begin{itemize}}
-  {\end{itemize}}
-
-\newenvironment{ol}
-  {\begin{enumerate}}
-  {\end{enumerate}}
-
 % usage:
 % \mycite[page no]{books bibname}{cited text}
 % or
@@ -55,7 +47,39 @@
     \else \cite[#1]{#2}
     \fi  \end{quote}}
 
+\newenvironment{ul}
+  {\begin{itemize}}
+  {\end{itemize}}
+
+\newenvironment{ol}
+  {\begin{enumerate}}
+  {\end{enumerate}}
+
+% compact list without extra spacing
+\newenvironment{ul*}%
+  {\begin{itemize}%
+    %\setlength{\topsep}{0pt}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{itemize}}
+
+% compact list without extra spacing
+\newenvironment{ol*}%
+  {\begin{enumerate}%
+    %\setlength{\topsep}{0pt}%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{enumerate}}
+
+% description/definition list
+\newenvironment{dl}
+  {\begin{description}}
+  {\end{description}}
+
+%\usepackage{savetrees}
+
 % salli rumat tavutukset ja rivitykset
 %\sloppy
 % vaadi siistit tavutukset ja rivitykset
 \fussy
+

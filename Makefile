@@ -27,7 +27,7 @@ remake:
 	make -s almost-clean all
 
 almost-clean:
-	rm -f *.dvi *.ps *.pdf
+	rm -f $(SOURCEBASE).ps $(SOURCEBASE).dvi $(SOURCEBASE).pdf $(SOURCEBASE).toc $(SOURCEBASE).aux
 
 ps: $(SOURCEBASE).ps
 

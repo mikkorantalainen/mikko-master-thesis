@@ -1,4 +1,4 @@
-\chapter{Oppimapin käytettävyyden arviointia}
+\chapter{Esimerkki: Peda.net Oppimapin käytettävyyden arviointia}
 
 Oppimapin käyttöliittymän pääosat muodostuvat navigointipalkista,
 toimintovalikosta ja sisältöalueesta. Kuvassa
@@ -68,9 +68,9 @@ Oppimappia voidaan arvioida myös luvussa
 \ref{label:kaytettavyydessa_huomioitavaa} esitettyjen kohtien
 perusteella:
 
-\begin{description}
+\begin{dl}
 
-\item[ulkonäön taitto] Oppimapissa oletuksena käytetty tyylitiedosto
+\item[Ulkonäön taitto:] Oppimapissa oletuksena käytetty tyylitiedosto
 mukailee Peda.net-hankkeen staattisia www"-sivuja. Kirjasimeksi on
 valittu groteski kirjasinleikkaus, sillä se on yleensä näytöllä
 paremmin luettava kuin antiikva. Tekstin kokoa ei ole määritelty
@@ -78,7 +78,7 @@ absoluuttisesti vaan leipäteksti on käyttäjän selaimen oletuskoko.
 Oikein konfiguroitu www-selain käyttää siis aina optimaalista tekstin
 kokoa. Käyttäjä voi halutessaan käyttää omaa CSS-tyylitiedostoa.
 
-\item[yhdenmukaisuus] Koko sovelluksen ulkonäkö on määritelty yhdessä
+\item[Yhdenmukaisuus] ja johdonmukaisuus: koko sovelluksen ulkonäkö on määritelty yhdessä
 CSS"-tyylitiedostossa. Koska HTML"-koodissa ei ole määritelty ulkoasua
 vaan ainoastaan sisällön rakenne ovat kaikki sivut keskenään
 yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu toiminta"-palkin
@@ -87,19 +87,19 @@ kautta ja toiminnot tallennetaan aina lomakkeen lopussa olevasta
 järjestelmään pysyviä, kaikkia käyttäjiä koskevia muutoksia ja
 toisaalta kaikkien painikkeiden painaminen tekee pysyviä muutoksia.
 
-\item[saavutettavuus] Oppimapin sisältö on esitetty semanttisella
+\item[Saavutettavuus:] Oppimapin sisältö on esitetty semanttisella
 merkinnällä ja esimerkiksi sivun ulkoasua ei ole tehty taulukolla.
 Tämän ansioista käyttö esimerkiksi puheselaimella onnistuu hyvin.
 Samoin kirjasinkokoa voi vapaasti muuttaa ja sovellus käyttää
 selaimessa asetettua tekstin kokoa. Suurta tekstiä tarvitseva käyttäjä
 on jo aikaisemmin säätänyt selaimensa haluamakseen.
 
-\item[personalisointi] Oppimappi tarjoaa mahdollisuuden vaihtaa
+\item[Personalisointi:] Oppimappi tarjoaa mahdollisuuden vaihtaa
 käyttöliittymän ulkoasua (käyttäjä voi valita ulkonäön vaihtoehtoisista
 CSS-tyylisivuista) ja käyttöliittymän kieltä. Lisäksi järjestelmä kerää
 tapahtumahistoriaa käyttäjien toimista.
 
-\item[tehokkuus] Oppimapin vasteaika on keskimäärin 0,04 sekuntia sivua
+\item[Tehokkuus:] Oppimapin vasteaika on keskimäärin 0,04 sekuntia sivua
 kohden. Keskimääräinen sivu on noin 20 kilotavua, mutta tiedonsiirrossa
 käytetään gzip"-pakkausta, jos selain sitä tukee, jonka ansiosta
 siirrettävän datan määrä on noin 3 kilotavua sivua kohden. Tavallisella
@@ -107,24 +107,24 @@ modeemillakin sivun pitäisi siis saapua aina alle 2 sekunnissa. Sivun
 ulkonäköön vaikuttava CSS-tiedosto ja ikonit tarvitsee siirtää vain
 ensimmäisellä sivulla, sen jälkeen ne ovat selaimen välimuistissa.
 
-\item[sisältö] Peda.net ei ota kantaa Oppimapilla tuotettavaan
+\item[Sisältö:] Peda.net ei ota kantaa Oppimapilla tuotettavaan
 sisältöön. Käyttöliittymän tekstit ylläpidetään keskitetysti Peda.netin
 toimesta ja eri kieliversioita tehdään käyttäjien tarpeiden mukaan.
-Useinmmissa tapauksissa joku Peda.netin käyttäjistä tarjoutuu
+Useimmissa tapauksissa joku Peda.netin käyttäjistä tarjoutuu
 kääntämään tarvittavat merkkijonot uuden kielen tukemista varten.
 
-\item[luotettavuus] Oppimappi ei ole ollut vielä käytössä riittävän
+\item[Luotettavuus:] Oppimappi ei ole ollut vielä käytössä riittävän
 kauan, että toimintavarmuudesta voitaisiin sanoa mitään tarkkaa.
 Kuormitustestissä järjestelmä pystyy nykyisellä palvelimella tarjoamaan
 lähes 30 sivua sekunnissa jatkuvasti. Järjestelmä on ollut tätä
 kirjoitettaessa tuotantokäytössä kaksi viikkoa ilman huoltotaukoja.
 
-\item[navigointi] Oppimappi tarjoaa koko ajan linkit koko hierarkian
+\item[Navigointi:] Oppimappi tarjoaa koko ajan linkit koko hierarkian
 päätasoille (kotisivu, omat tiedostot, työtilat ja ylläpito) ja muuten
 hierarkiassa edetään yksi taso kerrallaan alaspäin tai palaamalla
 suoraan mille tahansa edelliselle tasolle. Kaikki sisällössä olevat linkit ovat sinisiä ja alleviivattuja, joten ne on helppo havaita.
 
-\end{description}
+\end{dl}
 
 \section{Johtopäätöksiä Oppimapin käytettävyydestä}
 \label{oppimapin-kaytettavyys-yhteenveto}
