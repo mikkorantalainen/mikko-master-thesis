@@ -18,6 +18,7 @@ FLAGS		= "-A1"
 #FLAGS		=
 ERR		= "warn|error|^\\!|^\\?|^l\.|^[*][*]"
 #LATEXARGS	= -interaction=batchmode
+#LATEXARGS	= -interaction=nonstopmode -file-line-error-style
 LATEXARGS	= -interaction=nonstopmode
 
 all:	$(ALL)
@@ -55,7 +56,7 @@ clean:
 %.dvi:	%.tex
 	@echo === Creating: $@
 	latex $(LATEXARGS) $< | grep non-existing-string ; true
-	egrep -q $(NOHYPHEN) $*.log && initex latex.ltx | egrep -i $(FLAGS) $(ERR) && latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ; true
+	egrep -q $(NOHYPHEN) $*.log && latex -ini latex.ltx | egrep -i $(FLAGS) $(ERR) && latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ; true
 	egrep -q $(RERUNBIB) $*.log && ( bibtex $* | egrep -i $(FLAGS) $(ERR) ; latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR)) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) ; true
 	egrep -q $(RERUN) $*.log && ( latex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
@@ -78,7 +79,7 @@ clean:
 %.pdf:	%.tex %.dvi
 	@echo === Creating: $@
 	pdflatex $(LATEXARGS) $* | egrep -i $(FLAGS) $(ERR); true
-	egrep -q $(NOHYPHEN) $*.log && pdfinitex pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR); true
+	egrep -q $(NOHYPHEN) $*.log && pdflatex -ini pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR); true
 	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
 	@echo ======= Done: $@
 	

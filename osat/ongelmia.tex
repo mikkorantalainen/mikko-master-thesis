@@ -28,7 +28,14 @@ hukkua tai niitä ei koskaan lähetetä, joten selaimessa käyttäjälle
 näkyvä tila voi olla eri kuin palvelimen tapahtumien avulla muodostama
 tila.
 
-\section{HTTP on yhteydetön protokolla}
+Käytännössä ongelmia aiheuttavat HTTP"-protokolla www"-sivujen
+tiedonsiirtomenetelmänä, selaimen suorittamien toimintojen tapahtuminen
+ilman tiedon saapumista palvelimelle, käyttöliittymän esittäminen
+HTML"-kielen ehdoilla, selainhistorian käyttö kaikkine vaikutuksineen
+sekä verkon ja selaimen toimintavirheet. Käsittelen näitä ongelmia
+tarkemmin seuraavissa luvuissa.
+
+\section{HTTP on yhteydetön tiedonsiirtoprotokolla}
 
 WWW"-sivujen taustalla toimiva HTTP"-protokolla eli \alt{HyperText
 Transfer Protocol} vastaa varsinaisesta tiedonsiirrosta. HTTP on
@@ -40,34 +47,31 @@ yhteys\footnote{HTTP 1.1 lisäsi mahdollisuuden pitää varsinainen
 tietoliikenneyhteys auki eri sivujen hakujen välillä, mutta
 HTTP"-palvelin tai selain voi esimerkiksi vähäisten resurssien vuoksi
 katkaista yhteyden käyttääkseen siihen varattuja resursseja
-väliaikaisesti muualla.} katkeaa välittömästi yksittäisen sivun saamisen
-jälkeen. Erityisesti selain ei lähetä palvelimelle mitään tietoa
+väliaikaisesti muualla.} katkeaa välittömästi yksittäisen sivun
+saamisen jälkeen. Selain ei lähetä palvelimelle mitään tietoa
 esimerkiksi takaisin"-toiminnon suorittamisesta tai uuden ikkunan
 avaamisesta. Palvelin ei voi edes tietää sitä, onko käyttäjä jo
 siirtynyt toiselle sivustolle, sulkenut selaimen vai onko käyttäjä
 esimerkiksi kirjoittamassa vain pitkää tekstiä johonkin lomakekenttään.
 
-\subsection{Varoittavia esimerkkejä}
-
-Jos palvelimella ajetaan yksinkertaiseen tapahtumankäsittelijään
-perustuvaa sovellusta, saa se ensin tiedon siitä, että käyttäjä haluaa
-siirtyä johonkin tilaan (esimerkiksi valinta siirtyä
-sisällysluettelosta lukuun 1.3), mutta sovellukselle ei tule tietoa
-siitä, että käyttäjä tämän jälkeen palasi takaisin sisällysluetteloon
-käyttämällä takaisin"-toimintoa. Jos käyttäjä tämän jälkeen valitsee
-sovelluksessa ``muokkaa''"-toiminnon, tulee muokkaus sovelluksen tilan
-perusteella osoittaa lukuun 1.3, mutta käyttäjän mielestä
-sisällysluetteloon.
+Ongelmia syntyy jos palvelimella ajetaan yksinkertaiseen
+tapahtumankäsittelijään perustuvaa sovellusta. Se voi esimerkiksi saada
+ensin tiedon siitä, että käyttäjä haluaa siirtyä johonkin tilaan
+(esimerkiksi valinta siirtyä sisällysluettelosta lukuun 1.3), mutta
+sovellukselle ei tule tietoa siitä, että käyttäjä tämän jälkeen palasi
+takaisin sisällysluetteloon käyttämällä takaisin"-toimintoa. Jos
+käyttäjä tämän jälkeen valitsee sovelluksessa ``muokkaa''"-toiminnon,
+tulee muokkaus sovelluksen tilan perusteella osoittaa lukuun 1.3, mutta
+käyttäjän mielestä sisällysluetteloon.
 
 Toinen varoittava esimerkki on Jyväskylän Yliopiston kirjaston
 hakupalvelu. Etsiessäni Jakob Nielsenin ``WWW suunnittelu'' "=kirjaa,
 saan vastauksena kuvan \ref{fig:kirjasto1} mukaisen sivun. Siinä on
 kohtuullisen selkeästi esitetty kirjan tiedot ja palvelu toimiikin
-tältä osin juuri niinkuin odotankin.\footnote{Maininnan arvoinen on myös
-totaalisen hyödytön sivun otsikko ``WebVoyage Record View~1''. Tosin,
-vaikka otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki
-toimisi siitä huolimatta, koska palvelun sivujen osoitteet eivät ole
-pysyviä.}
+tältä osin juuri niinkuin odotankin.\footnote{Maininnan arvoinen on
+myös hyödytön sivun otsikko ``WebVoyage Record View~1''. Tosin, vaikka
+otsikko olisi ollut parempi, ei sivuun osoittava kirjanmerkki toimisi
+siitä huolimatta, koska palvelun sivujen osoitteet eivät ole pysyviä.}
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto1}
@@ -80,18 +84,18 @@ oli juuri se kirja, jota toisella sivustolla suositeltiin ja nostan
 tämän ikkunan esiin muiden alta muutamaa minuuttia myöhemmin. Suureksi
 hämmästyksekseni juuri hakemani tiedot on hukattu, koska ``yhteytesi
 tietokantaan on katkennut aikarajoituksen vuoksi'' (ks. kuva
-\ref{fig:kirjasto2}). Ei minua käyttäjänä kiinnosta mistä tiedot
-haetaan ja erityisesti minua ei kiinnosta kuinka pitkän yhteyden
-tietokanta kerrallaan sallii. Palvelun tekijällä on selvästikin ollut
-ajatuksena valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä
-aktiivisessa käytössä. Jostain syystä on päätetty, että jos käyttäjä ei
-tee jotain muutaman minuutin sisällä niin silloin ``oikea'' toimenpide
-on \emph{poistaa hakutulokset tai muu vastaava sisältö}. Sovellusta
-tehdessä olisi ehkä kannattanut miettiä, olisiko sovellus mahdollista
-toteuttaa siten, että tietokantapalvelimen aikarajan umpeutuessa
-käyttäjälle luovutettu sivu jätetään ennalleen ja huolehditaan
-aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä vielä yrittää
-tehdä jotain muuta.
+\ref{fig:kirjasto2}). Käyttäjää ei kiinnosta mistä tiedot haetaan ja
+erityisesti häntä ei kiinnosta kuinka pitkän yhteyden tietokanta
+kerrallaan sallii. Palvelun tekijällä on selvästikin ollut ajatuksena
+valvoa näin lyhyellä aikarajalla sitä, onko ikkuna vielä aktiivisessa
+käytössä. Jostain syystä on päätetty, että jos käyttäjä ei tee jotain
+muutaman minuutin sisällä niin silloin ``oikea'' toimenpide on
+\emph{poistaa hakutulokset tai muu vastaava sisältö} käyttäjän
+näytöltä. Sovellusta tehdessä olisi ehkä kannattanut miettiä, voisiko
+sovelluksen toteuttaa siten, että tietokantapalvelimen aikarajan
+umpeutuessa käyttäjälle luovutettu sivu jätetään ennalleen ja
+huolehditaan aikarajan umpeen menemisestä vasta, \emph{jos} käyttäjä
+vielä yrittää suorittaa muita toimintoja.
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/kirjasto2}
@@ -99,10 +103,8 @@ tehdä jotain muuta.
 \label{fig:kirjasto2}
 \end{kuva}
 
-\subsection{Selainkäyttöiset ohjelmat tulee suunnitella toisin}
-
 Tapahtumien avulla toimiva ohjelmalogiikka ei siis sinänsä ole
-syyllinen tähän ongelmaan, vaan se, että selainkäyttöinen ohjelma ei
+syyllinen näihin ongelmiin, vaan se, että selainkäyttöinen ohjelma ei
 voi luottaa siihen, että kaikista asioista syntyisi tapahtuma. Tämän
 rajoituksen vuoksi sokeasti perinteisen mallin mukaisesti toteutettu
 ohjelma toimii epävakaasti selainkäyttöisenä.
@@ -194,13 +196,14 @@ ohjelma pystyykin vastaamaan näihin odotuksiin.
 
 \section{Yhteydetön käyttöliittymä}
 
-WWW"-selaimet käyttävät tiedon siirtoon HTTP"-yhteyttä tai SSL"-salattua
-HTTP"-yhteyttä (tästä käytetään usein lyhennystä \alt{HTTPS}). Molemmat
-näistä yhteysmalleista ovat loogisesti yhteydettömiä, vaikka
-tehokkuuden vuoksi todelliset toteutukset pitävätkin yhteyden usein
-auki eri dokumenttien noutamisen välillä. Selain voi milloin tahansa
-katkaista entisen yhteyden ja luoda uuden, mutta tämä ei saa vaikuttaa
-ohjelman toimintaan.
+WWW"-selaimet käyttävät tiedon siirtoon HTTP"-yhteyttä tai
+SSL"-salattua HTTP"-yhteyttä (tästä käytetään usein lyhennystä
+\alt{HTTPS}). Molemmat näistä yhteysmalleista ovat \emph{loogisesti}
+yhteydettömiä, vaikka tehokkuuden vuoksi todelliset toteutukset
+pitävätkin tiedonsiirtoyhteyden usein auki eri dokumenttien noutamisen
+välillä. Selain tai palvelin voi milloin tahansa katkaista entisen
+yhteyden ja luoda uuden, mutta tämä ei saa vaikuttaa ohjelman
+toimintaan.
 
 Yhteydettömän toiminnan vuoksi käyttöliittymän toiminnot täytyy
 suunnitella siten, että yhdellä lomakkeella tehtävät toiminnot eivät
@@ -213,20 +216,19 @@ päässä.\footnote{JavaScript"-skriptikielellä voi esimerkiksi tarkistaa
 onko syötekenttään käyttäjän kirjoittama tieto laskun viitenumero
 laskemalla onko viitenumeron viimeinen tarkistusnumero oikein. Jos
 tarkistusnumero ei toimi, näytetään varoitusikkuna ja pyydetään
-käyttäjää syöttämään tieto uudelleen. Kuitenkin, turvallisuussyistä
-sama tarkistus täytyy tehdä myös palvelimella (koska muuten
-pahantahtoinen asiakas voisi muuttaa selaimessa toimivaa
-JavaScript"-ohjelmaa ja lähettää virheellisen numeron järjestelmään).}
-Tästä seuraa, että sama toiminnallisuus täytyy esittää kahdella eri
-ohjelmointikielellä (JavaScript ja kieli, jolla palvelimen logiikka on
-tehty). Seurauksena on koko järjestelmän huomattavasti vaikeampi
-ylläpito, koska eri kielillä tehtyjen toimintojen täytyy vastata
-toisiaan. Vaihtoehtona on myös toteuttaa kevyt tarkistus selaimen
-päässä, jossa pyritään karsimaan suurimmat virheet pois, mutta syötetyn
-tiedon oikeellisuus täytyy edelleen tarkistaa myös palvelimen päässä.
-Lisäksi tulee huomata, että jos osa toiminnoista \emph{vaatii}
-JavaScript"-kielen tukea, ei sovellus enää toimi millä tahansa
-www"-selaimella.
+käyttäjää syöttämään tieto uudelleen. Turvallisuussyistä sama tarkistus
+täytyy tehdä myös palvelimella (koska muuten pahantahtoinen asiakas
+voisi esimerkiksi muuttaa selaimessa toimivaa JavaScript"-ohjelmaa ja
+lähettää virheellisen numeron järjestelmään).} Tästä seuraa, että sama
+toiminnallisuus täytyy esittää kahdella eri ohjelmointikielellä
+(JavaScript ja kieli, jolla palvelimen logiikka on tehty). Seurauksena
+on koko järjestelmän huomattavasti vaikeampi ylläpito, koska eri
+kielillä tehtyjen toimintojen täytyy vastata toisiaan. Vaihtoehtona on
+myös toteuttaa kevyt tarkistus selaimen päässä, jossa pyritään
+karsimaan suurimmat virheet pois, mutta syötetyn tiedon oikeellisuus
+täytyy edelleen tarkistaa myös palvelimen päässä. Lisäksi tulee
+huomata, että jos osa toiminnoista \emph{vaatii} JavaScript"-kielen
+tukea, ei sovellus enää toimi millä tahansa www"-selaimella.
 
 \section{Ongelmallinen takaisin"-painike}
 
@@ -249,40 +251,41 @@ liittyvä tieto on peräisin lomakkeelta $A$, eikä lomakkeelta $B$.
 
 Usein tähän ongelmaan käytetty ``ratkaisu'' on kertoa käyttäjälle, että
 sovelluksessa \emph{ei saa} käyttää
-\emph{takaisin}"-toimintoa.\footnote{Tämä rajoitus seuraa yleensä siitä,
-sovellus yrittää pitää istunnon tilaa yllä. Usein tähän käytetään
-keksejä (\alt{cookies}). Näiden suurin ongelma on, että niihinkään ei
-voida helposti vaikuttaa historiatoimintojen yhteydessä ja lisäksi ne
-ovat globaaleja kaikkien selainohjelman ikkunoiden kesken. Jos istuntoa
-kuvaavassa keksissä säilytetään myös käyttäjän tunnistetietoja ei
-sovellukseen voi kirjautua monella eri käyttäjätunnuksella
-samanaikaisesti -- paitsi jos käyttää eri selainohjelmaa jokaista
-käyttäjää kohden.} Olennaista on kuitenkin huomata, että käyttäjä teki
-tietoisen päätöksen käyttäessään -- tai yrittäessään käyttää --
-kyseistä toimintoa ja varmastikin hän olisi halunnut sen tekevän jotain
-muuta, kuin näyttävän virheilmoituksen.
+\emph{takaisin}"-toimintoa.\footnote{Tämä rajoitus seuraa yleensä
+siitä, sovellus yrittää pitää istunnon tilaa yllä. Usein tähän
+käytetään keksejä (\alt{cookies}). Näiden suurin ongelma on, että
+niihinkään ei voida helposti vaikuttaa historiatoimintojen yhteydessä
+ja lisäksi ne ovat globaaleja kaikkien selainohjelman ikkunoiden
+kesken. Jos istuntoa kuvaavassa keksissä säilytetään myös käyttäjän
+tunnistetietoja ei sovellukseen voi kirjautua monella eri
+käyttäjätunnuksella samanaikaisesti. Esimerkiksi
+Optima"-oppimisympäristössä ei voi käyttää samaan aikaan kahta ikkunaa,
+joissa on kirjautuneena eri käyttäjä.} Olennaista on kuitenkin huomata,
+että käyttäjä teki tietoisen päätöksen käyttäessään -- tai yrittäessään
+käyttää -- kyseistä toimintoa ja varmastikin hän olisi halunnut sen
+tekevän jotain muuta, kuin näyttävän virheilmoituksen.
 
 %Ohjelma tulee siis tehdä sellaiseksi, että se pystyy vastaanottamaan ja käsittelemään \emph{mahdollisimman suuren} osan käyttäjän lähettämästä tiedosta, vaikka muuttuneen tilanteen vuoksi osa siitä ei olisikaan relevanttia.
 
 \section{Istunnon haarautuminen}
 
 Istunnon haarautuminen liittyy hyvin läheisesti
-\emph{takaisin}"-toimintoon. Siinä erona, käyttäjä kahdentaa aktiivisen
-lomakkeen $A$ ja valitsee ensimmäisessä ikkunassa toiminnon $a_3$ ja
-toisessa ikkunassa toiminnon $a_4$. Järjestelmä palauttaa toiminnon
-$a_3$ seurauksena sivun $C$ ja toiminnon $a_4$ seurauksena sivun $D$.
-Järjestelmän kannalta tämä tapahtuma näyttää täsmälleen samalta kuin
-\emph{takaisin}"-toiminnon käyttökin, mutta merkittävä ero syntyy siitä,
-että seuraavaksi käyttäjä voi tuottaa rinnakkaisia tapahtumia sekä
-lomakkeelle $C$, että lomakkeelle $D$. Ei siis riitä, että
-palvelinohjelma pitää kirjaa käyttäjän toimintahistoriasta ja osaa
-peruuttaa lähetettyjen kutsujen mukaan oikeaan tilanteeseen; lisäksi
-ohjelman pitää kyetä haarauttamaan istuntoja epäsuorien tapahtumien
-kautta. Täysin oikean istuntoa kuvaavan tiedon ylläpitäminen
-palvelimella onkin vähintäänkin hyvin työlästä ellei mahdotonta.
-Istunnon tiedot täytyy siis jotenkin saada siirtymään selainohjelmassa
-ikkunakohtaisesti, jolloin ikkunan kahdentaminen kahdentaa myös
-istunnon.
+\emph{takaisin}"-toimintoon. Erona edelliseen käyttäjä kahdentaa
+kuvassa \ref{fig:fork} esitetyn aktiivisen lomakkeen $A$ ja valitsee
+ensimmäisessä ikkunassa toiminnon $a_3$ ja toisessa ikkunassa toiminnon
+$a_4$. Järjestelmä palauttaa toiminnon $a_3$ seurauksena sivun $C$ ja
+toiminnon $a_4$ seurauksena sivun $D$. Järjestelmän kannalta tämä
+tapahtuma näyttää täsmälleen samalta kuin \emph{takaisin}"-toiminnon
+käyttökin, mutta merkittävä ero syntyy siitä, että seuraavaksi käyttäjä
+voi tuottaa rinnakkaisia tapahtumia sekä lomakkeelle $C$, että
+lomakkeelle $D$. Ei siis riitä, että palvelinohjelma pitää kirjaa
+käyttäjän toimintahistoriasta ja osaa peruuttaa lähetettyjen kutsujen
+mukaan oikeaan tilanteeseen; lisäksi ohjelman pitää kyetä haarauttamaan
+istuntoja epäsuorien tapahtumien kautta. Täysin oikean istuntoa
+kuvaavan tiedon ylläpitäminen palvelimella onkin vähintäänkin hyvin
+työlästä ellei jopa mahdotonta. Istunnon tiedot täytyy siis jotenkin
+saada siirtymään selainohjelmassa ikkunakohtaisesti, jolloin ikkunan
+kahdentaminen kahdentaa myös istunnon.
 
 \begin{figure}[htb]
 \begin{center}
@@ -340,18 +343,18 @@ Kun palvelimen ohjelmisto on saatu toimimaan ja kaikki edellämainitut
 ongelmat on otettu huomioon, havaitaan, että eri selainohjelmat eivät
 toimi eri standardeissa määrätyllä tavalla. Useimmat vioista
 vaikuttavat ainoastaan käyttäjälle näkyvän lomakkeen ulkoasuun --
-esimerkiksi joku teksti on suhteessa muuhun käyttöliittymään
-suuremmalla tekstillä kuin pitäisi. Kuitenkin osa vioista voi estää
-tiettyjen toimintojen käytön: esimerkiksi HTML"-määrityksen mukaan
-yhden \code{file}"-tyyppisen lomake"-elementin tulee tarjota
+esimerkiksi jokin teksti on suhteessa muuhun käyttöliittymään
+suuremmalla kirjasinkoolla kuin pitäisi. Kuitenkin osa vioista voi
+estää tiettyjen toimintojen käytön: esimerkiksi HTML"-määrityksen
+mukaan yhden \code{file}"-tyyppisen lomake"-elementin tulee tarjota
 mahdollisuus usean tiedoston siirtämiseen yhtä aikaa. Ainoa yleisesti
 käytössä oleva selain, joka toimii tässä mielessä määrityksen
-mukaisesti, on Opera. Tämä näkyy myös yleisimmissä palvelinpään
-toteutuksissa siten, että Operalla monta tiedostoa yhtä aikaa
-lähetettäessä, tapahtuu palvelinpäässä yleensä virhe tiedostoja
-vastaanotettaessa, koska palvelinohjelmiston kehittäjä ei ole lukenut
+mukaisesti, on Opera. Tämän seurauksena Operalla monta tiedostoa yhtä
+aikaa lähetettäessä, tapahtuu palvelinpäässä yleensä virhe tiedostoja
+vastaanotettaessa. Palvelinohjelmiston kehittäjä ei ole lukenut
 määritystä vaan ainoastaan tarkkaillut kuinka yleisimmät selaimet
-toimivat. \cite{korpela:file_input}
+toimivat; niissä käyttäjä voi lähettää kerrallaan vain yhden tiedoston.
+\cite{korpela:file_input}
 
 Toinen yleinen virhe selainten toteutuksessa on tiedon lähettäminen
 UTF-8"-koodauksella ilman siitä ilmoittamista -- protokollan mukaan
@@ -361,4 +364,13 @@ väärin. Tässä siis puutteellisen toiminnan lisäksi tuhoutuu myös
 tietoa. Tämä ongelma voidaan kiertää esimerkiksi lähettämällä
 lomakkeella näkymätön kenttä, jonka sisältö on tunnettu ja sisältää
 ASCII"-merkistön ulkopuolisia merkkejä, ja tarkastelemalla kuinka
-selain koodaa tämän kentän sisällön.
+selain koodaa tämän kentän sisällön. Käytännössä olen päässyt parempaan
+tulokseen pyytämällä selainta lähettämään tiedot aina
+UTF-8"-koodauksella ja tarkistamalla onko siirretty data
+UTF-8"-koodauksen mukaista. Jos ei, on data poikkeuksetta ollut
+muodossa ISO-8859-1. Väärin konfiguroitu selain voi jopa lähettää osan
+lomakekentistä UTF-8"-koodauksella samaan aikaan kun loput kentistä
+siirretään \mbox{ISO-8859-1}"-koodauksella. Erityisesti tiedostojen
+siirrossa (\alt{file upload}) erikoismerkit tiedostojen nimissä
+siirtyvät usein väärin. Pelkkä ISO-8859-1"-merkistön käyttö ei riitä,
+jos käytettävät kielet sisältävät suomen, venäjän ja saamen.

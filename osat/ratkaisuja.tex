@@ -5,12 +5,12 @@ Neo: "You mean I can dodge bullets?"\\
 Morpheus: "I mean when you are ready, you won't have to."
 \end{chapterquote}
 
-Kuten luvussa \ref{ongelmia} kuvasin, selainkäyttöisten ohjelmien
-käyttöliittymien toteuttamisessa on useita ongelmia. Kuvailen tässä
-luvussa ratkaisuvaihtoehtoja tuossa luvussa kuvattujen ongelmien
-ratkaisemiseksi. Osa suunnittelemistani ratkaisuvaihtoehdoista
-osoittautui epäkäytännöllisiksi, mutta kuvailen ne siitä huolimatta
-antamaan kuvaa ratkaisujen kehityskaaresta.
+Luvussa \ref{ongelmia} kuvattiin selainkäyttöisten ohjelmien
+käyttöliittymien toteuttamisessa kohdattuja ongelmia. Kuvailen tässä
+luvussa ratkaisuvaihtoehtoja kuvattujen ongelmien ratkaisemiseksi. Osa
+suunnittelemistani ratkaisuvaihtoehdoista osoittautui
+epäkäytännöllisiksi, mutta kuvailen ne siitä huolimatta antamaan kuvaa
+ratkaisujen kehityskaaresta.
 
 \section{Käyttöliittymäkerroksen jakaminen osiin}
 
@@ -22,7 +22,7 @@ käyttöliittymän toiminnallisuuden kuvaamiseen ja käyttöliittymäajuriin
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=10cm]{kuvat/fig4tier}
+\includegraphics[width=11cm]{kuvat/fig4tier}
 \caption{Kaavio nelikerroksisesta arkkitehtuurista usean sovelluksen
 tapauksessa}
 \label{fig:4tier}
@@ -61,27 +61,31 @@ sovellusten.
 
 \subsection{Tiedon käsittelyn logiikka}
 
-Tämä kerros toteutetaan käyttämällä jotain olemassaolevaa tietokantaa,
-esimerkiksi MySQL tai PostgreSQL. Teoriassa tietokannan pitäisi
-ymmärtää ja valvoa kaikki tiedon esitysmalliin liittyvät rajoitukset.
-Käytännössä tähän ei päästä, koska rajanpinta tiedon käsittelyn
-logiikan ja sovelluslogiikan välillä on toteutettu SQL"-kielellä. Monien
-tietokantojen tuki SQL"-kielelle on varsin kehittymätön erityisesti
-tietorakenteen rajoitusten suhteen. Tämän seurauksena merkittävä osa
-tiedon esitysmallin rajoituksista joudutaan sijoittamaan
-sovelluslogiikkaan. Muuten sovellusta ei voida tulevaisuudessa siirtää
-toimimaan toisen tietokannan päällä. Jos siirrettävyys ei ole
-tavoitteena, tietokannan tehokkuus voidaan maksimoida ohjelmoimalla
-tarkistukset ja rajoitukset tietokannan omilla työkaluilla. Pyrin itse
-pitämään selainkäyttöiset sovellukset tietokantariippumattomina -- eli
-sijoitan rajoitukset sovelluslogiikkaan -- koska olen kokenut, että
-käytännössä eri tietokannan käyttämisestä saatava nopeusero on suurempi
-kuin yksittäisen tietokannan hienosäätämisestä saatava nopeusero.
-Toisin sanoen, suurin nopeuden kasvattaminen saataisiin aikaiseksi
-vaihtamalla tietokantaa aina sen hetkisen sisällön ja käyttöprofiilin
-mukaisesti nopeiten toimivaan. Tämän tutkielman kannalta tarkka jako
-tiedon käsittelyn logiikan ja sovelluslogiikan välillä ei ole
-kuitenkaan olennaista.
+Tämä kerros (kuva \ref{fig:4tier}) toteutetaan usein käyttämällä jotain
+olemassaolevaa relaatiotietokantaa, esimerkiksi MySQL tai PostgreSQL.
+Teoriassa tietokannan pitäisi ymmärtää ja valvoa kaikki tiedon
+esitysmalliin liittyvät rajoitukset. Käytännössä tähän ei päästä, koska
+rajanpinta tiedon käsittelyn logiikan ja sovelluslogiikan välillä on
+toteutettu SQL"-kielellä. Monien tietokantojen tuki SQL"-kielelle on
+varsin kehittymätön erityisesti tietorakenteen rajoitusten suhteen.
+Tämän seurauksena merkittävä osa tiedon esitysmallin rajoituksista
+joudutaan sijoittamaan sovelluslogiikkaan. Muuten sovellusta ei voida
+tulevaisuudessa siirtää toimimaan toisen tietokannan päällä. Jos
+siirrettävyys ei ole tavoitteena, tietokannan tehokkuus voidaan
+maksimoida ohjelmoimalla tarkistukset ja rajoitukset tietokannan omilla
+työkaluilla.
+
+Pyrin itse pitämään selainkäyttöiset sovellukset
+tietokantariippumattomina -- eli käytännössä sijoitan rajoitukset
+sovelluslogiikkaan -- koska olen kokenut, että käytännössä eri
+tietokannan käyttämisestä saatava nopeusero on suurempi kuin
+yksittäisen tietokannan hienosäätämisestä saatava nopeusero. Toisin
+sanoen, suurin nopeuden kasvattaminen saataisiin aikaiseksi vaihtamalla
+tietokantaa aina sen hetkisen sisällön ja käyttöprofiilin mukaisesti
+nopeiten toimivaan. Oliotietokanta voisi helpottaa sovelluksen
+kehittämistä, mutta tekniikan kypsyys herättää epäilyksiä. Tämän
+tutkielman kannalta tarkka jako tiedon käsittelyn logiikan ja
+sovelluslogiikan välillä ei ole kuitenkaan olennaista.
 
 \subsection{Sovelluslogiikka}
 
@@ -96,7 +100,9 @@ kaikki muutokset täytyy kuitenkin tehdä molempiin osiin, jonka vuoksi
 jaosta ei saada kovin paljon etua. Lisäksi sulauttamisen haittojen voi
 neljän kerroksen mallissa olettaa olevan kohtuullisen pieniä, koska
 käyttöliittymän toiminnallisuus ei ole enää tiukasti sidottu itse
-käyttöliittymän ulkonäköön.
+käyttöliittymän ulkonäköön. Tulevaisuudessa, jos selaimilla voidaan
+esittää monimutkaisempia käyttöliittymiä, kannattaa tämä kerros
+edelleen pitää erillisenä käyttöliittymän toiminnallisuudesta.
 
 \subsection{Käyttöliittymän toiminnallisuus}
 
@@ -118,25 +124,26 @@ kirjoittaa käyttöliittymäajuri kirjastoksi, joka
 linkitetään\footnote{Joissakin ohjelmointiympäristöissä ohjelmakoodi
 käännetään objektitiedostoiksi, jotka yhdistetään \emph{linkittämällä}
 valmiin ohjelman tuottamiseksi. Vasta näin tuotettu valmis ohjelma
-voidaan suorittaa. Toisaalta, esimerkiksi PHP"-kielisissä ohjelmissa
-manuaalinen linkitys ei ole tarpeen, sillä se suoritetaan
-automaattisesti ohjelman käynnistyessä kun kirjastoa on muutettu.}
-ohjelmaan sitä tehtäessä. Linkitys pitää tehdä uudelleen kirjaston
-päivityksen yhteydessä, mutta itse käyttöliittymän toiminnallisuuteen
-ei tarvitse puuttua. Tässäkin mallissa eri sovellusten käyttöliittymät
-saadaan säilymään yhdenmukaisina pelkästään linkittämällä kaikki
-sovellukset uudelleen aina käyttöliittymäajurin päivityksen jälkeen.
+voidaan suorittaa. Toisaalta, esimerkiksi tulkattavia kieliä
+käyttävissä ohjelmissa manuaalinen linkitys ei ole tarpeen, sillä se
+suoritetaan automaattisesti ohjelman käynnistyessä kun kirjastoa on
+muutettu.} ohjelmaan sitä tehtäessä. Linkitys pitää tehdä käännetyssä
+ohjelmassa uudelleen kirjaston päivityksen yhteydessä, mutta itse
+käyttöliittymän toiminnallisuuteen ei tarvitse puuttua. Tässäkin
+mallissa eri sovellusten käyttöliittymät saadaan säilymään
+yhdenmukaisina pelkästään linkittämällä kaikki sovellukset uudelleen
+aina käyttöliittymäajurin päivityksen jälkeen.
 \cite{w3:xml_v1_0,w3:xhtml,w3:xslt}
 
 \subsection{Käyttöliittymäajuri}
 
 Tämä kerros vastaa siitä kuinka käyttäjä pystyy tekemään eri valinnat
-ja toiminnot. Jos, käyttöliittymässä on kuvattu, että lomakkeella on 10
-vaihtoehtoa, joista pitää valita täsmälleen yksi, niin tällöin
-selainkäyttöisen sovelluksen käyttöliittymäajuri voi näyttää sivulla 10
-linkkiä, joista käyttäjä painaa yhtä. \emph{Vaihtoehtoisesti} ajuri
-voisi näyttää lomakkeen jossa on 10 \alt{radio button} "=tyyppistä
-elementtiä ja OK"-painike. Kolmas vaihtoehto olisi näyttää
+ja toiminnot. Jos käyttöliittymässä on kuvattu, että lomakkeella on 10
+vaihtoehtoa, joista pitää valita täsmälleen yksi voi selainkäyttöisen
+sovelluksen käyttöliittymäajuri näyttää sivulla 10 linkkiä, joista
+käyttäjä painaa yhtä. \emph{Vaihtoehtoisesti} ajuri voisi näyttää
+lomakkeen jossa on 10 \alt{radio button} "=tyyppistä elementtiä ja
+OK"-painike. Kolmas vaihtoehto olisi näyttää
 \alt{combobox}"-alasvetovalikko yhdistettynä JavaScript"-käsittelijään,
 joka lähettäisi lomakkeen välittömästi käyttäjän näpäytettyä jotain
 kohtaa. Optimaalisessa tapauksessa käyttöliittymäajuri osaisi käyttää
@@ -149,8 +156,8 @@ valita millä tyylillä hän haluaa käyttää erityyppisiä lomakkeita.
 Koska selainkäyttöisen sovelluksen käyttäjä voi esimerkiksi haarauttaa
 istunnon ja tästä toiminnosta ei synny tapahtumaa palvelimelle, täytyy
 kaikki tieto kuljettaa lomakkeen muun tiedon yhteydessä sivuun
-upotettuna. Tällöin tieto kahdentuu automaattisesti, kun käyttäjä
-kahdentaa istunnon eli käytännössä avaa uuden ikkunan, jossa on sama
+upotettuna. Tällöin tieto kopioidaan automaattisesti, kun käyttäjä
+haarauttaa istunnon eli käytännössä avaa uuden ikkunan, jossa on sama
 sovellus toiminnassa. Samoin historiatoimintojen yhteydessä selain
 käyttää automaattisesti entisen lomakkeen tietoja, sillä nuo tiedot
 sisältyvät siihen sivuun, jota selain käyttää sivun näyttämiseenkin.
@@ -158,10 +165,10 @@ Käyttöliittymäajuri ei voi estää vanhentuneen tiedon saapumista, joten
 käyttöliittymän toiminnallisuuden tai sovelluslogiikan täytyy ottaa
 siihen kantaa.\footnote{Käyttäjä voisi esimerkiksi muokata
 selainkäyttöliittymällä uutisartikkelia, poistaa artikkelin ja käyttää
-\emph{takaisin} toimintoa palatakseen takaisin muokkaus"-toimintoon. Kun
-käyttäjä nyt tallentaa tehdyt muokkaukset täytyy sovelluksen joko
+\emph{takaisin} toimintoa palatakseen takaisin muokkaus"-toimintoon.
+Kun käyttäjä nyt tallentaa tehdyt muokkaukset täytyy sovelluksen joko
 palauttaa poistettu artikkeli tai luoda lähetettyjen tietojen
-perusteella uusi tai käyttäjän lähettämää tieto hukkuu.}
+perusteella uusi. Muuten käyttäjän lähettämää tietoa hukkuu.}
 
 Istunnon ylläpitoon tarvittavan tiedon määrän täytyy olla pieni, koska
 kaikkien sovelluksen generoimien sivujen sisältämien linkkien täytyy
@@ -181,7 +188,7 @@ tiedonsiirtokaistaan, tulee ohjelman toteutuksessa erikseen jakaa
 istunto"-tiedot kahteen osaan: lomakkeiden kautta siirtyvä tieto, ja
 tieto, joka voidaan jakaa myös haarautettujen tai vanhentuneiden
 tapahtumien kanssa. Tällöin jaettu tieto voidaan säilyttää
-palvelimella. Tällaista jaettua tietoa olisivat esimerkiksi käyttäjän
+palvelimella. Tällaista jaettua tietoa olisivat muun muassa käyttäjän
 henkilökohtaiset asetukset, jotka voidaan jakaa eri ikkunoiden kesken.
 Esimerkiksi valittu koko sivuston tyyli tai päivämäärien esitysmuoto
 olisi tällaista tietoa. Jakamatonta istuntotietoa olisi taas
@@ -192,7 +199,7 @@ Tulevaisuudessa selainkäyttöisen sovelluksen käyttöliittymäajuri voisi
 esittää käyttöliittymän XForms"-määrityksen mukaisilla lomakkeilla,
 jolloin käyttöliittymän toiminnallisuus ja ulkonäkö voidaan pitää
 erillään www"-selaimeen asti. Ikävä kyllä XForms on hyvin heikosti
-tuettu uusimmissakin selaimissa ja mikään ei viittaa siihen, että
+tuettu uusimmissakin selaimissa eikä mikään viittaa siihen, että
 tilanteeseen olisi tulossa nopeasti muutosta.
 \cite{korpela:html_forms,w3:xforms}
 
@@ -204,51 +211,75 @@ yrittää tunnistaa asiakasohjelma (selaintyyppi ja versio) ja kiertää
 jollakin tavalla siinä tunnetut ongelmat. Viallisten selainten tukeen
 kuluva työaika on helpompi perustella, koska ajuri on yhteinen monelle
 eri sovellukselle, joten kustannukset ohjelmaa kohden ovat pienempiä
-kuin perinteisellä mallilla. Eräissä, erityisesti ulkonäköön liittyvissä
-yksityiskohdissa, samaan lopputulokseen on mahdollista pyrkiä usealla
-eri tavalla standardin puitteissa ja näistä täytyy kokeilemalla etsiä
-se malli, joka toimii eri selaimissa. Tällöin eri selaimia varten ei
-tarvitse kirjoittaa selainkohtaisia ominaisuuksia.
+kuin perinteisellä mallilla. 
+
+Esimerkiksi Microsoft Internet Explorerissa takaisin"-painike ei toimi
+POST"-metodin käyttämisen jälkeen, jos lomakkeen \emph{Cache-Control}
+otsake sisälti tunnisteen \code{no-cache}. Tämä tunniste kieltää
+standardin mukaan sivun tallentamisen levylle, mutta ei estä
+esimerkiksi sivun säilyttämistä päätelaitteen muistissa. Koska
+Microsoft saattaa korjata tämän vian tulevaisuudessa ei ole kuitenkaan
+järkevää poistaa \code{no-cache}"-tunnistetta sovelluksesta yleisesti
+vaan ainoastaan poistaa se Internet Explorer 6.0 ja sitä vanhemmille
+versioille tarjottavista sivuista. Vastaavia ongelmia löytyy muista
+selaimista. Selainkohtaiset korjaukset on tärkeää tehdä siten, että
+tuntemattomalle selaimen versiolle tarjotaan aina standardin mukainen
+sivu. Tällöin tulevaisuudessa standardia tukeva selain saa aina oikein
+toimivan näkymän.
+
+Eräissä, erityisesti ulkonäköön liittyvissä yksityiskohdissa, samaan
+lopputulokseen on mahdollista pyrkiä usealla eri tavalla standardin
+puitteissa ja näistä täytyy kokeilemalla etsiä se malli, joka toimii
+eri selaimissa. Tällöin eri selaimia varten ei tarvitse kirjoittaa
+selainkohtaisia ominaisuuksia. Joitakin ongelmia ei voi kuitenkaan
+kiertää standardin puitteissa.
 
 Koska käyttöliittymäajurin täytyy huolehtia kaikista selaimen käytöstä
 johtuvista ongelmista, on sen toteuttaminen vaikeaa. HTML"-kieltä
 tukevan ajurin ei kuitenkaan tarvitse ottaa kantaa käyttöliittymän
-yksityiskohtiin, ainoastaan eri komponenttien järjestykseen, sillä
-ulkonäölliset yksityiskohdat, kuten värit ja elementtien asemoinnit
+yksityiskohtiin, ainoastaan eri komponenttien järjestykseen.
+Ulkonäölliset yksityiskohdat, kuten värit ja elementtien asemoinnit
 voidaan käsitellä vasta selaimessa käyttäjän tietokoneella CSS"-kielen
 avulla \cite{w3:css}. Sovellukselle voidaan helposti tuottaa erilaisia
 ulkoasuja (\alt{skins}) pelkästään luomalla erilaisia CSS"-tiedostoja.
 Lisäksi standardi mahdollistaa eri CSS"-tiedostojen kirjoittamisen
-esimerkiksi normaalille selaimelle, dataprojektorille ja
-kämmentietokoneille; käyttöliittymän ulkoasu on siis mahdollista hioa
-tarvittaessa laitekohtaisesti.
+esimerkiksi normaalille selaimelle, dataprojektorille, ääniselaimille
+ja kämmentietokoneille; käyttöliittymän esitystä on siis mahdollista
+hioa tarvittaessa laitekohtaisesti.
 
 \section{Nelikerroksisen mallin käytännön ongelmia}
 
 Aloin toteuttamaan käyttöliittymäajuriajatusta Peda.net"-hankkeessa
-tehtävän Oppimappi"-nimisen työkalun
-valmistuksessa.\footnote{Oppimappi"-työkalusta kerrotaan tarkemmin
-luvussa \ref{pedanet-oppimappi}} Peda.net"-hankkeessa on päätetty
-yhdenmukaistaa sovellusten toimintaympäristöksi Apache"-www"-palvelimen
-päällä toimiva PHP"-ohjelmointiympäristö sekä MySQL"-tietokanta, joten
-tämä asetti käytännön rajoituksia ohjelman loogiseen rakenteeseen;
-nykyisin käytössä oleva PHP"-kielen versio 4 ei tue moniperintää eikä
-rajapintaluokkia, joten luokkahierarkian toteuttaminen vaati osin
-teoriittisesta mallista poikkeamista.
-
-% Oppimappia voi käyttää sekä MySQL
-% että PostgreSQL "=tietokantojen päällä. Nykyisellä palvelimella MySQL
-% toimii nopeammin.
+tehtävän Oppimappi"-nimisen työkalun valmistuksessa, kerrotaan
+tarkemmin luvussa \ref{pedanet-oppimappi}. Peda.net"-hankkeessa on
+päätetty yhdenmukaistaa sovellusten toimintaympäristöksi Apache
+www"-palvelimen päällä toimiva PHP"-ohjelmointiympäristö sekä
+MySQL"-tietokanta, joten tämä asetti käytännön rajoituksia ohjelman
+loogiseen rakenteeseen; nykyisin käytössä oleva PHP"-kielen versio 4 ei
+tue moniperintää eikä rajapintaluokkia, joten luokkahierarkian
+toteuttaminen vaati osin kirjallisuudessa esitetyistä malleista
+poikkeamista.
 
 Kuvassa \ref{fig:oppimappi-schema-orig} on esitetty osa alkuperäisestä
-luokkahierarkiasta.
-
-%Kuvassa \ref{fig:oppimappi-big-picture} on puolestaan
-%mallinnettu ympäristöä isommassa mittakaavassa. Käytännössä
-%MySQL"-tietokanta ja Oppimappi PHP"-sovellus toimivat
-%Peda.net"-hankkeen ylläpitämällä palvelimella ja ohjelman
-%käyttöliittymä esitetään HTML ja CSS "=kielien avulla sovelluksen
-%käyttäjän koneessa toimivassa www"-selaimessa.
+luokkahierarkiasta. Siinä sovellus muodostui Oppimapista ja sen avulla
+käytettävistä moduuleista, jotka toteuttivat käyttöliittymän
+käyttöliittymäajurin luokkien avulla. Yksittäiset dokumenttityypit,
+kuten \code{SimpleText} ja \code{Folder} perittiin
+\code{Document}"-luokasta, joka auttoi sessiokohtaisen tiedon
+hallinnassa sekä tietokannan käsittelyssä. Yksittäisen dokumentin koodi
+käynnistettiin vaiheessa, jossa käyttäjän istunnon voimassaolo oli
+varmistettu ja dokumentin tiedot oli haettu tietokannasta. Tämän
+jälkeen dokumentti siirtyi suoritusvaiheeseen, jossa se teki kaikki
+päivitykset tietokannan sisältöön. Tämän vaiheen jälkeen dokumentti
+siirtyi käyttöliittymän luontivaiheeseen, jolloin moduuli koosti
+käyttöliittymän käyttöliittymäajurin tarjoamien luokkien avulla. Luokat
+käynnistettiin vielä erillisen \code{UIFactory}"-luokan kautta
+tulevaisuuden muutosten helpottamiseksi. Suoritusvaihe ja
+käyttöliittymän luonti on jaettu kahteen vaiheeseen, jotta
+tulevaisuudesssa useita dokumenttityyppejä voidaan tarvittaessa ajaa
+samalla sivulla rinnakkain. Tällöin jokainen dokumentti voi vaikuttaa
+yleisiin asetuksiin ja muutos ehtii vaikuttamaan muiden dokumenttien
+näyttämässä käyttöliittymässä.
 
 \begin{kuva}
 \includegraphics[width=15.4cm]{kuvat/oppimappi-schema-orig}
@@ -259,19 +290,28 @@ luokkahierarkiasta.
 Noin kuukauden kehitystyön jälkeen kävi kuitenkin selväksi, että
 PHP"-ympäristön suorituskyky olioiden luomisessa ja tuhoamisessa oli
 aika heikko. Lisäksi täydellisen käyttöliittymäajurin tekeminen alkoi
-varmistumaan liian työlääksi siitä saataviin etuihin verrattuna.
+varmistua liian työlääksi siitä saataviin etuihin verrattuna.
 
 \section{Käyttöliittymäajurin yksinkertaistaminen}
 
 Päädyin siihen johtopäätökseen, ettei täydellistä käyttöliittymäajuria
 kannata tehdä, koska varsinaisen sovelluslogiikan ja käyttäjän välissä
-on niin useita tasoja. Jakamalla käyttöliittymän toteutus osittain HTML
-ja CSS "=kielien vastuulle, voidaan käyttöliittymäajuri pitää
+on niin useita tasoja. Jakamalla käyttöliittymäajurin toteutus osittain
+HTML ja CSS -kielien vastuulle, voidaan käyttöliittymäajuri pitää
 kohtuullisen yksinkertaisena. Tätä on havainnollistettu kuvassa
-\ref{fig:oppimappi-big-picture}. Lisäksi, koska PHP rajaa ainakin
-toistaiseksi natiivin käyttöliittymän kehittämisen mahdollisuuksia
+\ref{fig:oppimappi-big-picture}. Erona entiseen malliin,
+käyttöliittymäajurin tehtäviä on siirretty sekä selaimelle HTML ja CSS
+-kielien muodossa, että käyttöliittymän toiminnallisuuteen, jossa
+käytetään hyväksi tietoa, että lopputuloksen on tarkoitus olla
+XML"-muodossa. Sovellus generoi siis XHTML"-kielisen esityksen ja
+käyttöliittymäajurin rajapinta generoikin suoraan XML"-kielisiä palasia
+(\alt{XML Fragment}). Koska PHP"-kieli rajaa ainakin toistaiseksi
+natiivin käyttöliittymän kehittämisen mahdollisuuksia
 suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
 helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
+
+Erona tavalliseen 3"-kerrosmalliin on, että käyttöliittymäkerros on
+jaettu osiin palvelimen ja asiakkaan välille.
 
 \begin{kuva}
 \includegraphics[width=4.2cm]{kuvat/oppimappi-big-picture}
@@ -280,11 +320,39 @@ helpottamiseksi kannattanut tässä vaiheessa uhrata aikaa.
 \end{kuva}
 
 Kuvassa \ref{fig:oppimappi-schema-current} on  esitetty Oppimapissa
-loppujen lopuksi käytetty ratkaisumalli. Tässäkin luokkahierarkia on
-hieman erikoinen, mutta ratkaisun taustalla kummittelee vaillinainen
-oliotuki PHP"-kielessä. Tätä kirjoittaessa PHP"-kielen versio 5 on jo
-ilmestynyt ja siinä osa puutteista onkin korjattu, mutta sen
-tuotantokäyttöä kannattanee harkita aikaisintaan ensi vuonna.
+loppujen lopuksi käytetty ratkaisumalli. Merkittävänä erona
+alkuperäiseen malliin \code{UIFactory}"-luokka on poistettu kokonaan ja
+sen korvaa \code{DocumentUI}. Päädyin tähän tulokseen, koska
+käytännössä \code{UIFactory}"-luokan metodit tarvitsivat usein
+istunto"-tietoa, joka oli saavutettavissa vain
+\code{DocumentCore}"-luokan kautta. Istuntotiedon kuljettaminen
+kaikkien käyttöliittymäajurin luokkien yhteydessä oli hankalaa. Lisäksi
+istunnon kuljettaminen parametrina oli turhaa uudessa mallissa, koska
+istunto ei koskaan muutu yksittäisen dokumentin suorituskerran aikana.
+Samoin \code{Document}"-luokka jaettiin kolmeen luokkaan.
+\code{DocumentCore} sisältää ne metodit, joita tarvitaan kaikkiin
+dokumenttityyppeihin, myös sellaisiin, joilla ei ole käyttöliittymää
+ollenkaan. \code{DocumentActions} sisältää metodit, joita kaikki
+käyttöliittymän sisältävät dokumentit tukevat kuten versionhallinnan
+käyttöliittymä. \code{Document}"-luokka sisältää joitakin
+erikoistoimintoja, joita Oppimappi käyttää. Samaa runkoa myöhemmin
+muissa selainkäyttöisissä sovelluksissa käytettäessä
+\code{Document}"-luokka voidaan joutua kirjoittamaan uudelleen.
+Varsinainen Oppimappi peritään \code{Application}"-luokasta, joka
+sisältää HTML"-koodin generoitiin tarvittavat metodit, sekä huolehtii
+sisäänkirjautumisesta.
+
+Tässäkin luokkahierarkia on siis hieman erikoinen, mutta ratkaisun
+taustalla kummittelee vaillinainen oliotuki PHP"-kielessä.  Tätä
+kirjoittaessa PHP"-kielen versio 5 on jo ilmestynyt ja siinä osa
+puutteista onkin korjattu, mutta sen tuotantokäyttöä kannattanee
+harkita aikaisintaan ensi vuonna. Jos PHP olisi tukenut moniperintää
+tai edes rajapintaluokkia, olisi ohjelman rakenne \code{Document} ja
+\code{DocumentUI} -luokkien suhteen ollut erilainen. Nyt ohjelman
+koodissa esitetty perintähierarkia ei vastaa kunnolla loogista
+rakennetta. Tällä ei ole ollut toistaiseksi merkitystä ja koodi on
+pyritty kirjoittamaan siten, että muutos on kohtuullisen helppo tehdä
+kun kieli myöhemmin alkaa tukemaan sitä.
 
 \begin{kuva}
 \includegraphics[width=\linewidth]{kuvat/oppimappi-schema-current}
@@ -308,18 +376,18 @@ sovelluksia. Oppimapista voidaan myös tarvittaessa rakentaa muita
 toimintaympäristöjä jättämällä osa käytössä olevista moduuleista pois
 tai korvaamalla niitä uusilla.
 
-\subsection{Tiedon siirto lomakkeiden välillä}
+\subsection{Tiedonsiirto lomakkeiden välillä}
 
 Kaikki Oppimapin moduulit peritään luokasta \class{Document} (ks. kuva
 \ref{fig:oppimappi-schema-current}) ja kaikki moduulit saavat oman
 nimiavaruuden käyttämilleen parametreille. Tämä on olennaista, koska
 istuntoon liittyvää tietoa täytyy kuljettaa kaikkien linkkien
-osoitteissa, kuten luvussa \ref{kaikki-data-sivulla} selitin. Eri
+osoitteissa, kuten luvussa \ref{kaikki-data-sivulla} perustelin. Eri
 moduulien parametrit sijoitetaan puolestaan omiin nimiavaruuksiinsa,
 jotta useita moduuleita olisi mahdollista esittää rinnakkain samalla
 sivulla. Automaattinen parametrien uudelleennimeäminen mahdollistaa
-myös sen, ettei yksittäistä moduulia ohjelmoitaessa tarvitse
-tarkistaa mitä nimiä muut moduulit käyttävät.
+myös sen, ettei yksittäistä moduulia ohjelmoitaessa tarvitse tarkistaa
+mitä nimiä muut moduulit käyttävät.
 
 Jos esimerkiksi moduuli, jonka id"-numero on \code{251}, asettaa
 sivulle parametrin, jonka nimi on \code{foo}, käytetään todellisena
@@ -354,18 +422,44 @@ osoitteeseen, jolloin ne toistuvat automaattisesti kaikissa
 suhteellisissa linkeissä.
 
 Esimerkiksi osoitteessa
-\code{http://peda.net/mappi""?session=databasetest/""1/""9325""35/""53""252""\&=4""/6""/1}
-oleva Oppimapin dokumentti voitaisiin siirtää osoitteeseen 
+\code{http://peda.net/mappi""?session=databasetest/""1/""9325""35/""53""252""\&d=4""/6""/1}
+oleva Oppimapin dokumentti voitaisiin siirtää osoitteeseen
 \code{http://""peda.""net/""mappi/""databasetest.""1.""932535.""53252/""4.""6.""1}.
 Nyt tältä sivulta toiselle Oppimapin sivulle linkitettäessä ei
 tarvisisi toistaa enää istuntoon liittyvää tietoa vaan ainoastaan
-sivukohtaiset muutokset. Esimerkiksi linkki
-\verb!<a href="?x=y">linkkiteksti</a>! osoittaisi automaattisesti
-samaan istuntoon ja samaan dokumenttiin ja selain lähettäisi linkin
-mukana parametrin $x$ arvolla ``y''. Nykyisin kaikissa linkeissä pitää
-aina toistaa parametrit \code{session} ja \code{d}. Ongelmaa ei voi
-kiertää esimerkiksi keksien (\alt{cookies}) avulla, koska ne eivät
-toimi yhteistyössä selaimen historia"-toimintojen kanssa.
+sivukohtaiset muutokset. Esimerkiksi HTML"-kielellä kirjoitettu
+toimintolinkki \verb!<a
+href="?action=x">!""\verb!linkkiteksti!""\verb!</a>! osoittaisi
+automaattisesti samaan istuntoon ja samaan dokumenttiin ja selain
+lähettäisi linkin mukana parametrin $action$ arvolla ``x''. Nykyisin
+kaikissa linkeissä pitää aina toistaa parametrit \code{session} ja
+\code{d}. Ongelmaa ei voi kiertää esimerkiksi keksien (\alt{cookies})
+avulla, koska ne eivät toimi yhteistyössä selaimen
+historia"-toimintojen kanssa. Samoin usealla eri käyttäjällä
+kirjautuminen selaimen eri ikkunoissa ei toimisi. Todellisuudessa
+Oppimappi siirtää kaikissa toiminnoissa lisäksi historiatietoa
+edellisistä näkymistä, jolloin esimerkiksi ``Tallenna''"-toiminnon
+jälkeen on mahdollista palata käyttäjän mielestä oikeaan näkymään.
+
+Ongelmana tässä tekniikassa on, että käyttäjä ei voi kopioida
+osoitepalkista osoitetta sellaisenaan kaverilleen. Tietoturvan vuoksi
+osoitteeseen on upotettu tarkistussumma, johon vaikuttaa kävijän
+IP"-numero. Jos linkki lähetetään esimerkiksi sähköpostissa toiselle
+käyttäjälle, kysytään käyttäjätunnus ja salasana uudelleen IP"-numeron
+muuttumisen jälkeen. Oppimapissa käyttäjän luomissa linkeissä ei
+käytetä URL"-osoitteita vaan symbolisia viittauksia. Tällä hetkellä on
+vielä ratkaisematon ongelma, kuinka sähköpostissa voidaan kuljettaa
+linkki siten, että käyttäjän ei tarvitse kirjautua sitä käyttäessään ja
+samaan aikaa voidaan tukea sitä, että käyttäjällä on useita eri
+käyttäjätunnuksia sisäänkirjattuna; mitä käyttäjätunnusta tällaisen
+linkin pitäisi käyttää? Selkein ratkaisu olisi käyttää
+käyttäjätunnusta, jolla viimeisin sisäänkirjautuminen on tehty ja
+siirtää tämä tieto eri ikkunoiden välillä keksien avulla.
+Vaihtoehtoisesti käyttäjälle voitaisiin näyttää sivu, jossa häntä
+pyydetään valitsemaan jokin sisäänkirjatuista käyttäjätunnuksista
+linkin seuraamiseksi. Mitään yksinkertaista ratkaisua ongelmaan ei ole,
+koska HTML ja HTTP rajoittavat mahdollisuuksia. Lisäongelmia
+aiheuttavat vialliset selaimet.
 
 Koska kaikki nämä tiedot viedään jokaiseen sivuun upotettuna, toimii
 edelliseen näkymään palaaminen myös historian kautta avatuissa sivuissa

@@ -1,12 +1,12 @@
 \chapter{Pohdintaa}
 
-Tutkimuksen alkuperäinen tavoite oli selvittää selainkäyttöisten
-sovellusten käytettävyyttä ja helpottaa niiden valmistamista. Samoin
-tavoitteena oli dokumentoida Peda.net"-hankkeen kehityskaarta.
-Peda.netin uusin työkalu, Oppimappi, onnistuu ratkaisemaan
-käytettävyyteen liittyvät ongelmat HTML"-kielen antamissa rajoissa
-kohtuullisen hyvin. Rinnakkaiseen muutosten hallintaan täytyy vielä
-etsiä parempia ratkaisuja. Lisäksi Oppimapissa käytetty rakenne
+Tutkimuksen alkuperäinen tavoite oli selvittää aidosti
+selainkäyttöisten sovellusten käytettävyyttä ja helpottaa niiden
+valmistamista. Samoin tavoitteena oli dokumentoida Peda.net"-hankkeen
+kehityskaarta. Peda.netin uusin työkalu, Oppimappi, onnistuu
+ratkaisemaan käytettävyyteen liittyvät ongelmat HTML"-kielen antamissa
+rajoissa kohtuullisen hyvin. Rinnakkaiseen muutosten hallintaan täytyy
+vielä etsiä parempia ratkaisuja. Lisäksi Oppimapissa käytetty rakenne
 olettaa, että kukin dokumenttityyppi on itsenäinen osa järjestelmää ja
 koko käsiteltävä sovelluksen rakenne voidaan \emph{luontevasti} esittää
 puurakenteena tai kaksisuuntaisena puurakenteena.\footnote{Esimerkiksi
@@ -18,7 +18,9 @@ tietyn tyyppiselle tiedolle, esimerkiksi kuville.}
 Ratkaisemattomaksi ongelmaksi vaikuttaa siis jäävän aidosti
 selainkäyttöisten käyttöliittymien suunnittelu ja kehittäminen
 yleisellä tasolla -- ainakin kun tavoitteena on yhtä aikaa kohtuullisen
-helppo sovelluksen toteutus ja hyvä käytettävyys.
+helppo sovelluksen toteutus ja hyvä käytettävyys. Tässä tutkielmassa
+esitetty malli soveltuu vain ongelmiin, joissa käsiteltävä asia voidaan
+jakaa itsenäisesti toimiin moduuleihin. Jos moduuleihin jakaminen ei ole mahdollista tai moduulit ovat hyvin monimutkaisia, täytyy ongelmaan löytää jokin muu ratkaisu. Tässä esitetyn tekniikan rajoitteena on tiedon siirto HTTP"-protokollan GET"-metodin avulla. Tämä rajoite koskee myös muita ratkaisuja, sillä tämä on ainoa metodi, jota kaikki selaimet tukevat.
 
 Tulevaisuuden tutkimuskohteiksi kannattaisi harkita jotain seuraavista:
 \begin{ol*}
@@ -42,14 +44,14 @@ Lisäksi www"-selaimissa on toimintoja, joita tavallisia ohjelmia
 suunniteltaessa ei tarvitse ottaa huomioon. Takaisin"-toiminto, ja
 laajemmassa mitassaan sivuhistoria, ovat kuitenkin käytettävyyttä
 lisääviä ominaisuuksia. Ongelmana on vain niiden tukeminen
-sovelluksissa. Selainkäyttöisen sovelluksen sivujen ja dialogien
-välillä tulisikin siis siirtyä tavallisten www"-sivujen tapaan.
-Vastakohtana tavalliset, käyttöjärjestelmässä toimivat sovellukset
-harvoin käyttävät useita dialogeja peräkkäin ja eivät siten sovellu
-selainkäyttöisen sovelluksen esimerkiksi. ``Tavalliset'' ohjelmat
-muokkaavatkin usein \emph{sen hetkistä} dialogia sen sijaan, että
-näyttäisivät käyttäjän toimien tulokset uudessa dialogissa tai sivussa,
-kuten www"-sivut toimivat.
+sovelluksissa. Selainkäyttöisen sovelluksen eri näkymien välillä
+tulisikin siis siirtyä tavallisten www"-sivujen tapaan. Vastakohtana
+tavalliset, käyttöjärjestelmässä toimivat sovellukset harvoin käyttävät
+useita dialogeja peräkkäin ja eivät siten sovellu selainkäyttöisen
+sovelluksen esimerkiksi. ``Tavalliset'' ohjelmat muokkaavatkin usein
+\emph{sen hetkistä} dialogia sen sijaan, että näyttäisivät käyttäjän
+toimien tulokset uudessa dialogissa tai sivussa, kuten www"-sivut
+toimivat.
 
 Toinen tärkeä tutkimuskohde on, kuinka lomakepohjaisia käyttöliittymiä
 voitaisiin kuvata tehokkaasti. Erityisesti tulisi tutkia tarkemmin,
@@ -64,7 +66,7 @@ palvelimen tarjoamaa ohjelmakoodia tai skriptejä -- toiminnallisuus
 pitäisi pystyä toteuttamaan HTML"-kielen ja HTTP"-protokollan ehdoilla.
 
 Kolmas tutkimusta vaativa asia olisi selvittää, kuinka rinnakkain
-tehtyjä muutoksia voisi paremmin hallita? Luvussa
+tehtyjä muutoksia voisi paremmin hallita. Luvussa
 \ref{oppimapin-kaytettavyys-yhteenveto} kuvailin muutamia
 ongelmatilanteita, joita usean käyttäjän tapauksessa voi syntyä, koska
 yhteys muokkaustoimintojen ja sovelluksen välillä ei ole
