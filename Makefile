@@ -46,7 +46,7 @@ clean:
 		$(SOURCEBASE).bbl $(SOURCEBASE).blg $(SOURCEBASE).brf $(SOURCEBASE).cb \
 		$(SOURCEBASE).ind $(SOURCEBASE).idx $(SOURCEBASE).ilg $(SOURCEBASE).inx \
 		$(SOURCEBASE).ps $(SOURCEBASE).dvi $(SOURCEBASE).pdf $(SOURCEBASE).toc \
-		$(SOURCEBASE).out latex.fmt pdflatex.fmt
+		$(SOURCEBASE).out latex.fmt pdflatex.fmt latex.log pdflatex.log texsys.aux
 
 %.dvi:	%.tex
 	@echo === Creating: $@
