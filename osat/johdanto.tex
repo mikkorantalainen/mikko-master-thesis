@@ -16,7 +16,9 @@ Selaimella toimivat ohjelmat yritetään usein naamioida tavallisten ohjelmien näk
 
 \section{Käytettäviä www-sivuja}
 
-Tavallisten www-sivujen käytettävyydestä on kirjoitettu useita kirjoja. Ehkä arvostetuimpia on Jakob Nielsenin WWW-suunnittelu. Nielsen käsittelee kirjassaan useita olemassa olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen -- painottuen erityisesti käytettävyyden esteisiin. Kotimaisesta tuotannosta mainitsemisen arvoinen on Jukka Korpelan ja Tero Linjaman kirjoittama Web-suunnittelu. Molempien kirjojen mukaan www-sivun käytettävyyden kannalta on tärkeää erityisesti varsinaisen sisällön maksimointi; navigointiin ja sivun koristeluun ei tule tuhlata pinta-alaa. Nielsen jopa laskee sivun pinta-alasta sivun varsinaisen sisällön ja koko sivun suhteen. Turhan monessa www-sivussa ja selainkäyttöisessä sovelluksessa sisällölle varattu pinta-ala on alle puolet!
+Tavallisten www-sivujen käytettävyydestä on kirjoitettu useita kirjoja. Ehkä tunnetuimpia on Jakob Nielsenin WWW-suunnittelu\cite{nielsen:usability} siitäkin huolimatta, että kirja on kirjoitettu vasta 1999. Nielsen käsittelee kirjassaan useita olemassa olevia sivustoja ja ottaa kantaa sivujen käytettävyyteen -- painottuen erityisesti käytettävyyden esteisiin. Kirja on itse asiassa kokoelma Nielsenin \url{useit.com}-sivustolla julkaistuista artikkeleista. Kotimaisesta tuotannosta mainitsemisen arvoinen on Jukka Korpelan ja Tero Linjaman kirjoittama Web-suunnittelu\cite{korpela:web-suunnittelu}.
+
+Molempien kirjojen mukaan www-sivun käytettävyyden kannalta on tärkeää painottua nimenomaan sisällön esittämiseen; navigointiin ja sivun koristeluun ei tule tuhlata pinta-alaa. Nielsen jopa arvioi käytettävyyttä karkeasti laskemalla kuinka suuri prosenttiosuus on varattu itse sisällölle koko sivun pinta-alasta. Turhan monessa www-sivussa ja selainkäyttöisessä sovelluksessa sisällölle varattu pinta-ala on alle puolet!
 
 \begin{kuva}
 \includegraphics[width=14cm]{kuvat/www-korpela}
@@ -39,6 +41,20 @@ Joskus näkee sivuilla myös linkkejä, joista ei tiedä pitäisikö itkeä vai nauraa:
 Jos käytettävässä www-sivu on aina joko navigointi-sivu (siis jonkin tason sisällysluettelo) tai sisältösivu (jolla on siis korkeintaan kolme navigointiin liittyvää linkkiä) niin kuinka tätä voisi vielä parantaa? Varmastikin sijoittamalla nuo kolme sisältösivulla olevaa linkkiä aina samaan paikkaan. HTML-määritys antaakin tähän mahdollisuuden \tag{link}-elementtiä käyttäen. Tällöin nuo linkit tulisivat aina \emph{täsmälleen} samaan paikkaan käyttöliittymässä. Ikävä kyllä, suurimman markkinaosuuden omaava selain ei tue tätäkään ominaisuutta, joten käytännössä linkit täytyy sijoittaa sivun sisälle.
 
 Tämän kaltaisilla sivuilla navigointi tapahtuu aina sisällysluettelon kautta tai lukemalla koko sivusto kirjoittajan suunnittelemassa järjestyksessä. Navigointiin pääsee \emph{aina} painamalla näppäimistön \alt{home}-näppäintä ja valitsemalla sivun alusta linkki ''Sisällysluettelo''\footnote{Jos selain tukee \element{link}-elementtiä, ei sivulla tarvitse edes navigoida, sillä \element{link}-elementillä voidaan kertoa selaimelle, mistä sivuston sisällysluettelo löytyy. Selain voi sitten tarjota sisällysluetteloon siirtymiseen vaikka erillisen pikanäppäimen tai painikkeen!}. Sisällysluettelosta pääsee mihin tahansa sivuun suoraan painamalla halumaansa linkkiä. Kun vertaa tätä sivuun, jossa navigointi ja sisältö on samalla sivulla, havaitaan, että sisällysluettelon käyttö ja esittäminen helpottuu, koska sille voidaan varata enemmän tilaa. Myös varsinaisen sisällön käyttö helpottuu, koska koko selaimen ikkuna voidaan varata sen käyttöön. Yhdistelmäsivulla joudutaan myös siirtymään sivun alkuun (tai loppuun) navigoinnin käyttämistä varten, joten ainoa etu yhdistelmäsivulla on, että ei tarvitse painaa ''Sisällysluettelo''-linkkiä. Kun vastapuolella vaakakupissa on helppokäyttöisempi sisällysluettelo \emph{ja} parempi sisällön käytettävyys pitäisi valinnan olla helppo!
+
+Toinen linkityksessä usein tehty virhe on käyttää linkityksessä sanoja ''klikkaa tästä''. Joskus webin alkuaikoina, kun käyttäjät eivät vielä tienneet, mitä linkittäminen on ja kuinka linkkejä käytetään, on tuollainen sanamuoto saattanut tuntua hetken hyvältä. Mutta entä jos samaa mallia käytettäisiin selainkäyttöisessä sähköpostissakin? Viestin perässä voisi pahimmillaan olla toimintavaihtoehtoja:
+\begin{quote}
+Poistaaksesi tämän viestin \emph{klikkaa tästä}.\\
+Vastataksesi tähän viesiin \emph{klikkaa tästä}.\\
+Lähettääksesi tämän viestin eteenpäin \emph{klikkaa tästä}.
+\end{quote}
+Varmasti kokematonkin käyttäjä ymmärtää nopeasti, että ''klikkaa tästä'' on huono linkin nimi, koska se ei anna hyödyllistä informaatiota linkistä. Silti tälläisiä linkkejä näkee joka päivä! Parempia muotoja edellisille toiminnoille olisivat
+\begin{quote}
+\emph{Poista tämä viesti}.\\
+\emph{Vastaa tähän viestiin}.\\
+\emph{Lähetä tämä viesti eteenpäin}.
+\end{quote}
+Joissakin tilanteissa parempi vaihtoehto on käyttää ainoastaan verbejä toimintoihin liittyvissä linkeissä. Esimerkiksi pelkkä \emph{vastaa} ja \emph{poista} riittäisi hyvin linkin tekstiksi, jos toiminnon kohde on muusta yhteydestä selvä. Tällainen linkki ei edes vie merkittävästi enemmän tilaa kuin tarkoitukseen erikseen suunniteltu ikoni ja on varmasti yksiselitteinen, toisin kuin ikoni.
 
 Myös Edward Tufte kirjoittaa kirjassaan \cite[146--149]{tufte:explanations} seuraavia huomioita:
 
