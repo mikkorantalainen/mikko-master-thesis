@@ -64,12 +64,13 @@ sovellusten.
 Tämä kerros (kuva \ref{fig:4tier}) toteutetaan usein käyttämällä jotain
 olemassaolevaa relaatiotietokantaa, esimerkiksi MySQL tai PostgreSQL.
 Teoriassa tietokannan pitäisi ymmärtää ja valvoa kaikki tiedon
-esitysmalliin liittyvät rajoitukset. Käytännössä tähän ei päästä, koska
-rajanpinta tiedon käsittelyn logiikan ja sovelluslogiikan välillä on
-toteutettu SQL"-kielellä. Monien tietokantojen tuki SQL"-kielelle on
-varsin kehittymätön erityisesti tietorakenteen rajoitusten suhteen.
-Tämän seurauksena merkittävä osa tiedon esitysmallin rajoituksista
-joudutaan sijoittamaan sovelluslogiikkaan. Muuten sovellusta ei voida
+esitysmalliin liittyvät rajoitukset, jos tämä kerros halutaan toteuttaa
+täysin tietokannalla. Käytännössä tähän ei päästä, koska rajanpinta
+tiedon käsittelyn logiikan ja sovelluslogiikan välillä on toteutettu
+SQL"-kielellä. Monien tietokantojen tuki SQL"-kielelle on varsin
+kehittymätön erityisesti tietorakenteen rajoitusten suhteen. Tämän
+seurauksena merkittävä osa tiedon esitysmallin rajoituksista joudutaan
+sijoittamaan sovelluslogiikkaan. Muuten sovellusta ei voida
 tulevaisuudessa siirtää toimimaan toisen tietokannan päällä. Jos
 siirrettävyys ei ole tavoitteena, tietokannan tehokkuus voidaan
 maksimoida ohjelmoimalla tarkistukset ja rajoitukset tietokannan omilla
@@ -215,7 +216,7 @@ kuin perinteisellä mallilla.
 
 Esimerkiksi Microsoft Internet Explorerissa takaisin"-painike ei toimi
 POST"-metodin käyttämisen jälkeen, jos lomakkeen \emph{Cache-Control}
-otsake sisälti tunnisteen \code{no-cache}. Tämä tunniste kieltää
+otsake sisältää tunnisteen \code{no-cache}. Tämä tunniste kieltää
 standardin mukaan sivun tallentamisen levylle, mutta ei estä
 esimerkiksi sivun säilyttämistä päätelaitteen muistissa. Koska
 Microsoft saattaa korjata tämän vian tulevaisuudessa ei ole kuitenkaan
@@ -243,9 +244,9 @@ voidaan käsitellä vasta selaimessa käyttäjän tietokoneella CSS"-kielen
 avulla \cite{w3:css}. Sovellukselle voidaan helposti tuottaa erilaisia
 ulkoasuja (\alt{skins}) pelkästään luomalla erilaisia CSS"-tiedostoja.
 Lisäksi standardi mahdollistaa eri CSS"-tiedostojen kirjoittamisen
-esimerkiksi normaalille selaimelle, dataprojektorille, ääniselaimille
+esimerkiksi tavallisille selaimille, dataprojektoreille, ääniselaimille
 ja kämmentietokoneille; käyttöliittymän esitystä on siis mahdollista
-hioa tarvittaessa laitekohtaisesti.
+hioa tarvittaessa ympäristökohtaisesti.
 
 \section{Nelikerroksisen mallin käytännön ongelmia}
 
@@ -265,7 +266,7 @@ luokkahierarkiasta. Siinä sovellus muodostui Oppimapista ja sen avulla
 käytettävistä moduuleista, jotka toteuttivat käyttöliittymän
 käyttöliittymäajurin luokkien avulla. Yksittäiset dokumenttityypit,
 kuten \code{SimpleText} ja \code{Folder} perittiin
-\code{Document}"-luokasta, joka auttoi sessiokohtaisen tiedon
+\code{Document}"-luokasta, joka auttoi istuntokohtaisen tiedon
 hallinnassa sekä tietokannan käsittelyssä. Yksittäisen dokumentin koodi
 käynnistettiin vaiheessa, jossa käyttäjän istunnon voimassaolo oli
 varmistettu ja dokumentin tiedot oli haettu tietokannasta. Tämän
@@ -276,7 +277,7 @@ käyttöliittymän käyttöliittymäajurin tarjoamien luokkien avulla. Luokat
 käynnistettiin vielä erillisen \code{UIFactory}"-luokan kautta
 tulevaisuuden muutosten helpottamiseksi. Suoritusvaihe ja
 käyttöliittymän luonti on jaettu kahteen vaiheeseen, jotta
-tulevaisuudesssa useita dokumenttityyppejä voidaan tarvittaessa ajaa
+tulevaisuudessa useita dokumenttityyppejä voidaan tarvittaessa ajaa
 samalla sivulla rinnakkain. Tällöin jokainen dokumentti voi vaikuttaa
 yleisiin asetuksiin ja muutos ehtii vaikuttamaan muiden dokumenttien
 näyttämässä käyttöliittymässä.
@@ -303,8 +304,8 @@ kohtuullisen yksinkertaisena. Tätä on havainnollistettu kuvassa
 käyttöliittymäajurin tehtäviä on siirretty sekä selaimelle HTML ja CSS
 -kielien muodossa, että käyttöliittymän toiminnallisuuteen, jossa
 käytetään hyväksi tietoa, että lopputuloksen on tarkoitus olla
-XML"-muodossa. Sovellus generoi siis XHTML"-kielisen esityksen ja
-käyttöliittymäajurin rajapinta generoikin suoraan XML"-kielisiä palasia
+XML"-muodossa. Sovellus tulostaa siis XHTML"-kielisen esityksen ja
+käyttöliittymäajurin rajapinta tuottaa suoraan XML"-kielisiä palasia
 (\alt{XML Fragment}). Koska PHP"-kieli rajaa ainakin toistaiseksi
 natiivin käyttöliittymän kehittämisen mahdollisuuksia
 suoritusympäristönsä vuoksi, ei natiivisovelluksen kehittämisen
@@ -317,6 +318,12 @@ jaettu osiin palvelimen ja asiakkaan välille.
 \includegraphics[width=4.2cm]{kuvat/oppimappi-big-picture}
 \caption{Oppimapin rakenne kerroksina}
 \label{fig:oppimappi-big-picture}
+\end{kuva}
+
+\begin{kuva}
+\includegraphics[width=\linewidth]{kuvat/oppimappi-schema-current}
+\caption{Osa toteutetusta Oppimapin rakenteesta}
+\label{fig:oppimappi-schema-current}
 \end{kuva}
 
 Kuvassa \ref{fig:oppimappi-schema-current} on  esitetty Oppimapissa
@@ -353,12 +360,6 @@ koodissa esitetty perintähierarkia ei vastaa kunnolla loogista
 rakennetta. Tällä ei ole ollut toistaiseksi merkitystä ja koodi on
 pyritty kirjoittamaan siten, että muutos on kohtuullisen helppo tehdä
 kun kieli myöhemmin alkaa tukemaan sitä.
-
-\begin{kuva}
-\includegraphics[width=\linewidth]{kuvat/oppimappi-schema-current}
-\caption{Osa toteutetusta Oppimapin rakenteesta}
-\label{fig:oppimappi-schema-current}
-\end{kuva}
 
 Käytännössä käyttöliittymästä vastaavan kerroksen pilkkominen osiin
 selaimen sekä palvelimen vastuulle aiheutti sen, että
@@ -406,12 +407,12 @@ käyttöjärjestelmässä ikkunan sulkemista, jonka jälkeen aktiiviseksi
 vaihtuisi edellinen ikkuna.
 
 Oppimappi erottelee istuntoon liittyvän tiedon kahteen eri ryhmään:
-ikkunakohtaiset tiedot ja yleiset asetukset. Kaikki yleiset asetukset
+näkymäkohtaiset tiedot ja yleiset asetukset. Kaikki yleiset asetukset
 tallennetaan palvelimen tietokantaan ja ne haetaan tietokannasta
-jokaisen sivun generoinnin alussa. Tietojen hakeminen aina jokaisen
+jokaisen sivun tulostamisen alussa. Tietojen hakeminen aina jokaisen
 sivun alussa lisää palvelimen kuormaa. Toisaalta se mahdollistaa
 kuorman jakamisen helposti eri edustakoneiden kesken, sillä Oppimappia
-ajava edustakone ei tallenna mitään tietoja käyttäjästä. Asetukset ja
+ajava edustakone ei tallenna mitään tietoja käyttäjistä. Asetukset ja
 tiedot, jotka ovat aikaan sidottuja ja joiden vaikutuksen pitää näkyä
 selaimen historia"-toimintoja käytettäessä, tallennetaan jokaiseen
 sivuun upotettuna. Tällä hetkellä ne koodataan kaikkiin linkkeihin,
@@ -426,15 +427,15 @@ Esimerkiksi osoitteessa
 oleva Oppimapin dokumentti voitaisiin siirtää osoitteeseen
 \code{http://""peda.""net/""mappi/""databasetest.""1.""932535.""53252/""4.""6.""1}.
 Nyt tältä sivulta toiselle Oppimapin sivulle linkitettäessä ei
-tarvisisi toistaa enää istuntoon liittyvää tietoa vaan ainoastaan
+tarvitsisi toistaa enää istuntoon liittyvää tietoa vaan ainoastaan
 sivukohtaiset muutokset. Esimerkiksi HTML"-kielellä kirjoitettu
-toimintolinkki \verb!<a
-href="?action=x">!""\verb!linkkiteksti!""\verb!</a>! osoittaisi
-automaattisesti samaan istuntoon ja samaan dokumenttiin ja selain
-lähettäisi linkin mukana parametrin $action$ arvolla ``x''. Nykyisin
-kaikissa linkeissä pitää aina toistaa parametrit \code{session} ja
-\code{d}. Ongelmaa ei voi kiertää esimerkiksi keksien (\alt{cookies})
-avulla, koska ne eivät toimi yhteistyössä selaimen
+toimintolinkki
+\verb!<a~href="?action=x">!""\verb!linkkiteksti!""\verb!</a>!
+osoittaisi automaattisesti samaan istuntoon ja samaan dokumenttiin ja
+selain lähettäisi linkin mukana parametrin $action$ arvolla ``x''.
+Nykyisin kaikissa linkeissä pitää aina toistaa parametrit
+\code{session} ja \code{d}. Ongelmaa ei voi kiertää esimerkiksi keksien
+(\alt{cookies}) avulla, koska ne eivät toimi yhteistyössä selaimen
 historia"-toimintojen kanssa. Samoin usealla eri käyttäjällä
 kirjautuminen selaimen eri ikkunoissa ei toimisi. Todellisuudessa
 Oppimappi siirtää kaikissa toiminnoissa lisäksi historiatietoa

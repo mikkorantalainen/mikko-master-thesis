@@ -265,7 +265,14 @@ että käyttäjä teki tietoisen päätöksen käyttäessään -- tai yrittäessään
 käyttää -- kyseistä toimintoa ja varmastikin hän olisi halunnut sen
 tekevän jotain muuta, kuin näyttävän virheilmoituksen.
 
-%Ohjelma tulee siis tehdä sellaiseksi, että se pystyy vastaanottamaan ja käsittelemään \emph{mahdollisimman suuren} osan käyttäjän lähettämästä tiedosta, vaikka muuttuneen tilanteen vuoksi osa siitä ei olisikaan relevanttia.
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=10cm]{kuvat/fork}
+\caption{Kaavio istunnon haarautumisesta}
+\label{fig:fork}
+\end{center}
+\end{figure}
+
 
 \section{Istunnon haarautuminen}
 
@@ -286,14 +293,6 @@ kuvaavan tiedon ylläpitäminen palvelimella onkin vähintäänkin hyvin
 työlästä ellei jopa mahdotonta. Istunnon tiedot täytyy siis jotenkin
 saada siirtymään selainohjelmassa ikkunakohtaisesti, jolloin ikkunan
 kahdentaminen kahdentaa myös istunnon.
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=10cm]{kuvat/fork}
-\caption{Kaavio istunnon haarautumisesta}
-\label{fig:fork}
-\end{center}
-\end{figure}
 
 \section{Selaimen historia"-toiminnot}
 
@@ -372,5 +371,5 @@ muodossa ISO-8859-1. Väärin konfiguroitu selain voi jopa lähettää osan
 lomakekentistä UTF-8"-koodauksella samaan aikaan kun loput kentistä
 siirretään \mbox{ISO-8859-1}"-koodauksella. Erityisesti tiedostojen
 siirrossa (\alt{file upload}) erikoismerkit tiedostojen nimissä
-siirtyvät usein väärin. Pelkkä ISO-8859-1"-merkistön käyttö ei riitä,
-jos käytettävät kielet sisältävät suomen, venäjän ja saamen.
+siirtyvät usein väärin. Pelkkä ISO-8859-1"-merkistön käyttö ei yksin
+riitä, jos käytettävät kielet sisältävät suomen, venäjän ja saamen.

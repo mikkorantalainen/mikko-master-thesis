@@ -17,7 +17,7 @@ objektin perässä olevaa toimintoa käyttämällä sen ominaisuuksiin voi
 vaikuttaa.
 
 \begin{kuva}
-\includegraphics[width=10.5cm]{kuvat/oppimappi-kotisivu}
+\includegraphics[width=10.0cm]{kuvat/oppimappi-kotisivu}
 \caption{Oppimappi: työpöytä-näkymä}
 \label{fig:oppimappi-kotisivu}
 \end{kuva}
@@ -28,13 +28,13 @@ ympäristön otsikko valtaavat suuren osan käytettävissä olevasta alasta.
 Tämä on seurausta valitusta tyylitiedostosta. Kuvassa
 \ref{fig:oppimappi-kotisivu-nostyle} on esitetty sama näkymä kun
 CSS"-tyylisivu on selaimen asetuksista valittu pois päältä. Tämä näkymä
-vastaa erityisryhmien käyttöliittymää; esimerkiksi sokealle käyttäjälle
-tieto esitettäisiin tämän näkymän mukaisessa järjestyksessä. Tässä
-erityisesti nykyistä näkyvää koskevat toiminnot esitetään sisällön
-\emph{jälkeen} -- tämä on tärkeää, koska yleensä käyttäjä on
-kiinnostunut itse sisällöstä, ei mahdollisista toiminnoista. Samoin
-kaikki sovelluksen toiminnallisuus on käytettävissä ilman kuvien
-lataamista tai JavaScript"-tukea.
+vastaa erityisryhmien käyttöliittymää; esimerkiksi näkövammaiselle
+käyttäjälle tieto esitettäisiin tämän näkymän mukaisessa
+järjestyksessä. Tässä erityisesti nykyistä näkyvää koskevat toiminnot
+esitetään sisällön \emph{jälkeen} -- tämä on tärkeää, koska yleensä
+käyttäjä on kiinnostunut itse sisällöstä, ei mahdollisista
+toiminnoista. Samoin kaikki sovelluksen toiminnallisuus on
+käytettävissä ilman kuvien lataamista tai JavaScript"-tukea.
 
 \begin{kuva}
 \includegraphics[width=10cm]{kuvat/oppimappi-kotisivu-nostyle}
@@ -84,10 +84,13 @@ kokoa. Käyttäjä voi halutessaan käyttää omaa CSS"-tyylitiedostoa.
 määritelty yhdessä CSS"-tyylitiedostossa. Koska HTML"-koodissa ei ole
 määritelty ulkoasua vaan ainoastaan sisällön rakenne ovat kaikki sivut
 keskenään yhdenmukaisia. Kaikki sisällön muokkaus tapahtuu
-toiminta"-palkin kautta ja toiminnot tallennetaan aina lomakkeen lopussa
-olevasta ``Tallenna''-painikkeella. Mikään, mikä ei näytä painikkeelta
-ei tee järjestelmään pysyviä, kaikkia käyttäjiä koskevia muutoksia ja
-toisaalta kaikkien painikkeiden painaminen tekee pysyviä muutoksia.
+toiminta"-palkin kautta ja toiminnot tallennetaan aina lomakkeen
+lopussa olevasta ``Tallenna''"-painikkeella. Mikään, mikä ei näytä
+painikkeelta ei tee järjestelmään pysyviä, kaikkia käyttäjiä koskevia
+muutoksia ja toisaalta kaikkien painikkeiden painaminen tekee pysyviä
+muutoksia. Esimerkiksi ``Poista''"-linkki ei poista tiedostoa
+välittömästi, vaan linkkiä painettaessa siirrytään lomakkeelle, jolla
+poisto vahvistetaan painikkeella.
 
 \item[Saavutettavuus:] Oppimapin sisältö on esitetty semanttisella
 merkinnällä ja esimerkiksi sivun ulkoasua ei ole tehty taulukolla.
@@ -101,13 +104,16 @@ käyttöliittymän ulkoasua (käyttäjä voi valita ulkonäön vaihtoehtoisista
 CSS"-tyylisivuista) ja käyttöliittymän kieltä. Lisäksi järjestelmä kerää
 tapahtumahistoriaa käyttäjien toimista.
 
-\item[Tehokkuus:] Oppimapin vasteaika on keskimäärin 0,04 sekuntia sivua
-kohden. Keskimääräinen sivu on noin 20 kilotavua, mutta tiedonsiirrossa
-käytetään gzip"-pakkausta, jos selain sitä tukee, jonka ansiosta
-siirrettävän datan määrä on noin 3 kilotavua sivua kohden. Tavallisella
-modeemillakin sivun pitäisi siis saapua aina alle 2 sekunnissa. Sivun
-ulkonäköön vaikuttava CSS"-tiedosto ja ikonit tarvitsee siirtää vain
-ensimmäisellä sivulla, sen jälkeen ne ovat selaimen välimuistissa.
+\item[Tehokkuus:] Oppimapin vasteaika on keskimäärin 0,04 sekuntia
+sivua kohden. Keskimääräinen sivu on noin 20 kilotavua, mutta
+tiedonsiirrossa käytetään gzip"-pakkausta, jos selain sitä tukee, jonka
+ansiosta siirrettävän datan määrä on noin 3 kilotavua sivua kohden.
+Tavallisella modeemillakin sivun pitäisi siis saapua aina alle 2
+sekunnissa. Sivun ulkonäköön vaikuttava CSS"-tiedosto ja ikonit
+tarvitsee siirtää vain ensimmäisellä sivulla, sen jälkeen ne ovat
+selaimen välimuistissa. Sovelluksen käytön tehokkuutta on parannettu
+tarpeen mukaan nostamalla yleisimmin käytettyjä dokumenttien toimintoja
+myös dokumenttien listauksiin, jolloin niiden käyttöön tarvitaan yksi sivunhaku vähemmän.
 
 \item[Sisältö:] Peda.net ei ota kantaa Oppimapilla tuotettavaan
 sisältöön. Käyttöliittymän tekstit ylläpidetään keskitetysti Peda.netin
@@ -129,7 +135,7 @@ linkit ovat sinisiä ja alleviivattuja, joten ne on helppo havaita.
 
 \end{dl}
 
-\section{Johtopäätöksiä Oppimapin käytettävyydestä}
+%\section{Johtopäätöksiä Oppimapin käytettävyydestä}
 \label{oppimapin-kaytettavyys-yhteenveto}
 
 Yhteenvetona vaikuttaisi siltä, että käytettävyyden kannalta ainakin
@@ -157,17 +163,17 @@ kehittäminen ristiriitaisten muutosten yhdistämiseen tulee olemaan
 haastava tehtävä. \cite{ritcher:three-way-merge}
 
 Yleisempänä ongelmana on rinnakkaisissa muutoksissa tilanne, jossa
-henkilö $A$ aloittaa dokumentin $X$ muokkaamisen ja tämän jälkeen
-henkilö $B$ poistaa dokumentin $X$. Jos $A$ nyt yrittää tallentaa
-tekemänsä muutokset, niin haluttu tulos ei ole itsestään selvä.
-Oppimappi ei toistaiseksi osaa käsitellä tilannetta, jossa dokumentin
-$X$ muutokset yritetään tallentaa, mutta dokumenttia $X$ ei ole enää
-olemassa. Näin tapahtuessa käyttäjälle annetaan vain virheilmoitus,
-jossa toistetaan käyttäjän syöttämä tieto, jotta hän voi kopioida sen
-talteen toiseen paikkaan. Ongelmana on, pitäisikö järjestelmän
-palauttaa dokumentti $X$ järjestelmään. Jos tämän pitää olla
-mahdollista, ei järjestelmä voikaan koskaan poistaa dokumenttia $X$
-oikeasti, ainoastaan piilottaa se näkyvistä. Vaihtoehtoisesti muokattu
-sisältö voitaisiin tallentaa uudeksi tiedostoksi. Tässä mallissa
-ongelmana on, mihin uusi tiedosto pitäisi luoda? Myös hakemisto, jossa
-tiedosto oli, on voitu poistaa.
+henkilö $A$ aloittaa dokumentin muokkaamisen ja tämän jälkeen henkilö
+$B$ poistaa saman dokumentin. Jos $A$ nyt yrittää tallentaa tekemänsä
+muutokset, niin haluttu tulos ei ole itsestään selvä. Oppimappi ei
+toistaiseksi osaa käsitellä tilannetta, jossa dokumentin muutokset
+yritetään tallentaa, mutta dokumenttia ei ole enää olemassa. Näin
+tapahtuessa käyttäjälle annetaan vain virheilmoitus, jossa toistetaan
+käyttäjän syöttämä tieto, jotta hän voi kopioida sen talteen toiseen
+paikkaan. Ongelmana on, pitäisikö järjestelmän palauttaa poistettu
+dokumentti järjestelmään. Jos tämän pitää olla mahdollista, ei
+järjestelmä voikaan koskaan poistaa dokumenttia oikeasti, ainoastaan
+piilottaa se näkyvistä. Vaihtoehtoisesti muokattu sisältö voitaisiin
+tallentaa uudeksi tiedostoksi. Tässä mallissa ongelmana on, mihin uusi
+tiedosto pitäisi luoda? Myös hakemisto, jossa tiedosto oli, on voitu
+poistaa.

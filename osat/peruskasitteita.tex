@@ -33,7 +33,7 @@ oppimista.
 \item[Opittavuus] tarkoittaa sitä, että tuotteen käyttö on helppo
 oppia. Käytännössä toiminnot pitää esittää itsensä kuvaavalla tavalla
 ja tuotteen tulee toimia arvattavasti. Tuotteen käytön pitäisi myös
-helpposti palautua mieleen pitkän käyttötauon jälkeenkin.
+helposti palautua mieleen pitkän käyttötauon jälkeenkin.
 
 \item[Esitystapa] tarkoittaa sitä, että käyttäjä saa selkeän kuvauksen
 kulloinkin suoritettavasta toiminnosta ja toimintojen lopputulokset
@@ -151,12 +151,12 @@ Tällöin rakenteen luontevan esittämisen voisi olettaa vievän vieläkin
 enemmän tilaa, jolloin joka sivulla toistettava navigointi toimisi
 vieläkin huonommin. Tällöin paras vaihtoehto on esittää nykyinen
 sijainti mahdollisimman pienessä tilassa ja tarjota mahdollisuus
-havainnollistaa kokonaisuutta erilllisellä kartalla. Toisaalta
+havainnollistaa kokonaisuutta erillisellä kartalla. Toisaalta
 hierarkista rakennetta monimutkaisempien kokonaisuuksien esittämiseen
 ei ole olemassa standardia edes tavallisten ohjelmien käyttöliittymien
 tapauksessakaan, joten ongelman ratkaiseminen on aina tapauskohtainen.
 
-Joskus näkee sivuilla myös linkkejä, joista ei tiedä, pitäisikö itkeä
+Joskus sivuilla näkee myös linkkejä, joista ei tiedä, pitäisikö itkeä
 vai nauraa. Kamalimmat esimerkit ovat varmastikin ``Takaisin'', joka
 \emph{yrittää} tehdä saman kuin selaimen takaisin"-toiminto, ja ``Sivun
 alkuun'', joka \emph{yrittää} vierittää näkymän takaisin sivun alkuun.
@@ -192,7 +192,7 @@ julkaistusta standardista \cite{w3c:html32}, joten käytännössä linkit
 täytyy sijoittaa \emph{myös} sivun sisälle toimivuuden varmistamiseksi.
 
 \begin{kuva}
-\includegraphics[width=14cm]{kuvat/mozilla-linkbar}
+\includegraphics[width=12.5cm]{kuvat/mozilla-linkbar}
 \caption{HTML"-määritystä täysin tukeva selain tukee integroitua
 navigointia}
 \label{fig:mozilla-linkbar}
@@ -339,7 +339,7 @@ taiton osalta, joten ulkonäön yksityiskohdat eivät ole niin
 merkittävässä osassa käytettävyyden kannalta kuin varsinainen
 toiminnallisuus. Yhtenevään ulkoasuun pyrkiminen eri sovellusten
 välillä olisi tietenkin tärkeää, mutta koska sivustoilla tai
-selainkäyttöisillä sovelluksilla ei ole olemassa koko internetin
+selainkäyttöisillä sovelluksilla ei ole olemassa koko Internetin
 laajuisesti tiettyä tyyliä, ei sellaiseen voida pyrkiä. Luonnollisesti
 kaikki yhden yrityksen tuottamat selainkäyttöiset ympäristöt tulisi
 kuitenkin tehdä noudattamaan samaa tyyliä.
@@ -351,21 +351,18 @@ matkivaa. Tätä ongelmaa havainnollistavat seuraavat kuvakaappaukset.
 Näistä ensimmäisessä (kuva \ref{fig:mixedos}) on kuvattu, millaiselta
 täydellisesti Windows"-käyttöjärjestelmää matkiva selainkäyttöinen
 sovellus näyttäisi MacOS"-käyttöjärjestelmässä. Ensimmäisenä havaittava
-ero on, että MacOS"-järjestelmässä kunkin ohjelman valikko on
+ero on, että MacOS"-järjestelmässä kaikkien ohjelmien valikko on
 kiinnitetty näytön yläreunaan kun taas Windows"-sovelluksissa se on
-kiinni ikkunan yläreunassa. Käyttäjä voi odottaa valikon otsikkotekstiä
-painaessaan näpäyttävänsä tavallista linkkiä, mutta yllättyy kun sivun
-vaihtumisen sijaan näkyviin tuleekin valikko. Käyttäjän on luonnollista
-olettaa, että teksti jota voi näpäyttää hiirellä on linkki tai painike,
-joka lähettää sivun, koska kyse on selaimessa näytettävästä sivusta!
-Myös värimaailma ja ikonien tyyli poikkeaa käyttäjän odottamasta. Koska
-www-sivu ei voi mukautua ainakaan nykyisen selaintekniikan rajoissa
-käytettävään ympäristöön tulee minkään tietyn ympäristön matkimista
-välttää. Tällöin käyttäjälle ei voi syntyä virheellisiä odotuksia
-ohjelman toiminnasta. Toisessa (kuva \ref{fig:oppimappi-palm}) on
-esitetty Oppimappi"-työkalu PalmOS V "=kämmentietokoneen
-www"-selaimessa. Luonnollisesti jotakin muuta käyttöjärjestelmää
-matkiva sovellus toimisi huonosti tällaisessa ympäristössä.
+kiinni jokaisen ikkunan yläreunassa. Käyttäjä voi odottaa valikon
+otsikkotekstiä painaessaan näpäyttävänsä tavallista linkkiä, mutta
+yllättyy kun sivun vaihtumisen sijaan näkyviin tuleekin muusta
+ympäristöstä poiketen valikko. Käyttäjän on luonnollista olettaa, että
+teksti jota voi näpäyttää hiirellä on linkki tai painike, joka lähettää
+sivun, koska kyse on selaimessa näytettävästä sivusta! Myös värimaailma
+ja ikonien tyyli poikkeaa käyttäjän odottamasta. Koska www-sivu ei voi
+mukautua ainakaan nykyisen selaintekniikan rajoissa käytettävään
+ympäristöön tulee minkään tietyn ympäristön matkimista välttää. Tällöin
+käyttäjälle ei voi syntyä virheellisiä odotuksia ohjelman toiminnasta.
 
 \begin{kuva}
 \includegraphics[width=13cm]{kuvat/mixedos}
@@ -373,8 +370,13 @@ matkiva sovellus toimisi huonosti tällaisessa ympäristössä.
 \label{fig:mixedos}
 \end{kuva}
 
+Toisessa (kuva \ref{fig:oppimappi-palm}) on esitetty Oppimappi"-työkalu
+PalmOS V "=kämmentietokoneen www"-selaimessa. Luonnollisesti jotakin
+muuta käyttöjärjestelmää matkiva sovellus toimisi huonosti tällaisessa
+ympäristössä.
+
 \begin{kuva}
-\includegraphics[width=7cm]{kuvat/oppimappi-palm}
+\includegraphics[width=6.3cm]{kuvat/oppimappi-palm}
 \caption{Peda.net Oppimappi Palm V "=kämmentietokoneen kautta
 käytettynä}
 \label{fig:oppimappi-palm}
@@ -417,11 +419,15 @@ Kirjanmerkkien tekeminen suoraan selainkäyttöisen sovelluksen
 yksittäiselle sivulle, esimerkiksi jonkin hakutoiminnon tuloksiin, ei
 myöskään useinkaan onnistu. Jonkinlainen kirjanmerkki kyllä usein miten
 syntyy selaimeen, mutta sen käyttö myöhemmin epäonnistuu, koska
-sovellus on tehty väärin.
+sovellus on tehty väärin. Kirjanmerkkiin tallentuvan osoitteen (URL)
+täytyy olla kelvollinen esimerkiksi vielä kuukaudenkin päästä.
+Luonnollisesti sisäänkirjautuminen on aiheellista kysyä ennen sivulle
+palaamista. Usein sovelluksen tuottama URL on kuitenkin kelvollinen
+vain yhden istunnon ajan.
 
 Pelkkien teknisten vaatimusten lisäksi selainkäyttöisen sovelluksen
-käytetävyyteen vaikuttaa voimakkaasti myös käytetyn selainohjelman eri
-toiminnot. Tälläisia toimintoja voisivat olla esimerkiksi kyky skaalata
+käytettävyyteen vaikuttaa voimakkaasti myös käytetyn selainohjelman eri
+toiminnot. Tällaisia toimintoja voisivat olla esimerkiksi kyky skaalata
 sivua näytön koon mukaan, tehdä erilaisia yhteenvetoja käyttäjän
 puolesta ja mukautua muuten käyttäjän tarpeisiin. Näiltä osin
 selainkäyttöiset sovellukset eivät eroa tavallisista www"-sivuista,
@@ -431,7 +437,10 @@ tapaan. Selainkäyttöisen ohjelman käytettävyyttä voitaisiin parantaa
 esimerkiksi tukemalla paremmin vaikkapa hiiren raahaus"-toimintoa tai
 tiedon esittämistä eri väreillä, mutta tällöin ei voida enää puhua
 \emph{aidosti} selainkäyttöisestä sovelluksesta; entä jos käyttäjän
-selaimessa ei ole graafista näyttöä tai hiirä?
+selaimessa ei ole graafista näyttöä tai hiirtä? Selain voi tietenkin
+tukea tiedoston raahausta esimerkiksi siirrettävää tiedostoa
+lähetettäessä, mutta siihen palvelinsovelluksen ei tarvitse ottaa
+kantaa.
 
 \section{Selainkäyttöisen sovelluksen käytettävyydessä
 huomioonotettavia asioita}
@@ -448,7 +457,7 @@ kurssin valmistelu ennen ryhmän luomista voisi olla kömpelöä.
 Toisaalta, jos kurssin perusrakenteena on materiaali, voi saman
 materiaalin käyttö usealla eri kurssilla vaikeaa. Jos taas kurssi ei
 ole suoraan sidoksissa ryhmään eikä materiaaliin, voi käsite olla
-käyttäjän kannalta liian abstraksi ja sen ymmärtäminen vaikeutuu.
+käyttäjän kannalta liian abstrakti ja sen ymmärtäminen vaikeutuu.
 
 Verkkosovelluksen käytettävyyteen vaikuttavat Beckerin ja Berkemeyerin
 \cite{becker:web_usability} mukaan erityisesti seuraavat asiat:
@@ -475,7 +484,7 @@ muuttaa kirjasinkokoa tai tarjota automaattisesti esimerkiksi listan
 aikaisemmin suoritetuista toiminnoista.
 
 \item[Tehokkuus] käsittelee sovelluksen vasteaikaa. Tässä vasteaika
-tarkoitaa sitä aikaa joka kuluu jonkin toiminnon aloittamisesta siihen,
+tarkoittaa sitä aikaa joka kuluu jonkin toiminnon aloittamisesta siihen,
 että toiminto on suoritettu loppuun tai sovellus ilmoittaa, että
 toiminto on aloitettu. (Verkkosovelluksissa pidetään yleensä 10
 sekunnin vasteaikaa maksimirajana, mutta mielestäni selvästi alle
