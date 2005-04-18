@@ -81,6 +81,7 @@ clean:
 	pdflatex $(LATEXARGS) $* | egrep -i $(FLAGS) $(ERR); true
 	egrep -q $(NOHYPHEN) $*.log && pdflatex -ini pdflatex.ini && pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR); true
 	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
+	# run "make images" if there're any errors with the images
 	@echo ======= Done: $@
 	
 
