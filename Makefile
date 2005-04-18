@@ -102,5 +102,5 @@ fast-loop:
 
 images:
 	@echo "Compiling images..."
-	( cd kuvat; find -name "*.eps" | perl -npe "s/^(.*)([.]eps)$$/epstopdf \$$1.eps -o \$$1.pdf/" | sh )
+	( cd kuvat; find -name "*.dia" | perl -npe "s/^(.*)([.]dia)$$/epstopdf \$$1.eps -o \$$1.pdf/" | sh )
 
