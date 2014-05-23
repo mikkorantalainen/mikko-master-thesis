@@ -21,6 +21,19 @@ ERR		= "warn|error|^\\!|^\\?|^l\.|^[*][*]"
 #LATEXARGS	= -interaction=nonstopmode -file-line-error-style
 LATEXARGS	= -interaction=nonstopmode
 
+default: pdf2014
+
+pdf2014: images
+	@echo "Creating the PDF the way it worked in 2014..."
+	@echo "(see pdf2014.log for details)"
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+	bibtex $(SOURCEBASE) > pdf2014.log
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+	pdflatex -interaction=nonstopmode $(SOURCEBASE) > pdf2014.log
+
 all:	$(ALL)
 
 extra: $(ALL) $(SOURCEBASE)-alt.pdf
@@ -83,7 +96,6 @@ clean:
 	egrep -q $(RERUN) $*.log && ( pdflatex $(LATEXARGS) $< | egrep -i $(FLAGS) $(ERR) ) || true
 	# run "make images" if there're any errors with the images
 	@echo ======= Done: $@
-	
 
 dist: clean
 	@echo "Creating $(TGZ) ..."

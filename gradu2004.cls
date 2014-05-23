@@ -251,7 +251,7 @@
 \def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
 \def\gradu@copyrightowner{\gradu@author}
 \def\gradu@license{All rights reserved.}
-\def\gradu@copyrightyear{\the\year}
+\def\gradu@copyrightyear{\year}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
