@@ -1,0 +1,32 @@
+This repo contains an old version history of my Master's Thesis.
+
+The thesis, commit log and filenames are all in Finnish. Title and abstract
+can be found in English below:
+
+\translatedtitle{Truly Browser Accessible Applications and Peda.net}
+
+\abstract{This Master's Thesis investigates how web based user
+interfaces differ from traditional native user interfaces and how this
+relates to the design and implementation of web applications. In
+addition to theory, I will describe some web browser accessible
+applications that I have developed in Peda.net project. I will discuss
+technical decisions, compromises and advancements in the more recent
+applications.}
+
+\keywords{user interface, usability, browser, www, web application,
+HTML, CSS, XHTML, XML}
+
+And the same in Finnish:
+
+\title{Aidosti selainkäyttöiset sovellukset ja Peda.net}
+
+\tiivistelma{Tämä pro gradu -tutkielma selvittää, kuinka
+www-selaimella toimivat käyttöliittymät eroavat perinteisistä,
+käyttöliittymissä natiivisti toimivista ohjelmista ja kuinka tämä
+tulisi ottaa huomioon käyttöliittymän suunnittelussa ja toteutuksessa.
+Vastapainona teorialle kuvailen Peda.net -hankkeessa
+tekemiäni selainkäyttöisiä sovelluksia ja niissä tehtyjä ratkaisuja ja
+kompromisseja.}
+
+\avainsanat{käyttöliittymä, käytettävyys, selain, www, verkkosovellus,
+HTML, CSS, XHTML, XML}
